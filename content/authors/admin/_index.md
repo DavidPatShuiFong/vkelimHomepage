@@ -23,17 +23,20 @@ interests:
 organizations:
 - name: coHealth community health service
   url: "https://www.cohealth.org.au/"
-role: Lead doctor, Kensington site
+role: Lead doctor, Kensington site, coHealth
 social:
 - icon: envelope
   icon_pack: fas
   link: '#contact'
-- icon: "graduation-cap"
-  icon_pack: "fa"
+- icon: "google-scholar"
+  icon_pack: "ai"
   link: "https://scholar.google.com/citations?user=r_9Ml0cAAAAJ"
 - icon: github
   icon_pack: fab
   link: https://github.com/DavidPatShuiFong
+- icon: linkedin
+  icon_pack: fab
+  link: "https://au.linkedin.com/in/david-p-fong-0b266970"
 superuser: true
 title: David Fong
 user_groups:
