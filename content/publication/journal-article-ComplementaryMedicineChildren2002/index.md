@@ -28,6 +28,10 @@ links:
     icon: pubmed
     name: PubMed
     url: "https://pubmed.ncbi.nlm.nih.gov/12043138/"
+  - icon_pack: fas
+    icon: file-pdf
+    name: "PDF (colour)"
+    url: "/document/UsageComplementaryMedicineChildren.pdf"
 url_code: ""
 url_dataset: ""
 url_pdf: ""

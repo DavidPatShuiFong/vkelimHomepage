@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-bio: My interests include sustainable development in low-resource populations and the uses of monitoring and evaluation in clinical practice.
+bio: My interests include sustainable development in low-resource populations, teaching and the uses of monitoring and evaluation in clinical practice.
 education:
   courses:
   - course: Data, Economics and Development Policy
@@ -19,6 +19,7 @@ education:
 email: ""
 interests:
 - development work
+- teaching
 - monitoring and evaluation
 organizations:
 - name: coHealth community health service
@@ -44,4 +45,4 @@ user_groups:
 - Visitors
 ---
 
-David Fong is a general practitioner (family medicine) working at coHealth, Kensington site. He volunteers with Spur Afrika (child development program) in Kibera, Kenya, and Elim and Agape childrens' home (HIV and disability) in Xi'an, China.
+David Fong is a general practitioner (family medicine doctor) working at coHealth, Kensington site. He volunteers with Spur Afrika (child development program) in Kibera, Kenya, and Elim and Agape childrens' home (HIV and disability) in Xi'an, China.
