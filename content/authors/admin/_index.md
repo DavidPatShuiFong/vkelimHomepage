@@ -39,7 +39,7 @@ social:
   icon_pack: fab
   link: "https://au.linkedin.com/in/david-p-fong-0b266970"
 superuser: true
-title: David Fong
+title: "David Fong"
 user_groups:
 - Researchers
 - Visitors

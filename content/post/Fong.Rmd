@@ -1,0 +1,125 @@
+---
+title: "Fong, Louie and Kwong"
+author: "David Fong"
+date: 2020-08-23T00:00:00Z
+categories: ["Chinese"]
+aliases:
+  - /fong.html
+  - /fong/
+tags: ["Fong", "Louie", "Lui", "Kwong", "Chinese culture", "genealogy", "Soo Yuen"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+<div align="center">
+<table align="center" summary="Table of Soo Yuen family characters">
+  <tbody>
+    <tr>
+      <td><a href="http://lost-theory.org/ocrat"><img
+ alt="Fong character, sourced from Ocrat"
+ src="/images/fong_animated.gif" align="middle"
+ height="10%" width="56"></a></td>
+      <td><a href="http://lost-theory.org/ocrat"><img
+ alt="Lui character, sourced from Ocrat"
+ src="/images/lei_animated.gif" align="middle"
+ height="10%" width="56"></a></td>
+      <td><a href="http://www.wenlin.com/"><img
+ alt="Kuang character, generated with WenLin"
+ src="/images/kuang_animated.gif"
+ align="middle" height="10%" width="56"></a></td>
+    </tr>
+    <tr>
+      <td>Fong</td>
+      <td>Louie</td>
+      <td>Kwong</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+The following information about the Fong family name was transcribed by James Louie [^james], dated August 1968. Some minor word changes or additions are in square brackets [ ]. Explanatory notes written by my father are in foot-notes.
+
+[^james]: James Louie - I have been informed by Paul Fong (Fremont, California) and Carole Louie... <br/><br/> *James Louie was a member of the Soo Yuen Benevolent Association in Stockton, California USA where my father was a member. I'm told a copy of the transcription hangs on the wall at the Stockton association hall.*<br/>
+
+## Soo Yuen Benevolent Association
+
+The Soo Yuen Association consists of three families -- Louie[/Lei/Lui], Fong[/Fang] and Kwong[/Kuang]. The history and the origin of these names date back to four thousand six hundred [and] sixty-five years ago.
+
+4,665 years ago [2697 B.C.] China had an Emperor named Hwang Ti [^1]. One member of his cabinet at this time was named Louie Goan, who was from the territory of Sai Ling. Because of this friendship, Emperor Hwang Ti became acquainted with Louie Goan's cousin, Louie Jo. Eventually she became the Emperor's Queen. She was very talented in her work with silkworms, and she developed the silk industry. This is the beginning of the Louie name.
+
+[^1]: The first emperor of China. All later Chinese emperors have the title "Hwang Ti".
+
+At about the same time, Emperor Hwang Ti sent [^2] his Prime Minister, a member of the Louie family, to the Fong San territory to settle troubles and disturbances. The Emperor's Prime Minister was the son of the Aye Yee Mong. After success in settling the problems of the Fong San territory, he decided to remain and made his home there. He changed his name to Fong, and therefore became the first Fong.
+
+[^2]: The origin of the Fong family is in the north-east part of China close to the Yellow River (Huang He).
+
+In the year 1127 [A.D.], Fong Sam Tit of the Tang dynasty had a son who served under Soong Goe Dong. His name was Fong Yee Ping, of the Soong dynasty. He served as a member of the Emperor's cabinet, and he held the position of a Supreme Court Justice. Because of his great deeds for his country and the fact that the Emperor's wife was the daughter of Fong Yee Ping, he was awarded the name Kwong by the emperor. From that day forth, he became known as Kwong Yee Ping. Therefore, that was the beginning of the Kwong name.
+
+The above incidents relate the originality of the names of Louie, Fong and Kwong. [Their] three families are associated together under the name of Soo Yuen association. The words "Soo Yuen" are symbolic of the a swirling river which flows from its source [^3] and continues on and on till it reaches its deeper and larger channels. The history of the Soo Yuen Association is, therefore, very similar to the river, whereby it goes back from the Kwong name to Fong and to Louie. This is the reason for the united brotherhood among all these three families.
+
+[^3]: "Shui Soo Yuen" - source of a river.
+
+The Soo Yuen Association is a worldwide organisation. All members, by tradition and culture, have always displayed love, kindness and help to their young people. In return, our young people respect their parents at home, respect the teachers in school and act righteously in our society and nation. Consequently, there are few delinquencies among our young people in Soo Yuen family.
+
+
+## The Paternal Blood Relationship of Louie, Fong, Kwong
+
+*Another history, by James San Fong [^4] of the San Francisco Soo Yuen Association (date unknown) follows...*
+
+[^4]: In the Four-County dialect, Fong and Kwong have the same pronunciation though the two characters are written differently. The writer of this sketch is of the Kwong family, but because he was born in Toi Shan, one of the four counties, the native pronunciation of his family name is Fong instead of the Cantonese dialect Kwong.
+
+The paternal blood relationship of the three great families of Louie, Fong and Kwong can be traced back to their common ancestor Louie Goan during the time of the Emperor Huang-ti.
+
+The Emperor Huang-ti ruled China from 2697--2597 B.C. and Louie Goan was his right hand minister in both civil and military affairs. In the rebellion of Chi-yau, Louie Goan led an army corps composed of a great part of the imperial army and the forces of a number of feudal princes under the direct command of Huang-ti to help defeat the rebellious Chi-yau and his followers.
+
+Because of his distinguished great military merit in achieving victory over Chi-yau and his success in preserving lasting peace in the country, Louie Goan was made feudal prince over the princedom of Fong. From that time on he adopted Fong Louie as his family name. After his death, one of his two sons inherited his princedom and the other was summoned ot the Imperial Court to serve as a high ranking minister somewhat like his father, Louie Goan. Because he was in the Imperial Court, he resumed his father's family name Louie. Thereafter, his descendants multiplied and for some 4,600 years have never changed their family name.
+
+Seeing that his brother had changed his name back to Louie, Prince Fong Louie adopted Fong for his family name. Though his princehood came to an end when the next Emperior Siu Ho ascended the throne in 2597 B.C. his descendants continued their family name Fong for some 4,600 years except one instance which was in the Southern Sung dynasty during the reign of Emperor Kao Chung (1127--1163 A.D.).
+
+One of the Fong descendants, Yee Ping Fong, serving as Imperial Advisor and Mayor of the national capital, found favor with the Emperor and His Majesty bestowed upon him the family name of Kwong. In obedience to Imperial order, Yee Ping Fong adopted Kwong as his family name. Thereafter the Kwong descendants have never changed their family name.
+
+From this sketch, we the descendants of Louie, Fong and Kwong, can see that our paternal blood relationship is clearly traced to our common ancestor, Louie Goan.
+
+
+## Another description of the origin of the Fong/Fang family name
+
+from [Yutopian](http://www.yutopian.com/names/04/4fang62.html)
+
+*The 62nd most common last name in China. Descendents of ancient king Yan Di, also known as Shen Nong. During Huang Di's reign, a descendent called Yu Lei was awarded the land of Fang (north west of Nanyu) for his contributions in defeating a foreign tribe. He was thus known as Fang Lei, and his descendents were given the last name Fang. Ji Yuan is considered as another forefather of the Fangs. Ji was a general of Zhou Xuan Wang, and was known for his contributions in conquering the north and the south. Since his nickname was Fang Shu, the king awarded him the last name of Fang. (Fang means square). Hometown: 30 miles north east of Leyang in Henan Province.*
+
+## Links - Soo Yuen 遡源 Benevolent Association
+
+[Soo Yuen Benevolent Association of Chicago](http://www.sooyuenchicago.org/)
+
+* Address : 2317 South Wentworth Avenue, Chicago, Illinois, 60616-2013, 3rd Floor. United States of America.
+* Phone : (312) 326-1089
+* e-mail : sooyuenchicago@yahoo.com
+
+The Chicago assocation web-site has plenty of links to other Soo Yuen associations around the world.
+
+[Soo Yuen Benevolent Association](https://www.sooyuen.org/) - San Francisco
+
+[Soo Yuen Benevolent Association on *Wikipedia*](https://en.wikipedia.org/wiki/Soo_Yuen_Benevolent_Association)
+
+## Family names, genealogies and "finding one's roots"
+
+[The first part of a detailed history of the Fong family name in classical Chinese](/document/Family-Vol-1.pdf). Provided courtesy of my uncle, Dr Jack Fong (thanks Uncle!), Assoc Prof Paediatrics Danbury Hospital, Connecticut. I have no idea what any of it means. If anyone would care to provide a translation or summary, I would be much obliged. I also have available a further two parts, but I think most of those parts are very 'Fong' genealogy specific.
+
+### Links
+
+[Rick Harbaugh's Chinese surname page](http://zhongwen.com/x/xingshi.htm)
+
+[Chinese Family History Group of Southern California](https://www.chinesefamilyhistory.org/) - resources, including a link to [family name and village databases at 'Friends of Roots'](https://www.friendsofroots.org/), which contains a database of village and family names together with interactive maps of the Taishan area.
+
+For example, my ancestral village [寧溪里](http://villagedb.friendsofroots.org/display.cgi/village/6026) has the following entry :
+
+* County : [開平, Hoiping](http://villagedb.friendsofroots.org/display.cgi/county/2)
+* Area : [3](http://villagedb.friendsofroots.org/display.cgi/area/13)
+* Heung : [平安鄉 Ping On Heung](http://villagedb.friendsofroots.org/display.cgi/heung/331), with [approximate location on Google Maps](https://www.google.com/maps/@?api=1&map_action=map&center=22.16733,112.59051&zoom=14)
+  + Very approximate location. The actual location is 4.1 km south of south-west of Chishuizhen 赤水镇, on the opposite side of the road to Sanhecun 三合村. [The 'actual' location on OpenStreetMap](https://www.openstreetmap.org/#map=18/22.10202/112.57461)
+* Subheung : [大嶺鄉 villages formerly under the jurisdiction of Tai Ling Heung](http://villagedb.friendsofroots.org/display.cgi/subheung/420)
+* Village : 寧溪里,北邊頭 Ning Kai Lay, Pak Bin Tau
+* Surname(s) : 方 Fong
+
