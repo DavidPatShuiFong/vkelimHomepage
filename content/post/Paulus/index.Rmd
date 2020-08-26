@@ -1,0 +1,22 @@
+---
+title: "Paulus"
+author: "David Fong"
+date: 2020-08-26T00:00:00Z
+categories: ["Christianity"]
+aliases:
+tags: ["Christianity", "Paulus", "St. Paul", "Felix Mendelssohn-Bartholdy"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+## 'Paulus' (St. Paul) - Opus 36 by Mendelssohn
+
+<!-- Note that the latex2html generated files in the /Paulus/ directory  -->
+<!-- do NOT have an automatic 'link' in the up button. This needs to be -->
+<!-- changed manually in the index.html file e.g. point to '../' -->
+
+[German and English libretto/text](/Paulus/) to St. Paul (Paulus), an oratorio composed by Felix Mendelssohn-Bartholdy. As far as I can tell, this oratorio is infrequently performed or recorded these days. A [good recording was made by EMI in 1977](https://www.amazon.com/Mendelssohn-Paulus-Felix/dp/B000005GPP). Some recordings do not include an English text!
+
+This `translation' was completed early in 2002. Also available as [PDF version](/document/Paulus.pdf), [$\LaTeX$](/document/Paulus.tex) and [LyX](/document/Paulus.lyx) files. Please contact me regarding any errors.

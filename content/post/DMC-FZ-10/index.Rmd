@@ -1,0 +1,24 @@
+---
+title: "Panasonic DMC FZ-10"
+author: "David Fong"
+date: 2020-08-26T00:00:00Z
+categories: ["photography"]
+aliases:
+tags: ["Panasonic DMC FZ-10", "photography", "rough guide"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+## Panasonic DMC FZ-10 'rough guide'
+
+<!-- Note that the latex2html generated files in the /DMCFZ10/ directory  -->
+<!-- do NOT have an automatic 'link' in the up button. This needs to be -->
+<!-- changed manually in the index.html file e.g. point to '../' -->
+
+[A summary I wrote of Panasonic DMC FZ-10 information](/DMCFZ10/). Very old article, I am afraid many of the links don't work any more!
+
+The Panasonic FZ-10 is a four megapixel prosumer digital camera. It was the first digital camera I owned. It had features similar to an entry-level SLR camera of the time (such as a 'through-the-lens viewfinder', albeit digital, and a manual focus ring), however it is not an SLR camera. Its other outstanding feature is a 420 mm equivalent zoom ('superzoom') with optical image stabilization.
+
+I still like and use Panasonic cameras! Particularly the (relatively) portable micro-4/3 line. I use a Panasonic GH-1, Panasonic GM-5 and also Olympus micro-4/3 cameras.
