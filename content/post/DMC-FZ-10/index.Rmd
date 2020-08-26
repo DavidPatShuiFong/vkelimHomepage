@@ -17,7 +17,9 @@ knitr::opts_chunk$set(collapse = TRUE)
 <!-- do NOT have an automatic 'link' in the up button. This needs to be -->
 <!-- changed manually in the index.html file e.g. point to '../' -->
 
-[A summary I wrote of Panasonic DMC FZ-10 information](/DMCFZ10/). Very old article, I am afraid many of the links don't work any more!
+[A summary I wrote of Panasonic DMC FZ-10 information](/DMCFZ10/).
+
+A very old article. Many of the links don't work any more!
 
 The Panasonic FZ-10 is a four megapixel prosumer digital camera. It was the first digital camera I owned. It had features similar to an entry-level SLR camera of the time (such as a 'through-the-lens viewfinder', albeit digital, and a manual focus ring), however it is not an SLR camera. Its other outstanding feature is a 420 mm equivalent zoom ('superzoom') with optical image stabilization.
 

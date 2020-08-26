@@ -3,6 +3,8 @@ title: "Fong, Louie and Kwong"
 author: "David Fong"
 date: 2020-08-23T00:00:00Z
 categories: ["Chinese"]
+summary: History of the Fong, Louie and Kwong family names, the Soo Yuen Benevolent
+  Association and other genealogy information.
 image:
   caption: '寧溪里 Ning Kai Lei/Ningxili. My father, Dr Stephen Fong, checking the family tree.'
   focal_point: "smart"
