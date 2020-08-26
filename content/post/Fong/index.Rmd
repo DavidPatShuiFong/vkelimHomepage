@@ -16,37 +16,41 @@ tags: ["Fong", "Louie", "Lui", "Kwong", "Chinese culture", "genealogy", "Soo Yue
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-<div align="center">
-<table align="center" summary="Table of Soo Yuen family characters">
-  <tbody>
-    <tr>
-      <td><a href="http://lost-theory.org/ocrat"><img
+<div align="center" margin="0px 0px 0px 0px">
+<p width="50%" style="text-align: center;"> <!-- resists centreing in Chrome! --> 
+
+| <!-- -->    | <!-- -->    | <!-- --> |
+|-------------|-------------|----------|
+| <a href="http://lost-theory.org/ocrat"><img
  alt="Fong character, sourced from Ocrat"
  src="/images/fong_animated.gif" align="middle"
- height="10%" width="56"></a></td>
-      <td><a href="http://lost-theory.org/ocrat"><img
+ height="10%" width="56"></a> | <a href="http://lost-theory.org/ocrat"><img
  alt="Lui character, sourced from Ocrat"
  src="/images/lei_animated.gif" align="middle"
- height="10%" width="56"></a></td>
-      <td><a href="http://www.wenlin.com/"><img
+ height="10%" width="56"></a> |<a href="http://www.wenlin.com/"><img
  alt="Kuang character, generated with WenLin"
  src="/images/kuang_animated.gif"
- align="middle" height="10%" width="56"></a></td>
-    </tr>
-    <tr>
-      <td>Fong</td>
-      <td>Louie</td>
-      <td>Kwong</td>
-    </tr>
-  </tbody>
-</table>
+ align="middle" height="10%" width="56"></a> |
+| Fong  | Louie | Kwong |
+
+</p>
 </div>
 
-The following information about the Fong family name was transcribed by James Louie [^james], dated August 1968. Some minor word changes or additions are in square brackets [ ]. Explanatory notes written by my father are in foot-notes.
+<style>
+div.orange_highlight { background-color:#f1ad1f; border-radius: 5px; padding: 20px;}
+</style>
 
-[^james]: James Louie - I have been informed by Paul Fong (Fremont, California) and Carole Louie... <br/><br/> *James Louie was a member of the Soo Yuen Benevolent Association in Stockton, California USA where my father was a member. I'm told a copy of the transcription hangs on the wall at the Stockton association hall.*<br/>
+<style>
+div.aqua_highlight { background-color:#12f393; border-radius: 5px; padding: 20px;}
+</style>
 
 ## Soo Yuen Benevolent Association
+
+<div class = "orange_highlight">
+The following information about the Fong family name was transcribed by James Louie [^james], dated August 1968. Some minor word changes or additions are in square brackets [ ]. Explanatory notes written by my father are in foot-notes.
+</div>
+
+[^james]: James Louie - I have been informed by Paul Fong (Fremont, California) and Carole Louie... <br/><br/> *James Louie was a member of the Soo Yuen Benevolent Association in Stockton, California USA where my father was a member. I'm told a copy of the transcription hangs on the wall at the Stockton association hall.*<br/>
 
 The Soo Yuen Association consists of three families -- Louie[/Lei/Lui], Fong[/Fang] and Kwong[/Kuang]. The history and the origin of these names date back to four thousand six hundred [and] sixty-five years ago.
 
@@ -69,7 +73,9 @@ The Soo Yuen Association is a worldwide organisation. All members, by tradition 
 
 ## The Paternal Blood Relationship of Louie, Fong, Kwong
 
+<div class = "orange_highlight">
 *Another history, by James San Fong [^4] of the San Francisco Soo Yuen Association (date unknown) follows...*
+</div>
 
 [^4]: In the Four-County dialect, Fong and Kwong have the same pronunciation though the two characters are written differently. The writer of this sketch is of the Kwong family, but because he was born in Toi Shan, one of the four counties, the native pronunciation of his family name is Fong instead of the Cantonese dialect Kwong.
 
@@ -88,7 +94,9 @@ From this sketch, we the descendants of Louie, Fong and Kwong, can see that our 
 
 ## Another description of the origin of the Fong/Fang family name
 
+<div class = "orange_highlight">
 from [Yutopian](http://www.yutopian.com/names/04/4fang62.html)
+</div>
 
 *The 62nd most common last name in China. Descendents of ancient king Yan Di, also known as Shen Nong. During Huang Di's reign, a descendent called Yu Lei was awarded the land of Fang (north west of Nanyu) for his contributions in defeating a foreign tribe. He was thus known as Fang Lei, and his descendents were given the last name Fang. Ji Yuan is considered as another forefather of the Fangs. Ji was a general of Zhou Xuan Wang, and was known for his contributions in conquering the north and the south. Since his nickname was Fang Shu, the king awarded him the last name of Fang. (Fang means square). Hometown: 30 miles north east of Leyang in Henan Province.*
 
@@ -116,6 +124,7 @@ The Chicago assocation web-site has plenty of links to other Soo Yuen associatio
 
 [Chinese Family History Group of Southern California](https://www.chinesefamilyhistory.org/) - resources, including a link to [family name and village databases at 'Friends of Roots'](https://www.friendsofroots.org/), which contains a database of village and family names together with interactive maps of the Taishan area.
 
+<div class = "aqua_highlight">
 For example, my ancestral village [寧溪里](http://villagedb.friendsofroots.org/display.cgi/village/6026) has the following entry :
 
 * County : [開平, Hoiping](http://villagedb.friendsofroots.org/display.cgi/county/2)
@@ -125,4 +134,4 @@ For example, my ancestral village [寧溪里](http://villagedb.friendsofroots.or
 * Subheung : [大嶺鄉 villages formerly under the jurisdiction of Tai Ling Heung](http://villagedb.friendsofroots.org/display.cgi/subheung/420)
 * Village : 寧溪里,北邊頭 Ning Kai Lay, Pak Bin Tau
 * Surname(s) : 方 Fong
-
+</div>

@@ -9,6 +9,11 @@
 #  weight = 10
 
 [[main]]
+  name = "Fong"
+  url = "fong/"
+  weight = 10
+
+[[main]]
   name = "Posts"
   url = "#posts"
   weight = 20
@@ -27,6 +32,15 @@
 #  name = "Courses"
 #  url = "courses/"
 #  weight = 50
+
+[[main]]
+  name = "Topics"
+  weight = 45
+
+[[main]]
+  name = "Fong family name"
+  parent = "Topics"
+  url = "fong/"
 
 [[main]]
   name = "About"
