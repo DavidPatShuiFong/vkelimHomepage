@@ -9,6 +9,11 @@
 #  weight = 10
 
 [[main]]
+  name = "CV"
+  url = "CV/"
+  weight = 5
+
+[[main]]
   name = "Fong"
   url = "fong/"
   weight = 10
