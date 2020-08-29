@@ -8,3 +8,5 @@ blogdown
 public
 Resources
 resources
+.~*
+*.csv#

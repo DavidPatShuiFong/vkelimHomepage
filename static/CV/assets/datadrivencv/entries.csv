@@ -3,7 +3,7 @@ section,title,loc,institution,start,end,description_1,description_2,description_
 education,Masters in Global Development Practice,"Cambridge, Massachusetts","Harvard University, Extension School",2019,,"including “Data, Economics and Development Policy” micromasters (MITx) as credit",,,
 education,[Data Economics and Development Policy Micromasters](https://micromasters.mit.edu/certificate/program/721e9a94ec5e2a866c7b5f56adbf4c38),edX,Massachusetts Institute of Technology,2018,2019,,,,
 education,Drug and Alcohol Certificate Course,"Melbourne, Australia",Monash University,2004,2004,,,,
-education,Certificate of Integrative Medicine,"Melbourne, Australia",Swinburne University of Technology,2003,2003,,,,
+education,Certificate of Integrative Medicine,"Melbourne, Australia",Swinburne University of Technology,2002,2003,,,,
 education,International Health and Development Summer School,"Adelaide, Australia",Tabor Adelaide,2002,2002,,,,
 education,Fellowship in Advanced Rural General Practice,Australia,Royal Australian College of General Practitioners,1998,2001,incorporating Graduate Diploma in Rural General Practice,,,
 education,[Fellowship of the Royal Australian College of General Practitioners](https://www.ahpra.gov.au/Registration/Registers-of-Practitioners.aspx?q=MED0001157068&t=I5UTt2InzNnIj48JB4xC),Australia,Royal Australian College of General Practitioners,1998,2001,Registration number : MED0001157068,details and registration available at [Australian Health Practitioner Regulation Agency](https://www.ahpra.gov.au),,
@@ -11,10 +11,11 @@ education,Certificate of Advanced Paediatric Life Support,Australia,APLS Austral
 education,Diploma of Obstetrics and Gynaecology,,Royal Australian College of Obstetrics and Gynaecology,1998,1999,,,,
 education,"[Bachelor of Medicine, Bachelor of Surgery M.B., B.S.](https://www.myequals.net/sharelink/638d1976-114b-4349-b5e6-83d2dda1d3a6/299bd932-b131-4491-a002-f1cfbec0c98e)","Melbourne, Australia",University of Melbourne,1989,1994,,,,TRUE
 professional_positions,Medical practitioner,"Kensington, Victoria, Australia",[coHealth community health service](http://www.cohealth.org.au),2003,,"multidisciplinary primary care practice with a particular focus on people groups with relative disadvantage including risk of homelessness, mental health, substance use disorders and refugee and asylum seeker health",lead doctor 2009 to present,,TRUE
-professional_positions,volunteer doctor   ,"Kibera, Kenya",[SpurAfrika](http://www.spurafrika.org),2014,,data analysis (2014 - 2017),visiting doctor (January 2016 and January 2020),,TRUE
+professional_positions,volunteer doctor   ,"Kibera, Kenya",[SpurAfrika](http://www.spurafrika.org),2014,,data analysis (2014 – 2020),visiting doctor (January 2016 and January 2020),,TRUE
 professional_positions,volunteer doctor   ,"Shaanxi, China",[Shaanxi Agape](https://www.facebook.com/ShaanxiAgape) and [Elim Kids](https://www.facebook.com/elimkidschina),2005,2019,Paediatric and general medicine,Elim (HIV paediatric) and Shaanxi Agape Community Care Association (orphans and disability),"direct patient care, working together with local doctors, training of local primary care physicians, community education",
 professional_positions,General practice (paediatric),"Melbourne, Australia",After-hours clinic Royal Children’s Hospital,2007,2008,,,,
 professional_positions,volunteer doctor   ,"Parbatipur, Rajshahi Division, Bangladesh",[LAMB project](http://www.lambproject.org),2002,2003,General medicine,Neonatal (level 2 nursery),,
+professional_positions,volunteer doctor   ,"ShuangLiu County, Sichuan province, China",[MSI professional services](http://msips.org),2002,2002,health screening,lecturing to health professionals,,
 professional_positions,General practice,"Viewbank and Rosanna, Australia","Viewbank Family Medical Group, Rosanna Medical Group",2001,2002,,,,
 professional_positions,General practice,"Moe, Victoria",Federation Health,2000,2000,Third term of General Practice Training Program (GPT3),,,
 professional_positions,Opthalmology/ENT emergency resident,"Melbourne, Australia",Eye & Ear Hospital,2000,2001,VATGP (Victorian Advanced Training for General Practice) position – six months,,,
@@ -28,3 +29,4 @@ professional_positions,Hospital resident (HMO1) – Intern,"Victoria, Australia"
 professional_positions,Alfred Hospital auxiliary (volunteer),"Prahran, Victoria",Alfred Hospital,1990,1990,,,,
 teaching_positions,Community Teaching Assistant (TA),edX,Massachusetts Institute of Technology,2019,2019,Teaching Assistant for 'Designing and Running Randomized Evaluations',,,TRUE
 academic_articles,"Assessment of vitamin D and its association with cardiovascular disease risk factors in an adult migrant population: an audit of patient records at a Community Health Centre in Kensington, Melbourne, Australia","*BMC Cardiovascular Disorders* vol. 14, Article number: 157",,2014,2014,"authored with Thilanga Ruwanpathirana, Christopher M Reid, Alice J Owen, Usha Gowda, Andre M N Renzaho",,,TRUE
+academic_articles,Usage of complementary medicine among children ,"Australian Family Physician, April 2002. 31(4):388–391 ",,2002,2002,authored with Lee Fong,,,TRUE
