@@ -87,6 +87,9 @@ build_network_logo <- function(position_data, sparse = TRUE){
       institution = stringr::str_remove_all(institution, '(\\(.+?\\))|(\\[)|(\\])'),
       section = stringr::str_replace_all(section, "_", " ") %>% stringr::str_to_title()
     ) %>%
+    dplyr::mutate(institution = dplyr::if_else(
+      institution == "N/A", "", institution
+    )) %>%
     dplyr::mutate(
       title = paste0(title, "\n", institution)
     )
