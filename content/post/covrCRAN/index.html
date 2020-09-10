@@ -1,0 +1,106 @@
+---
+title: "covr thinks I'm CRAN!"
+author: "David Fong"
+date: 2020-09-10T00:00:00Z
+categories: ["R"]
+image:
+  caption: <span>Photo by <a href="https://unsplash.com/@chrisliverani?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Chris Liverani</a> on <a href="https://unsplash.com/s/photos/exam?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+  focal_point: Smart
+aliases:
+tags: ["R", "covr", "testthat", "NOT_CRAN"]
+---
+
+
+
+<p><a href="https://r-pkgs.org/tests.html"><code>testthat</code></a> is a great tool to test that R package
+code actually does what it is supposed to do. And keep doing the right thing
+after multiple package updates, edits and ‘fixes’.</p>
+<p><a href="https://github.com/r-lib/covr"><code>covr</code></a> <a href="https://codingclubuc3m.rbind.io/post/2019-11-26/">helps show what part of the codebase
+is actually tested with <code>testthat</code></a>.</p>
+<p>It is possible to <a href="https://github.com/rfaelens/exampleShinyTest">use testthat with shiny</a>.</p>
+<p>One annoying problem I had is that <code>devtools::test()</code> might work :</p>
+<pre eval="FALSE"><code>&gt; devtools::test()
+Loading DTedit
+Testing DTedit
+✓ |  OK F W S | Context
+✓ |   1       | callbacks_actionButtons [12.5 s]
+✓ |   1       | dtedit_demo [10.0 s]
+✓ |   1       | dtedit_demo_modular [5.2 s]
+✓ |   5       | error_test [6.5 s]
+✓ |   1       | fileInput_modular [12.2 s]
+✓ |   1       | password [6.9 s]
+✓ |   1       | reactive [2.7 s]
+✓ |   1       | reactive_demo [2.7 s]
+✓ |   1       | selectInputReactive [8.7 s]
+✓ |   1       | selectInputReactive_demo [13.6 s]
+✓ |   1       | simple [13.6 s]
+✓ |   1       | simple_modular [13.7 s]
+
+══ Results ═════════════════════════════════════════════════════════════════════
+Duration: 113.0 s
+
+OK:       16
+Failed:   0
+Warnings: 0
+Skipped:  0</code></pre>
+<p>
+<p>but <code>testthat::test_package()</code> skips all the tests :</p>
+<pre class="eval"><code>&gt; testthat::test_package(&quot;DTedit&quot;, quiet = FALSE)
+══ testthat results  ═══════════════════════════════════════════════════════════
+[ OK: 0 | SKIPPED: 12 | WARNINGS: 0 | FAILED: 0 ]</code></pre>
+<p>
+<p>with similar results from <code>covr::codecov()</code> :</p>
+<pre eval="FALSE"><code>&gt; covr::codecov(quiet = FALSE)
+* installing *source* package ‘DTedit’ ...
+** R
+** inst
+** tests
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘DTedit’
+    dtedit                                  example
+    dteditmodUI                             example
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+* DONE (DTedit)
+Running specific tests for package ‘DTedit’
+  Running ‘testthat.R’
+DTedit Coverage: 0.00%
+R/dtedit_demo.R: 0.00%
+R/dtedit_test.R: 0.00%
+R/dtedit.R: 0.00%</code></pre>
+<p>
+<p>ouch! no coverage!</p>
+<p>The problem is that, strangely, <a href="https://github.com/r-lib/covr/issues/314">the default setting of various R packages is to
+think that testing is occurring on a CRAN computer</a>!</p>
+<p>So tests will be skipped if <code>testthat::skip_on_cran()</code> is used in the tests.</p>
+<p>There a few possible solutions, but one solution
+<a href="https://github.com/r-lib/covr/issues/314">described by Randy Lai</a> is to use
+<code>withr::with_envvar</code> :</p>
+<pre eval="FALSE"><code>&gt; withr::with_envvar(c(&quot;NOT_CRAN&quot; = &quot;true&quot;), covr::codecov(quiet = FALSE))
+* installing *source* package ‘DTedit’ ...
+** R
+** inst
+** tests
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+  converting help for package ‘DTedit’
+    dtedit                                  example
+    dteditmodUI                             example
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+* DONE (DTedit)
+Running specific tests for package ‘DTedit’
+  Running ‘testthat.R’
+DTedit Coverage: 95.07%
+R/dtedit.R: 94.99%
+R/dtedit_test.R: 95.04%
+R/dtedit_demo.R: 100.00%
+$uploaded
+[1] TRUE</code></pre>
