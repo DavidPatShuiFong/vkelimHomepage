@@ -37,6 +37,7 @@
 #  name = "Courses"
 #  url = "courses/"
 #  weight = 50
+#
 
 [[main]]
   name = "Topics"
@@ -46,6 +47,11 @@
   name = "Fong family name"
   parent = "Topics"
   url = "fong/"
+
+[[main]]
+  name = "Christianity"
+  parent = "Topics"
+  url = "category/christianity"
 
 [[main]]
   name = "About"
