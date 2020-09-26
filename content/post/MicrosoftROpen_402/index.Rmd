@@ -1,0 +1,62 @@
+---
+title: "Microsoft R Open 4.0.2 and openSuSE"
+author: "David Fong"
+date: 2020-09-26T00:00:00Z
+categories: ["R"]
+image:
+  caption: <span>Photo by <a href="https://unsplash.com/@musiime?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Musiime P. Muramura</a> on <a href="https://unsplash.com/s/photos/gecko?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+  focal_point: Smart
+aliases:
+tags: ["R", "Microsoft R Open", "4.0.2", "openSuSE Leap 15.2"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+One reason for my sometimes growing respect for Microsoft is that they support
+(just) [Microsoft R Open](https://mran.microsoft.com/). Back in May 2019 they released
+[version 3.5.3](https://blog.revolutionanalytics.com/2019/05/availability-of-microsoft-r-open-352-and-353.html). It was a long time coming, but Microsoft just released 
+[Microsoft R Open 4.0.2](https://blog.revolutionanalytics.com/2020/09/mro-402-available.html).
+
+In the nick-of-time, really. [Theresa Graefe's RTutor tutorial on synthetic models](https://github.com/TheresaGraefe/RTutorCarbonTax) appears to rely on at least version 3.6 of R.
+
+## Microsoft R Open 4.0.2 and openSuSE Leap 15.2
+
+I mainly use Microsoft R on Windows, but Linux has once again become my 'daily driver'
+for home use. Microsoft R Open does [support SuSE Linux Enterprise SLES](https://mran.microsoft.com/documents/rro/installation) installation. To install on openSuSE Leap 15.2, I needed to change line 109 of the `install.sh` to:
+
+```{r eval=FALSE}
+  elif  [ "$OS_NAME" == "openSUSE" ]; then
+```
+
+## Microsoft R Open CRAN snapshots
+
+Normally, I think snapshots are a good idea to ease maintenance (though it would be more usable if Microsoft had a more regular update cycle...).
+
+For some reason, the default CRAN mirror isn't quite working the way it should be.
+
+`RevoUtils::getRevoRepos()` returns `"https://mran.microsoft.com/snapshot/2020-07-16"`.
+
+but...
+
+```{r eval=FALSE}
+> install.packages("tidyverse")
+Warning in install.packages :  
+  unable to access index for repository https://mran.microsoft.com/snapshot/2020-07-16/src/contrib:  
+  Line starting '<head><title>Documen ...' is malformed!
+```
+
+The problem can be 'fixed' manually after R starts with the commands:
+
+```{r eval=FALSE}
+r <- getOption("repos")
+r["CRAN"] <- "https://cran.microsoft.com/snapshot/2020-07-16"
+options(repos = r)
+```
+
+but a more permanent fix is by modifying line 23 of `/opt/microsoft/ropen/4.0.2/lib64/R/etc/Rprofile.site`.
+
+```{r eval=FALSE}
+ r["CRAN"] <- "https://cran.microsoft.com/snapshot/2020-07-16" # RevoUtils::getRevoRepos()
+```
