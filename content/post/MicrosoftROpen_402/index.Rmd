@@ -16,8 +16,8 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 One reason for my sometimes growing respect for Microsoft is that they support
 (just) [Microsoft R Open](https://mran.microsoft.com/). Back in May 2019 they released
-[version 3.5.3](https://blog.revolutionanalytics.com/2019/05/availability-of-microsoft-r-open-352-and-353.html). It was a long time coming, but Microsoft just released 
-[Microsoft R Open 4.0.2](https://blog.revolutionanalytics.com/2020/09/mro-402-available.html).
+[version 3.5.3](https://blog.revolutionanalytics.com/2019/05/availability-of-microsoft-r-open-352-and-353.html). It was a long time coming, but Microsoft released 
+[Microsoft R Open 4.0.2](https://blog.revolutionanalytics.com/2020/09/mro-402-available.html) in September 2020.
 
 In the nick-of-time, really. [Theresa Graefe's RTutor tutorial on synthetic models](https://github.com/TheresaGraefe/RTutorCarbonTax) appears to rely on at least version 3.6 of R.
 
