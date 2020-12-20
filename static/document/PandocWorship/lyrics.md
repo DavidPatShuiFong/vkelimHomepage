@@ -14,7 +14,7 @@ to a slide with using '#' at the beginning of the line (a markdown 'title')
 
 generate powerpoint from '.md' markdown file with
 "pandoc --to pptx --from markdown+hard_line_breaks --reference-doc pandoc_pptx_reference_worship.potx --output output.pptx lyrics.md"
-'hard_line_breaks' treats each new line as a line break as a 'line break' (which is what you want)
+'hard_line_breaks' treats each new line as a 'line break' (which is what you want)
 
 :::
 
