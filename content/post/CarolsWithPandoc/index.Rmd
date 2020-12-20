@@ -1,0 +1,96 @@
+---
+title: "Carolling with Pandoc - 'automatic' Powerpoint lyric slides"
+author: "David Fong"
+date: 2020-12-20T00:00:00Z
+categories: ["Computers", "Christianity"]
+aliases:
+tags: ["Christianity", "pandoc", "markdown", "PowerPoint"]
+image:
+  caption: <span>Photo by <a href="https://unsplash.com/@davidbeale?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">David Beale</a> on <a href="https://unsplash.com/s/photos/christmas-singing?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+  focal_point: Smart
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+## Converting lyrics (in text/'markdown' format) to PowePoint
+
+Christmas carols and worship songs lyrics are easily (and sometimes freely)
+available across the Internet. One source is [SongSelect (by CCLI)](https://songselect.ccli.com),
+though [SongSelect](https://songselect.ccli.com) is *not* free, but does help
+congregations support song-writers by paying appropriate royalty fees.
+
+A popular and (almost) universal presentation format is
+[PowerPoint (by Microsoft)](https://en.wikipedia.org/wiki/Microsoft_PowerPoint).
+Unfortunately, creating song lyric slides from PowerPoint can be a painful and
+slow process. Lyric slides might only contain two or three lines per slide!
+So a lot of slides might need to be created for a single song.
+
+[**Pandoc**](https://pandoc.org/) to the rescue! Pandoc can rapidly convert a text
+file (such as lyrics) to another format, such as PowerPoint slides!
+
+The gory details are described in the [Pandoc manual](https://pandoc.org/MANUAL.html),
+but here's a summary, followed by example files.
+
+* Create a *Powerpoint template*
+  + As described in the manual, create a default template with pandoc with <br> `pandoc -o custom-reference.pptx --print-default-data-file reference.pptx`
+  + Edit the created template's **slide master** with PowerPoint.
+    - Note that the **master** needs to be edited, not the slides!
+  + There are four slides to edit, the *title slide*, *title and content*, *section header* and *two (column) content*.
+    - The only slide that I really needed to edit for typical lyrics PowerPoints is *title and content*
+    - I moved the *title* of *title and content* to the bottom, so it will where I will place
+     copyright information.
+    - I restricted the main body (lyrics) of the slide to the top half of the slide.
+  + Save the created template. I saved it as `.potx` PowerPoint template.
+* Create a lyric file in markdown '.md' format
+  + This is 'just' a textfile.
+  + Separate slides with `---`. The `---` needs to be preceded and followed by a blank line.
+  + '#' titles, in my template, are used to designate copyright information. Titles must be placed at the beginning of the slide.
+* Process the markdown file with `pandoc`
+  + `pandoc --to pptx --from markdown+hard_line_breaks --reference-doc pandoc_pptx_reference_worship.potx --output output.pptx lyrics.md`
+    - the name of my template is `pandoc_pptx_reference_worship.potx`
+    - `hard_line_breaks` modification to `markdown` specifies that each newline in the lyrics actually does create a new line!
+
+<br>
+
+Very small lyrics 'markdown' example:
+
+```
+# （C） Chris Tomlin | Ed Cash | George Frideric Handel | Isaac Watts | Matt Gilder
+
+Joy to the world the Lord is come
+Let earth receive her King
+Let ev'ry heart prepare Him room
+ 
+---
+
+And heaven and nature sing
+And heaven and nature sing
+And heaven and heaven and nature sing
+```  
+
+![](/document/PandocWorship/PowerPointPicture.png)
+
+*Bonus feature* - It is easy to import and convert the 'markdown' text file into
+the lyrics manager of other presentation software, such as [**Easyworship**](https://www.easyworship.com/).
+
+### Example files
+
+* Markdown lyrics file for ['Joy To The World'](/document/PandocWorship/lyrics.md)
+  + includes comments
+  + includes a verse in Chinese using the 'two column' PowerPoint master template.
+* An example [template](/document/PandocWorship/pandoc_pptx_reference_worship.potx)
+  + I have only used the **title and content** master template component
+  + Text is white bold version of Calibri, with black outlines
+  + Slides backgrounds are a very dark blue
+  + The *title* of the **title and content** master template is at the *bottom* of
+    the slide, with a smaller font. Intended to be used for copyright information.
+    Note that the 'title/copyright' *needs* to be at the 'beginning' of
+    the slide description.
+  + The *title* of the **two column** master template is still at the top of the slide
+    - the 'left column' (Chinese) uses a font which is not outlined, or bold
+
+* The ['Joy to the World' PowerPoint created by Pandoc](/document/PandocWorship/JoyToTheWorld.pptx)
+
