@@ -36,22 +36,24 @@ but here's a summary, followed by example files.
 
 * Create a *Powerpoint template*
   + As described in the manual, create a default template with pandoc with <br> `pandoc -o custom-reference.pptx --print-default-data-file reference.pptx`
-  + Edit the created template's **slide master** with PowerPoint.
+  + Edit the **slide master** of the created template `custom-reference.pptx` with PowerPoint.
     - Note that the **master** needs to be edited, not the slides!
   + There are four slides to edit, the *title slide*, *title and content*, *section header* and *two (column) content*.
     - The only slide that I really needed to edit for typical lyrics PowerPoints is *title and content*
     - I moved the *title* of *title and content* to the bottom, so it will where I will place
      copyright information.
     - I restricted the main body (lyrics) of the slide to the top half of the slide.
-  + Save the created template. I saved it as `.potx` PowerPoint template.
+  + Save the created template. I saved it as `.potx` PowerPoint template. This template is
+    named `pandox_pptx_reference_worship.potx` below.
 * Create a lyric file in markdown '.md' format
-  + This is 'just' a textfile.
+  + This is 'just' a textfile. This file is named `lyrics.md` below.
   + Separate slides with `---`. The `---` needs to be preceded and followed by a blank line.
   + '#' titles, in my template, are used to designate copyright information. Titles must be placed at the beginning of the slide.
 * Process the markdown file with `pandoc`
   + `pandoc --to pptx --from markdown+hard_line_breaks --reference-doc pandoc_pptx_reference_worship.potx --output output.pptx lyrics.md`
     - the name of my template is `pandoc_pptx_reference_worship.potx`
     - `hard_line_breaks` modification to `markdown` specifies that each newline in the lyrics actually does create a new line!
+    - this example creates the PowerPoint file `output.pptx`
 
 <br>
 
@@ -82,15 +84,18 @@ the lyrics manager of other presentation software, such as [**Easyworship**](htt
   + includes comments
   + includes a verse in Chinese using the 'two column' PowerPoint master template.
 * An example [template](/document/PandocWorship/pandoc_pptx_reference_worship.potx)
-  + I have only used the **title and content** master template component
   + Text is white bold version of Calibri, with black outlines
   + Slides backgrounds are a very dark blue
-  + The *title* of the **title and content** master template is at the *bottom* of
+  + **title and content** master template
+    - The body/lyrics section is limited to the top of the slide
+    - The *title* is at the *bottom* of
     the slide, with a smaller font. Intended to be used for copyright information.
     Note that the 'title/copyright' *needs* to be at the 'beginning' of
     the slide description.
-  + The *title* of the **two column** master template is still at the top of the slide
-    - the 'left column' (Chinese) uses a font which is not outlined, or bold
+  + **two column** master template
+    - The *title* is at the top of the slide
+    - the 'left column' (for Chinese lyrics) uses a font which is not outlined, or bold
+    - the 'right column' (for English lyrics) uses a bold, outlined font.
 
 * The ['Joy to the World' PowerPoint created by Pandoc](/document/PandocWorship/JoyToTheWorld.pptx)
 

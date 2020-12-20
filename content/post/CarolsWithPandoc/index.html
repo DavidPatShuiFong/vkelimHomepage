@@ -33,7 +33,7 @@ but here’s a summary, followed by example files.</p>
 <li>Create a <em>Powerpoint template</em>
 <ul>
 <li>As described in the manual, create a default template with pandoc with <br> <code>pandoc -o custom-reference.pptx --print-default-data-file reference.pptx</code></li>
-<li>Edit the created template’s <strong>slide master</strong> with PowerPoint.
+<li>Edit the <strong>slide master</strong> of the created template <code>custom-reference.pptx</code> with PowerPoint.
 <ul>
 <li>Note that the <strong>master</strong> needs to be edited, not the slides!</li>
 </ul></li>
@@ -44,11 +44,12 @@ but here’s a summary, followed by example files.</p>
 copyright information.</li>
 <li>I restricted the main body (lyrics) of the slide to the top half of the slide.</li>
 </ul></li>
-<li>Save the created template. I saved it as <code>.potx</code> PowerPoint template.</li>
+<li>Save the created template. I saved it as <code>.potx</code> PowerPoint template. This template is
+named <code>pandox_pptx_reference_worship.potx</code> below.</li>
 </ul></li>
 <li>Create a lyric file in markdown ‘.md’ format
 <ul>
-<li>This is ‘just’ a textfile.</li>
+<li>This is ‘just’ a textfile. This file is named <code>lyrics.md</code> below.</li>
 <li>Separate slides with <code>---</code>. The <code>---</code> needs to be preceded and followed by a blank line.</li>
 <li>‘#’ titles, in my template, are used to designate copyright information. Titles must be placed at the beginning of the slide.</li>
 </ul></li>
@@ -58,6 +59,7 @@ copyright information.</li>
 <ul>
 <li>the name of my template is <code>pandoc_pptx_reference_worship.potx</code></li>
 <li><code>hard_line_breaks</code> modification to <code>markdown</code> specifies that each newline in the lyrics actually does create a new line!</li>
+<li>this example creates the PowerPoint file <code>output.pptx</code></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -87,16 +89,21 @@ the lyrics manager of other presentation software, such as <a href="https://www.
 </ul></li>
 <li>An example <a href="/document/PandocWorship/pandoc_pptx_reference_worship.potx">template</a>
 <ul>
-<li>I have only used the <strong>title and content</strong> master template component</li>
 <li>Text is white bold version of Calibri, with black outlines</li>
 <li>Slides backgrounds are a very dark blue</li>
-<li>The <em>title</em> of the <strong>title and content</strong> master template is at the <em>bottom</em> of
+<li><strong>title and content</strong> master template
+<ul>
+<li>The body/lyrics section is limited to the top of the slide</li>
+<li>The <em>title</em> is at the <em>bottom</em> of
 the slide, with a smaller font. Intended to be used for copyright information.
 Note that the ‘title/copyright’ <em>needs</em> to be at the ‘beginning’ of
 the slide description.</li>
-<li>The <em>title</em> of the <strong>two column</strong> master template is still at the top of the slide
+</ul></li>
+<li><strong>two column</strong> master template
 <ul>
-<li>the ‘left column’ (Chinese) uses a font which is not outlined, or bold</li>
+<li>The <em>title</em> is at the top of the slide</li>
+<li>the ‘left column’ (for Chinese lyrics) uses a font which is not outlined, or bold</li>
+<li>the ‘right column’ (for English lyrics) uses a bold, outlined font.</li>
 </ul></li>
 </ul></li>
 <li>The <a href="/document/PandocWorship/JoyToTheWorld.pptx">‘Joy to the World’ PowerPoint created by Pandoc</a></li>
