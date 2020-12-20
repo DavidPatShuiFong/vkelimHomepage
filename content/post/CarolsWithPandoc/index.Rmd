@@ -1,5 +1,5 @@
 ---
-title: "Carolling with Pandoc - 'automatic' Powerpoint lyric slides"
+title: "Carolling with Pandoc - 'automatic' PowerPoint lyric slides"
 author: "David Fong"
 date: 2020-12-20T00:00:00Z
 categories: ["Computers", "Christianity"]
@@ -15,7 +15,7 @@ image:
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-## Converting lyrics (in text/'markdown' format) to PowePoint
+## Converting lyrics (in text/'markdown' format) to PowerPoint
 
 Christmas carols and worship songs lyrics are easily (and sometimes freely)
 available across the Internet. One source is [SongSelect (by CCLI)](https://songselect.ccli.com),
