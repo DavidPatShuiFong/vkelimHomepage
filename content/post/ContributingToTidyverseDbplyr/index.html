@@ -1,0 +1,82 @@
+---
+title: "Contributing to the Tidyverse (dbplyr)"
+author: "David Fong"
+date: 2020-12-21T00:00:00Z
+categories: ["R"]
+aliases:
+tags: ["R", "tidyverse", "dbplyr", "github"]
+image:
+  caption: <span>Illustrations by <a href="https://www.allisonhorst.com/">Allison Horst</a>, artist in residence at <a href="https://blog.rstudio.com/2019/11/18/artist-in-residence/">RStudio</a></span>
+  focal_point: Smart
+
+---
+
+<script src="index_files/header-attrs/header-attrs.js"></script>
+
+
+<p>I was <a href="https://www.tidyverse.org/blog/2020/11/dbplyr-2-0-0/">acknowledged as a contributor to the version 2.0.0 release of <code>dbplyr</code></a>!
+An acknowledgement can be found <a href="https://www.tidyverse.org/blog/2020/11/dbplyr-2-0-0/">at the bottom of the announcement page</a>.</p>
+<p><a href="https://dbplyr.tidyverse.org/"><code>dbplyr</code></a> is the database backend for the ‘data
+pliers <a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a>’ data manipulation package in
+the <a href="https://www.tidyverse.org/"><code>tidyverse</code></a> software suite of <a href="https://www.r-project.org/about.html"><code>R</code></a>
+statistical programming language.</p>
+<p>Or to describe from ‘top-down’:</p>
+<ul>
+<li><p><a href="https://www.r-project.org/about.html"><code>R</code></a> is a computer programming language
+used by statisticians and others who want to interpret data.</p>
+<p><br></p></li>
+<li><p><a href="https://www.tidyverse.org/"><code>tidyverse</code></a> is a collection of software packages for
+the <code>R</code> language which makes it easier for R users to manipulate and process data.
+So much easier, that <code>R</code> is now taught to liberal arts post-graduate students
+to analyze data e.g. for environmental studies at Harvard Extension School.
+These students often have no prior experience in computer programming.</p>
+<p><br></p>
+<p>The <code>tidyverse</code> was largely the creation of a New Zealander, <a href="http://hadley.nz/">Hadley Wickham</a>,
+and it looks like he is the chief maintainer of the <code>tidyverse</code> software.
+Like <code>R</code>, <code>tidyverse</code> is ‘<a href="https://en.wikipedia.org/wiki/Open_source">open source</a>’,
+freely available for use and modification, and contributed to by many
+enthusiasts in the data science community.</p>
+<p><br></p></li>
+<li><p><a href="https://dplyr.tidyverse.org/"><code>dplyr</code></a> is a software package in the <code>tidyverse</code>
+collection which does many of the common data manipulation tasks, such as
+filtering, changing, sorting, summarizing and selection.</p>
+<p><br></p></li>
+<li><p><a href="https://dbplyr.tidyverse.org/"><code>dbplyr</code></a> allows <code>dplyr</code> to interact with database
+backends.</p></li>
+</ul>
+<p><img src="/document/ContributeTidyverse/tidy_bakers.png" /></p>
+<p><em>My</em> contributions to the free and open-source <code>dbplyr</code> are (ironically) related
+to <code>dbplyr</code> operation with <a href="https://en.wikipedia.org/wiki/Microsoft_SQL_Server">Microsoft SQL Server ‘MSSQL’</a>.
+In all credit to Microsoft, the basic versions of Microsoft SQL Server are freely
+available, as are client libraries (for use in Linux), and Microsoft also provides
+extensive freely available documentation.</p>
+<p>As of 21st December 2020, my two accepted contributions (‘pull requests’) are:</p>
+<ol style="list-style-type: decimal">
+<li><p><a href="https://github.com/tidyverse/dbplyr/pull/388">Cast <code>as.double</code> and <code>as.numeric</code> to <code>FLOAT</code> instead of <code>NUMERIC</code></a></p>
+<p><br></p>
+<p>In MSSQL, <code>NUMERIC</code> converts floating point number to integers, which is
+not what is intended for <code>as.double</code> and <code>as.numeric</code> in <code>R</code>.</p>
+<p><br></p></li>
+<li><p><a href="https://github.com/tidyverse/dbplyr/pull/496">Use <code>try_cast</code> instead of <code>cast</code> for MSSQL version 11+ (2012+)</a></p>
+<p><br></p>
+<p>In MSSQL, <code>try_cast</code> allows more elegant handling of invalid entries.
+<code>try_cast</code> returns <code>NA</code> (not available) in situations where <code>cast</code> will return an error.</p>
+<p><br></p></li>
+</ol>
+<p>As of 21st December 2020, I also have a <a href="https://github.com/tidyverse/dbplyr/pull/555">currently open contribution</a>
+(‘pull request’) to fix an error in my second contribution.</p>
+<p>What I really would like to say is just how friendly Hadley Wickham and others
+have been in helping me contribute to and improve <code>dbplyr</code>.</p>
+<p>Both in <a href="https://github.com/tidyverse/dbplyr/issues/379">initial discussion</a>
+and in the <a href="https://github.com/tidyverse/dbplyr/pull/496">process of doing a ‘pull request’</a>,
+Hadley and <a href="https://github.com/krlmlr">Kirrill Müller</a> have answered the simplest
+of queries, amended my super-clumsy code and really encouraged me along!
+Hadley is an adjunct professor and something of a data science legend. I have
+not attended a formal computer programming class at high school, university or
+trade school, so I’m really humbled to feel like a valued contributor to
+the data science world.</p>
+<p><img src="/document/ContributeTidyverse/tidy_icecream.jpg" /></p>
+<p>(And why am I so interested in improving the operation of <code>dbplyr</code> with <code>MSSQL</code>?
+It is because I use <code>dbplyr</code>/<code>dplyr</code> to interrogate the <a href="https://bpsoftware.net/">Best Practice</a>
+electronic medical record patient information database with my ‘near future’
+patient care quality improvement tool <a href="https://github.com/DavidPatShuiFong/DailyMeasure">GPstat!</a>.)</p>

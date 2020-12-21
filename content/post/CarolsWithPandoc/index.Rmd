@@ -34,7 +34,7 @@ file (such as lyrics) to another format, such as PowerPoint slides!
 The gory details are described in the [Pandoc manual](https://pandoc.org/MANUAL.html),
 but here's a summary, followed by example files.
 
-* Create a *Powerpoint template*
+* Create a *PowerPoint template*
   + As described in the manual, create a default template with pandoc with <br> `pandoc -o custom-reference.pptx --print-default-data-file reference.pptx`
   + Edit the **slide master** of the created template `custom-reference.pptx` with PowerPoint.
     - Note that the **master** needs to be edited, not the slides!
@@ -94,7 +94,7 @@ the lyrics manager of other presentation software, such as [**Easyworship**](htt
     the slide description.
   + **two column** master template
     - The *title* is at the top of the slide
-    - the 'left column' (for Chinese lyrics) uses a font which is not outlined, or bold
+    - the 'left column' (for Chinese lyrics) uses a font which is neither outlined nor bold
     - the 'right column' (for English lyrics) uses a bold, outlined font.
 
 * The ['Joy to the World' PowerPoint created by Pandoc](/document/PandocWorship/JoyToTheWorld.pptx)

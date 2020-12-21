@@ -1,0 +1,108 @@
+---
+title: "Contributing to the Tidyverse (dbplyr)"
+author: "David Fong"
+date: 2020-12-21T00:00:00Z
+categories: ["R"]
+aliases:
+tags: ["R", "tidyverse", "dbplyr", "github"]
+image:
+  caption: <span>Illustrations by <a href="https://www.allisonhorst.com/">Allison Horst</a>, artist in residence at <a href="https://blog.rstudio.com/2019/11/18/artist-in-residence/">RStudio</a></span>
+  focal_point: Smart
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+I was [acknowledged as a contributor to the version 2.0.0 release of `dbplyr`](https://www.tidyverse.org/blog/2020/11/dbplyr-2-0-0/)!
+An acknowledgement can be found [at the bottom of the announcement page](https://www.tidyverse.org/blog/2020/11/dbplyr-2-0-0/).
+
+[`dbplyr`](https://dbplyr.tidyverse.org/) is the database backend for the 'data
+pliers [`dplyr`](https://dplyr.tidyverse.org/)' data manipulation package in
+the [`tidyverse`](https://www.tidyverse.org/) software suite of [`R`](https://www.r-project.org/about.html)
+statistical programming language.
+
+Or to describe from 'top-down':
+
+* [`R`](https://www.r-project.org/about.html) is a computer programming language
+  used by statisticians and others who want to interpret data.
+  
+  <br>
+  
+* [`tidyverse`](https://www.tidyverse.org/) is a collection of software packages for
+  the `R` language which makes it easier for R users to manipulate and process data.
+  So much easier, that `R` is now taught to liberal arts post-graduate students
+  to analyze data e.g. for environmental studies at Harvard Extension School.
+  These students often have no prior experience in computer programming.
+  
+  <br>
+  
+  The `tidyverse` was largely the creation of a New Zealander, [Hadley Wickham](http://hadley.nz/),
+  and it looks like he is the chief maintainer of the `tidyverse` software.
+  Like `R`, `tidyverse` is '[open source](https://en.wikipedia.org/wiki/Open_source)',
+  freely available for use and modification, and contributed to by many
+  enthusiasts in the data science community.
+  
+  <br>
+  
+* [`dplyr`](https://dplyr.tidyverse.org/) is a software package in the `tidyverse`
+  collection which does many of the common data manipulation tasks, such as
+  filtering, changing, sorting, summarizing and selection.
+  
+  <br>
+  
+* [`dbplyr`](https://dbplyr.tidyverse.org/) allows `dplyr` to interact with database
+  backends.
+
+![](/document/ContributeTidyverse/tidy_bakers.png)
+  
+*My* contributions to the free and open-source `dbplyr` are (ironically) related
+to `dbplyr` operation with [Microsoft SQL Server 'MSSQL'](https://en.wikipedia.org/wiki/Microsoft_SQL_Server).
+In all credit to Microsoft, the basic versions of Microsoft SQL Server are freely
+available, as are client libraries (for use in Linux), and Microsoft also provides
+extensive freely available documentation.
+
+As of 21st December 2020, my two accepted contributions ('pull requests') are:
+
+1. [Cast `as.double` and `as.numeric` to `FLOAT` instead of `NUMERIC`](https://github.com/tidyverse/dbplyr/pull/388)
+
+   <br>
+
+   In MSSQL, `NUMERIC` converts floating point number to integers, which is
+   not what is intended for `as.double` and `as.numeric` in `R`.
+   
+   <br>
+   
+2. [Use `try_cast` instead of `cast` for MSSQL version 11+ (2012+)](https://github.com/tidyverse/dbplyr/pull/496)
+
+   <br>
+
+   In MSSQL, `try_cast` allows more elegant handling of invalid entries.
+   `try_cast` returns `NA` (not available) in situations where `cast` will return an error.
+
+   <br>
+
+As of 21st December 2020, I also have a [currently open contribution](https://github.com/tidyverse/dbplyr/pull/555)
+('pull request') to fix an error in my second contribution.
+
+What I really would like to say is just how friendly Hadley Wickham and others
+have been in helping me contribute to and improve `dbplyr`.
+
+Both in [initial discussion](https://github.com/tidyverse/dbplyr/issues/379)
+and in the [process of doing a 'pull request'](https://github.com/tidyverse/dbplyr/pull/496),
+Hadley and [Kirrill Müller](https://github.com/krlmlr) have answered the simplest
+of queries, amended my super-clumsy code and really encouraged me along!
+Hadley is an adjunct professor and something of a data science legend. I have
+not attended a formal computer programming class at high school, university or
+trade school, so I'm really humbled to feel like a valued contributor to
+the data science world.
+
+![](/document/ContributeTidyverse/tidy_icecream.jpg)
+
+(And why am I so interested in improving the operation of `dbplyr` with `MSSQL`?
+It is because I use `dbplyr`/`dplyr` to interrogate the [Best Practice](https://bpsoftware.net/)
+electronic medical record patient information database with my 'near future'
+patient care quality improvement tool [GPstat!](https://github.com/DavidPatShuiFong/DailyMeasure).)
+
+
