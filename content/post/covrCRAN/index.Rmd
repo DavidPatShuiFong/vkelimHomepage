@@ -25,7 +25,7 @@ It is possible to [use testthat with shiny](https://github.com/rfaelens/exampleS
 
 One annoying problem I had is that `devtools::test()` might work : 
 
-```{eval=FALSE}
+```{r eval=FALSE}
 > devtools::test()
 Loading DTedit
 Testing DTedit
@@ -55,7 +55,7 @@ Skipped:  0
 <p>
 but `testthat::test_package()` skips all the tests :
 
-```{eval = FALSE}
+```{r eval = FALSE}
 > testthat::test_package("DTedit", quiet = FALSE)
 ══ testthat results  ═══════════════════════════════════════════════════════════
 [ OK: 0 | SKIPPED: 12 | WARNINGS: 0 | FAILED: 0 ]
@@ -65,7 +65,7 @@ but `testthat::test_package()` skips all the tests :
 
 with similar results from `covr::codecov()` :
 
-```{eval=FALSE}
+```{r eval=FALSE}
 > covr::codecov(quiet = FALSE)
 * installing *source* package ‘DTedit’ ...
 ** R
@@ -102,7 +102,7 @@ There a few possible solutions, but one solution
 [described by Randy Lai](https://github.com/r-lib/covr/issues/314) is to use
 `withr::with_envvar` :
 
-```{eval=FALSE}
+```{r eval=FALSE}
 > withr::with_envvar(c("NOT_CRAN" = "true"), covr::codecov(quiet = FALSE))
 * installing *source* package ‘DTedit’ ...
 ** R

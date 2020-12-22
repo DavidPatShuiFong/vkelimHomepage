@@ -10,6 +10,7 @@ aliases:
 tags: ["R", "covr", "testthat", "NOT_CRAN"]
 ---
 
+<script src="index_files/header-attrs/header-attrs.js"></script>
 
 
 <p><a href="https://r-pkgs.org/tests.html"><code>testthat</code></a> is a great tool to test that R package
@@ -19,7 +20,7 @@ after multiple package updates, edits and ‘fixes’.</p>
 is actually tested with <code>testthat</code></a>.</p>
 <p>It is possible to <a href="https://github.com/rfaelens/exampleShinyTest">use testthat with shiny</a>.</p>
 <p>One annoying problem I had is that <code>devtools::test()</code> might work :</p>
-<pre eval="FALSE"><code>&gt; devtools::test()
+<pre class="r"><code>&gt; devtools::test()
 Loading DTedit
 Testing DTedit
 ✓ |  OK F W S | Context
@@ -45,12 +46,12 @@ Warnings: 0
 Skipped:  0</code></pre>
 <p>
 <p>but <code>testthat::test_package()</code> skips all the tests :</p>
-<pre class="eval"><code>&gt; testthat::test_package(&quot;DTedit&quot;, quiet = FALSE)
+<pre class="r"><code>&gt; testthat::test_package(&quot;DTedit&quot;, quiet = FALSE)
 ══ testthat results  ═══════════════════════════════════════════════════════════
 [ OK: 0 | SKIPPED: 12 | WARNINGS: 0 | FAILED: 0 ]</code></pre>
 <p>
 <p>with similar results from <code>covr::codecov()</code> :</p>
-<pre eval="FALSE"><code>&gt; covr::codecov(quiet = FALSE)
+<pre class="r"><code>&gt; covr::codecov(quiet = FALSE)
 * installing *source* package ‘DTedit’ ...
 ** R
 ** inst
@@ -80,7 +81,7 @@ think that testing is occurring on a CRAN computer</a>!</p>
 <p>There a few possible solutions, but one solution
 <a href="https://github.com/r-lib/covr/issues/314">described by Randy Lai</a> is to use
 <code>withr::with_envvar</code> :</p>
-<pre eval="FALSE"><code>&gt; withr::with_envvar(c(&quot;NOT_CRAN&quot; = &quot;true&quot;), covr::codecov(quiet = FALSE))
+<pre class="r"><code>&gt; withr::with_envvar(c(&quot;NOT_CRAN&quot; = &quot;true&quot;), covr::codecov(quiet = FALSE))
 * installing *source* package ‘DTedit’ ...
 ** R
 ** inst
