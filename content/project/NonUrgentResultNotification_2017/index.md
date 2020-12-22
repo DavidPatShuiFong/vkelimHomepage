@@ -1,6 +1,5 @@
 ---
 date: "2020-11-11T00:00:00Z"
-external_link: https://rpubs.com/DavidFong/689509
 image:
   caption: <span>Photo by <a href="https://unsplash.com/@nci?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">National Cancer Institute</a> on <a href="https://unsplash.com/s/photos/doctor-results?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
   focal_point: Smart

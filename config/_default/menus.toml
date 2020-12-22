@@ -54,6 +54,11 @@
   url = "category/christianity"
 
 [[main]]
+  name = "Gallery"
+  url = "#gallery"
+  weight = 47
+
+[[main]]
   name = "About"
   url = "#about"
   weight = 50
