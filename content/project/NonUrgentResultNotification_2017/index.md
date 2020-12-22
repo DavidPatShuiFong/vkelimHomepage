@@ -12,3 +12,7 @@ tags:
 - quality improvement
 title: Results marked ‘non-urgent discussion’ - rate of notification without a result notification procedure (2015/2017)
 ---
+
+[Results marked 'non-urgent discussion' - rate of notification without a result notification procedure](https://rpubs.com/DavidFong/689509) on [RPubs](https://rpubs.com)
+
+Without any procedure to ‘recall’ patients who have a result marked ‘non-urgent discussion’, how many results are notified over the following weeks? During four measurement periods in 2015/2017, the Kensington site had approximately 100 results per week marked for ‘non-urgent discussion’. Although there was no mechanism to recall those patients if the result was not yet notified, about 55% of those results were notified within four weeks.
