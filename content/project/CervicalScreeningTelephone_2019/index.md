@@ -1,6 +1,5 @@
 ---
 date: "2019-11-21T00:00:00Z"
-external_link: https://bookdown.org/vkelim/coHealth/cervical-screening.html
 image:
   caption: Photo by CDC on Unsplash
   focal_point: Smart
