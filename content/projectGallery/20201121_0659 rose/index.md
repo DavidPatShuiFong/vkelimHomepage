@@ -8,3 +8,4 @@ tags:
 - rose
 title: 20201121_0659 rose
 ---
+[20201121_0659_0367 rose](https://vkelim.smugmug.com/Flowers/2020/i-dxG9GKd/A)
