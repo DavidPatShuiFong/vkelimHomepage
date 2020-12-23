@@ -4,6 +4,7 @@ author: "David Fong"
 date: 2020-12-21T00:00:00Z
 categories: ["R"]
 aliases:
+featured: true
 tags: ["R", "tidyverse", "dbplyr", "github"]
 image:
   caption: <span>Illustrations by <a href="https://www.allisonhorst.com/">Allison Horst</a>, artist in residence at <a href="https://blog.rstudio.com/2019/11/18/artist-in-residence/">RStudio</a></span>
@@ -16,7 +17,6 @@ knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 I was [acknowledged as a contributor to the version 2.0.0 release of `dbplyr`](https://www.tidyverse.org/blog/2020/11/dbplyr-2-0-0/)!
-An acknowledgement can be found [at the bottom of the announcement page](https://www.tidyverse.org/blog/2020/11/dbplyr-2-0-0/).
 
 [`dbplyr`](https://dbplyr.tidyverse.org/) is the database backend for the 'data
 pliers [`dplyr`](https://dplyr.tidyverse.org/)' data manipulation package in

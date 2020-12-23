@@ -3,6 +3,7 @@ title: "Fong, Louie and Kwong"
 author: "David Fong"
 date: 2020-08-23T00:00:00Z
 categories: ["Chinese"]
+featured: true
 summary: History of the Fong, Louie and Kwong family names, the Soo Yuen Benevolent
   Association and other genealogy information.
 image:

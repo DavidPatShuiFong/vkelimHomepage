@@ -1,0 +1,113 @@
+---
+title: "Comments for Hugo Academic (Wowchemy) with Utterances"
+author: "David Fong"
+date: 2020-12-23T00:00:00Z
+categories: ["blog"]
+aliases:
+featured: false
+tags: ["hugo academic", "wowchemy", "utterances", "comments"]
+image:
+  caption: <span>Photo by <a href="https://unsplash.com/@epicantus?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Daria Nepriakhina</a> on <a href="https://unsplash.com/s/photos/notes?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+  focal_point: Smart
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+There are endless numbers of blogs out there, often providing tidbits of useful
+information which I find useful. And occasionally, someone even finds *my* posts
+useful and uses the [Wowchemy (Hugo Academic)](https://wowchemy.com/) 'Contact'
+widget to send me a comment or question! But these questions are not attached
+to any particular blog post. Wouldn't it be nice if the a viewer could comment
+on an individual post in the blog?
+
+The most commonly used commenting system on Hugo websites appears to be [Disqus](https://disqus.com/).
+Disqus does have 'native' and easy support in Wowchemy. And I've certainly used
+Disqus to provide feedback on *other* blogs. But there are also numerous complaints
+about Disqus's speed (or lack thereof), resource intensity, advertisements and 
+- even worse - potential violations of privacy.
+
+But what - preferably free and 'open' - alternatives are there?
+
+I initially planned to use [Staticman](https://jvblog.net/configuring-staticman-hugo/) for
+commenting, but setup seemed a little involved, and I would need to register for
+a (free) Heroku account.
+
+I finally chose [utterances](https://utteranc.es), which cleverly uses [Github](https://github.com/)'s
+own 'issue' system to provide comments on my blog, which is also 'sourced' from [Github](https://github.com/).
+
+The disadvantage of utterances are
+
+* Commenters need to have a registered Github account
+  + Github is owned by Microsoft. I'm okay with that, actually.
+* Comments are not 'nested'
+
+*But* 'utterances' is very easy to set up. I used the advice from
+[Maëlle Salmon](https://masalmon.eu/2019/10/02/disqus/)
+and [Michele Sciponi](https://mscipio.github.io/post/utterances-comment-engine/).
+The instructions at the beginning of these blogs are clear, the final instructions
+at the end less so, so here are my notes for Hugo Academic version 4.8.0.
+
+* Install 'utterances' to my website's Github repository
+  + This website 'originates' from a Github repository - https://github.com/DavidPatShuiFong/vkelimHomepage
+  + [Github App - utterances](https://github.com/apps/utterances)
+* Retrieve/copy the 'utterances' script to be added to the blog's "comment partial"
+  + The script is provided, after answering a few questions such as the location
+    of the website's Github repository, at the [utterances website](https://utteranc.es/)
+* Copy the script to `[ROOT]/layouts/partials/comments/utterances.html`
+  + According to [Annie Lyu](https://annielyu.com) and Anabelle Laurent's 
+    [talk to an 'R ladies' workshop](https://annielyu.com/slides/isugg/blogdown_aa#1)
+    we **should not touch** the files in the 'themes' folder. (btw, Annie Lyu's
+    blog has a good introductory post to setting up a Hugo Academic/Wowchemy
+    site with R. It is what I used to get started...)
+  + This concept is confirmed on Hugo's website ["Customizing a Theme"](https://bwaycer.github.io/hugo_tutorial.hugo/themes/customizing/)
+  + So, create the file `[ROOT]/layout/partials/comments/utterances.html`, **not**
+    `[ROOT]/themes/hugo-academic/layout/partials/comments/utterances.html`
+  + This is what my script snippet looks like...
+  
+```
+<script src="https://utteranc.es/client.js"
+        repo="DavidPatShuiFong/vkelimHomepage"
+        issue-term="pathname"
+        label="comments 💬"
+        theme="github-dark-orange"
+        crossorigin="anonymous"
+        async>
+</script>
+```
+
+* Then I reference the script in `[ROOT]/layouts/partials/comments.html`
+  + **not** `[ROOT]/themes/hugo-academic/layout/partials/comments.html`
+  + I added two lines, referring to `site.Params.comment.engine 3`
+  + Here is the resulting script...
+
+```
+{{ if site.Params.comments.engine | and (index site.Params.comments.commentable .Type) | and (ne .Params.commentable false) | or .Params.commentable }}
+<section id="comments">
+  {{ if eq site.Params.comments.engine 1 }}
+    {{ partial "comments/disqus.html" . }}
+  {{ else if eq site.Params.comments.engine 2 }}
+    {{ partial "comments/commento.html" . }}
+  {{ else if eq site.Params.comments.engine 3 }}
+    {{ partial "comments/utterances.html" . }}
+  {{ end }}
+</section>
+{{ end }}
+```
+
+* Then I reference *that* `comments.html` script by changing the settings in
+`[ROOT]/config/_default/params.toml`
+  + Here is the relevant part of `params.toml`
+  + I added the comment about the 'Utterances' provider, and set the engine to '3'
+  
+```
+[comments]
+  # Comment provider:
+  #   0: Disabled
+  #   1: Disqus (https://disqus.com)
+  #   2: Commento (https://commento.io)
+  #   3: Utterances (https://utteranc.es/)
+  engine = 3
+```

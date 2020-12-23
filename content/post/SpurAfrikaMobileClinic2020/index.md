@@ -12,6 +12,7 @@ tags:
 - Nairobi
 - Kibera
 title: Spur Afrika Mobile Clinics 2020
+featured: true
 ---
 
 [Spur Afrika Mobile Clinics 2020](https://rpubs.com/DavidFong/SpurAfrikaMobileClinics2020) on [RPubs](https://rpubs.com)

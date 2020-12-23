@@ -5,6 +5,7 @@ date: 2020-09-12T00:00:00Z
 categories: ["Christianity"]
 aliases:
 tags: ["Christianity", "Knuth"]
+featured: TRUE
 ---
 
 ```{r setup, include=FALSE}
