@@ -29,6 +29,11 @@
   weight = 30
 
 [[main]]
+  name = "Gallery"
+  url = "#postsGallery"
+  weight = 35
+
+[[main]]
   name = "Publications"
   url = "#publications"
   weight = 40
@@ -52,11 +57,6 @@
   name = "Christianity"
   parent = "Topics"
   url = "category/christianity"
-
-[[main]]
-  name = "Gallery"
-  url = "#projectGallery"
-  weight = 47
 
 [[main]]
   name = "About"

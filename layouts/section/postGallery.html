@@ -1,0 +1,30 @@
+{{- define "main" -}}
+
+{{ partial "page_header.html" . }}
+
+<div class="universal-wrapper">
+
+  {{ with .Content }}
+  <div class="article-style">{{ . }}</div>
+  {{ end }}
+
+  <div class="row {{ if eq $.Params.view 6 }} isotope projects-container js-layout-masonry {{end}}">
+
+  {{ $paginator := .Paginate .Data.Pages }}
+  {{ range $idx, $post := $paginator.Pages }}
+    {{ if eq $.Params.view 1 }}
+      {{ partial "li_list" $post }}
+    {{ else if eq $.Params.view 3 }}
+      {{ partial "li_card" $post }}
+    {{ else }}
+      {{ partial "li_compact" $post }}
+    {{ end }}
+  {{ end }}
+
+  </div>
+
+  {{ partial "pagination" . }}
+
+</div>
+
+{{- end -}}
