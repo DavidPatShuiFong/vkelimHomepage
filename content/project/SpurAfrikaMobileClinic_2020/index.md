@@ -16,7 +16,7 @@ title: Spur Afrika Mobile Clinics 2020
 
 [Spur Afrika Mobile Clinics 2020](https://rpubs.com/DavidFong/SpurAfrikaMobileClinics2020) on [RPubs](https://rpubs.com)
 
-Spur Afrika mobile clinics were held in January 2020, seeing children from several schools in Kibera, Kenya, and children sponsored by the Spur Afrika Elimsha program. Health activities included medical and dental checks, dental hygiene education and medication education. 938 children were seen, ranging in ages from seven to eighteen years, but mostly in the ten to fourteen year age group.
+[Spur Afrika](https://spurafrika.org/) mobile clinics were held in January 2020, seeing children from several schools in Kibera, Kenya, and children sponsored by the Spur Afrika Elimsha program. Health activities included medical and dental checks, dental hygiene education and medication education. 938 children were seen, ranging in ages from seven to eighteen years, but mostly in the ten to fourteen year age group.
 
 Respiratory, eye, dental and gastrointestinal conditions were the most common conditions seen.
 
