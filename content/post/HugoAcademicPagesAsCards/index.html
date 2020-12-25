@@ -1,0 +1,146 @@
+---
+title: "Custom 'Pages' widget for Hugo Academic - cascading layout for cards "
+author: "David Fong"
+date: 2020-12-25T00:00:00Z
+categories: ["blog"]
+aliases:
+featured: false
+tags: ["hugo academic", "wowchemy", "pages widget", "cards", "isotope", "masonry", "cascading", "tiles", "column width"]
+image:
+  caption: <span>Photo by <a href="https://unsplash.com/@anniespratt?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Annie Spratt</a> on <a href="https://unsplash.com/s/photos/cards?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+  focal_point: Smart
+
+---
+
+<script src="index_files/header-attrs/header-attrs.js"></script>
+
+
+<p>In Hugo Academic (Wowchemy) version 4.8.0, the portfolio widget (used for ‘projects’)
+allows <a href="https://masonry.desandro.com/">cascading ‘cards’ layout with the isotope and masonry libraries</a>
+in the ‘cards’ view (view ‘3’).</p>
+<p>The pages widget (used for ‘posts’, ‘talks’, and ‘publications’) also has a
+‘cards’ view (view ‘3’), but all the cards are stacked vertically, one on top of
+another, without using the isotope and masonry libraries.</p>
+<p>By strategically copying parts of <code>[ROOT]/themes/hugo-academic/layouts/partials/widgets/portfolio.html</code>
+to <code>[ROOT]/themes/hugo-academic/layouts/partials/widgets/pages.html</code>, and storing
+the results in <code>[ROOT]/layouts/partials/widgets/pages.html</code>, it is possible to add
+a cascading ‘cards’ layouts to pages.</p>
+<p>Part of the original <code>[ROOT]/themes/hugo-academic/layouts/partials/widgets/pages.html</code>
+which changes the display of posts depending on the view:</p>
+<pre><code>{{ range $post := $query }}
+  {{ if eq $st.Params.design.view 1 }}
+    {{ partial &quot;li_list&quot; . }}
+  {{ else if eq $st.Params.design.view 3 }}
+    {{ partial &quot;li_card&quot; . }}
+  {{ else if eq $st.Params.design.view 4 | and (eq $items_type &quot;publication&quot;) }}
+    {{ partial &quot;li_citation&quot; . }}
+  {{ else }}
+    {{ partial &quot;li_compact&quot; . }}
+  {{ end }}
+{{end}}</code></pre>
+<p>The modified version adds view ‘6’. If view ‘6’ is chosen, then the <code>isotope</code> library
+is used to place cards (using <code>portfolio_li_card</code> partial) in a cascading layout.</p>
+<ul>
+<li>if view is 6, then add a call to <code>isotope projects-container js-layout-masonry</code></li>
+<li>iterate (<code>range</code>) over posts, retrieving both the <code>$idx</code> (index) and <code>$post</code> (post).
+<ul>
+<li>the original version just retrieves the <code>$post</code>, which is stored in <code>.</code></li>
+</ul></li>
+<li>if view is 6, then create additional variables relevant to the <code>$post</code>, then
+call the <code>portfolio_li_card</code> partial.</li>
+<li>similar changes can be made to <code>featured</code> widget.</li>
+</ul>
+<pre><code>&lt;div class=&quot;row {{ if eq $st.Params.design.view 6 }} isotope projects-container js-layout-masonry {{end}}&quot;&gt;
+
+  {{ range $idx, $post := $query }}
+    {{ if eq $st.Params.design.view 1 }}
+      {{ partial &quot;li_list&quot; $post }}
+    {{ else if eq $st.Params.design.view 3 }}
+      {{ partial &quot;li_card&quot; $post }}
+    {{ else if eq $st.Params.design.view 4 | and (eq $items_type &quot;publication&quot;) }}
+      {{ partial &quot;li_citation&quot; $post }}
+    {{ else if eq $st.Params.design.view 6 }}
+      {{ $link := $post.RelPermalink }}
+      {{ $target := &quot;&quot; }}
+      {{ if $post.Params.external_link }}
+        {{ $link = $post.Params.external_link }}
+        {{ $target = &quot;target=\&quot;_blank\&quot; rel=\&quot;noopener\&quot;&quot; }}
+      {{ end }}
+      {{ partial &quot;portfolio_li_card&quot; (dict &quot;widget&quot; $st &quot;index&quot; $idx &quot;item&quot; $post &quot;link&quot; $link &quot;target&quot; $target) }}
+    {{ else }}
+      {{ partial &quot;li_compact&quot; $post }}
+    {{ end }}
+  {{end}}
+&lt;/div&gt;</code></pre>
+<p>To use cascading cards view in the newly created view ‘6’, I choose view ‘6’ in
+the <code>[ROOT]/content/home/posts.md</code>:</p>
+<pre><code>[design]
+  # Toggle between the various page layout types.
+  #   1 = List
+  #   2 = Compact
+  #   3 = Card
+  #   4 = Citation (publication only)
+  #   6 = Cascading cards
+  view = 6</code></pre>
+<div id="extra-feature---custom-column-widths" class="section level2">
+<h2>Extra feature - custom column widths</h2>
+<p>By default, the ‘pages’ layout, if using two-column format, is divided into coluns
+of width ‘4’ (for the title) and the width ‘8’ (for the posts) themselves.</p>
+<p>This can be seen in the file <code>[ROOT]/themes/hugo-academic/layouts/partials/widgets/pages.html</code>
+with the various references <code>col-lg-8</code> and <code>col-lg-4</code>. In addition, ‘1’ column
+layout doesn’t actually work…</p>
+<pre><code>{{ $columns := $st.Params.design.columns | default &quot;2&quot; }}
+
+&lt;div class=&quot;row {{if not $st.Title | or (eq $columns &quot;1&quot;) }}justify-content-center{{end}}&quot;&gt;
+  {{ if $st.Title }}
+    {{ if eq $columns &quot;1&quot; }}
+      &lt;div class=&quot;col-12 col-lg-8 section-heading text-center&quot;&gt;
+        {{ with $st.Title }}&lt;h1&gt;{{.}}&lt;/h1&gt;{{ end }}
+        {{ with $st.Params.subtitle }}&lt;p&gt;{{ . | markdownify | emojify }}&lt;/p&gt;{{ end }}
+      &lt;/div&gt;
+    {{else}}
+      &lt;div class=&quot;col-12 col-lg-4 section-heading&quot;&gt;
+        {{ with $st.Title }}&lt;h1&gt;{{.}}&lt;/h1&gt;{{ end }}
+        {{ with $st.Params.subtitle }}&lt;p&gt;{{ . | markdownify | emojify }}&lt;/p&gt;{{ end }}
+      &lt;/div&gt;
+    {{end}}
+  {{ end }}
+  &lt;div class=&quot;col-12 col-lg-8&quot;&gt;</code></pre>
+<p>Here are changes, which I store in <code>[ROOT]/layouts/partials/widgets/pages.html</code>,
+which allow custom column widths, and allows one-column layout to work.</p>
+<ul>
+<li>adds variables <code>$lcolwidth</code> (default 4), and <code>$rcolwidth</code> (default 8)</li>
+<li>uses <code>$lcolwidth</code> and <code>$rcolwidth</code>, mainly for the two-column layout</li>
+<li><em>doesn’t</em> restrict the posts to <code>$rcolwidth</code> if in one-column layout</li>
+</ul>
+<pre><code>{{ $columns := $st.Params.design.columns | default &quot;2&quot; }}
+{{ $lcolwidth := $st.Params.design.lcolwidth | default &quot;4&quot; }}
+{{ $rcolwidth := $st.Params.design.rcolwidth | default &quot;8&quot; }}
+
+&lt;div class=&quot;row {{if not $st.Title | or (eq $columns &quot;1&quot;) }}justify-content-center{{end}}&quot;&gt;
+  {{ if $st.Title }}
+    {{ if eq $columns &quot;1&quot; }}
+      &lt;div class=&quot;col-12 col-lg-{{$rcolwidth}} section-heading text-center&quot;&gt;
+        {{ with $st.Title }}&lt;h1&gt;{{.}}&lt;/h1&gt;{{ end }}
+        {{ with $st.Params.subtitle }}&lt;p&gt;{{ . | markdownify | emojify }}&lt;/p&gt;{{ end }}
+      &lt;/div&gt;
+    {{else}}
+      &lt;div class=&quot;col-12 col-lg-{{$lcolwidth}} section-heading&quot;&gt;
+        {{ with $st.Title }}&lt;h1&gt;{{.}}&lt;/h1&gt;{{ end }}
+        {{ with $st.Params.subtitle }}&lt;p&gt;{{ . | markdownify | emojify }}&lt;/p&gt;{{ end }}
+      &lt;/div&gt;
+    {{end}}
+  {{ end }}
+  &lt;div class=&#39;col-12 {{if eq $columns &quot;2&quot;}}col-lg-{{$rcolwidth}}{{end}}&#39;&gt;</code></pre>
+<p>Custom column widths can be used in <code>[ROOT]/content/home/posts.md</code></p>
+<pre><code>[design]
+  # Toggle between the various page layout types.
+  #   1 = List
+  #   2 = Compact
+  #   3 = Card
+  #   4 = Citation (publication only)
+  #   6 = Cascading cards
+  view = 6
+  lcolwidth = &quot;3&quot;
+  rcolwidth = &quot;9&quot;</code></pre>
+</div>

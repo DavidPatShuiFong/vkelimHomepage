@@ -39,8 +39,8 @@ subtitle = ""
   #   3 = Card
   #   5 = Showcase
   view = 2
-  lcolwidth = "col-lg-3"
-  rcolwidth = "col-lg-9"
+  lcolwidth = "3"
+  rcolwidth = "9"
 
   # For Showcase view, flip alternate rows?
   flip_alt_rows = false

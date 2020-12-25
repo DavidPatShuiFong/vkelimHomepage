@@ -70,24 +70,24 @@
 {{ end }}
 
 {{ $columns := $st.Params.design.columns | default "2" }}
-{{ $lcolwidth := $st.Params.design.lcolwidth | default "col-lg-4" }}
-{{ $rcolwidth := $st.Params.design.rcolwidth | default "col-lg-8" }}
+{{ $lcolwidth := $st.Params.design.lcolwidth | default "4" }}
+{{ $rcolwidth := $st.Params.design.rcolwidth | default "8" }}
 
 <div class="row {{if not $st.Title | or (eq $columns "1") }}justify-content-center{{end}}">
   {{ if $st.Title }}
     {{ if eq $columns "1" }}
-      <div class="col-12 {{$rcolwidth}} section-heading text-center">
+      <div class="col-12 col-lg-{{$rcolwidth}} section-heading text-center">
         {{ with $st.Title }}<h1>{{.}}</h1>{{ end }}
         {{ with $st.Params.subtitle }}<p>{{ . | markdownify | emojify }}</p>{{ end }}
       </div>
     {{else}}
-      <div class="col-12 {{$lcolwidth}} section-heading">
+      <div class="col-12 col-lg-{{$lcolwidth}} section-heading">
         {{ with $st.Title }}<h1>{{.}}</h1>{{ end }}
         {{ with $st.Params.subtitle }}<p>{{ . | markdownify | emojify }}</p>{{ end }}
       </div>
     {{end}}
   {{ end }}
-  <div class='col-12 {{if eq $columns "2"}}{{$rcolwidth}}{{end}}'>
+  <div class='col-12 {{if eq $columns "2"}}col-lg-{{$rcolwidth}}{{end}}'>
 
     {{ with $st.Content }}{{ . }}{{ end }}
 

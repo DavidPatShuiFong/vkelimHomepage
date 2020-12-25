@@ -5,20 +5,20 @@
 {{ $st := .page }}
 {{ $items_type := $st.Params.content.page_type | default "project" }}
 {{ $columns := $st.Params.design.columns | default "2" }}
-{{ $lcolwidth := $st.Params.design.lcolwidth | default "col-lg-4" }}
-{{ $rcolwidth := $st.Params.design.rcolwidth | default "col-lg-8" }}
+{{ $lcolwidth := $st.Params.design.lcolwidth | default "4" }}
+{{ $rcolwidth := $st.Params.design.rcolwidth | default "8" }}
 
 {{ if ne $columns "1" }}
 {{/* Standard dual-column layout. */}}
 
 <div class="row">
-  <div class="col-12 {{$lcolwidth}} section-heading">
+  <div class="col-12 col-lg-{{$lcolwidth}} section-heading">
 
     {{ with $st.Title }}<h1>{{ . | markdownify | emojify }}</h1>{{ end }}
     {{ with $st.Params.subtitle }}<p>{{ . | markdownify | emojify }}</p>{{ end }}
 
   </div>
-  <div class="col-12 {{$rcolwidth}}">
+  <div class="col-12 col-lg-{{$rcolwidth}}">
 
 {{ else }}
 {{/* Single column layout. */}}

@@ -38,8 +38,8 @@ subtitle = ""
   #   3 = Card
   #   4 = Citation (publication only)
   view = 6
-  lcolwidth = "col-lg-3"
-  rcolwidth = "col-lg-9"
+  lcolwidth = "3"
+  rcolwidth = "9"
   
 [design.background]
   # Apply a background color, gradient, or image.

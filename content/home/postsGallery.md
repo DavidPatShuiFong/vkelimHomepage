@@ -37,6 +37,7 @@ subtitle = ""
   #   2 = Compact
   #   3 = Card
   #   4 = Citation (publication only)
+  #   6 = cascading cards
   view = 6
   columns = 1
 
