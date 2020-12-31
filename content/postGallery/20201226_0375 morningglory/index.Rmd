@@ -1,0 +1,12 @@
+---
+title: "20201226_0375"
+author: "David Fong"
+date: 2020-12-26T00:00:00Z
+categories:
+aliases:
+tags: ["flowers"]
+image:
+  caption: "[20201226_0375](https://vkelim.smugmug.com/Flowers/2020/i-P6CwRRH/A)"
+  focal_point: Smart
+---
+[20201121_0375 (garden on Yarravale Road, Kew)](https://vkelim.smugmug.com/Flowers/2020/i-P6CwRRH/A)
