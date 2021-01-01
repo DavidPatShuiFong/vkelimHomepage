@@ -38,6 +38,9 @@ social:
 - icon: linkedin
   icon_pack: fab
   link: "https://au.linkedin.com/in/david-p-fong-0b266970"
+- icon: twitter
+  icon_pack: fab
+  link: https://twitter.com/DavidBaCuiFong
 superuser: true
 title: "David Fong"
 user_groups:
