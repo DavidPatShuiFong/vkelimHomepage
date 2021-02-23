@@ -1,0 +1,12 @@
+---
+title: "20210208_1727 flower"
+author: "David Fong"
+date: 2021-02-08T17:27:00Z
+categories:
+aliases:
+tags: ["flower"]
+image:
+  caption: "[20210208_1722 flower](https://vkelim.smugmug.com/Flowers/2021/i-4gDPdtg/A)"
+  focal_point: Smart
+---
+[20210208_1722 flower (Kensington, Victoria)](https://vkelim.smugmug.com/Flowers/2021/i-4gDPdtg/A)
