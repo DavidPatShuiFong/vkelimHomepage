@@ -4,9 +4,10 @@
 .RData
 .Ruserdata
 .DS_Store
-blogdown
-public
+/blogdown
+/public
 Resources
-resources
+/resources
 .~*
 *.csv#
+Thumbs.db
