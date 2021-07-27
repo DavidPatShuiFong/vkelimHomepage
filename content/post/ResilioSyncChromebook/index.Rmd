@@ -1,0 +1,107 @@
+---
+title: "Resilio Sync on Chromebook (Linux 'Crostini' container)"
+author: "David Fong"
+date: 2021-07-27T00:00:00Z
+categories: ["Computers", "Linux"]
+aliases:
+featured: true
+tags: ["Chromebook", "Crostini", "Resilio Sync", "Linux"]
+image:
+  caption: <span>Photo by <a href="https://unsplash.com/@vfbranciforti?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vincent Branciforti</a> on <a href="https://unsplash.com/s/photos/synchronized-swimming?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
+  focal_point: Smart
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+## Using Resilio Sync on Chromebook (using the 'Crostini' Linux container)
+
+Resilio Sync is available on Chromebook as an Android app (via the Google Play
+Store), which is great, but:
+
+* for some reason, if I modify a synchronized file using a Linux application
+(running in the *excellent* Crostini Linux application container), the Resilio
+Sync app doesn't seem to detect the change, and doesn't propagate the changes
+to the other computers
+
+* the Android app does not have all the features, such as easily visible logs,
+as provided by the 'web browser' interface which operates on Linux/Windows
+computers.
+
+'Resilio Sync' for Linux can be operated inside a Chromebook 'Crostini' container!
+
+Details on the how to 'start'/use Crostini [can be found elsewhere](https://beebom.com/how-use-linux-chromebook/).
+
+Starting Resilio Sync on Crostini's 'Debian' container can be found on 
+[Resilio Sync's help pages](https://help.resilio.com/hc/en-us/articles/206178924-Installing-Sync-package-on-Linux).
+
+In summary
+
+* Add Resilio Sync repository 
+
+```
+echo "deb http://linux-packages.resilio.com/resilio-sync/deb resilio-sync non-free" | sudo tee /etc/apt/sources.list.d/resilio-sync.list
+```
+
+* Add Resilio Sync public key
+
+```
+curl -L https://linux-packages.resilio.com/resilio-sync/key.asc | sudo apt-key add
+```
+
+I myself used the instructions on [Leon's blog](https://osxlatitude.com/forums/topic/10961-crostini-howto-install-and-manage-resiliosync/)
+
+```
+wget -qO - https://linux-packages.resilio.com/resilio-sync/key.asc | sudo apt-key add -
+```
+
+* Update the repositories
+
+```
+sudo apt-get update
+```
+
+* Install Resilio Sync
+
+```
+sudo apt-get install -y resilio-sync
+```
+
+* Ensure that Resilio Sync is auto-started (at least when a container is started)
+
+```
+sudo systemctl enable resilio-sync
+```
+
+Sync's web-interface is immediately  accessible with the Chromebook's
+own 'Chrome' web-browser at `https://127.0.0.1:8888` (with an invalid certificate).
+
+By default, the 'Sync' service is started by the `rslsync` user. The `rslsync` user is created
+with a `rslsync` group. There will be a
+directory named `/home/rslsync`, which I think is the best place for synchronized
+files (which will have the owner `rslsync.rslsync`) to be placed. (The actual location
+of synchronized files is determined when adding synchronized directories with
+the web interface).
+
+My 'Crostini' Linux user has a different name e.g. `frieda`.
+
+How do I ensure that the 'normal' Linux user can read/write the synchronized files
+which are in directories which have the `rslsync.rslsync` owner?
+
+The Sync help web-pages suggest adding the `rslsync` group to the `frieda`
+user etc. will help.
+
+```
+sudo usermod -aG frieda rslsync
+sudo usermod -aG rslsync frieda
+sudo chmod g+rw /home/rslsync
+```
+
+I didn't find that was enough. What worked eventually for me was
+[adding user permissions to the `/home/rslsync` folder](https://kenfavors.com/code/how-to-add-user-permissions-to-a-folder-in-ubuntu/)
+
+```
+sudo setfacl -R -m "u:frieda:rwx" /home/rslsync
+```
