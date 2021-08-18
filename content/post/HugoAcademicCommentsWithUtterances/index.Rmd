@@ -1,7 +1,7 @@
 ---
 title: "Comments for Hugo Academic (Wowchemy) with Utterances"
 author: "David Fong"
-date: 2020-12-23T00:00:00Z
+date: 2021-08-18T00:00:00Z
 categories: ["blog"]
 aliases:
 featured: false
@@ -63,8 +63,8 @@ at the end less so, so here are my notes for Hugo Academic version 4.8.0.
     blog has a good introductory post to setting up a Hugo Academic/Wowchemy
     site with R. It is what I used to get started...)
   + This concept is confirmed on Hugo's website ["Customizing a Theme"](https://bwaycer.github.io/hugo_tutorial.hugo/themes/customizing/)
-  + So, create the file `[ROOT]/layout/partials/comments/utterances.html`, **not**
-    `[ROOT]/themes/hugo-academic/layout/partials/comments/utterances.html`
+  + So, create the file `[ROOT]/layouts/partials/comments/utterances.html`, **not**
+    `[ROOT]/themes/hugo-academic/layouts/partials/comments/utterances.html`
   + This is what my script snippet looks like...
   
 ```
@@ -79,7 +79,7 @@ at the end less so, so here are my notes for Hugo Academic version 4.8.0.
 ```
 
 * Then I reference the script in `[ROOT]/layouts/partials/comments.html`
-  + **not** `[ROOT]/themes/hugo-academic/layout/partials/comments.html`
+  + **not** `[ROOT]/themes/hugo-academic/layouts/partials/comments.html`
   + I added two lines, referring to `site.Params.comment.engine 3`
   + Here is the resulting script...
 
