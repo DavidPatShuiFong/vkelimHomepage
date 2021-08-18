@@ -2,6 +2,7 @@
 title: "Comments for Hugo Academic (Wowchemy) with Utterances"
 author: "David Fong"
 date: 2020-12-23T00:00:00Z
+lastmod: 2021-08-18T00:00:00Z
 categories: ["blog"]
 aliases:
 featured: false
@@ -12,7 +13,7 @@ image:
 
 ---
 
-<script src="index_files/header-attrs/header-attrs.js"></script>
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
 
 
 <p>There are endless numbers of blogs out there, often providing tidbits of useful
@@ -64,8 +65,8 @@ we <strong>should not touch</strong> the files in the ‘themes’ folder. (btw,
 blog has a good introductory post to setting up a Hugo Academic/Wowchemy
 site with R. It is what I used to get started…)</li>
 <li>This concept is confirmed on Hugo’s website <a href="https://bwaycer.github.io/hugo_tutorial.hugo/themes/customizing/">“Customizing a Theme”</a></li>
-<li>So, create the file <code>[ROOT]/layout/partials/comments/utterances.html</code>, <strong>not</strong>
-<code>[ROOT]/themes/hugo-academic/layout/partials/comments/utterances.html</code></li>
+<li>So, create the file <code>[ROOT]/layouts/partials/comments/utterances.html</code>, <strong>not</strong>
+<code>[ROOT]/themes/hugo-academic/layouts/partials/comments/utterances.html</code></li>
 <li>This is what my script snippet looks like…</li>
 </ul></li>
 </ul>
@@ -80,7 +81,7 @@ site with R. It is what I used to get started…)</li>
 <ul>
 <li>Then I reference the script in <code>[ROOT]/layouts/partials/comments.html</code>
 <ul>
-<li><strong>not</strong> <code>[ROOT]/themes/hugo-academic/layout/partials/comments.html</code></li>
+<li><strong>not</strong> <code>[ROOT]/themes/hugo-academic/layouts/partials/comments.html</code></li>
 <li>I added two lines, referring to <code>site.Params.comment.engine 3</code></li>
 <li>Here is the resulting script…</li>
 </ul></li>
