@@ -160,7 +160,7 @@ build_network_logo(CV$entries_data)
 
 ```{r}
 if(params$pdf_mode){
-  cat("View this CV online with links at _www.davidfong.info/_")
+  cat("View this CV online with links at _www.davidfong.org/_")
 } else {
   cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://davidfong.netlify.app/CV/cv.pdf)")
 }
