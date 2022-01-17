@@ -1,0 +1,33 @@
+---
+title: "Kenya Spur Afrika 2021-2022 - Asthma spacers"
+author: "David Fong"
+date: '2021-12-23T00:00:00Z'
+categories: Christianity
+aliases: null
+tags:
+- Christianity
+- Kenya
+- Spur Afrika
+- asthma
+- air pollution
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+When first visiting the Kibera (Nairobi) informal settlement in 2016,
+I noticed together with Dr Victor Hui that "no wonder so many kids complain about sore eyes,
+our eyes are hurting too!".
+
+There is significant air pollution in the informal settlements (slums) of Nairobi,
+in part due to slow-moving traffic, but also due to burning rubbish,
+nearby industry and the widespread use of dirty fuels for cooking indoors.
+
+Not surprisingly, with this much air pollution, many children we see in Nairobi
+also suffer with cough and feeling out of breath when trying to run, or even when sleeping.
+This might possibly affect young girls more, as they are more likely to be close to a cooking stove.
+
+In part, the solution might lie in the use of asthma medication (such as is used
+with the 'spacer' devices pictured).  Also important would be better housing conditions,
+equitable access to cleaner cooking technologies/fuels and less-gendered divisions of labour.
