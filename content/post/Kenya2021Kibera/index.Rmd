@@ -15,8 +15,6 @@ tags:
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-## Kibera informal settlement
-
 Today we had the opportunity and honour to visit some households in the Kibera informal settlement (slum) of Nairobi. It was good to see some of the recent improvements in infrastructure in Kibera, such as the sealing and widening of internal roads. It was an even greater pleasure and honour to walk around Kibera with some of older children (and now even adults!) who have been supported by Spur Afrika in previous years, and now acted as our guides and interpreters into the lives of some younger children. During the day we heard some of the difficult experiences of the families of those younger children. Some parents struggled to earn income – sometimes unsuccessfully despite multiple jobs – in order to pay for the higher education of talented children. Others, with many children of their own, undertook the additional task of caring for children whose own parents struggled to provide the necessary care.
 
 Some of these difficult experiences may well have been also experienced by our older guides. Under the guidance of the Spur Afrika staff, they shared and reflected on what it meant to experience the hardships faced by the families of the households we visited, and what could be done to alleviate those difficulties.

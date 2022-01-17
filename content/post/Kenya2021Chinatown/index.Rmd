@@ -14,8 +14,6 @@ tags:
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-## Chinatown
-
 While passing through Melbourne’s Chinatown on Friday, some ‘Season Greetings’ signs were visible, with the Chinese characters ‘恭喜发财’ (a congratulations, or wish, for the arrival of prosperity).
 
 I have heard that such an expression of wish for personal wealth is not a particularly religious, or ‘Christian’ form of greeting at Christmas time. However, such a desire is perhaps a fair representation of 19th century Chinese immigrants to gold-rush Victoria. I imagine very few would have considered Melbourne or Victoria their true home. Perhaps they considered Australia merely a place to gain fortune and provide for their loved ones back in China before returning to their ‘true’ home in the glory of a New Life.
