@@ -16,7 +16,7 @@ tags:
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-Travelling at Christmas time can always seem a bit hectic. There are often many competing demands, co-ordination with multiple parties and tight deadlines. This year has added uncertainty, with COVID-related concerns and travel restrictions. This has also affected the planned visit to Spur Afrika Kenya.
+Travelling at Christmas time can always seem a bit hectic. There are often many competing demands, co-ordination with multiple parties and tight deadlines. This year has added uncertainty, with COVID-related concerns and travel restrictions. This has also affected the planned visit to [Spur Afrika](https://spurafrika.org/) Kenya.
 
 In fact, just about every ‘plan’ for the past two hears has, in project-management terms, been affected by ‘VUCA’ – volatility, uncertainty, complexity and ambiguity.
 

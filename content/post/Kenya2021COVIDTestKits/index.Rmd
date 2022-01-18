@@ -11,7 +11,7 @@ tags: ["Christianity", "Kenya", "Spur Afrika"]
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-Although this Spur Kenya Trip (25th December 2021 to 6th January 2022) has been planned
+Although this [Spur Afrika](https://spurafrika.org/) Kenya Trip (25th December 2021 to 6th January 2022) has been planned
 - in one form or another - for a while, the finalization of detail has been
 something of a 'surprise'.
 

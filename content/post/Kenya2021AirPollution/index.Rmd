@@ -16,8 +16,8 @@ tags:
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-When first visiting the Kibera (Nairobi) informal settlement in 2016,
-I noticed together with Dr Victor Hui that "no wonder so many kids complain about sore eyes,
+When first visiting the Kibera (Nairobi) informal settlement in 2016 with the [Spur Afrika](https://spurafrika.org/) team,
+I noticed, together with Dr Victor Hui, that "no wonder so many kids complain about sore eyes,
 our eyes are hurting too!".
 
 There is significant air pollution in the informal settlements (slums) of Nairobi,
