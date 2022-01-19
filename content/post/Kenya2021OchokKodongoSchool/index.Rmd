@@ -1,0 +1,41 @@
+---
+title: "Kenya Spur Afrika 2021 - Ochok Kodongo School"
+author: "David Fong"
+date: '2022-01-04T00:00:00Z'
+categories: Christianity
+featured: false
+aliases: null
+tags:
+- Christianity
+- Kenya
+- Spur Afrika
+- Holo
+- Kisumu
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+Today we visited Ochok Kodongo Primary School, in Holo (near Kisumu, Western Kenya). Ochok Kodongo teaches students from pre-school to Year 8. Ochok Kodongo has about 900 students in total. Four of the primary school children supported by Spur Afrika attend this primary school, and another recently graduated from Ochok Kodongo. It was wonderful to be welcomed by the headmaster and enthusiastic teachers. It was an even more of treat to be welcomed by school children performing a traditional dance and inviting us to wear a 'sisal' dance skirt and dance with them.
+
+Local Spur Afrika staff have been working with the Ochok Kodongo Primary School. Other than direct support of some individual students, Spur Afrika has also been involved in dental hygiene and other programs. As direct support of students in the Holo area continues, we pray that we are able to further develop relationships with the local schools, such as for menstrual health.
+
+Tomorrow Rosalie and myself will do a COVID-19 PCR test, which is required before travelling back to Australia. We pray for a quick and negative result (of course!). We understand that many back in Australia are also anxiously awaiting their COVID-19 results, and unfortunately a few those results have been positive. Or even if the result is eventually negative, the threat of a positive result has already resulted in worry and changed and cancelled plans including those involved with local mission.
+
+Paul wrote in Phillipians 4 "Don't worry about anything. Rather, in every area of life let God know what you want, as you pray and make requests, and give thanks as well. And God's peace, which is greater than we can ever understand, will keep guard over your hearts and minds in King Jesus."
+
+Paul wrote that when in prison. And he was no stranger to  anxiety, worry and plans gone wrong (2 Corinthians 1:8, 2:12).
+
+But I am thankful for what has happened so far, has been achieved by God's grace so far and for being able to share and witness how God has worked so much in all the people around me in Kenya and beyond.
+
+Please pray for Rosalie and myself as we share training with the local staff, in two days, on the topics of psychological safety and monitoring/evaluation and project design. And for safe travels, firstly back to Kibera and then to Australia!
+
+
+```{r echo=FALSE}
+blogdown::shortcode('video', library = 'true', src = '20220104_OchokKodongoSchool.mp4', controls = 'yes')
+```
+
+```{r echo=FALSE}
+blogdown::shortcode('video', library = 'true', src = '20220104_OchokKodongoSchool_Dance.mp4', controls = 'yes')
+```
