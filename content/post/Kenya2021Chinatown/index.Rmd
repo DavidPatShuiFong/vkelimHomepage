@@ -8,6 +8,7 @@ tags:
 - Christianity
 - Kenya
 - Spur Afrika
+- Spur Afrika 2021
 ---
 
 ```{r setup, include=FALSE}

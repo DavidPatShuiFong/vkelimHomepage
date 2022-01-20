@@ -4,7 +4,7 @@ author: "David Fong"
 date: 2021-12-17T17:24:00Z
 categories: ["Christianity"]
 aliases:
-tags: ["Christianity", "Kenya", "Spur Afrika"]
+tags: ["Christianity", "Kenya", "Spur Afrika", "Spur Afrika 2021"]
 ---
 
 ```{r setup, include=FALSE}
