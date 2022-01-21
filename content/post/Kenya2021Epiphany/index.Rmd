@@ -34,21 +34,23 @@ htmltools::HTML(paste(
 />', # for fancybox
 '<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>', # for fancybox
 '<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>', # for masonry
-'<div class="masonry js-masonry" data-masonry-options=\'{ "itemSelector": ".masonry-grid-item", "columnWidth": 80, "gutter": 0}\'>',
-'<div class="masonry-grid-item"><a data-fancybox="gallery" href="./20220106_Epiphany_Clinic.jpg">',
-'<img src="./20220106_Epiphany_Clinic.jpg" width="300px" style="margin:0px 0px">', # default CSS top/bottom margin is not zero
+'<div class="masonry js-masonry" data-masonry-options=\'{ "itemSelector": ".masonry-grid-item", "columnWidth": 60, "percentPosition": "true", "gutter": 0}\'>',
+'<div class="grid-sizer"></div>',
+'<div class="masonry-grid-item" style="float:left; width:40%"><a data-fancybox="gallery" href="./20220106_Epiphany_Clinic.jpg">',
+'<img src="./20220106_Epiphany_Clinic.jpg" style="margin:0px 0px">', # default CSS top/bottom margin is not zero
 '</a></div>',
-'<div class="masonry-grid-item"><a data-fancybox="gallery" href="./20220106_Epiphany_Disability.jpg">',
-'<img src="./20220106_Epiphany_Disability.jpg" width="300px" style="margin:0px 0px">',
+'<div class="masonry-grid-item" style="float:left; width:40%"><a data-fancybox="gallery" href="./20220106_Epiphany_Disability.jpg">',
+'<img src="./20220106_Epiphany_Disability.jpg" style="margin:0px 0px">',
 '</a></div>',
-'<div class="masonry-grid-item"><a data-fancybox="gallery" href="./20220106_Epiphany_Residence.jpg">', 
-'<img src="./20220106_Epiphany_Residence.jpg" width="300px" style="margin:0px 0px">',
+'<div class="masonry-grid-item" style="float:left; width: 40%"><a data-fancybox="gallery" href="./20220106_Epiphany_Residence.jpg">', 
+'<img src="./20220106_Epiphany_Residence.jpg" style="margin:0px 0px">',
 '</a></div>',
-'<div class="masonry-grid-item"><a data-fancybox="gallery" href="./20220106_Epiphany_Child.jpg">',
-'<img src="./20220106_Epiphany_Child.jpg" width="300px" style="margin:0px 0px">',
+'<div class="masonry-grid-item" style="float:left; width: 40%"><a data-fancybox="gallery" href="./20220106_Epiphany_Child.jpg">',
+'<img src="./20220106_Epiphany_Child.jpg" style="margin:0px 0px">',
 '</a></div>',
 '</div>'
 ))
+
 ```
 
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
