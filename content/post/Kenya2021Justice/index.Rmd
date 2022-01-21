@@ -1,0 +1,45 @@
+---
+title: "Kenya Spur Afrika 2021 - Equity"
+author: "David Fong"
+date: '2022-01-14T00:00:00Z'
+categories: Christianity
+featured: false
+aliases: null
+tags:
+- Christianity
+- Kenya
+- Spur Afrika
+- Spur Afrika 2021
+- Equity
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+"Let justice roll on like the water, and righteousness like an ever-flowing stream. 但愿公正好象潮水滚流， 公义好象河水长流。
+(Amos 5:24, Lexham and 新译本 translations)"
+
+During the visit to Kenya a few weeks ago, the Spur Afrika Kenya team organized a health check for the sponsored children in Kibera, Kenya. Dr Simiyu and several local volunteer doctors checked the health, provided basic care and organized follow-up for not only the more than one hundred children supported by Spur Afrika, but also the parents of those children and some of the siblings. Several hundred patients in all.
+
+Spur Afrika Kenya seeks to support not only the education of children in Kibera (Nairobi) and Holo/Kisumu (Western Kenya), but also supports the emotional, relational and physical health of the children too. Both acute and chronic health crises in the children and their families were seen, time and again, to impact adversely on the wellbeing of children, both economically and academically. For this reason, Spur Afrika encourages and supports the families of supported children to enrol in Kenya's National Hospital Insurance Fund (NHIF). Despite challenges regarding the recent requirement for the use of biometrics to register for NHIF, 75% of the families of Spur Afrika supported children in Kibera are enrolled in the NHIF. Coupled with partnerships with local doctors, such as Dr. Simiyu, and health literacy education, both access and utilization of healthcare services have been facilitated.
+
+Equitable access to healthcare and healthcare choices, regardless of wealth or literacy, is a social justice issue.
+
+During our visit to the homes and families of recently sponsored children in Holo/Kisumu (Western Kenya), we saw not only health problems with the supported children, but ongoing health justice issues among the families; such as access to malaria medication, vision-correcting glasses, life-improving physical disability care and access to diagnostic and treatment services for children with significant abdominal swelling.
+
+Pray for Spur Afrika's efforts to improve access to healthcare for families in Holo, including through establishment of local partnerships, health education and access to the national health insurance scheme.
+
+“但愿人长久， 千里共婵娟. May we all be blessed with longevity. Though thousands of miles apart, may we share the beauty of the moon” (Su Shi, 11th century poet)
+
+```{r echo=FALSE}
+htmltools::HTML(paste(
+'<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>',
+'<div class="masonry js-masonry" data-masonry-options=\'{ "itemSelector": ".masonry-grid-item", "columnWidth": 60, "gutter": 0}\'>',
+'<div class="masonry-grid-item"><img src="./20220114_mothersandchildren.jpg" width="300px"></div>',
+'<div class="masonry-grid-item"><img src="./20220114_consult.jpg" width="300px"></div>',
+'<div class="masonry-grid-item"><img src="./20220114_support.jpg" width="300px"></div>',
+'<div class="masonry-grid-item"><img src="./20220114_disability.jpg" width="300px"></div>',
+'</div>'
+))
+```
