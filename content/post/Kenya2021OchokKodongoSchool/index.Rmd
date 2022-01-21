@@ -32,6 +32,7 @@ But I am thankful for what has happened so far, has been achieved by God's grace
 
 Please pray for Rosalie and myself as we share training with the local staff, in two days, on the topics of psychological safety and monitoring/evaluation and project design. And for safe travels, firstly back to Kibera and then to Australia!
 
+[Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
 ```{r echo=FALSE}
 blogdown::shortcode('video', library = 'true', src = '20220104_OchokKodongoSchool.mp4', controls = 'yes')

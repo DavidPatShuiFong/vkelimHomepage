@@ -57,3 +57,4 @@ htmltools::HTML(paste(
 ))
 ```
 
+[Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
