@@ -53,7 +53,7 @@ family members who watch out for each other and are sympathetic to those who are
 
 |                                                    |                                                  |  
 | -------------------------------------------------- | ------------------------------------------------ | 
-| ![️](/images/20220103_HoloShack.jpg)  | ![](/images/20220103_HoloNewShack.jpg) |
+| ![️](./20220103_HoloShack.jpg)  | ![](./20220103_HoloNewShack.jpg) |
 
 
- ![](/images/20220103_HoloVisit.jpg)
+ ![](./20220103_HoloVisit.jpg)
