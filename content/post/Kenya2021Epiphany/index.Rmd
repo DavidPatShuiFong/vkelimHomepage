@@ -26,6 +26,8 @@ Sometimes we have grand plans about what we could be do to fulfil our vision of 
 
 We have been peculiarly blessed to be in Kenya the past two weeks. Praise God that we could start the journey in the first place, have stayed well, and fears and anxiety about not being able to return to Australia in good time have been salved. Over two weeks, we have shared a little of what we have and borne witness to the provision of basic medical care, furthering of education and community building. The local Spur Afrika team have a heart to serve God, His purpose and His children. We pray for His blessing and His provision for children and families to continue to be and be further supported by those who are sent.
 
+[Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
+
 ```{r echo=FALSE}
 htmltools::HTML(paste(
 '<link
@@ -50,7 +52,4 @@ htmltools::HTML(paste(
 '</a></div>',
 '</div>'
 ))
-
 ```
-
-[Spur Afrika trip 2021-2022 posts](/spurafrika2021/)

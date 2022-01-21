@@ -32,6 +32,8 @@ Pray for Spur Afrika's efforts to improve access to healthcare for families in H
 
 “但愿人长久， 千里共婵娟. May we all be blessed with longevity. Though thousands of miles apart, may we share the beauty of the moon” (Su Shi, 11th century poet)
 
+[Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
+
 ```{r echo=FALSE}
 htmltools::HTML(paste(
 '<link
@@ -56,7 +58,4 @@ htmltools::HTML(paste(
 '</a></div>',
 '</div>'
 ))
-
 ```
-
-[Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
