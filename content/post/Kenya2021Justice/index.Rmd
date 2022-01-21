@@ -34,12 +34,26 @@ Pray for Spur Afrika's efforts to improve access to healthcare for families in H
 
 ```{r echo=FALSE}
 htmltools::HTML(paste(
-'<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>',
-'<div class="masonry js-masonry" data-masonry-options=\'{ "itemSelector": ".masonry-grid-item", "columnWidth": 60, "gutter": 0}\'>',
-'<div class="masonry-grid-item"><img src="./20220114_mothersandchildren.jpg" width="300px"></div>',
-'<div class="masonry-grid-item"><img src="./20220114_consult.jpg" width="300px"></div>',
-'<div class="masonry-grid-item"><img src="./20220114_support.jpg" width="300px"></div>',
-'<div class="masonry-grid-item"><img src="./20220114_disability.jpg" width="300px"></div>',
+'<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+/>', # for fancybox
+'<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>', # for fancybox
+'<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>', # for masonry
+'<div class="masonry js-masonry" data-masonry-options=\'{ "itemSelector": ".masonry-grid-item", "columnWidth": 80, "gutter": 0}\'>',
+'<div class="masonry-grid-item"><a data-fancybox="gallery" href="./20220114_mothersandchildren.jpg">',
+'<img src="./20220114_mothersandchildren.jpg" width="300px" style="margin:0px 0px">', # default CSS top/bottom margin is not zero
+'</a></div>',
+'<div class="masonry-grid-item"><a data-fancybox="gallery" href="./20220114_consult.jpg">',
+'<img src="./20220114_consult.jpg" width="300px" style="margin:0px 0px">',
+'</a></div>',
+'<div class="masonry-grid-item"><a data-fancybox="gallery" href="./20220114_support.jpg">', 
+'<img src="./20220114_support.jpg" width="380px" style="margin:0px 0px">',
+'</a></div>',
+'<div class="masonry-grid-item"><a data-fancybox="gallery" href="./20220114_disability.jpg">',
+'<img src="./20220114_disability.jpg" width="220px" style="margin:0px 0px">',
+'</a></div>',
 '</div>'
 ))
 ```
+
