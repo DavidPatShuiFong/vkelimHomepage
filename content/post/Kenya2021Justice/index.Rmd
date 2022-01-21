@@ -42,7 +42,7 @@ htmltools::HTML(paste(
 />', # for fancybox
 '<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>', # for fancybox
 '<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>', # for masonry
-'<div class="grid" data-masonry=\'{ "itemSelector": ".masonry-grid-item", "columnWidth": 60, "percentPosition": "true", "gutter": 0}\' >',
+'<div class="masonry js-masonry" data-masonry-options=\'{ "itemSelector": ".masonry-grid-item", "columnWidth": 60, "percentPosition": "true", "gutter": 0}\' >',
 '<div class="grid-sizer"></div>',
 '<div class="masonry-grid-item" style="float:left; width: 40%"><a data-fancybox="gallery" href="./20220114_mothersandchildren.jpg">',
 '<img src="./20220114_mothersandchildren.jpg" style="margin:0px 0px">', # default CSS top/bottom margin is not zero
