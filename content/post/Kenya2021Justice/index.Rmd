@@ -42,19 +42,18 @@ htmltools::HTML(paste(
 />', # for fancybox
 '<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>', # for fancybox
 '<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>', # for isotope
-# '<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>', # for masonry
-'<div class="grid" data-isotope=\'{ "itemSelector": ".isotope-grid-item", "masonry": {columnWidth: \".grid-sizer\"}, "percentPosition": "true", "gutter": 0}\' >',
+'<div class="grid" data-isotope=\'{ "itemSelector": ".isotope-grid-item", "masonry": "{columnWidth: \".grid-sizer\"}", "percentPosition": "true", "gutter": 0}\' >',
 '<div id="grid-sizer"></div>',
-'<div class="isotope-grid-item" style="float:left; width: 40%"><a data-fancybox="gallery" href="./20220114_mothersandchildren.jpg">',
+'<div class="isotope-grid-item" style="float:left; width: 48%"><a data-fancybox="gallery" href="./20220114_mothersandchildren.jpg">',
 '<img src="./20220114_mothersandchildren.jpg" style="margin:0px 0px">', # default CSS top/bottom margin is not zero
 '</a></div>',
-'<div class="isotope-grid-item" style="float:left; width: 40%"><a data-fancybox="gallery" href="./20220114_consult.jpg">',
+'<div class="isotope-grid-item" style="float:left; width: 48%"><a data-fancybox="gallery" href="./20220114_consult.jpg">',
 '<img src="./20220114_consult.jpg" style="margin:0px 0px">',
 '</a></div>',
-'<div class="isotope-grid-item" style="float:left; width: 45%"><a data-fancybox="gallery" href="./20220114_support.jpg">', 
+'<div class="isotope-grid-item" style="float:left; width: 53%"><a data-fancybox="gallery" href="./20220114_support.jpg">', 
 '<img src="./20220114_support.jpg" style="margin:0px 0px">',
 '</a></div>',
-'<div class="isotope-grid-item" style="float:left; width: 35%"><a data-fancybox="gallery" href="./20220114_disability.jpg">',
+'<div class="isotope-grid-item" style="float:left; width: 43%"><a data-fancybox="gallery" href="./20220114_disability.jpg">',
 '<img src="./20220114_disability.jpg" style="margin:0px 0px">',
 '</a></div>',
 '</div>'
