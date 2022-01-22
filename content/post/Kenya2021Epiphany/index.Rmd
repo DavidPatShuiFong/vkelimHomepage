@@ -33,14 +33,22 @@ htmltools::HTML(paste(
 '<link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/>', # for fancybox
-'<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>', # for fancybox
-'<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>', # for isotope
+/>', # CSS for fancybox, a 'lightbox'
+'<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>', # JS for fancybox
+'<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>', # JS for isotope, 'tiled gallery'
 '<div class="grid" data-isotope=\'{ "itemSelector": ".isotope-grid-item", "layoutMode": "masonry", "masonry": "{\"columnWidth\": \".grid-sizer\"}", "percentPosition": "true", "gutter": 0}\' >',
+# data-isotope attribute turns this div into a gallery
+# itemSelector chooses the name of the class which defines the div/element as a gallery item
+# layoutMode is supposed to choose the layout mode, but I can't seem anything other than masonry (the default) to work
+# masonry defines masonry layout options. The columnWidth is defined to be the same as grid-sizer element, but the default is the first element anyway?
+# percentPosition allows percent to be used
+# gutter is defined to be zero
 '<div id="grid-sizer"></div>',
 '<div id="gutter-sizer"></div>',
 '<div class="isotope-grid-item" style="float:left; width:59%"><a data-fancybox="gallery" href="./20220106_Epiphany_Clinic.jpg">',
-'<img src="./20220106_Epiphany_Clinic.jpg" style="margin:0px 0px">', # default CSS top/bottom margin is not zero
+# attribute data-fancybox defines the following item to be part of the a lightbox gallery
+'<img src="./20220106_Epiphany_Clinic.jpg" style="margin:0px 0px">', 
+# default CSS top/bottom margin is not zero (the default is defined by the hugo theme)
 '</a></div>',
 '<div class="isotope-grid-item" style="float:left; width:33%"><a data-fancybox="gallery" href="./20220106_Epiphany_Disability.jpg">',
 '<img src="./20220106_Epiphany_Disability.jpg" style="margin:0px 0px">',
