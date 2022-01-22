@@ -36,21 +36,22 @@ htmltools::HTML(paste(
 />', # for fancybox
 '<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>', # for fancybox
 '<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>', # for isotope
-'<div class="grid" data-isotope=\'{ "itemSelector": ".isotope-grid-item", "layoutMode": "masonry", "masonry": "{columnWidth: \".grid-sizer\"}", "percentPosition": "true", "gutter": 0}\' >',
+'<div class="grid" data-isotope=\'{ "itemSelector": ".isotope-grid-item", "layoutMode": "masonry", "masonry": "{\"columnWidth\": \".grid-sizer\"}", "percentPosition": "true", "gutter": 0}\' >',
 '<div id="grid-sizer"></div>',
 '<div id="gutter-sizer"></div>',
-'<div class="isotope-grid-item" style="float:left; width:48%"><a data-fancybox="gallery" href="./20220106_Epiphany_Disability.jpg">',
-'<img src="./20220106_Epiphany_Disability.jpg" style="margin:0px 0px">',
-'</a></div>',
-'<div class="isotope-grid-item" style="float:left; width:48%"><a data-fancybox="gallery" href="./20220106_Epiphany_Child.jpg">',
-'<img src="./20220106_Epiphany_Child.jpg" style="margin:0px 0px">',
-'</a></div>',
-'<div class="isotope-grid-item" style="float:left; width:48%"><a data-fancybox="gallery" href="./20220106_Epiphany_Clinic.jpg">',
+'<div class="isotope-grid-item" style="float:left; width:59%"><a data-fancybox="gallery" href="./20220106_Epiphany_Clinic.jpg">',
 '<img src="./20220106_Epiphany_Clinic.jpg" style="margin:0px 0px">', # default CSS top/bottom margin is not zero
 '</a></div>',
-'<div class="isotope-grid-item" style="float:left; width:48%"><a data-fancybox="gallery" href="./20220106_Epiphany_Residence.jpg">', 
+'<div class="isotope-grid-item" style="float:left; width:33%"><a data-fancybox="gallery" href="./20220106_Epiphany_Disability.jpg">',
+'<img src="./20220106_Epiphany_Disability.jpg" style="margin:0px 0px">',
+'</a></div>',
+'<div class="isotope-grid-item" style="float:left; width:46%"><a data-fancybox="gallery" href="./20220106_Epiphany_Residence.jpg">', 
 '<img src="./20220106_Epiphany_Residence.jpg" style="margin:0px 0px">',
 '</a></div>',
+'<div class="isotope-grid-item" style="float:left; width:46%"><a data-fancybox="gallery" href="./20220106_Epiphany_Child.jpg">',
+'<img src="./20220106_Epiphany_Child.jpg" style="margin:0px 0px">',
+'</a></div>',
+
 '</div>'
 ))
 ```
