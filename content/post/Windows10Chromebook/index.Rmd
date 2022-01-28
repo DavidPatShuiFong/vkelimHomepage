@@ -1,0 +1,156 @@
+---
+title: "Windows 10 on Chromebook (Linux 'Crostini' container)"
+author: "David Fong"
+date: 2022-01-28T00:00:00Z
+categories: ["Computers", "Linux", "Windows"]
+aliases:
+featured: false
+tags: ["Chromebook", "Crostini", "Samba", "Linux",  "Windows"]
+image:
+  caption: <span>Photo by <a href="https://unsplash.com/@vidarnm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vidar Nordli-Mathisen</a> on <a href="https://unsplash.com/s/photos/windows-inside-windows?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
+  focal_point: Smart
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+## Using Windows 10 Chromebook (using the 'Crostini' Linux container)
+
+My Chromebook, a Lenovo Ideapad Flex 5 with i5-10210U CPU and 8GB of memory,
+is extremely versatile. It can operate Android apps which are not available for
+Linux e.g. [Pleco](https://www.pleco.com/) (a Chinese dictionary) and the 
+[YouVersion Bible App](https://www.youversion.com/the-bible-app/), as well
+as powerful and useful Linux applications such as [RStudio](https://www.rstudio.com/), a data analysis environment,
+and [Zotero](https://www.zotero.org/), an academic citation tool.
+
+Using and application compatibility layer such as [CodeWeavers Crossover](https://www.codeweavers.com/),
+some Windows such as [Wenlin](https://wenlin.com/) (a Chinese dictionary), work just fine,
+and Microsoft Office more-or-less works, with encouragement.
+
+However, sometimes it is nice to have a complete Windows virtual machine available.
+
+Unfortunately [Virtualbox](https://www.virtualbox.org/) doesn't work, because of
+a current lack of nested KVM support.
+
+However, it is possible to use a different virtual machine (qemu) to install Windows.
+The process is described on [Chrome Unboxed](https://chromeunboxed.com/insalling-windows-on-chromebook-crostini-linux-kvm-qemu-virtual-machine/)
+and [Beebom](https://beebom.com/install-windows-10-chromebook/).
+
+Here is the process described on Chrome Unboxed, which works for me.
+
+In Crostini:
+
+```
+sudo apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils virtinst libvirt-daemon virt-manager -y
+```
+
+Start the Virtual Machine Manager and install Windows 10 from a downloaded ISO file.
+
+### Sharing files between Windows (in Crostini) and Linux (in Crostini)
+
+This was a bit tricky, and nowhere near as easy as using Virtualbox.
+
+In theory, `qemu`/`libvirt` (which is started by the Virtual Machine Manager)
+[can start its own samba server instance](https://unix.stackexchange.com/questions/451306/qemu-windows-guest-without-internet-but-with-a-shared-folder).
+
+Unfortunately, `libvirt` does not directly allow access to `-net` parameters,
+but it is possible to add those `-net` parameters [using `virsh edit`](https://unix.stackexchange.com/questions/188301/how-to-set-up-samba-sharing-with-libvirtd).
+
+The resulting XML file should look something like:
+
+```
+<domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+    ...
+    <qemu:commandline>
+        <qemu:arg value='-net'/>
+        <qemu:arg value='nic'/>
+        <qemu:arg value='-net'/>
+        <qemu:arg value='user,smb=/path/to/shared/directory'/>
+    </qemu:commandline>
+</domain>
+```
+
+...where the reference to `xmlns:qemu` is added to the domain specification
+near the top of the file, and the `qemu:commandline` is a section added to
+the  bottom. The 'answer' on stackexchange didn't have the `value='nic'` definition,
+but I found without that section nothing happened. Unfortunately *with* the
+`value='nic'` definition there is a complaint about PCI/argument conflict between
+the ethernet device and the graphics driver. Changing some PCI values removed
+the complaint, but it still didn't work!
+
+Using a command something like:
+
+```
+qemu-system-x86_64 /path/to/windows10.img -enable-kvm -net nic -net user,smb=/path/to/shared/directory -m 1024
+```
+
+did work, but meant I wasn't using all those wonderful options that `libvirt` made
+available. It is possible to see those options in the `libvirt` log, but I decided
+to set up a SAMBA share from Crostini/Linux instead.
+
+The guides I used to set up Samba shares on Linux are found on ['yodiw: install samba Ubuntu 20.04 and Windows 10 sharing'](https://www.yodiw.com/install-samba-ubuntu-20-04-and-windows-10-sharing/) and
+[reddit 'Use your chromebook as a samba server!'](https://www.reddit.com/r/chromeos/comments/k36mku/use_your_chromebook_as_a_samba_server/).
+
+```
+sudo apt-get install samba -y
+sudo smbpasswd -a 'username' # the user name. a password will be asked for
+```
+
+Then I edited the `smb.conf` file in `/etc/samba`.
+To use a graphical editor using `sudo` I used the command `xhost +si:localuser:root`.
+
+To the `[global]` part of `smb.conf` I added
+
+```
+  passdb backend = tdbsam
+  security = user
+```
+
+I also added a section to `[global]` to allow use of symbolic links
+
+```
+  allow insecure wide links = yes
+```
+
+Check interfaces using `sudo ifconfig`. I used `eth0`
+Edit the interfaces section in `smb.conf`.
+
+```
+  interfaces = x.x.x.x eth0 # replace x.x.x.x with the IP of the Crostinin container
+  bind interfaces only = yes
+```
+
+In the user part, disable `bad_user` map and force user.
+
+```
+  #map to guest = bad user
+  force user = 'username' # replace 'username' with the user
+```
+
+I edited the `[homes]` section in `smb.conf`, rather than set up a separate `[users]` section
+
+```
+[homes]
+  comment = Home directories
+  browseable = yes
+  read only = no
+  follow symblinks = yes # only if required to follow symlinks
+  wide links = yes # only if required to follow symlinks
+  create mask = 0660
+  directory mask = 2770
+  valid users = %S
+```
+
+Then `testparm` to test the SAMBA configuration, and restart the samba server.
+
+```
+sudo service smbd restart
+sudo service nmbd restart
+sudo service smbd status
+```
+
+The share will be at the eth0 IP address found earlier with `sudo ifconfig`, e.g. `100.115.7.8\username`.
+
+The credentials to connect a network drive from Windows will be `WORKGROUP\username`.

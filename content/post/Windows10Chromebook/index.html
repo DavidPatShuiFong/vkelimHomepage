@@ -1,0 +1,103 @@
+---
+title: "Windows 10 on Chromebook (Linux 'Crostini' container)"
+author: "David Fong"
+date: 2022-01-28T00:00:00Z
+categories: ["Computers", "Linux", "Windows"]
+aliases:
+featured: false
+tags: ["Chromebook", "Crostini", "Samba", "Linux",  "Windows"]
+image:
+  caption: <span>Photo by <a href="https://unsplash.com/@vidarnm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vidar Nordli-Mathisen</a> on <a href="https://unsplash.com/s/photos/windows-inside-windows?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
+  focal_point: Smart
+
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<div id="using-windows-10-chromebook-using-the-crostini-linux-container" class="section level2">
+<h2>Using Windows 10 Chromebook (using the ‘Crostini’ Linux container)</h2>
+<p>My Chromebook, a Lenovo Ideapad Flex 5 with i5-10210U CPU and 8GB of memory,
+is extremely versatile. It can operate Android apps which are not available for
+Linux e.g. <a href="https://www.pleco.com/">Pleco</a> (a Chinese dictionary) and the
+<a href="https://www.youversion.com/the-bible-app/">YouVersion Bible App</a>, as well
+as powerful and useful Linux applications such as <a href="https://www.rstudio.com/">RStudio</a>, a data analysis environment,
+and <a href="https://www.zotero.org/">Zotero</a>, an academic citation tool.</p>
+<p>Using and application compatibility layer such as <a href="https://www.codeweavers.com/">CodeWeavers Crossover</a>,
+some Windows such as <a href="https://wenlin.com/">Wenlin</a> (a Chinese dictionary), work just fine,
+and Microsoft Office more-or-less works, with encouragement.</p>
+<p>However, sometimes it is nice to have a complete Windows virtual machine available.</p>
+<p>Unfortunately <a href="https://www.virtualbox.org/">Virtualbox</a> doesn’t work, because of
+a current lack of nested KVM support.</p>
+<p>However, it is possible to use a different virtual machine (qemu) to install Windows.
+The process is described on <a href="https://chromeunboxed.com/insalling-windows-on-chromebook-crostini-linux-kvm-qemu-virtual-machine/">Chrome Unboxed</a>
+and <a href="https://beebom.com/install-windows-10-chromebook/">Beebom</a>.</p>
+<p>Here is the process described on Chrome Unboxed, which works for me.</p>
+<p>In Crostini:</p>
+<pre><code>sudo apt install qemu-kvm libvirt-clients libvirt-daemon-system bridge-utils virtinst libvirt-daemon virt-manager -y</code></pre>
+<p>Start the Virtual Machine Manager and install Windows 10 from a downloaded ISO file.</p>
+<div id="sharing-files-between-windows-in-crostini-and-linux-in-crostini" class="section level3">
+<h3>Sharing files between Windows (in Crostini) and Linux (in Crostini)</h3>
+<p>This was a bit tricky, and nowhere near as easy as using Virtualbox.</p>
+<p>In theory, <code>qemu</code>/<code>libvirt</code> (which is started by the Virtual Machine Manager)
+<a href="https://unix.stackexchange.com/questions/451306/qemu-windows-guest-without-internet-but-with-a-shared-folder">can start its own samba server instance</a>.</p>
+<p>Unfortunately, <code>libvirt</code> does not directly allow access to <code>-net</code> parameters,
+but it is possible to add those <code>-net</code> parameters <a href="https://unix.stackexchange.com/questions/188301/how-to-set-up-samba-sharing-with-libvirtd">using <code>virsh edit</code></a>.</p>
+<p>The resulting XML file should look something like:</p>
+<pre><code>&lt;domain type=&#39;kvm&#39; xmlns:qemu=&#39;http://libvirt.org/schemas/domain/qemu/1.0&#39;&gt;
+    ...
+    &lt;qemu:commandline&gt;
+        &lt;qemu:arg value=&#39;-net&#39;/&gt;
+        &lt;qemu:arg value=&#39;nic&#39;/&gt;
+        &lt;qemu:arg value=&#39;-net&#39;/&gt;
+        &lt;qemu:arg value=&#39;user,smb=/path/to/shared/directory&#39;/&gt;
+    &lt;/qemu:commandline&gt;
+&lt;/domain&gt;</code></pre>
+<p>…where the reference to <code>xmlns:qemu</code> is added to the domain specification
+near the top of the file, and the <code>qemu:commandline</code> is a section added to
+the bottom. The ‘answer’ on stackexchange didn’t have the <code>value='nic'</code> definition,
+but I found without that section nothing happened. Unfortunately <em>with</em> the
+<code>value='nic'</code> definition there is a complaint about PCI/argument conflict between
+the ethernet device and the graphics driver. Changing some PCI values removed
+the complaint, but it still didn’t work!</p>
+<p>Using a command something like:</p>
+<pre><code>qemu-system-x86_64 /path/to/windows10.img -enable-kvm -net nic -net user,smb=/path/to/shared/directory -m 1024</code></pre>
+<p>did work, but meant I wasn’t using all those wonderful options that <code>libvirt</code> made
+available. It is possible to see those options in the <code>libvirt</code> log, but I decided
+to set up a SAMBA share from Crostini/Linux instead.</p>
+<p>The guides I used to set up Samba shares on Linux are found on <a href="https://www.yodiw.com/install-samba-ubuntu-20-04-and-windows-10-sharing/">‘yodiw: install samba Ubuntu 20.04 and Windows 10 sharing’</a> and
+<a href="https://www.reddit.com/r/chromeos/comments/k36mku/use_your_chromebook_as_a_samba_server/">reddit ‘Use your chromebook as a samba server!’</a>.</p>
+<pre><code>sudo apt-get install samba -y
+sudo smbpasswd -a &#39;username&#39; # the user name. a password will be asked for</code></pre>
+<p>Then I edited the <code>smb.conf</code> file in <code>/etc/samba</code>.
+To use a graphical editor using <code>sudo</code> I used the command <code>xhost +si:localuser:root</code>.</p>
+<p>To the <code>[global]</code> part of <code>smb.conf</code> I added</p>
+<pre><code>  passdb backend = tdbsam
+  security = user</code></pre>
+<p>I also added a section to <code>[global]</code> to allow use of symbolic links</p>
+<pre><code>  allow insecure wide links = yes</code></pre>
+<p>Check interfaces using <code>sudo ifconfig</code>. I used <code>eth0</code>
+Edit the interfaces section in <code>smb.conf</code>.</p>
+<pre><code>  interfaces = x.x.x.x eth0 # replace x.x.x.x with the IP of the Crostinin container
+  bind interfaces only = yes</code></pre>
+<p>In the user part, disable <code>bad_user</code> map and force user.</p>
+<pre><code>  #map to guest = bad user
+  force user = &#39;username&#39; # replace &#39;username&#39; with the user</code></pre>
+<p>I edited the <code>[homes]</code> section in <code>smb.conf</code>, rather than set up a separate <code>[users]</code> section</p>
+<pre><code>[homes]
+  comment = Home directories
+  browseable = yes
+  read only = no
+  follow symblinks = yes # only if required to follow symlinks
+  wide links = yes # only if required to follow symlinks
+  create mask = 0660
+  directory mask = 2770
+  valid users = %S</code></pre>
+<p>Then <code>testparm</code> to test the SAMBA configuration, and restart the samba server.</p>
+<pre><code>sudo service smbd restart
+sudo service nmbd restart
+sudo service smbd status</code></pre>
+<p>The share will be at the eth0 IP address found earlier with <code>sudo ifconfig</code>, e.g. <code>100.115.7.8\username</code>.</p>
+<p>The credentials to connect a network drive from Windows will be <code>WORKGROUP\username</code>.</p>
+</div>
+</div>
