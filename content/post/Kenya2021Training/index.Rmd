@@ -53,16 +53,13 @@ htmltools::HTML(paste(
 '<div class="isotope-grid-item" style="float:left; width: 62%"><a data-fancybox="gallery" href="./SpurCentre_Training.jpg">',
 '<img src="./SpurCentre_Training.jpg" style="margin:0px 0px">',
 '</a></div>',
-'</div>'
+'</div>',
+# section below is created by blogdown::shortcode('video', library = 'true', src = 'SpurCentre_TrainingVideo.mp4', controls = 'yes')
+# but doesn't seem to be interpreted into correct HTML by Travis)
+'<p>',
+' <video controls = "">',
+'  <source src="/media/SpurCentre_TrainingVideo.mp4" type="video/mp4">',
+' </video>',
+'</p>'
 ))
-
-blogdown::shortcode('video', library = 'true', src = 'SpurCentre_TrainingVideo.mp4', controls = 'yes')
-
-# alternatively the video shortcode could be (because the shortcode doesn't always get interpreted into correct HTML?)
-# <p>
-#  <video controls = "">
-#   <source src="/media/SpurCentre_TrainingVideo.mp4" type="video/mp4">
-#  </video>
-# </p>
-
 ```
