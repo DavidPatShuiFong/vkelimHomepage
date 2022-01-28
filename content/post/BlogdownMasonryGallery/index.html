@@ -1,0 +1,133 @@
+---
+title: "Isotope and Fancybox Galleries on Blogdown"
+author: "David Fong"
+date: 2022-01-28T00:00:00Z
+categories: ["Computers", "R", "blogdown"]
+aliases:
+featured: false
+tags: ["R", "blogdown", "isotope", "fancybox", "gallery", "tiles"]
+image:
+  caption: <span>Photo by <a href="https://unsplash.com/@arlandscape?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Harald Arlander</a> on <a href="https://unsplash.com/s/photos/masonry?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
+  focal_point: Smart
+
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<p>The <a href="https://wowchemy.com/">Wowchemy theme</a> (formerly Hugo Academic) can ‘tile’
+irregularly shaped posts in a grid, using the <a href="https://isotope.metafizzy.co/">Isotope</a>
+Javascript library. In <a href="/post/hugoacademicpagesascards/">another post</a> I describe
+how the ‘cascading card’ layout can be used in the Wowchemy’s pages widget (used
+for ‘posts’, ‘talks’ and ‘publications’). Wouldn’t it be nice to also use
+the Isotope library for galleries within a post?</p>
+<p>Another Javascript library, <a href="https://fancyapps.com/docs/ui/fancybox/">fancybox</a> can
+also be used for photo galleries. When a picture has a <code>data-fancybox</code> attribute, then
+clicking on that photo results in a ‘lightbox’ view of the photo. Photos with the
+same <code>data-fancybox</code> attribute can be seen in the same lightbox by clicking on
+the right/left arrows, or using cursor keys.</p>
+<p>The example below is taken from my <a href="/post/kenya2021justice/">post on the topic of ‘equity’ after visiting
+Kenya in 2021/2022</a>. The code shown below is encased
+in a <code>```{r} ... ```</code> code chunk.</p>
+<pre class="r"><code>htmltools::HTML(paste(
+&#39;&lt;link
+  rel=&quot;stylesheet&quot;
+  href=&quot;https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css&quot;
+/&gt;&#39;, # for fancybox
+&#39;&lt;script 
+    src=&quot;https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js&quot;&gt;
+ &lt;/script&gt;&#39;, # for fancybox
+&#39;&lt;script 
+    src=&quot;https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js&quot;&gt;
+ &lt;/script&gt;&#39;, # for isotope
+&#39;&lt;div 
+   class=&quot;grid&quot; 
+   data-isotope=\&#39;{
+     &quot;itemSelector&quot;: &quot;.isotope-grid-item&quot;,
+     &quot;masonry&quot;: &quot;{\&quot;columnWidth\&quot;: \&quot;.grid-sizer\&quot;}&quot;,
+     &quot;percentPosition&quot;: &quot;true&quot;,
+     &quot;gutter&quot;: 0
+   }\&#39;
+ &gt;&#39;,
+&#39;  &lt;div id=&quot;grid-sizer&quot;&gt;&lt;/div&gt;&#39;,
+&#39;  &lt;div class=&quot;isotope-grid-item&quot; style=&quot;float:left; width: 48%&quot;&gt;&#39;,
+&#39;    &lt;a data-fancybox=&quot;gallery&quot; href=&quot;./20220114_mothersandchildren.jpg&quot;&gt;&#39;,
+&#39;      &lt;img src=&quot;./20220114_mothersandchildren.jpg&quot; style=&quot;margin:0px 0px&quot;&gt;&#39;, 
+       # default CSS top/bottom margin is not zero
+&#39;    &lt;/a&gt;&#39;,
+&#39;  &lt;/div&gt;&#39;,
+&#39;  &lt;div class=&quot;isotope-grid-item&quot; style=&quot;float:left; width: 48%&quot;&gt;&#39;,
+&#39;    &lt;a data-fancybox=&quot;gallery&quot; href=&quot;./20220114_consult.jpg&quot;&gt;&#39;,
+&#39;      &lt;img src=&quot;./20220114_consult.jpg&quot; style=&quot;margin:0px 0px&quot;&gt;&#39;,
+&#39;    &lt;/a&gt;&#39;,
+&#39;  &lt;/div&gt;&#39;,
+&#39;  &lt;div class=&quot;isotope-grid-item&quot; style=&quot;float:left; width: 53%&quot;&gt;&#39;,
+&#39;    &lt;a data-fancybox=&quot;gallery&quot; href=&quot;./20220114_support.jpg&quot;&gt;&#39;, 
+&#39;      &lt;img src=&quot;./20220114_support.jpg&quot; style=&quot;margin:0px 0px&quot;&gt;&#39;,
+&#39;    &lt;/a&gt;&#39;,
+&#39;  &lt;/div&gt;&#39;,
+&#39;  &lt;div class=&quot;isotope-grid-item&quot; style=&quot;float:left; width: 43%&quot;&gt;&#39;,
+&#39;    &lt;a data-fancybox=&quot;gallery&quot; href=&quot;./20220114_disability.jpg&quot;&gt;&#39;,
+&#39;      &lt;img src=&quot;./20220114_disability.jpg&quot; style=&quot;margin:0px 0px&quot;&gt;&#39;,
+&#39;    &lt;/a&gt;&#39;,
+&#39;  &lt;/div&gt;&#39;,
+&#39;&lt;/div&gt;&#39;,
+#
+&#39;&lt;br clear=&quot;left&quot;&gt;&lt;br&gt;&#39;
+))</code></pre>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+/> <script 
+    src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js">
+ </script> <script 
+    src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js">
+ </script> <div 
+   class="grid" 
+   data-isotope='{
+     "itemSelector": ".isotope-grid-item",
+     "masonry": "{"columnWidth": ".grid-sizer"}",
+     "percentPosition": "true",
+     "gutter": 0
+   }'
+ >   <div id="grid-sizer"></div>   <div class="isotope-grid-item" style="float:left; width: 48%">     <a data-fancybox="gallery" href="./20220114_mothersandchildren.jpg">       <img src="20220114_mothersandchildren.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 48%">     <a data-fancybox="gallery" href="./20220114_consult.jpg">       <img src="20220114_consult.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 53%">     <a data-fancybox="gallery" href="./20220114_support.jpg">       <img src="20220114_support.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 43%">     <a data-fancybox="gallery" href="./20220114_disability.jpg">       <img src="20220114_disability.jpg" style="margin:0px 0px">     </a>   </div> </div> <br clear="left"><br>
+<p>The first part defines the CSS of <code>fancybox</code>, and then includes the Javascript of
+<code>fancybox</code> and <code>isotope</code>. <code>isotope</code> has already been include by <code>Wowchemy</code>, but it
+is not clear to me how to access that included Javascript code.</p>
+<p>In a <code>div</code> of class <code>grid</code>, the <code>data-isotope</code> attribute is defined. This attribute
+needs to be rather carefully escaped.</p>
+<ul>
+<li><p><code>itemSelector</code> defines how isotope grid items class will be named in divisions which
+contain gallery items. In this case, the class name will be defined as <code>isotope-grid-item</code>.
+Note the added <code>.</code> period at the beginning of the name when the class name
+is defined.</p></li>
+<li><p>the default layout is <code>masonry</code>. The <code>masonry</code> attribute is defined in the <code>div</code>
+of class <code>grid</code>. I’m not actually sure how to change to a different layout! Or
+whether changing the <code>masonry</code> attributes makes much difference!</p>
+<ul>
+<li><p><code>columnWidth</code> in this case is defined as the width of the HTML element with the
+<code>id</code> of <code>grid-sizer</code>. A period <code>.</code> is placed before the <code>id</code> name. By default,
+the column width is defined as the width of the first element in the <code>grid</code> div.
+Changing this attribute doesn’t seem to make any difference to me, but to keep
+things safe, the first element in this <code>grid</code> will be a full-width element with
+the <code>id</code> of <code>grid-sizer</code>.</p></li>
+<li><p><code>percentPosition</code> allows grid item widths to be defined as percentages of
+available width. This attribute appears to work. In the example, this attribute
+is set to <code>true</code></p></li>
+<li><p><code>gutter</code>, which borders the <code>grid</code> elements, in this example is set to zero (0)</p></li>
+</ul></li>
+</ul>
+<p>As noted previously, it is safest to define the first element of the grid to
+be the full width of the desired gallery. As the width of the first element in
+the grid is the default width of the gallery.</p>
+<p>Each element in the grid which is part of the gallery needs to have a <code>class</code>
+definition which is the same as defined by <code>itemSelector</code> as mentioned above.</p>
+<p>In the <code>style</code> attribute, the <code>width</code> can be defined as a percentage. The percentage
+does not need to add up to 100%. Adjusting the percentages can help ‘line’ up the
+rows to be of equal height.</p>
+<p>The <code>data-fancybox</code> attribute in gallery items defines groups of photos as part
+of the same lightbox display provided by <code>fancybox</code>.</p>
+<p>In recent versions of <a href="https://gohugo.io/">hugo</a>, the <code>href</code> and <code>img src</code> of
+included pictures can be in the same directory as the post itself.</p>
+<p>The images themselves do not have a default margin of zero pixels. Zero pixel
+margins can be defined with the <code>style</code> attribute of the images.</p>
