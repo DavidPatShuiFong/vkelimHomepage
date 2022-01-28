@@ -38,10 +38,6 @@ Spur Afrika supports the education and development of children, families and com
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
 ```{r echo=FALSE}
-blogdown::shortcode('video', library = 'true', src = 'SpurCentre_TrainingVideo.mp4', controls = 'yes')
-```
-
-```{r echo=FALSE}
 htmltools::HTML(paste(
 '<link
   rel="stylesheet"
@@ -59,4 +55,14 @@ htmltools::HTML(paste(
 '</a></div>',
 '</div>'
 ))
+
+blogdown::shortcode('video', library = 'true', src = 'SpurCentre_TrainingVideo.mp4', controls = 'yes')
+
+# alternatively the video shortcode could be (because the shortcode doesn't always get interpreted into correct HTML?)
+# <p>
+#  <video controls = "">
+#   <source src="/media/SpurCentre_TrainingVideo.mp4" type="video/mp4">
+#  </video>
+# </p>
+
 ```
