@@ -1,0 +1,42 @@
+---
+title: "Kenya Spur Afrika 2021 - Welcome!"
+authors: ["Rosalie Lui"]
+date: '2021-12-15T00:00:00Z'
+categories: Christianity
+aliases: null
+tags:
+- Christianity
+- Kenya
+- Spur Afrika
+- Spur Afrika 2021
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+Hello friends! 
+
+Welcome to the support, encouragement & prayer group for Rosalie and David.  We are planning to start our journey on Dec 25th and to come back on Jan 7th.
+
+Our aims for this trip are:
+
+- to encourage the workers and children in Kibera 
+- health clinic day for the [Spur Afrika](https://spurafrika.org/) sponsored children in Kibera 
+- giving out cards and gifts for the children.  
+- training for the Spur workers / program evaluation / better communication
+- meeting and encouraging our new worker Andrew in rural Kenya (Holo, Kisumu) 
+- going to schools in rural Kenya / visiting sponsored children & understanding their needs so that we can establish a new office in Holo, Kisumu 
+- meeting with locals and establishing [Spur Afrika](https://spurafrika.org/) in a new area - trying to start a Sunday program for children
+
+We would love your prayers and thoughts. We have lots of paperwork and COVID related things to sort out before we go.
+
+Please pray:
+
+* Kenya visa to be approved ASAP
+* collection of gifts / packing (to bring to Kenya)
+* COVID testing protocol to be smooth - for us to NOT be exposed and not to test positive before we leave
+* all the relevant paperwork and applications to be completed in a timely manner
+* peace for family members and friends
+
+[Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
