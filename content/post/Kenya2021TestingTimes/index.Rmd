@@ -1,0 +1,33 @@
+---
+title: "Kenya Spur Afrika 2021 - Testing Times"
+authors: ["Rosalie Lui"]
+date: '2021-12-28T00:00:00Z'
+categories: Christianity
+aliases: null
+tags:
+- Christianity
+- Kenya
+- Spur Afrika
+- Spur Afrika 2021
+- COVID
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+The sign of the times - RAPID TESTING - NEGATIVE results! YAY~
+
+We decided to test ourselves for some peace of mind.  We nearly had the tests taken away at customs (because of tax reasons), however praise God we managed to talk our way through.  
+
+It isn't nice to hear that people charge \$40 USD for a rapid test and you still have to go to a clinic to do it!  Also we don't think you can buy them anywhere?  But I suppose people with lower health literacy wouldn't even know how to do a self-test.  
+
+Additionally, COVID testing costs \$50 USD and most people in Kibera wouldn't even know where to go.  This just highlights the disparities not just within Kenya but also the disparities between countries (Australia verses Kenya).  
+
+I was really stressed and then annoyed that my test results nearly didn't make it in time for my flight. But I suppose I should have seen it as a privilege that I got to be tested and I know how to protect myself?  While in Kenya, they don't even have the options to test.  What a mind shift, huh?? 
+
+Ok, no more COVID talk.  Feel like that is all people are worried about when there are so many other issues that people are facing, like poverty, HIV, domestic abuse, lack of education, health access, education…..my list is growing.
+
+Doing a lot of prep work today - seeing the local doctor and packing bags for the children.  Our children's day is tomorrow!
+
+[Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
