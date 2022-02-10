@@ -3,7 +3,7 @@ title: "Kenya Spur Afrika 2021 - Holo Mothers"
 authors: ["Rosalie Lui"]
 date: '2021-12-31T00:00:00Z'
 categories: Christianity
-featured: true
+featured: false
 aliases: null
 tags:
 - Christianity
