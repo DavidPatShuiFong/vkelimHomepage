@@ -21,7 +21,7 @@ subtitle = "Visiting a child support program, 25th December 2021 to 6th January 
   offset = 0
 
   # Page order. Descending (desc) or ascending (asc) date.
-  order = "desc"
+  order = "asc"
 
   # Filter posts by a taxonomy term.
   [content.filters]
