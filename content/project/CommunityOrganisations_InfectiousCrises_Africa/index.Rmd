@@ -4,6 +4,7 @@ title: The role of community-based service organisations in the humanitarian res
 author: "David Fong"
 date: '2022-05-12T00:00:00Z'
 categories: Management
+summary: "Community-based organisations can assist in providing flexible, localised and adaptive responses to epidemic crises, strengthening community resilience"
 aliases: null
 tags:
 - Crisis
