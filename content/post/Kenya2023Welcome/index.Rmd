@@ -1,0 +1,37 @@
+---
+title: "Kenya Spur Afrika 2023 - Welcome!"
+authors: ["Rosalie Lui"]
+date: '2022-10-08T11:00:00Z'
+categories: Christianity
+aliases: null
+tags:
+- Christianity
+- Kenya
+- Spur Afrika
+- Spur Afrika 2023
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+Hello friends!
+
+Welcome to the support, encouragement & prayer group for Rosalie and David.  Rosalie and David are planning to go to Kenya, leaving December 31st to January 20th 2023. We need your prayers, encouragement and support!!
+
+Who would have thought a year would pass and things have changed so much.  Kisumu has become a official office of [Spur Afrika](https://spurafrika.org/) and we are currently supporting 20 children with 2 workers: Andrew and Emily.
+
+Our aims for this trip are:
+
+- to encourage the workers and children in Kibera and Kisumu 
+- home visits in Kibera and Kisumu 
+- School Clinics over 4 days - this was stopped during COVID but now we would like to re-start!  
+- health clinic and day for the Spur sponsored children in Kibera 
+- giving out cards and gifts for the children.  
+- training for the Spur workers / program evaluation / better communication
+- meeting and encouraging our workers Andrew and Emily in rural Kenya (Holo, Kisumu) 
+- going to schools in rural Kenya / visiting sponsored children & understanding their needs in Holo, Kisumu 
+- encouragement for Sue and Patoh 
+- board meetings and strategy discussions
+
+[Spur Afrika trip 2023 posts](/spurafrika2023/)
