@@ -1,0 +1,22 @@
+---
+title: "Kenya Spur Afrika 2023 - Spur Sharing Day"
+authors: ["Rosalie Lui"]
+date: '2022-10-16T11:25:00Z'
+categories: Christianity
+aliases: null
+tags:
+- Christianity
+- Kenya
+- Spur Afrika
+- Spur Afrika 2023
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+There is a lot going on, including our sharing day service at CrossGen.  Would love to see you all there.
+
+David and I are busy figuring out many things for [Spur](https://spurafrika.org/), including clinics, worker retreats, mentorship training and much more.  Please keep praying for us.  We are getting some help as well. Thanks!
+
+[Spur Afrika trip 2023 posts](/spurafrika2023/)
