@@ -17,7 +17,7 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 PRAYER NEEDED: it has come to our attention that we are behind in our fundraising, so therefore there are lots of issues to tackle as well as figuring out what we are doing for the Spur trip in January.
 
-We need to raise *63K* by the end of the year and therefore this has got us worried.  This is due to a range of issues, but one of them is that we have expanded to another office.  
+We need to raise *63K* by the end of the year and therefore this has got us worried.  This is due to a range of issues, but one of them is that we have expanded to another office.
 
 So if you can help in any way: please let me know.  I am willing to have a chat with anyone and everyone.
 
