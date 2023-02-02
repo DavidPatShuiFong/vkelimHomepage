@@ -1,0 +1,55 @@
+---
+title: "Kenya Spur Afrika 2023 - Meet Rosemary"
+authors: ["Rosalie Lui"]
+date: '2022-11-13T11:25:00Z'
+categories: Christianity
+aliases: null
+tags:
+- Christianity
+- Kenya
+- Spur Afrika
+- Spur Afrika 2023
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+Hello Friends, It has been a while since my last post and again lots of things are happening.
+😭😂
+
+The most immediate need is my health. Unfortunately, I have been really sick the last 2 weeks. I haven't been able to go to work, actually I haven't even been able to leave the couch. I most likely (90% sure) have glandular fever and hepatitis. Anyway, it has been really challenging time and most of my Spur work has been reduced. I may have forced myself to have a few zoom meetings, but I really thank God for allowing me to complete them.
+
+I am praying that my recovery continues but mostly for patience and dependence on God. Spur is God's work and not mine. Praying that we can trust in him in all things, not only when it is easy but when things are looking tough and unsure.
+
+I thank God for my mother and for David. They have both really stepped up, not only with Spur stuff but with my day to day care. Also thank people who have prayed and are praying for me. Also thankful I avoided a ED trip and a dear friend was able to help (thanks Roger)
+
+Also, thankful for the Balwyn Methodist church for organising the dodgeball event. I heard it was fun and some people who didn't know Spur joined in on the BBQ. I was very disappointment I couldn't be there. Thanks to Becky and Brando for helping.
+💕❤️
+
+Here are some videos and events to join in on.
+
+`r blogdown::shortcode_html("youtube", "AWeVVGlQlRQ")`
+
+<br/>
+
+[Sharing day](https://fb.me/e/1VkIO80gf) is next Sunday - praying very hard that I can make it and not be unwell.
+
+Looking for any talent to perform at the [concert](https://fb.me/e/2sfYmiMVA)!
+
+[Spur Christmas Cards](https://spurafrika.bigcartel.com/)
+
+We have 10 children to be sponsored - message me if you are interested
+
+Trip planning
+
+* medication lists are in process
+* David Fong is applying for a medical license for Kenya
+* scheduling and logistics for our medical clinics and kisumu trips
+* mentorship training day planning
+* worker's retreat planning
+* costs are really high but we decided as a couple to fund our own flights, accommodation and most of the clinics and mission costs. We joyfully give this as an offering to God.
+
+If you feel like giving, [you can do so on grassrootz](https://spurafrika.grassrootz.com/spur-afrika-general-donations/donate?fbclid=IwAR3ZSHTpJXUd4Lq6zXbaBnoUbUilVfBpnqqe0NjnbaPHKy16MdRj-Iyzuho). It really does go a long way and you will make an impact.
+
+[Spur Afrika trip 2023 posts](/spurafrika2023/)
