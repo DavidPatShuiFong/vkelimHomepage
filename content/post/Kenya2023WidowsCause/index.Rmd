@@ -1,0 +1,63 @@
+---
+title: "Kenya Spur Afrika 2023 - Plead the widow's cause"
+authors: ["David Fong"]
+date: '2023-01-13T11:25:00Z'
+categories: Christianity
+aliases: null
+tags:
+- Christianity
+- Kenya
+- Kisumu
+- Spur Afrika
+- Spur Afrika 2023
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+> "Wash yourselves; make yourselves clean;  
+ remove the evil of your deeds from before my eyes;  
+ cease to do evil,  
+ learn to do good;  
+ seek justice,  
+ correct oppression;  
+ bring justice to the fatherless,  
+ plead the widow's cause."  
+*Isaiah 1:16-17*
+ 
+An initiative of Spur Afrika in Holo (Kisumu, western Kenya) is to support young single mothers who were unable to continue school upon being with child. This week, Rosalie and myself met many of the young mothers who are, or have been involved, in the twelve-week "Kinda Girls" program. Several of the young women spoke about the rekindling of their dream to further their education, or the skills they had learnt to help support themselves, their family and their child.
+
+Some of the young women themselves did not have fathers (or any parents) as the result of their father's death, or their mother being abandoned. Their household was often of very poor means, and had struggled to send the young woman to school - or even eat - before the added responsibilities of pregnancy and child-rearing. The situation of widows and unmarried mothers in western Kenya is particularly dire, since in many villages women are not formally recognized as being able to own property unless they have a male sponsor (which could be a ˜real" husband, or a husband of convenience, with all the hazards of the latter attached). There are even still some ideas that relate to women as chattel e.g. bride inheritance.
+
+Many of the children whose education is already being supported by Spur Afrika in both Holo (western Kenya) and Kibera (Nairobi, central Kenya) are orphans or children of widows. Including some children whose pictures were shown earlier by Rosalie and myself during this trip to Kenya.
+
+Praying that God shows his mercy, righteousness and blessing through us for all his loved children.
+
+> "Give justice to the weak and the fatherless;  
+ maintain the right of the afflicted and the destitute.  
+Rescue the weak and the needy;  
+ deliver them from the hand of the wicked."  
+*Psalm 82:3-4*
+
+[Spur Afrika trip 2023 posts](/spurafrika2023/)
+
+```{r echo=FALSE}
+htmltools::HTML(paste(
+'<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+/>', # for fancybox
+'<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>', # for fancybox
+'<script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>', # for isotope
+'<div class="grid" data-isotope=\'{ "itemSelector": ".isotope-grid-item", "masonry": "{\"columnWidth\": \".grid-sizer\"}", "percentPosition": "true", "gutter": 0}\' >',
+'<div id="grid-sizer"></div>',
+'<div class="isotope-grid-item" style="float:left; width: 43%"><a data-fancybox="gallery" href="./picture1.jpg">',
+'<img src="./picture1.jpg" style="margin:0px 0px">', # default CSS top/bottom margin is not zero
+'</a></div>',
+'<div class="isotope-grid-item" style="float:left; width: 50%"><a data-fancybox="gallery" href="./picture2.jpg">',
+'<img src="./picture2.jpg" style="margin:0px 0px">',
+'</a></div>',
+'</div>'
+))
+```
