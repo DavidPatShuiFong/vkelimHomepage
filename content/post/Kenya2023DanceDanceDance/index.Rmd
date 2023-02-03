@@ -1,0 +1,48 @@
+---
+title: "Kenya Spur Afrika 2023 - Lord of the Dance!"
+authors: ["David Fong"]
+date: '2023-01-11T11:25:00Z'
+categories: Christianity
+aliases: null
+tags:
+- Christianity
+- Kenya
+- Kibera
+- Spur Afrika
+- Spur Afrika 2023
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+> "Praise [God] for his mighty deeds;  
+praise him according to the abundance of his greatness.  
+Praise him with blast of horn;  
+praise him with harp and lyre.  
+Praise him with tambourine and dancing;  
+praise him with strings and flute.  
+Praise him with sounding cymbals;  
+praise him with clashing cymbals."
+>   
+*Psalm 150:2-5*
+
+A wonderful feature of Kenyan life is community dancing and being ... loud!
+
+Be it at the Spur Afrika picnic day  in Kibera/Nairobi (first video), or the welcome to Holo/Kisumu that the Spur Afrika children gave Rosalie and myself yesterday (second video), there seems to be no end to the dancing and singing!
+
+Church services that we've attended are like that as well. Lots of dancing and movement (by those on stage. and the congregation). And almost deafening music!
+
+Churches have, over centuries, been at the forefront of loud music and noises, be it the pipe organ (technological marvels of the day) and pealing bells.
+
+Something about public praise, worship and joy the Kenyans haven't yet forgotten!
+
+[Spur Afrika trip 2023 posts](/spurafrika2023/)
+
+```{r echo=FALSE}
+blogdown::shortcode('video', library = 'true', src = '20230107_team_danceoff.mp4', controls = 'yes')
+```
+
+```{r echo=FALSE}
+blogdown::shortcode('video', library = 'true', src = '20230109_kisumu_welcome.mp4', controls = 'yes')
+```
