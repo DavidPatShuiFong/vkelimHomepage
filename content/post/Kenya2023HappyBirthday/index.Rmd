@@ -29,3 +29,7 @@ Most of our high school graduates this year are all heading into college! What g
 Thanks for praying for our Spur community. I am praying for many more birthdays with cake 🎂.
 
 [Spur Afrika trip 2023 posts](/spurafrika2023/)
+
+```{r echo=FALSE}
+blogdown::shortcode('video', library = 'true', src = '20230115_HappyBirthdaySpur.mp4', controls = 'yes')
+```
