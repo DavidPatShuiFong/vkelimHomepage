@@ -7,6 +7,7 @@ aliases: null
 tags:
 - Christianity
 - Kenya
+- travel
 - Spur Afrika
 - Spur Afrika 2023
 ---
