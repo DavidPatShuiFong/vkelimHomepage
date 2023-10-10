@@ -37,8 +37,18 @@ source("cv_printing_functions.r")
 # Read in all data and initialize a CV printer object
 CV <- create_CV_object(
   data_location = "./assets/datadrivencv/",  #
-  pdf_mode = params$pdf_mode
+  pdf_mode = params$pdf_mode,
+  resume_mode = FALSE,
+  network_mode = FALSE
 )
+
+CV_network <- create_CV_object(
+  data_location = "./assets/datadrivencv/",  #
+  pdf_mode = params$pdf_mode,
+  resume_mode = FALSE,
+  network_mode = TRUE
+)
+
 #
 
 ```
@@ -78,7 +88,7 @@ Aside
 #'
 #' @return Interactive force-directed layout network of your CV data
 #' @export
-build_network_logo <- function(position_data, sparse = TRUE){
+build_network_logo <- function(position_data, sparse = FALSE){
   
   positions <- position_data %>%
     dplyr::mutate(
@@ -145,7 +155,7 @@ build_network_logo <- function(position_data, sparse = TRUE){
     "{network_data}",
     "</script>",
     "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js\"></script>",
-    "<svg style = \"width: 100%; height:400px; margin-top: -125px;\" id = \"cv_network_viz\"></svg>",
+    "<svg style = \"width: 100%; height:320px; margin-top: -125px;\" id = \"cv_network_viz\"></svg>",
     "<script>",
     "{viz_script}",
     "</script>"
@@ -154,7 +164,7 @@ build_network_logo <- function(position_data, sparse = TRUE){
 }
 
 
-build_network_logo(CV$entries_data)
+build_network_logo(CV_network$entries_data)
 ```
 
 
@@ -234,10 +244,21 @@ CV %<>% print_text_block('professional_experience_aside')
 CV %<>% print_section('professional_positions')
 ```
 
-<!-- These breaks just force a new page so section doesnt get cut off -->
-<br>
-<br>
-<br>
+<!-- These breaks just force a new page so section doesn't get cut off -->
+<!-- <br> -->
+
+Selected Data Analyses and Contributions {data-icon=chart-line}
+--------------------------------------------------------------------------------
+
+::: aside
+```{r}
+# CV %<>% print_text_block('data_science_writing_aside')
+```
+:::
+
+```{r}
+CV %<>% print_section('data_science_writings')
+```
 
 Teaching Experience {data-icon=chalkboard-teacher}
 --------------------------------------------------------------------------------
@@ -251,23 +272,6 @@ CV %<>% print_text_block('teaching_experience_aside')
 ```{r}
 CV %<>% print_section('teaching_positions')
 ```
-
-
-
-::: aside
-```{r}
-
-# Selected Data Science Writing {data-icon=chart-line}
-# --------------------------------------------------------------------------------
-
-# CV %<>% print_text_block('data_science_writing_aside')
-```
-:::
-
-```{r}
-# CV %<>% print_section('data_science_writings')
-```
-
 
 
 
@@ -292,7 +296,7 @@ CV %<>% print_section('teaching_positions')
 
 
 
-Selected Publications, Posters, and Talks {data-icon=book}
+Publications {data-icon=book}
 --------------------------------------------------------------------------------
 
 ```{r}

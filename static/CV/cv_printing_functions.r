@@ -13,10 +13,14 @@
 #'   to be stripped?
 #' @param sheet_is_publicly_readable If you're using google sheets for data,
 #'   is the sheet publicly available? (Makes authorization easier.)
+#' @param resume_mode shorter version of resume
+#' @param network_mode version for creating network logo
 #' @return A new `CV_Printer` object.
 create_CV_object <-  function(data_location,
                               pdf_mode = FALSE,
-                              sheet_is_publicly_readable = TRUE) {
+                              sheet_is_publicly_readable = TRUE,
+                              resume_mode = FALSE,
+                              network_mode = FALSE) {
 
   cv <- list(
     pdf_mode = pdf_mode,
@@ -52,6 +56,9 @@ create_CV_object <-  function(data_location,
     cv$contact_info <- readr::read_csv(paste0(data_location, "contact_info.csv"), skip = 1)
   }
 
+  if(resume_mode){
+    cv$entries_data %<>% dplyr::filter(in_resume == "TRUE")
+  }
 
   extract_year <- function(dates){
     date_year <- stringr::str_extract(dates, "(20|19)[0-9]{2}")
@@ -81,6 +88,20 @@ create_CV_object <-  function(data_location,
       description_bullets = ifelse(description_bullets != "", paste0("- ", description_bullets), ""),
       start = ifelse(start == "NULL", NA, start),
       end = ifelse(end == "NULL", NA, end),
+    )
+
+  if (network_mode == FALSE) {
+    cv$entries_data %<>%
+      dplyr::mutate(
+      start = dplyr::if_else(start == end, NA, start, missing = start)
+      # if start year same as end year, then remove the start year
+      # this looks nicer in the CV 'text'
+      # however, the network logo thinks that everything with the same start year should be 'networked' to each other
+    )
+  }
+
+  cv$entries_data %<>%
+    dplyr::mutate(
       start_year = extract_year(start),
       end_year = extract_year(end),
       no_start = is.na(start),
