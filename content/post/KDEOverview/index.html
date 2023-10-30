@@ -1,0 +1,48 @@
+---
+title: "KDE Activities Overview --- Simulating GNOME Super-Key ('Windows' Key)"
+author: "David Fong"
+date: 2023-10-30T00:00:00Z
+categories: ["KDE", "Gnome"]
+image:
+  caption: <span>Photo by <a href="https://unsplash.com/@cemersozlu?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Cem Ersozlu</a> on <a href="https://unsplash.com/photos/person-in-building-fiSXwmacuVw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></span>
+  focal_point: Smart
+aliases:
+tags: ["KDE", "Gnome", "Overview"]
+---
+
+
+
+<p>After my AMD RX570 graphics card no longer seemed to be supported in openSuSE
+Leap 15.5 (or perhaps any other Linux) for use with Da Vinci Resolve video editor,
+I replaced the RX570 with an NVidia Geforce RTX 3060.</p>
+<p>Took a little to install all the proprietary NVidia drivers into openSuSE (I used
+<a href="https://en.opensuse.org/SDB:NVIDIA_drivers">the official method and repositories</a>
+as described on the openSuSE web-pages). I did the installation of the NVidia drivers
+from the console (since I was not able to reach the login screen on the first few
+boots). Installation of ‘ndivida-driver-G06-kmp-default’ requires compilation of
+various modules. Eventually, I don’t think the warning messages about <code>Skipping BTF generation for /usr/src/kernel-modules/nvidia-535.113.01-default/nvidia-drm.ko due to unavailability of vmlinux</code> actually mattered. And there were also multiple
+warning messages about dracut failing to create various kernel modules for versions
+of the kernel which weren’t actually installed or being used on my system (include
+some ‘preempty’ kernels, which I removed). The generated modules were stored in
+<code>/lib/modules/5.14.21-150500.55.31-default/weak-updates/updates</code> (of course, the
+actual kernel version may vary with different system).</p>
+<p>Using Gnome or KDE with Wayland still seems defective and buggy, with long pauses
+happening periodically. Using KDE with Xorg seems to be more trouble-free than using
+Gnome. Perhaps not too surprising, openSuSE’s official desktop manager is KDE.</p>
+<p>I did miss the window ‘overview’ function from GNOME, however. Gnome accesses ‘overview’
+from the <code>Super</code> (also known as <code>Windows</code>) key. The same function is accessed on KDE
+with something like <code>Super-W</code> (in KDE parlance <code>Meta-W</code>). A similar function called
+‘Present Windows’ <code>Ctrl-F10</code> is also available in KDE, but unlike ‘Overview’ doesn’t allow
+for searching for applications to launch/start.</p>
+<p>It is possible to map the <code>Super</code> (/Meta/Windows) key to ‘Overview’ in KDE, but it is
+a little complicated, since the KDE’s <code>Meta</code> key is only used as a key modifier.
+The solution is found in a <a href="https://www.reddit.com/r/linuxquestions/comments/qju3cg/gnome_super_key_function_on_kde/">Reddit post by AiwendilH</a>.</p>
+<p>First, find the list of dbus calls for shortcuts:</p>
+<pre><code>$qdbus-qt5 org.kde.kglobalaccel /component/kwin shortcutNames</code></pre>
+<p>Overview is in that list (the list can also be seen — with great difficulty —
+using the GUI application <code>qdbusviewer-qt5</code>).</p>
+<p>Test the effect from the shell with:</p>
+<pre><code>$qdbus-qt5 org.kde.kglobalaccel /component/kwin invokeShortcut &quot;Overview&quot;</code></pre>
+<p>Then set the effect (using <a href="https://userbase.kde.org/Plasma/Tips#Windows.2FMeta_Key">instructions from the KDE wiki</a>) with:</p>
+<pre><code>$ kwriteconfig5 --file ~/.config/kwinrc --group ModifierOnlyShortcuts --key Meta &quot;org.kde.kglobalaccel,/component/kwin,org.kde.kglobalaccel.Component,invokeShortcut,Overview&quot;
+$ qdbus-qt5 org.kde.KWin /KWin reconfigure</code></pre>
