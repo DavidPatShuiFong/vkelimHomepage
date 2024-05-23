@@ -1,15 +1,22 @@
 ---
 title: "Resilio Sync on Chromebook (Linux 'Crostini' container)"
 author: "David Fong"
-date: 2021-07-27T00:00:00Z
-categories: ["Computers", "Linux"]
-aliases:
+date: "2021-07-27T00:00:00Z"
+lastmod: "2024-05-23T00:00:00Z"
+categories:
+- Computers
+- Linux
+aliases: null
 featured: false
-tags: ["Chromebook", "Crostini", "Resilio Sync", "Linux"]
+tags:
+- Chromebook
+- Crostini
+- Resilio Sync
+- Linux
 image:
-  caption: <span>Photo by <a href="https://unsplash.com/@vfbranciforti?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vincent Branciforti</a> on <a href="https://unsplash.com/s/photos/synchronized-swimming?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
+  caption: "<span>Photo by <a href=\"https://unsplash.com/@vfbranciforti?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText\">Vincent
+    Branciforti</a> on <a href=\"https://unsplash.com/s/photos/synchronized-swimming?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText\">Unsplash</a></span>"
   focal_point: Smart
-
 ---
 
 ```{r setup, include=FALSE}
@@ -105,3 +112,46 @@ I didn't find that was enough. What worked eventually for me was
 ```
 sudo setfacl -R -m "u:frieda:rwx" /home/rslsync
 ```
+
+### Using Resilio Sync on Chromebook Linux (Crsotini) as a regular user
+
+Some posts suggest running Sync as a local user instead, then placing the sync
+folder in the user's home directory, and adding rslsync user permissions to
+that sync folder in the user's home directory.
+
+A method which worked well for me is described in [the Forked](https://frkd.dev/posts/2021-03-01-resilio-sync-linux-user/), which
+suggests that the method recommended on the Resilio Sync website is *wrong* to
+recommend directly editing the file `/usr/lib/systemd/user/resilio-sync.service`.
+The reason is that file belongs to the Resilio Sync package, and will be
+over-written when the package is updated.
+
+Instead, Debian/systemd systems should use systemd drop-ins to modify the
+service's behaviour. These drop-ins overlay the systemd unit settings.
+
+This is the suggested routine by Forked.
+
+```
+# Disable default service used to run as `rslsync` user
+sudo systemctl stop resilio-sync.service
+sudo systemctl disable resilio-sync.service
+
+# Create a drop-in. Notice omitted sudo below this point.
+systemctl --user edit resilio-sync.service
+
+# At this point you'll get an editor opened where you need to
+# add two following lines which will replace in initial unit file:
+# [Install]
+# WantedBy=default.target
+
+# Now enable and start service as the current user.
+systemctl --user enable resilio-sync
+systemctl --user start resilio-sync
+```
+
+All further commands to the Resilio Sync service should be issued with 
+`systemctl --user` without using 'sudo'. The configuration file for the user
+Resilio Sync service can be found in `~/.config/resilio-sync`.
+
+This method suggested by Forked appears to be working well on my Asus CX9
+Chromebook.
+
