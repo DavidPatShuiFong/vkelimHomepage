@@ -7,7 +7,7 @@ aliases:
 featured: false
 tags: ["Chromebook", "Crostini", "Linux",  "Windows"]
 image:
-  caption: "<span>Photo by <a href=\"https://unsplash.com/@cloudett?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash\">Laura Cleffmann</a> on <a href=\"https://unsplash.com/photos/white-framed-glass-window-during-daytime-z3drmcczVTc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash\">Unsplash</a></span>"
+  caption: <span>Photo by <a href="https://unsplash.com/@cloudett?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Laura Cleffmann</a> on <a href="https://unsplash.com/photos/white-framed-glass-window-during-daytime-z3drmcczVTc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></span>
   focal_point: Smart
 
 ---

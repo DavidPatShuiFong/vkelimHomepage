@@ -1,0 +1,119 @@
+---
+title: "Resilio Sync on Chromebook (Linux 'Crostini' container)"
+author: "David Fong"
+date: "2021-07-27T00:00:00Z"
+categories:
+- Computers
+- Linux
+aliases: null
+featured: false
+tags:
+- Chromebook
+- Crostini
+- Resilio Sync
+- Linux
+image:
+  caption: <span>Photo by <a href="https://unsplash.com/@vfbranciforti?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vincent
+    Branciforti</a> on <a href="https://unsplash.com/s/photos/synchronized-swimming?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
+  focal_point: Smart
+---
+
+
+
+<div id="using-resilio-sync-on-chromebook-using-the-crostini-linux-container" class="section level2">
+<h2>Using Resilio Sync on Chromebook (using the ‘Crostini’ Linux container)</h2>
+<p>Resilio Sync is available on Chromebook as an Android app (via the Google Play
+Store), which is great, but:</p>
+<ul>
+<li><p>for some reason, if I modify a synchronized file using a Linux application
+(running in the <em>excellent</em> Crostini Linux application container), the Resilio
+Sync app doesn’t seem to detect the change, and doesn’t propagate the changes
+to the other computers</p></li>
+<li><p>the Android app does not have all the features, such as easily visible logs,
+as provided by the ‘web browser’ interface which operates on Linux/Windows
+computers.</p></li>
+</ul>
+<p>‘Resilio Sync’ for Linux can be operated inside a Chromebook ‘Crostini’ container!</p>
+<p>Details on the how to ‘start’/use Crostini <a href="https://beebom.com/how-use-linux-chromebook/">can be found elsewhere</a>.</p>
+<p>Starting Resilio Sync on Crostini’s ‘Debian’ container can be found on
+<a href="https://help.resilio.com/hc/en-us/articles/206178924-Installing-Sync-package-on-Linux">Resilio Sync’s help pages</a>.</p>
+<p>In summary</p>
+<ul>
+<li>Add Resilio Sync repository</li>
+</ul>
+<pre><code>echo &quot;deb http://linux-packages.resilio.com/resilio-sync/deb resilio-sync non-free&quot; | sudo tee /etc/apt/sources.list.d/resilio-sync.list</code></pre>
+<ul>
+<li>Add Resilio Sync public key</li>
+</ul>
+<p>On newer distributions:</p>
+<pre><code>wget -qO- https://linux-packages.resilio.com/resilio-sync/key.asc | sudo tee /etc/apt/trusted.gpg.d/resilio-sync.asc &gt; /dev/null 2&gt;&amp;1</code></pre>
+<p>On older distributions:</p>
+<pre><code>curl -L https://linux-packages.resilio.com/resilio-sync/key.asc | sudo apt-key add</code></pre>
+<p>I previously used the instructions on <a href="https://osxlatitude.com/forums/topic/10961-crostini-howto-install-and-manage-resiliosync/">Leon’s blog</a></p>
+<pre><code>wget -qO - https://linux-packages.resilio.com/resilio-sync/key.asc | sudo apt-key add -</code></pre>
+<ul>
+<li>Update the repositories</li>
+</ul>
+<pre><code>sudo apt-get update</code></pre>
+<ul>
+<li>Install Resilio Sync</li>
+</ul>
+<pre><code>sudo apt-get install -y resilio-sync</code></pre>
+<ul>
+<li>Ensure that Resilio Sync is auto-started (at least when a container is started)</li>
+</ul>
+<pre><code>sudo systemctl enable resilio-sync</code></pre>
+<p>Sync’s web-interface is immediately accessible with the Chromebook’s
+own ‘Chrome’ web-browser at <code>https://127.0.0.1:8888</code> (with an invalid certificate).</p>
+<p>By default, the ‘Sync’ service is started by the <code>rslsync</code> user. The <code>rslsync</code> user is created
+with a <code>rslsync</code> group. There will be a
+directory named <code>/home/rslsync</code>, which I think is the best place for synchronized
+files (which will have the owner <code>rslsync.rslsync</code>) to be placed. (The actual location
+of synchronized files is determined when adding synchronized directories with
+the web interface).</p>
+<p>My ‘Crostini’ Linux user has a different name e.g. <code>frieda</code>.</p>
+<p>How do I ensure that the ‘normal’ Linux user can read/write the synchronized files
+which are in directories which have the <code>rslsync.rslsync</code> owner?</p>
+<p>The Sync help web-pages suggest adding the <code>rslsync</code> group to the <code>frieda</code>
+user etc. will help.</p>
+<pre><code>sudo usermod -aG frieda rslsync
+sudo usermod -aG rslsync frieda
+sudo chmod g+rw /home/rslsync</code></pre>
+<p>I didn’t find that was enough. What worked eventually for me was
+<a href="https://kenfavors.com/code/how-to-add-user-permissions-to-a-folder-in-ubuntu/">adding user permissions to the <code>/home/rslsync</code> folder</a></p>
+<pre><code>sudo setfacl -R -m &quot;u:frieda:rwx&quot; /home/rslsync</code></pre>
+<div id="using-resilio-sync-on-chromebook-linux-crsotini-as-a-regular-user" class="section level3">
+<h3>Using Resilio Sync on Chromebook Linux (Crsotini) as a regular user</h3>
+<p>Some posts suggest running Sync as a local user instead, then placing the sync
+folder in the user’s home directory, and adding rslsync user permissions to
+that sync folder in the user’s home directory.</p>
+<p>A method which worked well for me is described in <a href="https://frkd.dev/posts/2021-03-01-resilio-sync-linux-user/">the Forked</a>, which
+suggests that the method recommended on the Resilio Sync website is <em>wrong</em> to
+recommend directly editing the file <code>/usr/lib/systemd/user/resilio-sync.service</code>.
+The reason is that file belongs to the Resilio Sync package, and will be
+over-written when the package is updated.</p>
+<p>Instead, Debian/systemd systems should use systemd drop-ins to modify the
+service’s behaviour. These drop-ins overlay the systemd unit settings.</p>
+<p>This is the suggested routine by Forked.</p>
+<pre><code># Disable default service used to run as `rslsync` user
+sudo systemctl stop resilio-sync.service
+sudo systemctl disable resilio-sync.service
+
+# Create a drop-in. Notice omitted sudo below this point.
+systemctl --user edit resilio-sync.service
+
+# At this point you&#39;ll get an editor opened where you need to
+# add two following lines which will replace in initial unit file:
+# [Install]
+# WantedBy=default.target
+
+# Now enable and start service as the current user.
+systemctl --user enable resilio-sync
+systemctl --user start resilio-sync</code></pre>
+<p>All further commands to the Resilio Sync service should be issued with
+<code>systemctl --user</code> without using ‘sudo’. The configuration file for the user
+Resilio Sync service can be found in <code>~/.config/resilio-sync</code>.</p>
+<p>This method suggested by Forked appears to be working well on my Asus CX9
+Chromebook.</p>
+</div>
+</div>
