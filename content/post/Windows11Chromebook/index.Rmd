@@ -1,0 +1,172 @@
+---
+title: "Windows 11 on Chromebook (Linux 'Crostini' container)"
+author: "David Fong"
+date: 2024-05-23T00:00:00Z
+categories: ["Computers", "Linux", "Windows"]
+aliases:
+featured: false
+tags: ["Chromebook", "Crostini", "Linux",  "Windows"]
+image:
+  caption: "<span>Photo by <a href=\"https://unsplash.com/@cloudett?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash\">Laura Cleffmann</a> on <a href=\"https://unsplash.com/photos/white-framed-glass-window-during-daytime-z3drmcczVTc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash\">Unsplash</a></span>"
+  focal_point: Smart
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+## Using Windows 11 Chromebook (using the 'Crostini' Linux container)
+
+My Chromebook, an Asus CX9 with i7-1165G7 CPU and 16GB of memory,
+is extremely versatile. It can operate Android apps which are not available for
+Linux e.g. [Pleco](https://www.pleco.com/) (a Chinese dictionary) and the 
+[YouVersion Bible App](https://www.youversion.com/the-bible-app/), as well
+as powerful and useful Linux applications such as [RStudio](https://www.rstudio.com/), a data analysis environment,
+and [Zotero](https://www.zotero.org/), an academic citation tool.
+
+Using and application compatibility layer such as [CodeWeavers Crossover](https://www.codeweavers.com/),
+some Windows such as [Wenlin](https://wenlin.com/) (a Chinese dictionary), work just fine,
+and Microsoft Office more-or-less works, with encouragement.
+
+However, sometimes it is nice to have a complete Windows virtual machine available.
+
+Unfortunately [Virtualbox](https://www.virtualbox.org/) doesn't work, because of
+a current lack of nested KVM support.
+
+There is a paid option to run a Windows virtual machine, [Parallels](https://www.parallels.com/products/desktop/chrome/). However, using
+Parallels currently requires Chromebook to be set up as an Enterprise chromebook.
+[This can be done on a 'home-user' Chromebook](https://www.xda-developers.com/windows-10-chrome-os/),
+but the process is involved, and a bit expensive!
+
+However, there is also a free virtual machine (qemu) to install Windows.
+The process is described on [Beebom](https://beebom.com/how-install-windows-11-chromebook/).
+
+Here is the process described on Chrome Unboxed, which works for me.
+
+### Optimising performance
+
+Running Windows 10 on my Lenovo Flex 5 (i5 tenth generation) was a bit slow, to
+say the least. I was keen to improve the performance of Windows 11 on my Asus CX9.
+The [guide from farmerbb in 'QEMU/KVM virt-manager vm very slow' ](https://www.reddit.com/r/ChromeOSFlex/comments/ucno4b/qemukvm_virtmanager_windows_vm_very_slow/)
+was particularly helpful. I didn't actually use [Leducc's article 'Improving the performance of a Windows Guest on KVM/QEMU'](https://leduccc.medium.com/improving-the-performance-of-a-windows-10-guest-on-qemu-a5b3f54d9cf5),
+but it looks pretty informative, too.
+
+Like farmerbb, I applied all possible Hyper-V enlightenments.
+
+```
+<hyperv>
+  <relaxed state='on'/>
+  <vapic state='on'/>
+  <spinlocks state='on' retries='8191'/>
+  <vpindex state='on'/>
+  <synic state='on'/>
+  <stimer state='on'>
+    <direct state='on'/>
+  </stimer>
+  <reset state='on'/>
+  <frequencies state='on'/>
+  <reenlightenment state='on'/>
+  <tlbflush state='on'/>
+  <ipi state='on'/>
+</hyperv>
+```
+
+I disabled all timers except for `hypervclock`. Like farmerbb, and unlike some
+other guides, [I left `hpet` disabled](https://www.reddit.com/r/VFIO/comments/80p1q7/high_kvmqemu_cpu_utilization_when_windows_10/).
+
+```
+<clock offset='localtime'>
+  <timer name='rtc' present='no' tickpolicy='catchup'/>
+  <timer name='pit' present='no' tickpolicy='delay'/>
+  <timer name='hpet' present='no'/>
+  <timer name='kvmclock' present='no'/>
+  <timer name='hypervclock' present='yes'/>
+</clock>
+```
+
+One particular caution I have with farmerbb's guide is that the CPU pinning settings
+is specifically for his 6-core CPU, so blind copying of those settings will probably
+mismatch virtual cores e.g. matching core 1 to core 6. Some other articles mention
+getting the pinning setting wrong is a likely cause of *worse* performance. Currently,
+I have set any cCPU pinning.
+
+I downloaded the [Windows virtio drivers](https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md)
+as suggested by farmerbb. I placed both my Windows and virtio driver ISO (currently named 'virtio-win-0.1.240.iso') into the Crostini 'normal' user's `Download` directory. Trying
+to install with those ISOs from a directory outside the Crostini directories did
+not work, for some reason QEMU managed to lose contact with the files during the install
+process. Unlike the QEMU XML snippet provided by farmerbb, I did not provide the `address`,
+as this appears to be auto-generated, and did not set `cache`. Note that the disk
+file is stored in the `libvirt` directory.
+
+```
+<disk type='file' device='disk'>
+  <driver name='qemu' type='qcow2' io='threads' discard='unmap' iothread='1' queues='6'/>
+  <source file='/var/lib/libvirt/images/win11.qcow2'/>
+  <target dev='vda' bus='virtio'/>
+</disk>
+```
+
+[Standard users cannot access the `libvirt` directory](https://ostechnix.com/solved-cannot-access-storage-file-permission-denied-error-in-kvm-libvirt/)!
+
+I followed Method 1 in the [Ostechnix article](https://ostechnix.com/solved-cannot-access-storage-file-permission-denied-error-in-kvm-libvirt/)!).
+As sudo, I edited the `/etc/libvirt/qemu.conf` file, adding:
+
+```
+user = "myusername"
+group = "libvirt"
+```
+
+Then restarting the `libvirtd` service, and making sure my regular user is part
+of the `libvirt` group.
+
+```
+sudo systemctl restart libvirtd
+sudo usermod -a -G libvirt $(whoami)
+```
+
+### Resizing Windows 11 guest window, Spice guest tools, Secure boot
+
+I installed [Spice guest tools](https://www.spice-space.org/download.html), but
+it didn't seem to be working, especially window resizing. The eventual solution
+was provided by ['Wind Slightly' in the post 'virt-manager guest resize not working'](https://stackoverflow.com/questions/41990600/virt-manager-guest-resize-not-working).
+
+It appears that the secure boot option in the boot manager/BIOS does not allow
+the spice guest tools to work. I entered the QEMU Windows 11 machine BIOS (by
+pressing the Escape key during boot, from memory) and disabled secure boot. After
+that, windows resize worked properly.
+
+
+### Inactive network (as seen in virt-manager)
+
+For some reason, the network became disabled, as could be seen in the virt-manager GUI.
+
+I was able to restart the network with the instructions included in a [post written by elattlat](https://www.reddit.com/r/VFIO/comments/6iwth1/network_default_is_not_active_after_every/)
+
+```
+sudo virsh net-autostart default
+sudo virsh net-start default
+```
+
+### Sharing files between Windows (in Crostini) and Linux (in Crostini)
+
+This is difficult, and nowhere near as easy as using Virtualbox.
+
+One 'trick' is to use the [Remmina](https://remmina.org/) remote desktop client,
+and [share a folder using the Remmina GUI](https://unix.stackexchange.com/questions/165554/shared-folder-between-qemu-windows-guest-and-linux-host).
+My particular Remmina client is not quite as pretty as shown in the stackexchange
+post. A share folder could only be specified in a saved configuration, and the
+name of the share folder could only be specified by text (no directory chooser!).
+In my case, the name of the share folder was a folder in the user's home directory.
+
+I enabled remote desktop protocol in Windows using the guide in [groovypost](https://www.groovypost.com/howto/setup-use-remote-desktop-windows-10/).
+The server name I chose in Remmina was the IP address of the virtual machine (as
+can be seen in the virt-manager). The username I set to my Windows login
+(e.g. myusername@outlook.com). One tricky thing with using the Windows login is
+that [my ability to use passwords in Windows 11 was disabled in my virtual machine](https://superuser.com/questions/1715525/how-to-login-windows-remote-desktop-rdp-in-windows-11-when-microsoft-account-a)! I needed to disable Windows Hello/PIN to enable password logins with
+remote desktop (RDP). The superuser page has suggestions about how to use 
+multi-factor-authentication (MFA) instead.
+
+In my case, using remote desktop via Remmina also seemed to provide better Windows
+GUI responsiveness (compared to using the QXL driver in virt-manager),
+with no appreciable penalty in CPU usage.
