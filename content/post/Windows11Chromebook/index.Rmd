@@ -16,17 +16,17 @@ image:
 knitr::opts_chunk$set(collapse = TRUE)
 ```
 
-## Using Windows 11 Chromebook (using the 'Crostini' Linux container)
+## Using Windows 11 on Chromebook
 
-My Chromebook, an Asus CX9 with i7-1165G7 CPU and 16GB of memory,
+My Chromebook, an Asus CX9 with i5-1135G7 CPU and 16GB of memory,
 is extremely versatile. It can operate Android apps which are not available for
 Linux e.g. [Pleco](https://www.pleco.com/) (a Chinese dictionary) and the 
 [YouVersion Bible App](https://www.youversion.com/the-bible-app/), as well
 as powerful and useful Linux applications such as [RStudio](https://www.rstudio.com/), a data analysis environment,
 and [Zotero](https://www.zotero.org/), an academic citation tool.
 
-Using and application compatibility layer such as [CodeWeavers Crossover](https://www.codeweavers.com/),
-some Windows such as [Wenlin](https://wenlin.com/) (a Chinese dictionary), work just fine,
+Application compatibility layers such as [CodeWeavers Crossover](https://www.codeweavers.com/) allow
+some Windows programs such as [Wenlin](https://wenlin.com/) (a Chinese dictionary) to work just fine,
 and Microsoft Office more-or-less works, with encouragement.
 
 However, sometimes it is nice to have a complete Windows virtual machine available.
@@ -37,12 +37,10 @@ a current lack of nested KVM support.
 There is a paid option to run a Windows virtual machine, [Parallels](https://www.parallels.com/products/desktop/chrome/). However, using
 Parallels currently requires Chromebook to be set up as an Enterprise chromebook.
 [This can be done on a 'home-user' Chromebook](https://www.xda-developers.com/windows-10-chrome-os/),
-but the process is involved, and a bit expensive!
+but the process is involved, and the annual subscriptions required are a bit expensive!
 
-However, there is also a free virtual machine (qemu) to install Windows.
+However, there is also a free virtual machine (qemu) which can be used to install Windows.
 The process is described on [Beebom](https://beebom.com/how-install-windows-11-chromebook/).
-
-Here is the process described on Chrome Unboxed, which works for me.
 
 ### Optimising performance
 
@@ -132,8 +130,8 @@ it didn't seem to be working, especially window resizing. The eventual solution
 was provided by ['Wind Slightly' in the post 'virt-manager guest resize not working'](https://stackoverflow.com/questions/41990600/virt-manager-guest-resize-not-working).
 
 It appears that the secure boot option in the boot manager/BIOS does not allow
-the spice guest tools to work. I entered the QEMU Windows 11 machine BIOS (by
-pressing the Escape key during boot, from memory) and disabled secure boot. After
+the spice guest tools to work. I entered the QEMU Windows 11 machine BIOS (I think by
+pressing the Escape key during boot) and disabled secure boot. After
 that, windows resize worked properly.
 
 
@@ -163,10 +161,10 @@ I enabled remote desktop protocol in Windows using the guide in [groovypost](htt
 The server name I chose in Remmina was the IP address of the virtual machine (as
 can be seen in the virt-manager). The username I set to my Windows login
 (e.g. myusername@outlook.com). One tricky thing with using the Windows login is
-that [my ability to use passwords in Windows 11 was disabled in my virtual machine](https://superuser.com/questions/1715525/how-to-login-windows-remote-desktop-rdp-in-windows-11-when-microsoft-account-a)! I needed to disable Windows Hello/PIN to enable password logins with
+that [my ability to use passwords in Windows 11 was disabled in my virtual machine, as described in a superuser post](https://superuser.com/questions/1715525/how-to-login-windows-remote-desktop-rdp-in-windows-11-when-microsoft-account-a)! I needed to disable Windows Hello/PIN to enable password logins with
 remote desktop (RDP). The superuser page has suggestions about how to use 
 multi-factor-authentication (MFA) instead.
 
-In my case, using remote desktop via Remmina also seemed to provide better Windows
+In my case, using remote desktop via Remmina provides better Windows
 GUI responsiveness (compared to using the QXL driver in virt-manager),
 with no appreciable penalty in CPU usage.
