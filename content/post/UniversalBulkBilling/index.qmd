@@ -42,7 +42,7 @@ The proposition to test is:
 
 $$
 \small
-\text{Benefit} \\ \text{Loss}
+\text{Benefit} > \text{Loss}
 $$
 Where *Benefit* is the benefit from universal bulk-billing and *Loss* is the revenue foregone from not charging a fee over and above the government-set price for the services.
 
@@ -78,7 +78,9 @@ If the practice agrees to universal bulk-billing, then all services which were p
 
 ### Services
 
-*All the 'code' below is fully modifiable, and can be changed to reflect individual practice circumstances! If you wish to 'run' the code, it is recommended that you 'run' the code blocks sequentially, from top to bottom.*
+*All the 'code' below is fully modifiable, and can be changed to reflect individual practice circumstances! If you wish to 'run' the code, it is recommended that you 'run' the code blocks sequentially, from top to bottom. After you have 'run' a code block, you can modify the code and 'run' it again without running the previous code blocks.*
+
+*If you 'Run Code' the code block below, a list of numbers in red will appear below the code block, showing the proportion of patients billed Medicare service items B, C, D and E.*
 
 ```{webr-r}
 # Service fees for the most common fee-for-service consultation items
@@ -105,7 +107,7 @@ service_proportion_private <- service_proportion_bulk
 service_proportion_bulk
 ```
 
-Currently it is known that the standard fee-for-service items, particularly items 'B', 'C' and 'D', will attract both bulk-billing incentives (individual service and universal bulk-billing incentive) and are likely to be required to be bulk-billed under the universal bulk-billing agreement. These are the most common service items to be charged in Australian general practice, and form the bulk of practice revenue. Item 'A', for consultations lasting less than five minutes, is also a common and standard fee-for-service item, but does not currently attract the individual bulk-billing incentive for pensioners and healthcare-card holders etc., and is perhaps unlikely to attract that incentive in the future.
+Currently it is known that the standard fee-for-service items, particularly items 'B', 'C' and 'D', will attract both bulk-billing incentives (individual service and universal bulk-billing incentive) and are likely to be required to be bulk-billed under the universal bulk-billing agreement. These are the most common service items to be charged in Australian general practice, and form the bulk of practice revenue. Item 'A', for consultations lasting less than five minutes, is also a common and standard fee-for-service item, but does not currently attract the individual high value 'triple' bulk-billing incentive for pensioners and healthcare-card holders etc., and is perhaps unlikely to attract that incentive in the future.
 
 ### Gap fees and bulk-billing incentive
 
@@ -114,6 +116,8 @@ Different practices and different clinicians charge different gap fees. The same
 The government bulk-billing incentive for individual services [varies by the location of the practice](https://www.mbsonline.gov.au/internet/mbsonline/publishing.nsf/Content/D204B38ED29B5FC8CA258A3E000EE282/$File/PDF%20Vers%20-%201%20November%202023%20Bulk%20billing%20incentive%20items%20GP%20tables.pdf). The incentive typically increasing the less urban and more remote the location of the practice.
 
 ```{webr-r}
+# note, please 'run' the previous code block! 
+
 # Set the gap fee for the individual service items B, C, D and E
 # for patients who were privately billed
 # for simplicity, set to the same fee of $50
@@ -150,7 +154,9 @@ We can now calculate the average benefit per patient if the practice adopts univ
 **Note that 'Run Code' below will not work unless the previous code blocks have already been 'Run'!!**
 
 ```{webr-r}
-### Benefit per 'average' patient charged service item B, C, D or E
+# note, depends on the previous code blocks already having been 'run'! 
+
+# Benefit per 'average' patient charged service item B, C, D or E
 
 net_benefit <- function(
   # calculate the average net benefit revenue
@@ -204,6 +210,8 @@ formatC(profit_loss, digits = 2, format = "f")
 With the default settings of 50% of patients privately-billed and a gap fee of 50, the average loss-per-patient is 7.81. However, what happens if we change some of the parameters?
 
 ```{webr-r}
+# note, depends on the previous code blocks already having been 'run'! 
+
 # Set the privately-billed proportion to 0.2 (20%), the gap fee to $35
 # and new service proportions
 
@@ -241,7 +249,9 @@ If the gap fee is set to 35, the average consult length is longer and only 20% o
 We can look at the effect on profit-loss by looking at a range of different gap fees. This graph is based on the first, original, example.
 
 ```{webr-r}
-# This code chunk relies on a few extra code packages
+# note, depends on the previous code blocks already having been 'run'! 
+
+# This code chunk requires a few extra code packages
 # It will take a few seconds to make these packages available
 install.packages("tibble", quiet = TRUE)
 install.packages("ggplot2", quiet = TRUE)
@@ -310,8 +320,7 @@ The above code chunk creates a plot like this, with a dashed red line at 'zero' 
 Likewise, we can examine the effect on net benefit through a range of different proportion of patients being privately billed prior to adopting universal bulk-billing. This graph is based on the second example.
 
 ```{webr-r}
-# note, depends on the libraries having already been installed
-# by the previous code block
+# note, depends on the previous code blocks already having been 'run'! 
 library(tibble)
 library(ggplot2)
 library(ggthemes)
@@ -433,8 +442,8 @@ new_payments <-
 new_payments
 ```
 
-The above code block outputs:
+The above code block output is shown below, matching the table in the [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf).
 
 ![](images/new_payments.png)
 
-matching the table in the [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf).
+
