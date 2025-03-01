@@ -2,6 +2,10 @@
 title: Calculating the practice benefit of universal bulk-billing
 date: "2025-02-28"
 format: hugo-md
+tags: 
+- medicine
+- Medicare
+- bulk-billing
 engine: knitr
 summary: 'Does the proposed universal bulk-billing incentive make financial sense for individual general practices?'
 webr:
@@ -38,7 +42,7 @@ The proposition to test is:
 
 $$
 \small
-\text{Benefit} > \text{Loss}
+\text{Benefit} \\ \text{Loss}
 $$
 Where *Benefit* is the benefit from universal bulk-billing and *Loss* is the revenue foregone from not charging a fee over and above the government-set price for the services.
 
@@ -112,7 +116,7 @@ The government bulk-billing incentive for individual services [varies by the loc
 ```{webr-r}
 # Set the gap fee for the individual service items B, C, D and E
 # for patients who were privately billed
-# for simplicity, set to the same fee
+# for simplicity, set to the same fee of $50
 gap_fee <- c(50, 50, 50, 50)
 
 # the proportion of patients who are charge the gap fee
@@ -120,12 +124,13 @@ gap_fee <- c(50, 50, 50, 50)
 # set to 50%
 privately_billed <- 0.5
 
-# the bulk billing incentive
+# the bulk billing incentive, in dollars
 # varies by location
 # Modified Monash areas 1, 2, 3+4, 5, 6, 7
 # items 75870, 75871, 75873, 75874, 75875, 75876
 # see https://www9.health.gov.au/mbs/search.cfm
-individual_bulk_billing_incentive <- c(21.35, 32.50, 34.50, 36.65, 38.70, 41.10)
+individual_bulk_billing_incentive <-
+  c(21.35, 32.50, 34.50, 36.65, 38.70, 41.10)
 
 # set the monash area to the city
 monash_area <- 1
@@ -134,6 +139,8 @@ monash_area <- 1
 # over the service fee
 # set to 12.5%
 universal_bulk_billing_incentive <- 0.125
+
+# this code block shows no output
 ```
 
 ### Calculating the benefit
@@ -145,37 +152,246 @@ We can now calculate the average benefit per patient if the practice adopts univ
 ```{webr-r}
 ### Benefit per 'average' patient charged service item B, C, D or E
 
-net_benefit <-
+net_benefit <- function(
+  # calculate the average net benefit revenue
+  # to the practice per patient
+  
+  # the variable names used in this function
+  # are the same as used in previous code chunks
+  # but will be 'local' to this function
+  service_fees,
+  service_proportion_bulk,
+  service_proportion_private,
+  gap_fee,
+  privately_billed,
+  individual_bulk_billing_incentive,
+  monash_area,
+  universal_bulk_billing_incentive) {
   # first calculate the universal bulk-bill incentive
   # for patients formerly privately-billed
   privately_billed *
-  sum(service_fees * service_proportion_private) *
-  universal_bulk_billing_incentive +
-  # for patients bulk-billed
-  (1 - privately_billed) * 
-  sum(service_fees * service_proportion_bulk) *
-  universal_bulk_billing_incentive +
-  
-  # calculate the individual service bulk-billing incentive applied
-  # to patients formerly privately-billed
-  privately_billed * individual_bulk_billing_incentive[monash_area] -
+    sum(service_fees * service_proportion_private) *
+    universal_bulk_billing_incentive +
+    # for patients bulk-billed
+    (1 - privately_billed) *
+    sum(service_fees * service_proportion_bulk) *
+    universal_bulk_billing_incentive +
+    
+    # calculate the individual service bulk-billing incentive applied
+    # to patients formerly privately-billed
+    privately_billed * individual_bulk_billing_incentive[monash_area] -
+    
+    # now calculate the loss
+    privately_billed *
+    sum(gap_fee * service_proportion_private)
+}
 
-  # now calculate the loss
-  privately_billed *
-  sum(gap_fee * service_proportion_private)
+profit_loss <- net_benefit(
+  service_fees,
+  service_proportion_bulk,
+  service_proportion_private,
+  gap_fee,
+  privately_billed,
+  individual_bulk_billing_incentive,
+  monash_area,
+  universal_bulk_billing_incentive
+)
 
-# Show the value of net_benefit
-formatC(net_benefit, digits = 2, format = "f")
+# Show the value of average net_benefit
+formatC(profit_loss, digits = 2, format = "f")
 ```
+
+With the default settings of 50% of patients privately-billed and a gap fee of 50, the average loss-per-patient is 7.81. However, what happens if we change some of the parameters?
+
+```{webr-r}
+# Set the privately-billed proportion to 0.2 (20%), the gap fee to $35
+# and new service proportions
+
+new_practice_service_raw <- 
+  # new B, C, D, E numbers
+  # with much longer average consults
+  c(225, 255, 81, 6)
+new_practice_service_proportions <- 
+  new_practice_service_raw/sum(new_practice_service_raw)
+
+profit_loss <- net_benefit(
+  service_fees,
+  service_proportion_bulk = new_practice_service_proportions,
+  service_proportion_private = new_practice_service_proportions,
+  # replace the gap fee for every possible service fee
+  # we could also use 'gap_fee = c(35, 35, 35, 35)'
+  gap_fee = rep(35, length(service_fees)),
+  # reduce the privately billed proportion to 20%
+  privately_billed = 0.2,
+  individual_bulk_billing_incentive,
+  monash_area,
+  universal_bulk_billing_incentive
+)
+
+# Show the value of average net_benefit
+formatC(profit_loss, digits = 2, format = "f")
+```
+
+If the gap fee is set to 35, the average consult length is longer and only 20% of patients are privately-billed, the practice can expect an average gain of +6.50 for each patient seen.
+
+### Graphing the benefit
+
+#### Different gap fees
+
+We can look at the effect on profit-loss by looking at a range of different gap fees. This graph is based on the first, original, example.
+
+```{webr-r}
+# This code chunk relies on a few extra code packages
+# It will take a few seconds to make these packages available
+install.packages("tibble", quiet = TRUE)
+install.packages("ggplot2", quiet = TRUE)
+install.packages("ggthemes", quiet = TRUE)
+library(tibble)
+library(ggplot2)
+library(ggthemes)
+
+# gap fees from $0 to $60
+gap_fee_range <- seq(from = 0, to = 60, by = 1)
+
+profit_loss <- sapply(
+  X = gap_fee_range,
+  function(x) {
+    net_benefit(
+      service_fees,
+      service_proportion_bulk,
+      service_proportion_private,
+      # set the gap fee to 'x'
+      gap_fee = rep(x, length(service_fees)),
+      privately_billed,
+      individual_bulk_billing_incentive,
+      monash_area,
+      universal_bulk_billing_incentive
+    )
+  }
+)
+
+gap_vs_profit <- tibble(
+  gap = gap_fee_range,
+  profit_loss = profit_loss
+)
+
+ggplot(
+  data = gap_vs_profit, 
+  mapping = aes(x = gap, y = profit_loss)
+  ) +
+  geom_point() +
+  labs(
+    x = "Gap fee ($)",
+    y = "Profit-loss ($)"
+  ) +
+  ggtitle("Net benefit to practice, per patient") +
+  geom_vline(
+    # our current gap-fee
+    xintercept = gap_fee,
+    linetype = "dotted",
+    color = "blue"
+  ) +
+  geom_hline(
+    # zero profit-loss line
+    yintercept = 0,
+    linetype = "dashed",
+    color = "red",
+    linewidth = 1
+  ) +
+  theme_economist()
+```
+
+The above code chunk creates a plot like this, with a dashed red line at 'zero' profit and a dotted blue line representing the current gap fee:
+
+![](images/profit_gap.png)
+
+#### Different previous gap-billing proportion
+
+Likewise, we can examine the effect on net benefit through a range of different proportion of patients being privately billed prior to adopting universal bulk-billing. This graph is based on the second example.
+
+```{webr-r}
+# note, depends on the libraries having already been installed
+# by the previous code block
+library(tibble)
+library(ggplot2)
+library(ggthemes)
+
+# privately billed range from 0 to 100%
+privately_billed_range <- seq(from = 0, to = 100, by = 1)
+
+# set different service proportions
+new_practice_service_raw <- 
+  # new B, C, D, E numbers
+  # with much longer average consults
+  c(225, 255, 81, 6)
+new_practice_service_proportions <- 
+  new_practice_service_raw/sum(new_practice_service_raw)
+
+profit_loss <- sapply(
+  X = privately_billed_range,
+  function(x) {
+    net_benefit(
+      service_fees,
+      # set service proportions to longer consults
+      service_proportion_bulk = new_practice_service_proportions,
+      service_proportion_private = new_practice_service_proportions,
+      # set the gap fee to $35
+      gap_fee = 35,
+      # set privately billed proportion to 'x'
+      # divide by 100 to convert from
+      # percentage to proportion
+      privately_billed = x/100,
+      individual_bulk_billing_incentive,
+      monash_area,
+      universal_bulk_billing_incentive
+    )
+  }
+)
+
+gap_vs_profit <- tibble(
+  gap = privately_billed_range,
+  profit_loss = profit_loss
+)
+
+ggplot(
+  data = gap_vs_profit, 
+  mapping = aes(x = gap, y = profit_loss)
+  ) +
+  geom_point() +
+  labs(
+    x = "Privately-billed proportion (%)",
+    y = "Profit-loss ($)"
+  ) +
+  ggtitle("Net benefit to practice, per patient") +
+  geom_vline(
+    # our current proportion
+    xintercept = 20,
+    linetype = "dotted",
+    color = "blue"
+  ) +
+  geom_hline(
+    # zero profit-loss line
+    yintercept = 0,
+    linetype = "dashed",
+    color = "red",
+    linewidth = 1
+  ) +
+  theme_economist()
+```
+
+The above code block will produce a graph as below.
+
+![](images/profit_private_proportion.png)
 
 ### Supplement - reproducing the universal bulk-billing fact sheet table
 
-We can now reproduce part of the table shown in the [government-provided fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) representing the total payments received (both individual bulk-billing incentive and universal bulk-billing incentive) for each service for those practices which agree to universally bulk-bill.
+We can reproduce part of the table shown in the [government-provided fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) representing the total payments received (both individual bulk-billing incentive and universal bulk-billing incentive) for each service for those practices which agree to universally bulk-bill. The original table is shown below:
+
+![](images/fact_sheet_new_payment.png)
 
 **Note that 'Run Code' below will not work unless the previous code blocks have already been 'Run'!!**
 
 ```{webr-r}
-install.packages("tibble", quiet = TRUE)
 library(tibble)
 
 # just include service items B, C and D
