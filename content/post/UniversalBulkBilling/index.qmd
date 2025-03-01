@@ -18,17 +18,18 @@ filters:
 
 ## Universal bulk-billing incentive
 
-As part of an election promise, the Australian Government as of February 2025 released a [proposal](https://www.health.gov.au/ministers/the-hon-mark-butler-mp/media/strengthening-medicare-more-bulk-billing-more-doctors-more-nurses) to increase the incentives for private general practices (sometimes known as 'family medicine' or 'primary care' practices) to '*bulk-bill*' patients. 'Bulk-billing' essentially allows a patient consultation with medical clinician to be 'free' (no out-of-pocket expense), if-and-only-if the clinician agrees to charge the patient no more than the government-set insurance price for the consultation.
+As part of an election promise, the Australian Government as of February 2025 released a [proposal](https://www.health.gov.au/ministers/the-hon-mark-butler-mp/media/strengthening-medicare-more-bulk-billing-more-doctors-more-nurses) to increase the incentives for private general practices (sometimes known as 'family medicine' or 'primary care' practices) to *bulk-bill* patients. 'Bulk-billing' essentially allows a patient consultation with medical clinician to be 'free' (no out-of-pocket expense), if-and-only-if the clinician agrees to charge the patient no more than the government-set insurance price for the consultation.
 
-The alternative to 'bulk-billing' is that the clinician charges the patient a price greater than the government-set insurance price, sometimes called '*private billing*'. In this case the patient pays the full price of the consultation and the government health insurance will repay the government-set insurance price to the patient.
+The alternative to 'bulk-billing' is that the clinician charges the patient a price greater than the government-set insurance price, sometimes called *private billing*. In this case the patient pays the full price of the consultation and the government health insurance will repay the government-set insurance price to the patient.
 
 The proposal to encourage general practices to 'bulk-bill' consisted of two parts:
 
--   Broadening the current bulk-billing incentive for individual consultations to all patients.
+-   Broadening the current bulk-billing incentive for individual consultations/services to all patients.
     -   Previously the bulk-billing incentive payment for individual consultations was only available to people, usually with less income or assets, who are [pensioners, recipients of a government-issued 'concession card' and children under the age of 16](https://www.ama.com.au/tas/bulk-billing-incentive-facts).
     -   This bulk-billing incentive is paid with each individual consult
--   If the general practice agrees to bulk-bill all patients, the government will pay the practice an additional 12.5% over and above the government-set price for each fee-for-service item.
+-   If the general practice agrees to bulk-bill all patients, i.e. universal bulk-billing, the government will pay the practice an additional 12.5% over and above the government-set price for each fee-for-service item.
     -   The definition of which service items need to be 'bulk-billed', and which service items will attract the 15% bonus is not yet fully defined. The government-provided [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) suggests that at least consultation items B/C/D and mental health care plans items will attract the 12.5% bonus.
+    - The 12.% bonus is paid quarterly, together with the current quarterly practice incentive program (PIP) payments.
 
 ## Will the proposed universal bulk-billing incentives be financially worthwhile for general practices?
 
@@ -107,7 +108,9 @@ service_proportion_private <- service_proportion_bulk
 service_proportion_bulk
 ```
 
-Currently it is known that the standard fee-for-service items, particularly items 'B', 'C' and 'D', will attract both bulk-billing incentives (individual service and universal bulk-billing incentive) and are likely to be required to be bulk-billed under the universal bulk-billing agreement. These are the most common service items to be charged in Australian general practice, and form the bulk of practice revenue. Item 'A', for consultations lasting less than five minutes, is also a common and standard fee-for-service item, but does not currently attract the individual high value 'triple' bulk-billing incentive for pensioners and healthcare-card holders etc., and is perhaps unlikely to attract that incentive in the future.
+A limitation of this model is that full details are not known regarding which service items are required to be bulk-billed under the proposal, and which services items will attract the universal bulk-billing incentive.
+
+Released documents show that some standard fee-for-service items, particularly items 'B', 'C' and 'D', will attract both bulk-billing incentives (individual service and universal bulk-billing incentive) and are likely to be required to be bulk-billed under the universal bulk-billing agreement. These are the most common service items to be charged in Australian general practice, and contribute the vast majority of practice revenue. Item 'A', for consultations lasting less than five minutes, is also a common and standard fee-for-service item, but does not currently attract the individual high value 'triple' bulk-billing incentive for pensioners and healthcare-card holders etc., and is perhaps unlikely to attract that incentive in the future.
 
 ### Gap fees and bulk-billing incentive
 
@@ -136,7 +139,7 @@ privately_billed <- 0.5
 individual_bulk_billing_incentive <-
   c(21.35, 32.50, 34.50, 36.65, 38.70, 41.10)
 
-# set the monash area to the city
+# set the Monash area to the city
 monash_area <- 1
 
 # universal bulk billing incentive
@@ -446,4 +449,6 @@ The above code block output is shown below, matching the table in the [fact shee
 
 ![](images/new_payments.png)
 
+### Technical credits
 
+Thanks to the [quarto-webr extension](https://quarto-webr.thecoatlessprofessor.com/), [Claudiu-Cristian's post on using webR in hugo websites](https://claudiu.psychlab.eu/post/hugo-blogdown-interactive-code-chunk-webr-quarto/) and [WebR](https://docs.r-wasm.org/webr/latest/) itself for the ability to run modifiable R models on 'static' web-pages!
