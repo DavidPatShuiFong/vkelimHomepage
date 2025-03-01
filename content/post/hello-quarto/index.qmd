@@ -1,0 +1,224 @@
+---
+title: Calculating the practice benefit of universal bulk-billing
+date: "2025-02-28"
+format: hugo-md
+engine: knitr
+summary: 'Does the proposed universal bulk-billing incentive make financial sense for individual general practices?'
+webr:
+  show-starup-message: true
+  cell-options:
+    editor-font-scale: 0.65
+filters:
+  - webr
+---
+
+## Universal bulk-billing incentive
+
+As part of an election promise, the Australian Government as of February 2025 released a [proposal](https://www.health.gov.au/ministers/the-hon-mark-butler-mp/media/strengthening-medicare-more-bulk-billing-more-doctors-more-nurses) to increase the incentives for private general practices (sometimes known as 'family medicine' or 'primary care' practices) to '*bulk-bill*' patients. 'Bulk-billing' essentially allows a patient consultation with medical clinician to be 'free' (no out-of-pocket expense), if-and-only-if the clinician agrees to charge the patient no more than the government-set insurance price for the consultation.
+
+The alternative to 'bulk-billing' is that the clinician charges the patient a price greater than the government-set insurance price, sometimes called '*private billing*'. In this case the patient pays the full price of the consultation and the government health insurance will repay the government-set insurance price to the patient.
+
+The proposal to encourage general practices to 'bulk-bill' consisted of two parts:
+
+-   Broadening the current bulk-billing incentive for individual consultations to all patients.
+    -   Previously the bulk-billing incentive payment for individual consultations was only available to people, usually with less income or assets, who are [pensioners, recipients of a government-issued 'concession card' and children under the age of 16](https://www.ama.com.au/tas/bulk-billing-incentive-facts).
+    -   This bulk-billing incentive is paid with each individual consult
+-   If the general practice agrees to bulk-bill all patients, the government will pay the practice an additional 12.5% over and above the government-set price for each fee-for-service item.
+    -   The definition of which service items need to be 'bulk-billed', and which service items will attract the 15% bonus is not yet fully defined. The government-provided [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) suggests that at least consultation items B/C/D and mental health care plans items will attract the 12.5% bonus.
+
+## Will the proposed universal bulk-billing incentives be financially worthwhile for general practices?
+
+The government has released [case examples](https://www.health.gov.au/sites/default/files/2025-02/strengthening-medicare-with-more-bulk-billing.pdf) of practices which would all financially benefit from the universal bulk-billing incentives proposal. [Not all real general practices have considered the incentives proposed to be attractive](https://www.medicalrepublic.com.au/tell-dohac-theyre-dreaming-re-bulk-billing-calculations-estimates/114770), however. The [benefit to real practices may be more nuanced](https://www.medicalrepublic.com.au/how-the-new-bulk-billing-offer-is-okay-bad-and-ugly/114856), depending on current private billing levels and current fees charged over the government-set price.
+
+## Modelling the benefits to individual practices
+
+A model will be demonstrated which aims to show the potential financial benefit (or loss) of taking up the universal bulk-billing proposal.
+
+The proposition to test is:
+
+$$
+\small
+\text{Benefit} > \text{Loss}
+$$
+Where *Benefit* is the benefit from universal bulk-billing and *Loss* is the revenue foregone from not charging a fee over and above the government-set price for the services.
+
+Both the 'Benefit' and 'Loss' side of the equation can be broken down into several individual components.
+
+$$
+\small
+\text{Loss} = \text{ Private services } \times {\text{Gap fee}} 
+$$
+*Private services* are the services which would have been privately billed before a practice agrees to universal bulk-billing. The *Gap fee* is the amount the clinician charges the patient over and above the government-set price for each service.
+
+<!--# Note that each line in the following LaTeX equations ends with six backslashes instead of two. The reason is explained in https://github.com/HugoBlox/hugo-blox-builder/issues/1480 -->
+
+$$
+\small
+\begin{align}
+\text{Benefit } = &\text{ Total fee-for-service billing } \times \text{universal bulk-billing incentive}\\\\\\
+&+ \text{Private Services } \times \text{ Individual service bulk-billing incentive}
+\end{align}
+$$
+
+Services which would have been previously privately billed are billed at the lower government-set price for the service, but now attract an individual service bulk-billing incentive, at least partly offsetting the *Loss* from not charging a *Gap fee*.
+
+$$
+\small
+\begin{align}
+\text{Total fee-for-service billing } = &\text{ Billing for bulk-billed services}\\\\\\
+&+ \text{Billing for private services}
+\end{align}
+$$
+
+If the practice agrees to universal bulk-billing, then all services which were previously 'bulk-billed' and previously 'private-billed' will benefit from the 12.5% universal bulk-billing incentive.
+
+### Services
+
+*All the 'code' below is fully modifiable, and can be changed to reflect individual practice circumstances! If you wish to 'run' the code, it is recommended that you 'run' the code blocks sequentially, from top to bottom.*
+
+```{webr-r}
+# Service fees for the most common fee-for-service consultation items
+# which attract a bulk-billing incentive
+
+# government-set price for service items B, C, D and E
+# Medicare items 23, 36, 44, and 123
+# in AUD (Australian dollars)
+service_fees <- c(42.85, 82.90, 122.15, 197.90)
+
+# the proportion which each item is billed
+
+# raw figures are derived for calendar year 2024 Australia-wide
+# http://medicarestatistics.humanservices.gov.au/statistics/mbs_item.jsp
+service_proportion_raw <- c(81240293, 19899953, 1609147, 174664)
+
+# calculate the proportions
+# for simplicity, assume the same proportions for bulk-billed patients
+# and privately-billed patients
+service_proportion_bulk <- service_proportion_raw/sum(service_proportion_raw)
+service_proportion_private <- service_proportion_bulk
+
+# display the proportions
+service_proportion_bulk
+```
+
+Currently it is known that the standard fee-for-service items, particularly items 'B', 'C' and 'D', will attract both bulk-billing incentives (individual service and universal bulk-billing incentive) and are likely to be required to be bulk-billed under the universal bulk-billing agreement. These are the most common service items to be charged in Australian general practice, and form the bulk of practice revenue. Item 'A', for consultations lasting less than five minutes, is also a common and standard fee-for-service item, but does not currently attract the individual bulk-billing incentive for pensioners and healthcare-card holders etc., and is perhaps unlikely to attract that incentive in the future.
+
+### Gap fees and bulk-billing incentive
+
+Different practices and different clinicians charge different gap fees. The same clinician or practice may charge different gap fees for different services.
+
+The government bulk-billing incentive for individual services [varies by the location of the practice](https://www.mbsonline.gov.au/internet/mbsonline/publishing.nsf/Content/D204B38ED29B5FC8CA258A3E000EE282/$File/PDF%20Vers%20-%201%20November%202023%20Bulk%20billing%20incentive%20items%20GP%20tables.pdf). The incentive typically increasing the less urban and more remote the location of the practice.
+
+```{webr-r}
+# Set the gap fee for the individual service items B, C, D and E
+# for patients who were privately billed
+# for simplicity, set to the same fee
+gap_fee <- c(50, 50, 50, 50)
+
+# the proportion of patients who are charge the gap fee
+# i.e. privately billed
+# set to 50%
+privately_billed <- 0.5
+
+# the bulk billing incentive
+# varies by location
+# Modified Monash areas 1, 2, 3+4, 5, 6, 7
+# items 75870, 75871, 75873, 75874, 75875, 75876
+# see https://www9.health.gov.au/mbs/search.cfm
+individual_bulk_billing_incentive <- c(21.35, 32.50, 34.50, 36.65, 38.70, 41.10)
+
+# set the monash area to the city
+monash_area <- 1
+
+# universal bulk billing incentive
+# over the service fee
+# set to 12.5%
+universal_bulk_billing_incentive <- 0.125
+```
+
+### Calculating the benefit
+
+We can now calculate the average benefit per patient if the practice adopts universal bulk-billing.
+
+**Note that 'Run Code' below will not work unless the previous code blocks have already been 'Run'!!**
+
+```{webr-r}
+### Benefit per 'average' patient charged service item B, C, D or E
+
+net_benefit <-
+  # first calculate the universal bulk-bill incentive
+  # for patients formerly privately-billed
+  privately_billed *
+  sum(service_fees * service_proportion_private) *
+  universal_bulk_billing_incentive +
+  # for patients bulk-billed
+  (1 - privately_billed) * 
+  sum(service_fees * service_proportion_bulk) *
+  universal_bulk_billing_incentive +
+  
+  # calculate the individual service bulk-billing incentive applied
+  # to patients formerly privately-billed
+  privately_billed * individual_bulk_billing_incentive[monash_area] -
+
+  # now calculate the loss
+  privately_billed *
+  sum(gap_fee * service_proportion_private)
+
+# Show the value of net_benefit
+formatC(net_benefit, digits = 2, format = "f")
+```
+
+### Supplement - reproducing the universal bulk-billing fact sheet table
+
+We can now reproduce part of the table shown in the [government-provided fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) representing the total payments received (both individual bulk-billing incentive and universal bulk-billing incentive) for each service for those practices which agree to universally bulk-bill.
+
+**Note that 'Run Code' below will not work unless the previous code blocks have already been 'Run'!!**
+
+```{webr-r}
+install.packages("tibble", quiet = TRUE)
+library(tibble)
+
+# just include service items B, C and D
+short_service_list <- service_fees[1:3]
+
+new_payments <- 
+  tibble(
+    Current = num(
+      short_service_list,
+      digits = 2
+    ),
+    Metro = num(
+      short_service_list*(1+universal_bulk_billing_incentive)+
+        individual_bulk_billing_incentive[1],
+      digits = 2
+    ),
+    Regional = num(
+      short_service_list*(1+universal_bulk_billing_incentive)+
+        individual_bulk_billing_incentive[2],
+      digits = 2
+    ),
+    `Large Rural` = num(
+      short_service_list*(1+universal_bulk_billing_incentive)+
+        individual_bulk_billing_incentive[3],
+      digits = 2
+    ),
+    `Small Rural` = num(
+      short_service_list*(1+universal_bulk_billing_incentive)+
+        individual_bulk_billing_incentive[4],
+      digits = 2
+    ),
+    Remote = num(
+      short_service_list*(1+universal_bulk_billing_incentive)+
+        individual_bulk_billing_incentive[5],
+      digits = 2
+    ),
+  )
+
+new_payments
+```
+
+The above code block outputs:
+
+![](images/new_payments.png)
+
+matching the table in the [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf).

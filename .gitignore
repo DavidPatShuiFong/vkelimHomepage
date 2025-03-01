@@ -11,3 +11,5 @@ Resources
 .~*
 *.csv#
 Thumbs.db
+
+/.quarto/
