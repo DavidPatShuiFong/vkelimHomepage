@@ -147,6 +147,8 @@ A limitation of this model is that explicit details are not known regarding whic
 
 Released documents show that standard fee-for-service items, particularly items 'A', 'B', 'C' and 'D', will attract both bulk-billing incentives (individual service and universal bulk-billing incentive) and are required to be bulk-billed under the universal bulk-billing agreement. These are the most common service items to be charged in Australian general practice, and contribute the vast majority of practice revenue. There are other service item numbers, such as care-plan related service items ('GPMP/721', 'TCA/723' and 'GPMP RV/732'), which contribute significantly to the practice income of many practices. Care-plan item numbers will be added to an `[example model described later]({{< ref "#including-care-plan-item-numbers" >}})`{=markdown}.
 
+<!--# Note normal Quarto cross-references to sections don't seem to work. Hugo shortcodes require 'escaping' as described in https://quarto.org/docs/output-formats/hugo.html#shortcodes -->
+
 ### Gap fees and bulk-billing incentive
 
 Different practices and different clinicians charge different gap fees. The same clinician or practice may charge different gap fees for different services.
@@ -581,7 +583,11 @@ We can reproduce part of the table shown in the [government-provided fact sheet]
 **Note that 'Run Code' below will not work unless the previous code blocks have already been 'Run'!!**
 
 ```{webr-r}
+#| results: 'asis'
+
+install.packages("knitr", quiet = TRUE)
 library(tibble)
+library(knitr)
 
 # just include service items B, C and D
 short_service_list <- service_fees[c("b", "c", "d"),]
@@ -619,7 +625,7 @@ new_payments <-
     ),
   )
 
-new_payments
+kable(new_payments, format = "html")
 ```
 
 The above code block output is shown below, matching the table in the [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf).
