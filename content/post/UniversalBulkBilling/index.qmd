@@ -16,6 +16,8 @@ filters:
   - webr
 ---
 
+*This document has now been updated,  please refer to [Calculating the practice benefit of universal bulk-billing - an updated model](../universalbulkbilling-update). Updated model includes MBS Service Level A and, optionally, care plans (721/723/732)*
+
 ## Universal bulk-billing incentive
 
 As part of an election promise, the Australian Government as of February 2025 released a [proposal](https://www.health.gov.au/ministers/the-hon-mark-butler-mp/media/strengthening-medicare-more-bulk-billing-more-doctors-more-nurses) to increase the incentives for private general practices (sometimes known as 'family medicine' or 'primary care' practices) to *bulk-bill* patients. 'Bulk-billing' essentially allows a patient consultation with medical clinician to be 'free' (no out-of-pocket expense), if-and-only-if the clinician agrees to charge the patient no more than the government-set insurance price for the consultation.
@@ -395,7 +397,9 @@ The above code block will produce a graph as below.
 
 ![](images/profit_private_proportion.png)
 
-### Supplement - reproducing the universal bulk-billing fact sheet table
+### Reproducing the universal bulk-billing fact sheet table
+
+(Supplement)
 
 We can reproduce part of the table shown in the [government-provided fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) representing the total payments received (both individual bulk-billing incentive and universal bulk-billing incentive) for each service for those practices which agree to universally bulk-bill. The original table is shown below:
 

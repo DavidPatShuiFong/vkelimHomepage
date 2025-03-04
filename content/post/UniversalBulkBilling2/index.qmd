@@ -1,6 +1,9 @@
 ---
 title: Calculating the practice benefit of universal bulk-billing - an updated model
 date: "2025-03-03"
+number-sections: true
+toc: true
+slug: "UniversalBulkBilling-update"
 format: hugo-md
 tags: 
 - medicine
@@ -16,6 +19,8 @@ filters:
   - webr
 ---
 
+*Updated from [Calculating the practice benefit of universal bulk-billing](../UniversalBulkBilling). Updated model includes MBS Service Level A and, optionally, care plans (721/723/732)*
+
 ## Universal bulk-billing incentive
 
 As part of an election promise, the Australian Government as of February 2025 released a [proposal](https://www.health.gov.au/ministers/the-hon-mark-butler-mp/media/strengthening-medicare-more-bulk-billing-more-doctors-more-nurses) to increase the incentives for private general practices (sometimes known as 'family medicine' or 'primary care' practices) to *bulk-bill* patients. 'Bulk-billing' essentially allows a patient consultation with medical clinician to be 'free' (no out-of-pocket expense), if-and-only-if the clinician agrees to charge the patient no more than the government-set insurance price for the consultation.
@@ -28,22 +33,42 @@ The proposal to encourage general practices to 'bulk-bill' consisted of two part
     -   Previously the bulk-billing incentive payment for individual consultations was only available to people, usually with less income or assets, who are [pensioners, recipients of a government-issued 'concession card' and children under the age of 16](https://www.ama.com.au/tas/bulk-billing-incentive-facts).
     -   This bulk-billing incentive is paid with each individual consult
 -   If the general practice agrees to bulk-bill all patients, i.e. universal bulk-billing, the government will pay the practice an additional 12.5% over and above the government-set price for each fee-for-service item.
-    -   The definition of which service items need to be 'bulk-billed', and which service items will attract the 15% bonus is not yet fully defined. The government-provided [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) suggests that at least consultation items B/C/D and mental health care plans items will attract the 12.5% bonus.
+    -   The definition of which service items need to be 'bulk-billed', and which service items will attract the 15% bonus is not yet fully defined. The government-provided [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) and [RACGP FAQ](https://www.racgp.org.au/advocacy/advocacy-resources/medicare-announcement-member-faqs) suggests that consultation items A/B/C/D, mental health care plan and other GP non-referred attendances will attract the 12.5% bonus.
     - The 12.5% bonus is paid quarterly, together with the current quarterly practice incentive program (PIP) payments.
 
 ## Will the proposed universal bulk-billing incentives be financially worthwhile for general practices?
 
 The government has released [case examples](https://www.health.gov.au/sites/default/files/2025-02/strengthening-medicare-with-more-bulk-billing.pdf) of practices which would all financially benefit from the universal bulk-billing incentives proposal. [Not all real general practices have considered the incentives proposed to be attractive](https://www.medicalrepublic.com.au/tell-dohac-theyre-dreaming-re-bulk-billing-calculations-estimates/114770), however. The [benefit to real practices may be more nuanced](https://www.medicalrepublic.com.au/how-the-new-bulk-billing-offer-is-okay-bad-and-ugly/114856), depending on current private billing levels and current fees charged over the government-set price.
 
+This model demonstrates the effect of pre-existing gap-fees, the proportion of patients which would normally be privately-billed and the inclusion of different non-referred general practice service items into the estimated profitability of adopting the proposed bulk-bill incentive program.
+
+Two examples are presented, followed by detailed description of the model and model variations.
+
+### Practice 1, limited item number inclusion
+
+The first example practice privately-bills 50% of its patients. The profit-loss calculation is based on just a few item numbers ('A', 'B', 'C', 'D' and 'E'). The graph below demonstrates the effect on net-profitability of adopting the bulk-billing incentives, depending on the private 'gap-fee' charged by the practice prior to adopting the bulk-billing incentives. The light-blue vertical dotted line represents the net-profitability (-8.23 per service) if the practice charged an average gap-fee of $50.
+
+![](images/profit_gap.png)
+
+### Practice 2, low gap-fee, care-plan item numbers included
+
+The first example practice charges a low private gap-fee of $35. The profit-loss calculation is based on both standard numbers ('A', 'B', 'C', 'D' and 'E') and care-plan item numbers. This practice did not charge a gap-fee for care-plan item numbers, even for 'private' patients. The graph below demonstrates the effect on net-profitability of the adopting the bulk-billing incentives, depending on the pre-existing proportion of patients who were charged privately before adopting the bulk-billing incentives.
+
+The light-blue vertical dotted line represents the net-profitability (6.55 per service) if only 20% of the practice population was privately-billed.
+
+![](images/profit_private_proportion.png)
+
+Following sections will describe how the models were created.
+
 ## Modelling the benefits to individual practices
 
-A model will be demonstrated which aims to show the potential financial benefit (or loss) of taking up the universal bulk-billing proposal.
+This model demonstrates the potential financial benefit (or loss) of taking up the universal bulk-billing proposal.
 
 The proposition to test is:
 
 $$
 \small
-\text{Benefit} > \text{Loss}
+\text{Benefit} \ge \text{Loss}
 $$
 Where *Benefit* is the benefit from universal bulk-billing and *Loss* is the revenue foregone from not charging a fee over and above the government-set price for the services.
 
@@ -81,7 +106,7 @@ If the practice agrees to universal bulk-billing, then all services which were p
 
 *All the 'code' below is fully modifiable, and can be changed to reflect individual practice circumstances! If you wish to 'run' the code, it is recommended that you 'run' the code blocks sequentially, from top to bottom. After you have 'run' a code block, you can modify the code and 'run' it again without running the previous code blocks.*
 
-*If you 'Run Code' the code block below, a list of numbers in red will appear below the code block, showing the proportion of patients billed Medicare service items B, C, D and E.*
+*If you 'Run Code' the code block below, a list of numbers in red will appear below the code block, showing the proportion of patients billed Medicare service items A, B, C, D and E.*
 
 ```{webr-r}
 # Service fees for the most common fee-for-service consultation items
@@ -118,9 +143,9 @@ service_proportion_private <- service_proportion_bulk
 service_proportion_bulk
 ```
 
-A limitation of this model is that full details are not known regarding which service items are required to be bulk-billed under the proposal, and which services items will attract the universal bulk-billing incentive.
+A limitation of this model is that explicit details are not known regarding which service items are required to be bulk-billed under the proposal, and which services items will attract the universal bulk-billing incentive.
 
-Released documents show that some standard fee-for-service items, particularly items 'B', 'C' and 'D', will attract both bulk-billing incentives (individual service and universal bulk-billing incentive) and are likely to be required to be bulk-billed under the universal bulk-billing agreement. These are the most common service items to be charged in Australian general practice, and contribute the vast majority of practice revenue. Item 'A', for consultations lasting less than five minutes, is also a common and standard fee-for-service item, but does not currently attract the individual high value 'triple' bulk-billing incentive for pensioners and healthcare-card holders etc., and is perhaps unlikely to attract that incentive in the future.
+Released documents show that standard fee-for-service items, particularly items 'A', 'B', 'C' and 'D', will attract both bulk-billing incentives (individual service and universal bulk-billing incentive) and are required to be bulk-billed under the universal bulk-billing agreement. These are the most common service items to be charged in Australian general practice, and contribute the vast majority of practice revenue. There are other service item numbers, such as care-plan related service items ('GPMP/721', 'TCA/723' and 'GPMP RV/732'), which contribute significantly to the practice income of many practices. Care-plan item numbers will be added to an `[example model described later]({{< ref "#including-care-plan-item-numbers" >}})`{=markdown}.
 
 ### Gap fees and bulk-billing incentive
 
@@ -193,12 +218,14 @@ fee_bulkbill_incentive
 
 We can now calculate the average benefit per patient if the practice adopts universal bulk-billing.
 
+If you 'Run Code' the block below With the default settings of 50% of patients privately-billed and a gap fee of 50, the profit-per-patient is shown as `-8.23`, i.e. a loss of 8.23. 
+
 **Note that 'Run Code' below will not work unless the previous code blocks have already been 'Run'!!**
 
 ```{webr-r}
 # note, depends on the previous code blocks already having been 'run'! 
 
-# Benefit per 'average' patient charged service item B, C, D or E
+# Benefit per 'average' patient charged service item A, B, C, D or E
 
 net_benefit <- function(
   # calculate the average net benefit revenue
@@ -259,7 +286,9 @@ profit_loss <- net_benefit(
 formatC(profit_loss, digits = 2, format = "f")
 ```
 
-With the default settings of 50% of patients privately-billed and a gap fee of 50, the average loss-per-patient is 7.81. However, what happens if we change some of the parameters?
+#### Modifying the model for a different practice
+
+What happens if we change some of the parameters? In this example, only 20% of services were privately-billed, the gap-fee for each privately-billed service item is $35 and the service items charged is biased towards the longer consult items.
 
 ```{webr-r}
 # note, depends on the previous code blocks already having been 'run'! 
@@ -270,6 +299,7 @@ With the default settings of 50% of patients privately-billed and a gap fee of 5
 new_practice_service_raw <- 
   # new A, B, C, D, E numbers
   # with much longer average consults
+  #  the consult time is progressively longer from A->B->C->D->E
   c(950, 3956, 4171, 1146, 75)
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
@@ -294,36 +324,47 @@ profit_loss <- net_benefit(
 formatC(profit_loss, digits = 2, format = "f")
 ```
 
-If the gap fee is set to 35, the average consult length is longer and only 20% of patients are privately-billed, the practice can expect an average gain of +6.50 for each patient seen.
+If the gap fee is set to 35, the average consult length is longer and only 20% of patients are privately-billed, the practice can expect an average profit of `5.37` per service.
+
+#### Including care plan item numbers {#including-care-plan-item-numbers}
+
+The [RACGP FAQ](https://www.racgp.org.au/advocacy/advocacy-resources/medicare-announcement-member-faqs) suggests that non-referred general practice service items such as care-plans and health assessments will also qualify for the new bulk-bill incentive payments. We can add these service items to our model. We will base this model on the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown}.
+
+*Model limitation - It is expected that the service item numbers and descriptors for general practice care-plans (721, 723 and 732) will change late in 2025. This model assumes that the fee-for-service revenue for the practice through care-plans will remain similar after the change in care-plan services items occurs.*
+
+Compared to the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown} described above, adding care plan item numbers increases the average profit from `5.37` to `6.55` per service.
 
 ```{webr-r}
 # note, depends on the previous code blocks already having been 'run'! 
 
-# Set the privately-billed proportion to 0.2 (20%), the gap fee to $35
-# and new service proportions
-
+# this model is based on the second practice model described above
+# add new service fee descriptions
 new_fee_names <- c(
   fee_names,
   # append items 721, 723 and 732
   c("GPMP", "TCA", "CDM RV")
 )
-new_service_fees <- c(
-  service_fees,
+new_service_fees <- array(
   # append fees for 721, 723 and 732
-  c(164.35, 130.25, 82.10)
+  data = c(service_fees, 164.35, 130.25, 82.10),
+  dim = c(length(new_fee_names), 1),
+  dimnames = list(new_fee_names, "fee")
 )
 new_gap_fee <- c(
   rep(35, 5),
-  # no gap fees were charged for these items, even 'private' patients
+  # no gap fees were charged for thes GPMP/TCA/GPMPRV items,
+  # even 'private' patients
   rep(0, 3)
 )
 new_individual_bulkbill_incentive_by_fee <- c(
   individual_bulkbill_incentive_by_fee,
   rep("single", 3)
 )
+# Set the privately-billed proportion to 0.2 (20%), the gap fee to $35
+# and new service proportions
 new_practice_service_raw <- 
   # new A, B, C, D, E numbers
-  # with much longer average consults
+  # (long average consults)
   # and GPMP/TCA/reviews
   c(950, 3956, 4171, 1146, 75, 416, 402, 255)
 new_practice_service_proportions <- 
@@ -403,7 +444,7 @@ ggplot(
     x = "Gap fee ($)",
     y = "Profit-loss ($)"
   ) +
-  ggtitle("Net benefit to practice, per patient") +
+  ggtitle("Net benefit to practice, per service") +
   geom_vline(
     # our current gap-fee
     xintercept = gap_fee,
@@ -437,11 +478,37 @@ library(ggthemes)
 # privately billed range from 0 to 100%
 privately_billed_range <- seq(from = 0, to = 100, by = 1)
 
-# set different service proportions
+# this model is based on the second practice model described above
+# together with care plan item numbers
+# add new service fee descriptions
+new_fee_names <- c(
+  fee_names,
+  # append items 721, 723 and 732
+  c("GPMP", "TCA", "CDM RV")
+)
+new_service_fees <- array(
+  # append fees for 721, 723 and 732
+  data = c(service_fees, 164.35, 130.25, 82.10),
+  dim = c(length(new_fee_names), 1),
+  dimnames = list(new_fee_names, "fee")
+)
+new_gap_fee <- c(
+  rep(35, 5),
+  # no gap fees were charged for thes GPMP/TCA/GPMPRV items,
+  # even 'private' patients
+  rep(0, 3)
+)
+new_individual_bulkbill_incentive_by_fee <- c(
+  individual_bulkbill_incentive_by_fee,
+  rep("single", 3)
+)
+# Set the privately-billed proportion to 0.2 (20%), the gap fee to $35
+# and new service proportions
 new_practice_service_raw <- 
   # new A, B, C, D, E numbers
-  # with much longer average consults
-  c(950, 3956, 4171, 1146, 75)
+  # (long average consults)
+  # and GPMP/TCA/reviews
+  c(950, 3956, 4171, 1146, 75, 416, 402, 255)
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
@@ -449,19 +516,19 @@ profit_loss <- sapply(
   X = privately_billed_range,
   function(x) {
     net_benefit(
-      service_fees,
-      fee_names,
+      service_fees = new_service_fees,
+      fee_names = new_fee_names,
       # set service proportions to longer consults
       service_proportion_bulk = new_practice_service_proportions,
       service_proportion_private = new_practice_service_proportions,
       # set the gap fee to $35
-      gap_fee = rep(35, length(fee_names)),
+      gap_fee = new_gap_fee,
       # set privately billed proportion to 'x'
       # divide by 100 to convert from
       # percentage to proportion
       privately_billed = x/100,
       individual_bulkbill_incentive,
-      individual_bulkbill_incentive_by_fee,
+      individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
       monash_area,
       universal_bulkbill_incentive
     )
@@ -482,7 +549,7 @@ ggplot(
     x = "Privately-billed proportion (%)",
     y = "Profit-loss ($)"
   ) +
-  ggtitle("Net benefit to practice, per patient") +
+  ggtitle("Net benefit to practice, per service") +
   geom_vline(
     # our current proportion
     xintercept = 20,
@@ -503,7 +570,9 @@ The above code block will produce a graph as below.
 
 ![](images/profit_private_proportion.png)
 
-### Supplement - reproducing the universal bulk-billing fact sheet table
+### Reproducing the universal bulk-billing fact sheet table
+
+(Supplement)
 
 We can reproduce part of the table shown in the [government-provided fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) representing the total payments received (both individual bulk-billing incentive and universal bulk-billing incentive) for each service for those practices which agree to universally bulk-bill. The original table is shown below:
 
@@ -515,7 +584,7 @@ We can reproduce part of the table shown in the [government-provided fact sheet]
 library(tibble)
 
 # just include service items B, C and D
-short_service_list <- service_fees[1:3]
+short_service_list <- service_fees[c("b", "c", "d"),]
 
 new_payments <- 
   tibble(
@@ -525,27 +594,27 @@ new_payments <-
     ),
     Metro = num(
       short_service_list*(1+universal_bulkbill_incentive)+
-        individual_bulkbill_incentive[1],
+        individual_bulkbill_incentive[1, 2],
       digits = 2
     ),
     Regional = num(
       short_service_list*(1+universal_bulkbill_incentive)+
-        individual_bulkbill_incentive[2],
+        individual_bulkbill_incentive[2, 2],
       digits = 2
     ),
     `Large Rural` = num(
       short_service_list*(1+universal_bulkbill_incentive)+
-        individual_bulkbill_incentive[3],
+        individual_bulkbill_incentive[3, 2],
       digits = 2
     ),
     `Small Rural` = num(
       short_service_list*(1+universal_bulkbill_incentive)+
-        individual_bulkbill_incentive[4],
+        individual_bulkbill_incentive[4, 2],
       digits = 2
     ),
     Remote = num(
       short_service_list*(1+universal_bulkbill_incentive)+
-        individual_bulkbill_incentive[5],
+        individual_bulkbill_incentive[5, 2],
       digits = 2
     ),
   )
