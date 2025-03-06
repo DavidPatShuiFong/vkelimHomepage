@@ -19,6 +19,10 @@ filters:
   - webr
 ---
 
+<!-- All source Code on this page is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this
+   - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
+
 *Updated from [Calculating the practice benefit of universal bulk-billing](../UniversalBulkBilling). Updated model includes MBS Service Level A and, optionally, care plans (721/723/732)*
 
 ## Universal bulk-billing incentive
@@ -58,11 +62,17 @@ The light-blue vertical dotted line represents the net-profitability (6.55 per s
 
 ![](images/profit_private_proportion.png)
 
-### Net benefit to practice 'heatmap'
+### Net benefit to practice 'heatmap' table
 
 An estimate of net benefit per service for a range of practices, assuming 'average' distribution of ABCDE/care plan items, depending on a range of gap fees and proportion of patients who were privately-billed.
 
 ![](images/netbenefit_heatmap.png)
+
+The 'heatmap' table above helps demonstrate some of the definitions and assumptions in the presented model.
+
+* All patients currently being 'bulk-billed' also qualify for the bulk-bill incentive rebate e.g. are healthcare card holders, pensioners or children and qualify for Medicare incentive items such as 10990 and 75870. In the 'privately-billed 0%' row in the table above is demonstrated the effect of the universal-bulk-billing incentive scheme on a practice whose practice population all have health care cards etc., and the practice bulk-bills them all. In this case, no additional patients will qualify for the individual service item bulk-bill incentives, but the practice qualifies for the 12.5% bulk-billing incentive paid quarterly.
+* All patients who do *not* qualify the current bulk-bill incentive rebates are 'privately' billed, even if the 'gap fee' is zero dollars (i.e. no gap fee charged above the government rebate for the service item). In the  heatmap table above, this is shown most starkly by the item in the top-left corner, where the practice 'privately' bills 100% of patients, with a gap fee of zero dollars. In this case, the practice can agree to receive the 12.5% bulk-billing incentive paid quarterly AND all patients will now potentially qualify for the individual service item bulk-bill incentive.
+* In practical terms, 'gap fee' in the heatmap table shown above is not the necessarily the 'nominal' gap fee for service items, but the average gap fee charged when current individual service bulk-billing incentives do not apply. Which may be lower than the nominal gap fee, if lower gap fees are charged for certain services e.g. review appointments, care plans etc..
 
 Following sections will describe how the models were created.
 
@@ -117,6 +127,10 @@ If the practice agrees to universal bulk-billing, then all services which were p
 ```{webr-r}
 # Service fees for the most common fee-for-service consultation items
 # which attract a bulk-billing incentive
+
+# All source code on this page is subject to the terms of the
+# Mozilla Public License, v. 2.0. A copy of the MPL can be obtained 
+# from https://mozilla.org/MPL/2.0/.
 
 # government-set price for service items A, B, C, D and E
 # Medicare items 3, 23, 36, 44, and 123
