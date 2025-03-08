@@ -38,7 +38,7 @@ The proposal to encourage general practices to 'bulk-bill' consisted of two part
     -   This bulk-billing incentive is paid with each individual consult
 -   If the general practice agrees to bulk-bill all patients, i.e. universal bulk-billing, the government will pay the practice an additional 12.5% over and above the government-set price for each fee-for-service item.
     -   The definition of which service items need to be 'bulk-billed', and which service items will attract the 15% bonus is not yet fully defined. The government-provided [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) and [RACGP FAQ](https://www.racgp.org.au/advocacy/advocacy-resources/medicare-announcement-member-faqs) suggests that consultation items A/B/C/D, mental health care plan and other GP non-referred attendances will attract the 12.5% bonus.
-    - The 12.5% bonus is paid quarterly, together with the current quarterly practice incentive program (PIP) payments.
+    -   The 12.5% bonus is paid quarterly, together with the current quarterly practice incentive program (PIP) payments.
 
 ## Will the proposed universal bulk-billing incentives be financially worthwhile for general practices?
 
@@ -62,17 +62,17 @@ The light-blue vertical dotted line represents the net-profitability (6.55 per s
 
 ![](images/profit_private_proportion.png)
 
-### Net benefit to practice 'heatmap' table
+### Net benefit to practice heatmap table
 
-An estimate of net benefit per service for a range of practices, assuming 'average' distribution of ABCDE/care plan items, depending on a range of gap fees and proportion of patients who were privately-billed.
+An estimate of net benefit per service for a range of practices, assuming 'average' distribution of ABCDE, care plan, health assessment and mental health care plan items, depending on a range of gap fees and proportion of patients who were privately-billed.
 
 ![](images/netbenefit_heatmap.png)
 
-The 'heatmap' table above helps demonstrate some of the definitions and assumptions in the presented model.
+The heatmap table above helps demonstrate some of the definitions and assumptions in the presented model.
 
-* All patients currently being 'bulk-billed' also qualify for the bulk-bill incentive rebate e.g. are healthcare card holders, pensioners or children and qualify for Medicare incentive items such as 10990 and 75870. In the 'privately-billed 0%' row in the table above is demonstrated the effect of the universal-bulk-billing incentive scheme on a practice whose practice population all have health care cards etc., and the practice bulk-bills them all. In this case, no additional patients will qualify for the individual service item bulk-bill incentives, but the practice qualifies for the 12.5% bulk-billing incentive paid quarterly.
-* All patients who do *not* qualify the current bulk-bill incentive rebates are 'privately' billed, even if the 'gap fee' is zero dollars (i.e. no gap fee charged above the government rebate for the service item). In the  heatmap table above, this is shown most starkly by the item in the top-left corner, where the practice 'privately' bills 100% of patients, with a gap fee of zero dollars. In this case, the practice can agree to receive the 12.5% bulk-billing incentive paid quarterly AND all patients will now potentially qualify for the individual service item bulk-bill incentive.
-* In practical terms, 'gap fee' in the heatmap table shown above is not the necessarily the 'nominal' gap fee for service items, but the average gap fee charged when current individual service bulk-billing incentives do not apply. Which may be lower than the nominal gap fee, if lower gap fees are charged for certain services e.g. review appointments, care plans etc..
+-   All patients currently being 'bulk-billed' also qualify for the bulk-bill incentive rebate e.g. are healthcare card holders, pensioners or children and qualify for Medicare incentive items such as 10990 and 75870. In the 'privately-billed 0%' row in the table above is demonstrated the effect of the universal-bulk-billing incentive scheme on a practice whose practice population all have health care cards etc., and the practice bulk-bills them all. In this case, no additional patients will qualify for the individual service item bulk-bill incentives, but the practice qualifies for the 12.5% bulk-billing incentive paid quarterly.
+-   All patients who do *not* qualify the current bulk-bill incentive rebates are 'privately' billed, even if the 'gap fee' is zero dollars (i.e. no gap fee charged above the government rebate for the service item). In the heatmap table above, this is shown most starkly by the item in the top-left corner, where the practice 'privately' bills 100% of patients, with a gap fee of zero dollars. In this case, the practice can agree to receive the 12.5% bulk-billing incentive paid quarterly AND all patients will now potentially qualify for the individual service item bulk-bill incentive.
+-   In practical terms, 'gap fee' in the heatmap table shown above is not the necessarily the 'nominal' gap fee for service items, but the average gap fee charged when current individual service bulk-billing incentives do not apply. Which may be lower than the nominal gap fee, if lower gap fees are charged for certain services e.g. review appointments, care plans etc..
 
 Following sections will describe how the models were created.
 
@@ -240,7 +240,7 @@ fee_bulkbill_incentive
 
 We can now calculate the average benefit per patient if the practice adopts universal bulk-billing.
 
-If you 'Run Code' the block below With the default settings of 50% of patients privately-billed and a gap fee of 50, the profit-per-patient is shown as `-8.23`, i.e. a loss of 8.23. 
+If you 'Run Code' the block below With the default settings of 50% of patients privately-billed and a gap fee of 50, the profit-per-patient is shown as `-8.23`, i.e. a loss of 8.23.
 
 **Note that 'Run Code' below will not work unless the previous code blocks have already been 'Run'!!**
 
@@ -596,7 +596,7 @@ The above code block will produce a graph as below.
 
 We can draw a heatmap of profit vs gap-fee and proportion privately-billed.
 
-The data in these plots are based on ABCDE/care plan item proportions as found on Medicare statistics for 2024 i.e. the 'mythical average' general practice. As usual, you can modify the proportion yourself in the code below.
+The data in these plots are based on ABCDE/care plan/health assessment and mental health care plan item proportions as found on Medicare statistics for 2024 i.e. the 'mythical average' general practice. As usual, you can modify the proportion yourself in the code below.
 
 The code-block below also has code to generate 3D and interactive plots. Unfortunately, these 3D and interactive plots cannot be created 'on-the-fly' from the code-block on your web-browser, but can only be fully modified by copying into R/RStudio.
 
@@ -622,26 +622,36 @@ privately_billed_range <- seq(from = 0, to = 100, by = 1)
 # add new service fee descriptions
 new_fee_names <- c(
   fee_names,
-  # append items 721, 723 and 732
-  c("GPMP", "TCA", "CDM RV")
+  # append chronic disease item numbers (721, 723, 732)
+  # health assessment item numbers (701 -- 715)
+  # and mental health care plan item numbers (2700 -- 271)
+  c("GPMP", "TCA", "CDM RV",
+    "HA701", "HA703", "HA705", "HA707", "HA715",
+    "MHCP2700", "MHCP2701", "MHCP2715", "MHCP2717", "MHCP RV")
 )
 new_service_fees <- array(
   # append fees for 721, 723 and 732
-  data = c(service_fees, 164.35, 130.25, 82.10),
+  data = c(service_fees,
+           164.35, 130.25, 82.10,
+           67.60, 157.10, 216.80, 306.25, 241.85,
+           81.70, 120.25, 103.70, 152.80, 81.70
+           ),
   dim = c(length(new_fee_names), 1),
   dimnames = list(new_fee_names, "fee")
 )
 new_individual_bulkbill_incentive_by_fee <- c(
   individual_bulkbill_incentive_by_fee,
-  rep("single", 3)
+  rep("single", 3+5+5)
 )
-
 # and new service proportions
 # from http://medicarestatistics.humanservices.gov.au/statistics/mbs_item.jsp (2024)
 new_practice_service_raw <- 
   # A, B, C, D, E service items
-  # and GPMP/TCA/reviews
-  c(4037130, 81240293, 19899953, 1609147, 174664, 3357364, 2954994, 4319542)
+  # and GPMP/TCA/reviews (CDM), health assessment and mental health plan items
+  c(4037130, 81240293, 19899953, 1609147, 174664,
+    3357364, 2954994, 4319542,
+    21383, 165878, 273690, 463237, 263931,
+    97733, 31550, 904320, 211540, 504901)
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
@@ -717,7 +727,7 @@ fig_ggplotly <- ggplot(
     aes(fill = profit),
     size = 4, shape = 22, stroke = 0
   ) +
-  scale_fill_viridis_c(option = "turbo")
+  scale_fill_viridis_c(option = "turbo", direction = -1)
 # to look at this plot, either 'fig_ggplotly' in R/RStudio or
 # 'ggplotly(fig_ggplotly)'
 
@@ -743,12 +753,12 @@ fig_ggplot
 Below is an example 3D plot which is generated with the above code block. Note that the 3D plot below will *not* change if you manually change the values in the above code-block. To generate and modify this plot yourself, you will need to copy the code into RStudio/R and run the code yourself.
 
 ```{r}
-#| code-fold: true
 #| echo: true
-#| code-overflow: wrap
-#| results: 'asis'
-#| warning: false
 #| error: false
+#| warning: false
+#| code-fold: true
+#| code-overflow: wrap
+#| results: asis
 
 library(tibble)
 library(plotly)
@@ -887,26 +897,36 @@ privately_billed_range <- seq(from = 0, to = 100, by = 1)
 # add new service fee descriptions
 new_fee_names <- c(
   fee_names,
-  # append items 721, 723 and 732
-  c("GPMP", "TCA", "CDM RV")
+  # append chronic disease item numbers (721, 723, 732)
+  # health assessment item numbers (701 -- 715)
+  # and mental health care plan item numbers (2700 -- 271)
+  c("GPMP", "TCA", "CDM RV",
+    "HA701", "HA703", "HA705", "HA707", "HA715",
+    "MHCP2700", "MHCP2701", "MHCP2715", "MHCP2717", "MHCP RV")
 )
 new_service_fees <- array(
   # append fees for 721, 723 and 732
-  data = c(service_fees, 164.35, 130.25, 82.10),
+  data = c(service_fees,
+           164.35, 130.25, 82.10,
+           67.60, 157.10, 216.80, 306.25, 241.85,
+           81.70, 120.25, 103.70, 152.80, 81.70
+           ),
   dim = c(length(new_fee_names), 1),
   dimnames = list(new_fee_names, "fee")
 )
 new_individual_bulkbill_incentive_by_fee <- c(
   individual_bulkbill_incentive_by_fee,
-  rep("single", 3)
+  rep("single", 3+5+5)
 )
-
 # and new service proportions
 # from http://medicarestatistics.humanservices.gov.au/statistics/mbs_item.jsp (2024)
 new_practice_service_raw <- 
   # A, B, C, D, E service items
-  # and GPMP/TCA/reviews
-  c(4037130, 81240293, 19899953, 1609147, 174664, 3357364, 2954994, 4319542)
+  # and GPMP/TCA/reviews (CDM), health assessment and mental health plan items
+  c(4037130, 81240293, 19899953, 1609147, 174664,
+    3357364, 2954994, 4319542,
+    21383, 165878, 273690, 463237, 263931,
+    97733, 31550, 904320, 211540, 504901)
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
@@ -919,10 +939,9 @@ profit_loss <- tibble(
 for (x in gap_fee_range) {
   for (y in privately_billed_range) {
     new_gap_fee <- c(
-      rep(x, length((new_fee_names)))
-      # the same gap fee charged for every item, including GPMP/TCA/GPMPRV items
-      # a simplified approach would use the 'average' gap fee charged
-      # for all relevant items
+      rep(x, 5),
+      rep(x, length((new_fee_names))-5)
+      # gap fee charged for ABCDE, $0 for all others
     )
     profit <- net_benefit(
       service_fees = new_service_fees,
@@ -985,12 +1004,91 @@ fig_ggplotly <- ggplot(
     aes(fill = profit),
     size = 4, shape = 22, stroke = 0
   ) +
-  scale_fill_viridis_c(option = "turbo")
+  scale_fill_viridis_c(option = "turbo", direction = -1)
 # to look at this plot, either 'fig_ggplotly' in R/RStudio or
 # 'ggplotly(fig_ggplotly)'
 
 fig_plotly_3d # show the 3D Plotly
 ```
+
+  
+
+The following interactive plot is based on the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown}, with relatively long consults and low gap fees and did not charge gap-fees for care plans or health assessments for any patients. Again, the plot below cannot be changed 'in-browser', but you can recreate this plot if you copy the code into R/RStudio.
+
+```{r}
+#| echo: true
+#| error: false
+#| warning: false
+#| code-fold: true
+#| code-overflow: wrap
+#| results: asis
+
+new_practice_service_raw <- 
+  # A, B, C, D, E service items
+  # and GPMP/TCA/reviews (CDM), health assessment and mental health plan items
+  c(950, 3956, 4171, 1146, 75,
+    416, 402, 255,
+    0, 13, 101, 45, 1,
+    7, 5, 64, 31, 41)
+new_practice_service_proportions <- 
+  new_practice_service_raw/sum(new_practice_service_raw)
+
+profit_loss <- tibble(
+  gap = numeric(), 
+  private_billed = numeric(), 
+  profit = numeric()
+)
+
+for (x in gap_fee_range) {
+  for (y in privately_billed_range) {
+    new_gap_fee <- c(
+      rep(x, length((new_fee_names)))
+      # the same gap fee charged for every item, including GPMP/TCA/GPMPRV items
+      # a simplified approach would use the 'average' gap fee charged
+      # for all relevant items
+    )
+    profit <- net_benefit(
+      service_fees = new_service_fees,
+      fee_names = new_fee_names,
+      # set service proportions to longer consults
+      service_proportion_bulk = new_practice_service_proportions,
+      service_proportion_private = new_practice_service_proportions,
+      # set the gap fee to $35
+      gap_fee = new_gap_fee,
+      # set privately billed proportion to 'x'
+      # divide by 100 to convert from
+      # percentage to proportion
+      privately_billed = y/100,
+      individual_bulkbill_incentive,
+      individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
+      monash_area,
+      universal_bulkbill_incentive
+    )
+    profit_loss <- add_row(profit_loss, gap = x, private_billed = y, profit = profit)
+  }
+}
+
+# this plot cannot be shown in the web-browser using this code block!
+# you will need to copy this code (and all the pre-requisites)
+# into a 'R/RStudio' and run it yourself :)
+fig_ggplotly <- ggplot(
+  data = profit_loss,
+  aes(x = gap, y = private_billed))+
+  geom_point(
+    aes(fill = profit),
+    size = 4, shape = 22, stroke = 0
+  ) +
+  scale_fill_viridis_c(option = "turbo", direction = -1)
+# to look at this plot, either 'fig_ggplotly' in R/RStudio or
+# 'ggplotly(fig_ggplotly)'
+
+ggplotly(fig_ggplotly) |> # show the ggplotly
+  layout(margin = list(r = 150))
+```
+
+The interactive profit-loss heatmap above is reproduced in a more conventional table format below.
+
+![](images/netbenefit_dg_heatmap.png)
 
 ### Reproducing the universal bulk-billing fact sheet table
 
@@ -1055,3 +1153,7 @@ The above code block output is shown below, matching the table in the [fact shee
 ### Technical credits
 
 Thanks to the [quarto-webr extension](https://quarto-webr.thecoatlessprofessor.com/), [Claudiu-Cristian's post on using webR in hugo websites](https://claudiu.psychlab.eu/post/hugo-blogdown-interactive-code-chunk-webr-quarto/) and [WebR](https://docs.r-wasm.org/webr/latest/) itself for the ability to run modifiable R models on 'static' web-pages!
+
+### External commentary and other models
+
+An article on the Medical Republic ['Which of these four Medicare BB models is Right for You?'](https://www.medicalrepublic.com.au/which-of-these-four-medicare-bb-models-is-right-for-you/114995) compares some of the available (and not yet available) models - including this one! - and the advantages and disadvantages of each.
