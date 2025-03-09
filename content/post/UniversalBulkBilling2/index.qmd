@@ -832,7 +832,7 @@ fig_ggplot <- ggplot(
   ggtitle("Net benefit to practice, per service") +
   scale_fill_gradientn(colors = rainbow(5), limits = c(-45, 45))
 
-fig_ggplot
+fig_ggplot + theme_tufte()
 ```
 
 Below is an example 3D plot which is generated with the above code block. Note that the 3D plot below will *not* change if you manually change the values in the above code-block. To generate and modify this plot yourself, you will need to copy the code into RStudio/R and run the code yourself.
@@ -1055,6 +1055,7 @@ new_practice_service_proportions <-
 profit_loss <- tibble(
   gap = numeric(), 
   private_billed = numeric(), 
+  current_fee_mean = numeric(),
   profit = numeric(),
   profit_rel = numeric(),
 )
@@ -1099,7 +1100,10 @@ for (x in gap_fee_range) {
     )
     profit_loss <- add_row(
       profit_loss,
-      gap = x, private_billed = y, profit = profit, profit_rel = profit/current_fee_mean
+      gap = x, private_billed = y,
+      current_fee_mean = current_fee_mean,
+      profit = profit,
+      profit_rel = profit/current_fee_mean
     )
   }
 }
@@ -1109,13 +1113,15 @@ for (x in gap_fee_range) {
 # into a 'R/RStudio' and run it yourself :)
 fig_plotly_3d <- plot_ly(
   data = profit_loss,
-  x = ~gap, y = ~private_billed, z = ~profit, text = ~profit_rel * 100,
+  x = ~gap, y = ~private_billed, z = ~profit,
+  text = ~profit_rel * 100, customdata = ~current_fee_mean,
   type = "scatter3d", mode = "markers",
   hovertemplate = paste(
     "Gap fee: <b>%{x}</b><br>",
-    "Private: <b>%{y}</b><br>",
+    "Private-billed: <b>%{y}</b>%<br>",
+    "Current mean fee: <b>%{customdata:$.2f}</b><br>",
     "Profit: <b>%{z:$.2f}</b><br>",
-    "Profit (%): <b>%{text:.0f}</b>%",
+    "Revenue change (%): <b>%{text:.0f}</b>%",
     "<extra></extra>"
   ),
   marker = list(
@@ -1177,7 +1183,8 @@ new_practice_service_proportions <-
 
 profit_loss <- tibble(
   gap = numeric(), 
-  private_billed = numeric(), 
+  private_billed = numeric(),
+  current_fee_mean = numeric(),
   profit = numeric(),
   profit_rel = character()
 )
@@ -1223,7 +1230,8 @@ for (x in gap_fee_range) {
     )
     profit_loss <- add_row(
       profit_loss,
-      gap = x, private_billed = y, 
+      gap = x, private_billed = y,
+      current_fee_mean = current_fee_mean,
       profit = profit, 
       profit_rel = formatC((profit / current_fee_mean * 100), digits = 0, format = "f")
     )
@@ -1238,8 +1246,11 @@ fig_ggplotly <- ggplot(
   aes(
     x = gap, y = private_billed, 
     text = sprintf(
-      "Gap: $%d<br>Private-billed: %d%%<br>Profit: $%.2f<br>Profit (%%): %s%%",
-      gap, private_billed,profit, profit_rel
+      paste(
+        "Gap: $%d<br>Private-billed: %d%%<br>Current fee mean: $%.2f<br>",
+        "Profit: $%.2f<br>Revenue change (%%): %s%%", sep = ""
+      ),
+      gap, private_billed, current_fee_mean, profit, profit_rel
     )
   )) +
   geom_point(
@@ -1262,6 +1273,110 @@ ggplotly(fig_ggplotly, tooltip = "text") |> # show the ggplotly
 The interactive profit-loss heatmap above is reproduced in a more conventional table format below.
 
 ![](images/netbenefit_dg_heatmap.png)
+
+#### Calculating relative (percentage) change in revenue
+
+Some of the interactive plots above include the estimated proportional change in revenue (mean fee) as the result of adopting universal bulk-billing. This is calculated from
+
+$$
+\small
+\frac{\text{Profit or loss}}{\text{Current mean fee}}
+$$
+
+The following table is based on the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown}.
+
+```{webr-r}
+#| results: 'asis'
+#| warning: 'false'
+#| message: 'false'
+#| editor-max-height: 300
+# show profit-loss as a percentage change in mean fee
+
+new_practice_service_raw <- 
+  # A, B, C, D, E service items
+  # and GPMP/TCA/reviews (CDM), health assessment and mental health plan items
+  c(950, 3956, 4171, 1146, 75,
+    416, 402, 255,
+    0, 13, 101, 45, 1,
+    7, 5, 64, 31, 41)
+new_practice_service_proportions <- 
+  new_practice_service_raw/sum(new_practice_service_raw)
+
+profit_loss <- tibble(
+  gap = numeric(), 
+  private_billed = numeric(),
+  current_fee_mean = numeric(),
+  profit = numeric(),
+  profit_rel = numeric()
+)
+
+for (x in gap_fee_range) {
+  for (y in privately_billed_range) {
+    new_gap_fee <- c(
+      rep(x, length((new_fee_names)))
+      # the same gap fee charged for every item, including GPMP/TCA/GPMPRV items
+      # a simplified approach would use the 'average' gap fee charged
+      # for all relevant items
+    )
+    current_fee_mean <- fee_mean(
+      service_fees = new_service_fees,
+      fee_names = new_fee_names,
+      # set service proportions to longer consults
+      service_proportion_bulk = new_practice_service_proportions,
+      service_proportion_private = new_practice_service_proportions,
+      gap_fee = new_gap_fee,
+      # set privately billed proportion to 'y'
+      # divide by 100 to convert from
+      # percentage to proportion
+      privately_billed = y/100,
+      individual_bulkbill_incentive,
+      individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
+      monash_area
+    )
+    profit <- net_benefit(
+      service_fees = new_service_fees,
+      fee_names = new_fee_names,
+      # set service proportions to longer consults
+      service_proportion_bulk = new_practice_service_proportions,
+      service_proportion_private = new_practice_service_proportions,
+      gap_fee = new_gap_fee,
+      # set privately billed proportion to 'y'
+      # divide by 100 to convert from
+      # percentage to proportion
+      privately_billed = y/100,
+      individual_bulkbill_incentive,
+      individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
+      monash_area,
+      universal_bulkbill_incentive
+    )
+    profit_loss <- add_row(
+      profit_loss,
+      gap = x, private_billed = y,
+      current_fee_mean = current_fee_mean,
+      profit = profit, 
+      profit_rel = profit / current_fee_mean * 100
+    )
+  }
+}
+
+fig_ggplot <- ggplot(
+  data = profit_loss |> 
+    dplyr::filter(gap == (gap %/% 5 * 5), private_billed == (private_billed %/% 5 * 5)),
+  aes(x = gap, y = private_billed, fill = profit_rel)) +
+  theme_bw() + geom_tile() + 
+  geom_text(aes(label=round(profit_rel, 0)), size = 8/.pt) +
+  labs(
+    x = "Gap fee ($)",
+    y = "Privately-billed (%)",
+    fill = "Profit-loss (%)"
+  ) +
+  scale_x_continuous(breaks = seq(from = 0, to = 70, by = 10)) +
+  scale_y_continuous(breaks = seq(from = 0, to = 100, by = 10)) +
+  ggtitle("Percentage change in revenue (mean fee)") +
+  scale_fill_gradientn(colors = rainbow(5), limits = c(-45, 45))
+
+fig_ggplot + theme_tufte()
+```
 
 ### Reproducing the universal bulk-billing fact sheet table
 
@@ -1325,7 +1440,7 @@ The above code block output is shown below, matching the table in the [fact shee
 
 ### Technical credits
 
-Thanks to the [quarto-webr extension](https://quarto-webr.thecoatlessprofessor.com/), [Claudiu-Cristian's post on using webR in hugo websites](https://claudiu.psychlab.eu/post/hugo-blogdown-interactive-code-chunk-webr-quarto/) and [WebR](https://docs.r-wasm.org/webr/latest/) itself for the ability to run modifiable R models on 'static' web-pages!
+Thanks to the [quarto-webr extension](https://quarto-webr.thecoatlessprofessor.com/), [Claudiu-Cristian's post on using webR in hugo websites](https://claudiu.psychlab.eu/post/hugo-blogdown-interactive-code-chunk-webr-quarto/) and [WebR](https://docs.r-wasm.org/webr/latest/) itself for the ability to run modifiable R models on 'static' web-pages! Thanks to [Dr Michael Tam](https://vitualis.com/) for suggesting adding 3D plots and colour!
 
 ### External commentary and other models
 
