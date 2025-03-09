@@ -240,7 +240,7 @@ fee_bulkbill_incentive
 
 We can now calculate the average benefit per patient if the practice adopts universal bulk-billing.
 
-If you 'Run Code' the block below With the default settings of 50% of patients privately-billed and a gap fee of 50, the profit-per-patient is shown as `-8.23`, i.e. a loss of 8.23.
+If you 'Run Code' the block below With the default settings of 50% of patients privately-billed and a gap fee of 50, the profit-per-patient is shown as `-8.23`, i.e. a loss of 8.23 compared to the current mean fee of `86.28`.
 
 **Note that 'Run Code' below will not work unless the previous code blocks have already been 'Run'!!**
 
@@ -267,7 +267,8 @@ net_benefit <- function(
   monash_area,
   universal_bulkbill_incentive) {
   # calculate individual bulk-bill incentive applicable to defined Monash area
-  fee_bulkbill_incentive <- individual_bulkbill_incentive[monash_area, individual_bulkbill_incentive_by_fee]
+  fee_bulkbill_incentive <- 
+    individual_bulkbill_incentive[monash_area, individual_bulkbill_incentive_by_fee]
   # re-define dimensions of the 'x' array
   dim(fee_bulkbill_incentive) <- c(length(fee_names), 1)
   # change row name to the fee names
@@ -282,6 +283,9 @@ net_benefit <- function(
     (1 - privately_billed) *
     sum(service_fees * service_proportion_bulk) *
     universal_bulkbill_incentive +
+    # the calculation above could be simplified, of course!, to
+    # sum(service_fees * service_proportion_private), but is kept
+    # separate to two different portions to clarify the calculation
     
     # calculate (and add) the individual service bulk-billing incentive applied
     # to patients formerly privately-billed
@@ -290,6 +294,55 @@ net_benefit <- function(
     # calculate (and subtract) the loss from not charging a private 'gap' fee
     privately_billed * sum(service_proportion_private * gap_fee)
 }
+
+fee_mean <- function(
+  # calculate the current mean fee
+  service_fees,
+  fee_names,
+  service_proportion_bulk,
+  service_proportion_private,
+  gap_fee,
+  privately_billed,
+  individual_bulkbill_incentive,
+  individual_bulkbill_incentive_by_fee,
+  monash_area
+) {
+  # calculate individual bulk-bill incentive applicable to defined Monash area
+  fee_bulkbill_incentive <- 
+    individual_bulkbill_incentive[monash_area, individual_bulkbill_incentive_by_fee]
+  # re-define dimensions of the 'x' array
+  dim(fee_bulkbill_incentive) <- c(length(fee_names), 1)
+  # change row name to the fee names
+  rownames(fee_bulkbill_incentive) <- fee_names
+  
+  privately_billed *
+    sum(service_fees * service_proportion_private) +
+    (1 - privately_billed) *
+    sum(service_fees * service_proportion_bulk) +
+    # the calculation above could be simplified, of course!, to
+    # sum(service_fees * service_proportion_private), but is kept
+    # separate to two different portions to clarify the calculation
+    
+    # calculate (and add) the individual service bulk-billing incentive applied
+    # to patients currently bulk-billed
+    (1 - privately_billed) * 
+    sum(service_proportion_private * fee_bulkbill_incentive) +
+    
+    # calculate (and add) the private 'gap' fee
+    privately_billed * sum(service_proportion_private * gap_fee)
+}
+
+current_fee_mean <- fee_mean(
+  service_fees,
+  fee_names,
+  service_proportion_bulk,
+  service_proportion_private,
+  gap_fee,
+  privately_billed,
+  individual_bulkbill_incentive,
+  individual_bulkbill_incentive_by_fee,
+  monash_area
+)
 
 profit_loss <- net_benefit(
   service_fees,
@@ -305,7 +358,8 @@ profit_loss <- net_benefit(
 )
 
 # Show the value of average net_benefit
-formatC(profit_loss, digits = 2, format = "f")
+paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
+paste("Profit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
 ```
 
 #### Modifying the model for a different practice
@@ -326,6 +380,21 @@ new_practice_service_raw <-
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
+current_fee_mean <- fee_mean(
+  service_fees,
+  fee_names,
+  service_proportion_bulk = new_practice_service_proportions,
+  service_proportion_private = new_practice_service_proportions,
+  # replace the gap fee for every possible service fee
+  # we could also use 'gap_fee = c(35, 35, 35, 35, 35)'
+  gap_fee = rep (35, length(fee_names)),
+  # reduce the privately billed proportion to 20%
+  privately_billed = 0.2,
+  individual_bulkbill_incentive,
+  individual_bulkbill_incentive_by_fee,
+  monash_area
+)
+
 profit_loss <- net_benefit(
   service_fees,
   fee_names,
@@ -343,10 +412,11 @@ profit_loss <- net_benefit(
 )
 
 # Show the value of average net_benefit
-formatC(profit_loss, digits = 2, format = "f")
+paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
+paste("Profit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
 ```
 
-If the gap fee is set to 35, the average consult length is longer and only 20% of patients are privately-billed, the practice can expect an average profit of `5.37` per service.
+If the gap fee is set to 35, the average consult length is longer and only 20% of patients are privately-billed, the practice can expect an average profit of `5.37` per service more than the current mean fee of `89.91`. Note that this practice has a higher current mean fee than the first practice, but longer consultation times would likely result in a lower fee-rate per hour.
 
 #### Including care plan item numbers {#including-care-plan-item-numbers}
 
@@ -354,7 +424,7 @@ The ['Strengthening Medicare with more bulk billing' information for GP provider
 
 *Model limitation - It is expected that the service item numbers and descriptors for general practice care-plans (721, 723 and 732) will change late in 2025. This model assumes that the fee-for-service revenue for the practice through care-plans will remain similar after the change in care-plan services items occurs.*
 
-Compared to the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown} described above, adding care plan item numbers increases the average profit from `5.37` to `6.55` per service.
+Compared to the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown} described above, adding care plan item numbers increases the average profit from `5.37` to `6.55` per service. The current mean fee has also risen, from `89.91` to `94.43`, reflecting the higher value of service items included.
 
 ```{webr-r}
 # note, depends on the previous code blocks already having been 'run'! 
@@ -392,6 +462,20 @@ new_practice_service_raw <-
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
+current_fee_mean <- fee_mean(
+  service_fees = new_service_fees,
+  fee_names = new_fee_names,
+  service_proportion_bulk = new_practice_service_proportions,
+  service_proportion_private = new_practice_service_proportions,
+  # replace the gap fee
+  gap_fee = new_gap_fee,
+  # reduce the privately billed proportion to 20%
+  privately_billed = 0.2,
+  individual_bulkbill_incentive,
+  individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
+  monash_area
+)
+
 profit_loss <- net_benefit(
   service_fees = new_service_fees,
   fee_names = new_fee_names,
@@ -408,7 +492,8 @@ profit_loss <- net_benefit(
 )
 
 # Show the value of average net_benefit
-formatC(profit_loss, digits = 2, format = "f")
+paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
+paste("Profit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
 ```
 
 ### Graphing the benefit
@@ -845,6 +930,43 @@ dim(fee_bulkbill_incentive) <- c(length(fee_names), 1)
 # change rownames to the fee names
 rownames(fee_bulkbill_incentive) <- fee_names
 
+fee_mean <- function(
+  # calculate the current mean fee
+  service_fees,
+  fee_names,
+  service_proportion_bulk,
+  service_proportion_private,
+  gap_fee,
+  privately_billed,
+  individual_bulkbill_incentive,
+  individual_bulkbill_incentive_by_fee,
+  monash_area
+) {
+  # calculate individual bulk-bill incentive applicable to defined Monash area
+  fee_bulkbill_incentive <- 
+    individual_bulkbill_incentive[monash_area, individual_bulkbill_incentive_by_fee]
+  # re-define dimensions of the 'x' array
+  dim(fee_bulkbill_incentive) <- c(length(fee_names), 1)
+  # change row name to the fee names
+  rownames(fee_bulkbill_incentive) <- fee_names
+  
+  privately_billed *
+    sum(service_fees * service_proportion_private) +
+    (1 - privately_billed) *
+    sum(service_fees * service_proportion_bulk) +
+    # the calculation above could be simplified, of course!, to
+    # sum(service_fees * service_proportion_private), but is kept
+    # separate to two different portions to clarify the calculation
+    
+    # calculate (and add) the individual service bulk-billing incentive applied
+    # to patients currently bulk-billed
+    (1 - privately_billed) * 
+    sum(service_proportion_private * fee_bulkbill_incentive) +
+    
+    # calculate (and add) the private 'gap' fee
+    privately_billed * sum(service_proportion_private * gap_fee)
+}
+
 net_benefit <- function(
   # calculate the average net benefit revenue
   # to the practice per patient
@@ -933,7 +1055,8 @@ new_practice_service_proportions <-
 profit_loss <- tibble(
   gap = numeric(), 
   private_billed = numeric(), 
-  profit = numeric()
+  profit = numeric(),
+  profit_rel = numeric(),
 )
 
 for (x in gap_fee_range) {
@@ -943,15 +1066,29 @@ for (x in gap_fee_range) {
       rep(x, length((new_fee_names))-5)
       # gap fee charged for ABCDE, $0 for all others
     )
+    
+    current_fee_mean <- fee_mean(
+      service_fees = new_service_fees,
+      fee_names = new_fee_names,
+      service_proportion_bulk = new_practice_service_proportions,
+      service_proportion_private = new_practice_service_proportions,
+      gap_fee = new_gap_fee,
+      # set privately billed proportion to 'y'
+      # divide by 100 to convert from
+      # percentage to proportion
+      privately_billed = y/100,
+      individual_bulkbill_incentive,
+      individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
+      monash_area
+    )
+
     profit <- net_benefit(
       service_fees = new_service_fees,
       fee_names = new_fee_names,
-      # set service proportions to longer consults
       service_proportion_bulk = new_practice_service_proportions,
       service_proportion_private = new_practice_service_proportions,
-      # set the gap fee to $35
       gap_fee = new_gap_fee,
-      # set privately billed proportion to 'x'
+      # set privately billed proportion to 'y'
       # divide by 100 to convert from
       # percentage to proportion
       privately_billed = y/100,
@@ -960,7 +1097,10 @@ for (x in gap_fee_range) {
       monash_area,
       universal_bulkbill_incentive
     )
-    profit_loss <- add_row(profit_loss, gap = x, private_billed = y, profit = profit)
+    profit_loss <- add_row(
+      profit_loss,
+      gap = x, private_billed = y, profit = profit, profit_rel = profit/current_fee_mean
+    )
   }
 }
 
@@ -968,12 +1108,14 @@ for (x in gap_fee_range) {
 # you will need to copy this code (and all the pre-requisites)
 # into a 'R/RStudio' and run it yourself :)
 fig_plotly_3d <- plot_ly(
-  data = profit_loss, x = ~gap, y = ~private_billed, z = ~profit,
+  data = profit_loss,
+  x = ~gap, y = ~private_billed, z = ~profit, text = ~profit_rel * 100,
   type = "scatter3d", mode = "markers",
   hovertemplate = paste(
     "Gap fee: <b>%{x}</b><br>",
-    "Private: <b>%{y}</b>%<br>",
-    "Profit: <b>%{z:$.2f}</b>",
+    "Private: <b>%{y}</b><br>",
+    "Profit: <b>%{z:$.2f}</b><br>",
+    "Profit (%): <b>%{text:.0f}</b>%",
     "<extra></extra>"
   ),
   marker = list(
@@ -1036,7 +1178,8 @@ new_practice_service_proportions <-
 profit_loss <- tibble(
   gap = numeric(), 
   private_billed = numeric(), 
-  profit = numeric()
+  profit = numeric(),
+  profit_rel = character()
 )
 
 for (x in gap_fee_range) {
@@ -1047,15 +1190,29 @@ for (x in gap_fee_range) {
       # a simplified approach would use the 'average' gap fee charged
       # for all relevant items
     )
+    current_fee_mean <- fee_mean(
+      service_fees = new_service_fees,
+      fee_names = new_fee_names,
+      # set service proportions to longer consults
+      service_proportion_bulk = new_practice_service_proportions,
+      service_proportion_private = new_practice_service_proportions,
+      gap_fee = new_gap_fee,
+      # set privately billed proportion to 'y'
+      # divide by 100 to convert from
+      # percentage to proportion
+      privately_billed = y/100,
+      individual_bulkbill_incentive,
+      individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
+      monash_area
+    )
     profit <- net_benefit(
       service_fees = new_service_fees,
       fee_names = new_fee_names,
       # set service proportions to longer consults
       service_proportion_bulk = new_practice_service_proportions,
       service_proportion_private = new_practice_service_proportions,
-      # set the gap fee to $35
       gap_fee = new_gap_fee,
-      # set privately billed proportion to 'x'
+      # set privately billed proportion to 'y'
       # divide by 100 to convert from
       # percentage to proportion
       privately_billed = y/100,
@@ -1064,7 +1221,12 @@ for (x in gap_fee_range) {
       monash_area,
       universal_bulkbill_incentive
     )
-    profit_loss <- add_row(profit_loss, gap = x, private_billed = y, profit = profit)
+    profit_loss <- add_row(
+      profit_loss,
+      gap = x, private_billed = y, 
+      profit = profit, 
+      profit_rel = formatC((profit / current_fee_mean * 100), digits = 0, format = "f")
+    )
   }
 }
 
@@ -1073,16 +1235,27 @@ for (x in gap_fee_range) {
 # into a 'R/RStudio' and run it yourself :)
 fig_ggplotly <- ggplot(
   data = profit_loss,
-  aes(x = gap, y = private_billed))+
+  aes(
+    x = gap, y = private_billed, 
+    text = sprintf(
+      "Gap: $%d<br>Private-billed: %d%%<br>Profit: $%.2f<br>Profit (%%): %s%%",
+      gap, private_billed,profit, profit_rel
+    )
+  )) +
   geom_point(
     aes(fill = profit),
     size = 4, shape = 22, stroke = 0
+  ) +
+  labs(
+    x = "Gap fee ($)",
+    y = "Privately-billed (%)",
+    fill = "Profit ($)"
   ) +
   scale_fill_viridis_c(option = "turbo", direction = -1)
 # to look at this plot, either 'fig_ggplotly' in R/RStudio or
 # 'ggplotly(fig_ggplotly)'
 
-ggplotly(fig_ggplotly) |> # show the ggplotly
+ggplotly(fig_ggplotly, tooltip = "text") |> # show the ggplotly
   layout(margin = list(r = 150))
 ```
 
