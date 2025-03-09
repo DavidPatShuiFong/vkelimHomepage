@@ -1052,7 +1052,7 @@ new_practice_service_raw <-
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
-profit_loss <- tibble(
+profit_loss_practice_standard <- tibble(
   gap = numeric(), 
   private_billed = numeric(), 
   current_fee_mean = numeric(),
@@ -1098,8 +1098,8 @@ for (x in gap_fee_range) {
       monash_area,
       universal_bulkbill_incentive
     )
-    profit_loss <- add_row(
-      profit_loss,
+    profit_loss_practice_standard <- add_row(
+      profit_loss_practice_standard,
       gap = x, private_billed = y,
       current_fee_mean = current_fee_mean,
       profit = profit,
@@ -1112,7 +1112,7 @@ for (x in gap_fee_range) {
 # you will need to copy this code (and all the pre-requisites)
 # into a 'R/RStudio' and run it yourself :)
 fig_plotly_3d <- plot_ly(
-  data = profit_loss,
+  data = profit_loss_practice_standard,
   x = ~gap, y = ~private_billed, z = ~profit,
   text = ~profit_rel * 100, customdata = ~current_fee_mean,
   type = "scatter3d", mode = "markers",
@@ -1146,7 +1146,7 @@ fig_plotly_3d <- plot_ly(
 # you will need to copy this code (and all the pre-requisites)
 # into a 'R/RStudio' and run it yourself :)
 fig_ggplotly <- ggplot(
-  data = profit_loss,
+  data = profit_loss_practice_standard,
   aes(x = gap, y = private_billed))+
   geom_point(
     aes(fill = profit),
@@ -1280,7 +1280,7 @@ Some of the interactive plots above include the estimated proportional change in
 
 $$
 \small
-\frac{\text{Profit or loss}}{\text{Current mean fee}}
+\frac{\text{Net benefit (profit or loss)}}{\text{Current mean fee}}
 $$
 
 The following table is based on the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown}.
@@ -1368,7 +1368,7 @@ fig_ggplot <- ggplot(
   labs(
     x = "Gap fee ($)",
     y = "Privately-billed (%)",
-    fill = "Profit-loss (%)"
+    fill = "Revenue change (%)"
   ) +
   scale_x_continuous(breaks = seq(from = 0, to = 70, by = 10)) +
   scale_y_continuous(breaks = seq(from = 0, to = 100, by = 10)) +
@@ -1376,6 +1376,55 @@ fig_ggplot <- ggplot(
   scale_fill_gradientn(colors = rainbow(5), limits = c(-45, 45))
 
 fig_ggplot + theme_tufte()
+```
+
+Following is a 3D plot of percentage change in revenue as the result of adopting universal bulk-billing for the 'average' general practice, according to pre-existing gap-fee and proportion of services which are privately-billed.
+
+```{r}
+#| echo: true
+#| error: false
+#| warning: false
+#| code-fold: true
+#| code-overflow: wrap
+#| results: asis
+# 3D plot of 'standard' Australian practice
+# percentage change in revenue vs pre-existing gap fee and 'private'-billing proportion
+
+# the data underlying this plot cannot be dynamically changed in the web-browser
+# you will need to copy this code (and all the pre-requisites)
+# into 'R/RStudio' and run it yourself :)
+fig_plotly_3d <- plot_ly(
+  data = profit_loss_practice_standard,
+  x = ~gap, y = ~private_billed, z = ~profit_rel * 100,
+  text = ~profit, customdata = ~current_fee_mean,
+  type = "scatter3d", mode = "markers",
+  hovertemplate = paste(
+    "Gap fee: <b>%{x}</b><br>",
+    "Private-billed: <b>%{y}</b>%<br>",
+    "Current mean fee: <b>%{customdata:$.2f}</b><br>",
+    "Profit: <b>%{text:$.2f}</b><br>",
+    "Revenue change (%): <b>%{z:.0f}</b>%",
+    "<extra></extra>"
+  ),
+  marker = list(
+    color = ~profit,
+    colorscale = "Rainbow",
+    showscale = TRUE,
+    line = list(width = 1, color = "DarkSlateGrey")) 
+  ) |>
+  layout(
+    title = "Revenue change (%) according to gap fee and proportion privately-billed",
+    scene = list(
+      xaxis = list(title = list(text = "Gap fee ($)")),
+      yaxis = list(title = list(text = "Privately-billed (%)")),
+      zaxis = list(title = list(text = "Revenue change (%)"))
+    ),
+    margin = list(r = 150)
+    # coloraxis = list(colorbar = list(x = 0.6))
+    # move the color legend to the left a little
+  )
+
+fig_plotly_3d
 ```
 
 ### Reproducing the universal bulk-billing fact sheet table
