@@ -33,8 +33,9 @@ The alternative to 'bulk-billing' is that the clinician charges the patient a pr
 
 The proposal to encourage general practices to 'bulk-bill' consisted of two parts:
 
--   Broadening the current bulk-billing incentive for individual consultations/services to all patients.
-    -   Previously the bulk-billing incentive payment for individual consultations was only available to people, usually with less income or assets, who are [pensioners, recipients of a government-issued 'concession card' and children under the age of 16](https://www.ama.com.au/tas/bulk-billing-incentive-facts).
+-   Broadening the current *bulk-billing incentive* for individual consultations/services to all patients.
+    - The government had provided *bulk-billing incentives* for general practitioners to bulk-bill patients previously deemed to benefit more from bulk-billing. The value of these incentives have been 7.15 to 21.35 dollars per service in urban areas.
+    - Currently the bulk-billing incentive payment for individual consultations is only available to people, usually with less income or assets, who are [pensioners, recipients of a government-issued 'concession card' and children under the age of 16](https://www.ama.com.au/tas/bulk-billing-incentive-facts). The services which are bulk-billed and also qualify for the current bulk-billing incentive payment will be referred to as 'concessionally bulk-billed'.
     -   This bulk-billing incentive is paid with each individual consult
 -   If the general practice agrees to bulk-bill all patients, i.e. universal bulk-billing, the government will pay the practice an additional 12.5% over and above the government-set price for each fee-for-service item.
     -   The definition of which service items need to be 'bulk-billed', and which service items will attract the 15% bonus is not yet fully defined. The government-provided [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) and [RACGP FAQ](https://www.racgp.org.au/advocacy/advocacy-resources/medicare-announcement-member-faqs) suggests that consultation items A/B/C/D, mental health care plan and other GP non-referred attendances will attract the 12.5% bonus.
@@ -50,29 +51,29 @@ Two examples are presented, followed by detailed description of the model and mo
 
 ### Practice 1, limited item number inclusion
 
-The first example practice privately-bills 50% of its patients. The profit-loss calculation is based on just a few item numbers ('A', 'B', 'C', 'D' and 'E'). The graph below demonstrates the effect on net-profitability of adopting the bulk-billing incentives, depending on the private 'gap-fee' charged by the practice prior to adopting the bulk-billing incentives. The light-blue vertical dotted line represents the net-profitability (-8.23 per service) if the practice charged an average gap-fee of $50.
+The first example practice currently concessionally bulk-bills (bulk-bills with the benefit of bulk-billing incentive payments) 50% of its patients. The profit-loss calculation is based on just a few item numbers ('A', 'B', 'C', 'D' and 'E'). The graph below demonstrates the effect on net-profitability of adopting the bulk-billing incentives, depending on the private 'gap-fee' charged by the practice (to those patients who were not bulk-billed *or* do not qualify for the current bulk-billing incentive payments) prior to adopting the universal-bulk-billing incentives. The light-blue vertical dotted line represents the net-profitability (-8.23 per service) if the practice charged an average gap-fee of $50.
 
 ![](images/profit_gap.png)
 
 ### Practice 2, low gap-fee, care-plan item numbers included
 
-The first example practice charges a low private gap-fee of $35. The profit-loss calculation is based on both standard numbers ('A', 'B', 'C', 'D' and 'E') and care-plan item numbers. This practice did not charge a gap-fee for care-plan item numbers, even for 'private' patients. The graph below demonstrates the effect on net-profitability of the adopting the bulk-billing incentives, depending on the pre-existing proportion of patients who were charged privately before adopting the bulk-billing incentives.
+This example practice charges a low (mean) private gap-fee of $35, which applies to every person who is not bulk-billed or does not have access to current bulk-billing incentive rebates. The profit-loss calculation is based on both standard numbers ('A', 'B', 'C', 'D' and 'E') and care-plan item numbers. This practice did not charge a gap-fee at all for care-plan item numbers, even for patients who did not have access to to current bulk-billing incentive rebates. The graph below demonstrates the effect on net-profitability of the adopting the bulk-billing incentives, depending on the pre-existing proportion of patients who were concessionally bulk-billed (with the benefit of current bulk-billing incentives) before adopting the universal-bulk-billing incentives.
 
-The light-blue vertical dotted line represents the net-profitability (6.55 per service) if only 20% of the practice population was privately-billed.
+The light-blue vertical dotted line represents the net-profitability (6.55 per service) if 80% of the practice population was concessionally bulk-billed.
 
-![](images/profit_private_proportion.png)
+![](images/profit_concessional_bulkbilled_proportion.png)
 
 ### Net benefit to practice heatmap table
 
-An estimate of net benefit per service for a range of practices, assuming 'average' distribution of ABCDE, care plan, health assessment and mental health care plan items, depending on a range of gap fees and proportion of patients who were privately-billed.
+An estimate of net benefit per service for a range of practices, assuming 'average' distribution of ABCDE, care plan, health assessment and mental health care plan items, depending on a range of mean gap fees charge to patients who were concessionally bulk-billed.
 
 ![](images/netbenefit_heatmap.png)
 
 The heatmap table above helps demonstrate some of the definitions and assumptions in the presented model.
 
--   All patients currently being 'bulk-billed' also qualify for the bulk-bill incentive rebate e.g. are healthcare card holders, pensioners or children and qualify for Medicare incentive items such as 10990 and 75870. In the 'privately-billed 0%' row in the table above is demonstrated the effect of the universal-bulk-billing incentive scheme on a practice whose practice population all have health care cards etc., and the practice bulk-bills them all. In this case, no additional patients will qualify for the individual service item bulk-bill incentives, but the practice qualifies for the 12.5% bulk-billing incentive paid quarterly.
+-   In the 'concessional bulk-billed 100%' row in the table above is demonstrated the effect of the universal-bulk-billing incentive scheme on a practice whose practice population all have health care cards etc., and the practice bulk-bills them all. In this case, no additional patients will qualify for the individual service item bulk-bill incentives, but the practice qualifies for the 12.5% bulk-billing incentive paid quarterly.
 -   All patients who do *not* qualify the current bulk-bill incentive rebates are 'privately' billed, even if the 'gap fee' is zero dollars (i.e. no gap fee charged above the government rebate for the service item). In the heatmap table above, this is shown most starkly by the item in the top-left corner, where the practice 'privately' bills 100% of patients, with a gap fee of zero dollars. In this case, the practice can agree to receive the 12.5% bulk-billing incentive paid quarterly AND all patients will now potentially qualify for the individual service item bulk-bill incentive.
--   In practical terms, 'gap fee' in the heatmap table shown above is not the necessarily the 'nominal' gap fee for service items, but the average gap fee charged when current individual service bulk-billing incentives do not apply. Which may be lower than the nominal gap fee, if lower gap fees are charged for certain services e.g. review appointments, care plans etc..
+-   In practical terms, 'gap fee' in the heatmap table shown above is not the necessarily the 'nominal' gap fee for service items, but the mean gap fee charged when current individual service bulk-billing incentives do not apply. Which may be lower than the nominal gap fee, if lower gap fees are charged for certain services e.g. review appointments, care plans etc..
 
 Following sections will describe how the models were created.
 
@@ -92,9 +93,9 @@ Both the 'Benefit' and 'Loss' side of the equation can be broken down into sever
 
 $$
 \small
-\text{Loss} = \text{ Private services } \times {\text{Gap fee}} 
+\text{Loss} = \text{ Private services } \times {\text{Mean Gap fee}} 
 $$
-*Private services* are the services which would have been privately billed before a practice agrees to universal bulk-billing. The *Gap fee* is the amount the clinician charges the patient over and above the government-set price for each service.
+*Private services* are the services which would have been privately billed - or did not have access to bulk-billing incentives - before a practice agrees to universal bulk-billing. The *Mean Gap fee* is the amount the clinician charges the patient over and above the government-set price for each service.
 
 <!--# Note that each line in the following LaTeX equations ends with six backslashes instead of two. The reason is explained in https://github.com/HugoBlox/hugo-blox-builder/issues/1480 -->
 
@@ -111,10 +112,12 @@ Services which would have been previously privately billed are billed at the low
 $$
 \small
 \begin{align}
-\text{Total fee-for-service billing } = &\text{ Billing for bulk-billed services}\\\\\\
+\text{Total fee-for-service billing } = &\text{ Billing for concessional bulk-billed services}\\\\\\
 &+ \text{Billing for private services}
 \end{align}
 $$
+
+'Bulk-billed' services includes only those bulk-billed service (no 'gap' payment) where the patient currently qualifies for bulk-billing incentive payments. 'Private' services include patients where a 'gap' fee is charged, but *also* includes services where the patient was charged no 'gap' fee, but does not currently qualify for bulk-billing incentive payments (but will in the future plan).
 
 If the practice agrees to universal bulk-billing, then all services which were previously 'bulk-billed' and previously 'private-billed' will benefit from the 12.5% universal bulk-billing incentive.
 
@@ -155,6 +158,10 @@ service_proportion_raw <- array(
 # calculate the proportions
 # for simplicity, assume the same proportions for bulk-billed patients
 # and privately-billed patients
+# 'Private' services includes patients where a 'gap' fee is charged. 'Private'
+# *also* includes services where the patient was charged no 'gap' fee, but
+# does not currently qualify for bulk-billing incentive payments
+# (all patients will qualify for bulk-billing incentive payments in the future plan)
 service_proportion_bulk <- service_proportion_raw/sum(service_proportion_raw)
 colnames(service_proportion_bulk) <- c("proportion")
 service_proportion_private <- service_proportion_bulk
@@ -178,7 +185,7 @@ The government bulk-billing incentive for individual services [varies by the loc
 ```{webr-r}
 # note, please 'run' the previous code block! 
 
-# Set the gap fee for the individual service items A, B, C, D and E
+# Set the mean gap fee for the individual service items A, B, C, D and E
 # for patients who were privately billed
 # for simplicity, set to the same fee of $50
 gap_fee <- array(
@@ -187,10 +194,15 @@ gap_fee <- array(
   dimnames = list(fee_names, "gap")
 )
 
-# the proportion of patients who are charge the gap fee
-# i.e. privately billed
+# the proportion of patients who are bulk-billed *and*
+# currently qualify for bulk-billing incentives 
 # set to 50%
-privately_billed <-  0.5
+concessional_bulkbilled <-  0.5
+# in this case, 'private' services are 100% - 50% = 50%
+# 'Private' services includes patients where a 'gap' fee is charged. 'Private'
+# *also* includes services where the patient was charged no 'gap' fee, but
+# does not currently qualify for bulk-billing incentive payments
+# (all patients will qualify for bulk-billing incentive payments in the future plan)
 
 # the bulk billing incentive, in dollars
 # varies by location
@@ -240,7 +252,7 @@ fee_bulkbill_incentive
 
 We can now calculate the average benefit per patient if the practice adopts universal bulk-billing.
 
-If you 'Run Code' the block below With the default settings of 50% of patients privately-billed and a gap fee of 50, the profit-per-patient is shown as `-8.23`, i.e. a loss of 8.23 compared to the current mean fee of `86.28`.
+If you 'Run Code' the block below With the default settings of 50% of patients are concessionally bulk-billed and a mean gap fee of 50, the profit-per-patient is shown as `-8.23`, i.e. a loss of 8.23 compared to the current mean fee of `86.28`.
 
 **Note that 'Run Code' below will not work unless the previous code blocks have already been 'Run'!!**
 
@@ -261,7 +273,7 @@ net_benefit <- function(
   service_proportion_bulk,
   service_proportion_private,
   gap_fee,
-  privately_billed,
+  concessional_bulkbilled,
   individual_bulkbill_incentive,
   individual_bulkbill_incentive_by_fee,
   monash_area,
@@ -276,11 +288,11 @@ net_benefit <- function(
   
   # calculate the universal bulk-bill incentive
   # for patients formerly privately-billed
-  privately_billed *
+  (1 -concessional_bulkbilled) *
     sum(service_fees * service_proportion_private) *
     universal_bulkbill_incentive +
     # calculate (and add) benefit for patients already bulk-billed
-    (1 - privately_billed) *
+    concessional_bulkbilled *
     sum(service_fees * service_proportion_bulk) *
     universal_bulkbill_incentive +
     # the calculation above could be simplified, of course!, to
@@ -289,10 +301,10 @@ net_benefit <- function(
     
     # calculate (and add) the individual service bulk-billing incentive applied
     # to patients formerly privately-billed
-    privately_billed * sum(service_proportion_private * fee_bulkbill_incentive) -
+    (1 - concessional_bulkbilled) * sum(service_proportion_private * fee_bulkbill_incentive) -
     
     # calculate (and subtract) the loss from not charging a private 'gap' fee
-    privately_billed * sum(service_proportion_private * gap_fee)
+    (1 - concessional_bulkbilled) * sum(service_proportion_private * gap_fee)
 }
 
 fee_mean <- function(
@@ -302,7 +314,7 @@ fee_mean <- function(
   service_proportion_bulk,
   service_proportion_private,
   gap_fee,
-  privately_billed,
+  concessional_bulkbilled,
   individual_bulkbill_incentive,
   individual_bulkbill_incentive_by_fee,
   monash_area
@@ -315,9 +327,9 @@ fee_mean <- function(
   # change row name to the fee names
   rownames(fee_bulkbill_incentive) <- fee_names
   
-  privately_billed *
+  (1 - concessional_bulkbilled) *
     sum(service_fees * service_proportion_private) +
-    (1 - privately_billed) *
+    concessional_bulkbilled *
     sum(service_fees * service_proportion_bulk) +
     # the calculation above could be simplified, of course!, to
     # sum(service_fees * service_proportion_private), but is kept
@@ -325,11 +337,11 @@ fee_mean <- function(
     
     # calculate (and add) the individual service bulk-billing incentive applied
     # to patients currently bulk-billed
-    (1 - privately_billed) * 
+    concessional_bulkbilled * 
     sum(service_proportion_private * fee_bulkbill_incentive) +
     
     # calculate (and add) the private 'gap' fee
-    privately_billed * sum(service_proportion_private * gap_fee)
+    (1 - concessional_bulkbilled) * sum(service_proportion_private * gap_fee)
 }
 
 current_fee_mean <- fee_mean(
@@ -338,7 +350,7 @@ current_fee_mean <- fee_mean(
   service_proportion_bulk,
   service_proportion_private,
   gap_fee,
-  privately_billed,
+  concessional_bulkbilled,
   individual_bulkbill_incentive,
   individual_bulkbill_incentive_by_fee,
   monash_area
@@ -350,7 +362,7 @@ profit_loss <- net_benefit(
   service_proportion_bulk,
   service_proportion_private,
   gap_fee,
-  privately_billed,
+  concessional_bulkbilled,
   individual_bulkbill_incentive,
   individual_bulkbill_incentive_by_fee,
   monash_area,
@@ -364,12 +376,12 @@ paste("Profit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
 
 #### Modifying the model for a different practice
 
-What happens if we change some of the parameters? In this example, only 20% of services were privately-billed, the gap-fee for each privately-billed service item is $35 and the service items charged is biased towards the longer consult items.
+What happens if we change some of the parameters? In this example, 80% of services are concessionally bulk-billed, the gap-fee for each privately-billed service item is $35 and the service items charged is biased towards the longer consult items.
 
 ```{webr-r}
 # note, depends on the previous code blocks already having been 'run'! 
 
-# Set the privately-billed proportion to 0.2 (20%), the gap fee to $35
+# Set the privately-billed proportion to 0.2 (20%), the mean gap fee to $35
 # and new service proportions
 
 new_practice_service_raw <- 
@@ -385,11 +397,11 @@ current_fee_mean <- fee_mean(
   fee_names,
   service_proportion_bulk = new_practice_service_proportions,
   service_proportion_private = new_practice_service_proportions,
-  # replace the gap fee for every possible service fee
+  # replace the mean gap fee for every possible service fee
   # we could also use 'gap_fee = c(35, 35, 35, 35, 35)'
   gap_fee = rep (35, length(fee_names)),
-  # reduce the privately billed proportion to 20%
-  privately_billed = 0.2,
+  # increase the concessionally bulk-billed to 80%
+  concessional_bulkbilled = 0.8,
   individual_bulkbill_incentive,
   individual_bulkbill_incentive_by_fee,
   monash_area
@@ -400,11 +412,11 @@ profit_loss <- net_benefit(
   fee_names,
   service_proportion_bulk = new_practice_service_proportions,
   service_proportion_private = new_practice_service_proportions,
-  # replace the gap fee for every possible service fee
+  # replace the mean gap fee for every possible service fee
   # we could also use 'gap_fee = c(35, 35, 35, 35, 35)'
   gap_fee = rep(35, length(fee_names)),
-  # reduce the privately billed proportion to 20%
-  privately_billed = 0.2,
+  # increase the concessionally bulk-billed to 80%
+  concessional_bulkbilled = 0.8,
   individual_bulkbill_incentive,
   individual_bulkbill_incentive_by_fee,
   monash_area,
@@ -416,7 +428,7 @@ paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
 paste("Profit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
 ```
 
-If the gap fee is set to 35, the average consult length is longer and only 20% of patients are privately-billed, the practice can expect an average profit of `5.37` per service more than the current mean fee of `89.91`. Note that this practice has a higher current mean fee than the first practice, but longer consultation times would likely result in a lower fee-rate per hour.
+If the mean gap fee is set to 35, the average consult length is longer and 80% of patients are concessionally bulk-billed, the practice can expect an average profit of `5.37` per service more than the current mean fee of `89.91`. Note that this practice has a higher current mean fee than the first practice, but longer consultation times would likely result in a lower fee-rate per hour.
 
 #### Including care plan item numbers {#including-care-plan-item-numbers}
 
@@ -444,7 +456,7 @@ new_service_fees <- array(
 )
 new_gap_fee <- c(
   rep(35, 5),
-  # no gap fees were charged for thes GPMP/TCA/GPMPRV items,
+  # no gap fees were charged for these GPMP/TCA/GPMPRV items,
   # even 'private' patients
   rep(0, 3)
 )
@@ -452,7 +464,7 @@ new_individual_bulkbill_incentive_by_fee <- c(
   individual_bulkbill_incentive_by_fee,
   rep("single", 3)
 )
-# Set the privately-billed proportion to 0.2 (20%), the gap fee to $35
+# Set the privately-billed proportion to 0.2 (20%), the mean gap fee to $35
 # and new service proportions
 new_practice_service_raw <- 
   # new A, B, C, D, E numbers
@@ -467,10 +479,10 @@ current_fee_mean <- fee_mean(
   fee_names = new_fee_names,
   service_proportion_bulk = new_practice_service_proportions,
   service_proportion_private = new_practice_service_proportions,
-  # replace the gap fee
+  # replace the mean gap fee
   gap_fee = new_gap_fee,
-  # reduce the privately billed proportion to 20%
-  privately_billed = 0.2,
+  # increase the concessinally bulk-billed proportion to 80%
+  concessional_bulkbilled = 0.8,
   individual_bulkbill_incentive,
   individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
   monash_area
@@ -481,10 +493,10 @@ profit_loss <- net_benefit(
   fee_names = new_fee_names,
   service_proportion_bulk = new_practice_service_proportions,
   service_proportion_private = new_practice_service_proportions,
-  # replace the gap fees
+  # replace the mean gap fees
   gap_fee = new_gap_fee,
   # reduce the privately billed proportion to 20%
-  privately_billed = 0.2,
+  concessional_bulkbilled = 0.8,
   individual_bulkbill_incentive,
   individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
   monash_area,
@@ -498,9 +510,9 @@ paste("Profit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
 
 ### Graphing the benefit
 
-#### Different gap fees
+#### Different mean gap fees
 
-We can look at the effect on profit-loss by looking at a range of different gap fees. This graph is based on the first, original, example.
+We can look at the effect on profit-loss by looking at a range of different mean gap fees. This graph is based on the first, original, example.
 
 ```{webr-r}
 # note, depends on the previous code blocks already having been 'run'! 
@@ -514,7 +526,7 @@ library(tibble)
 library(ggplot2)
 library(ggthemes)
 
-# gap fees from $0 to $60
+# mean gap fees from $0 to $60
 gap_fee_range <- seq(from = 0, to = 60, by = 1)
 
 profit_loss <- sapply(
@@ -525,9 +537,9 @@ profit_loss <- sapply(
       fee_names,
       service_proportion_bulk,
       service_proportion_private,
-      # set the gap fee to 'x'
+      # set the mean gap fee to 'x'
       gap_fee = rep(x, length(fee_names)),
-      privately_billed,
+      concessional_bulkbilled,
       individual_bulkbill_incentive,
       individual_bulkbill_incentive_by_fee,
       monash_area,
@@ -547,7 +559,7 @@ ggplot(
   ) +
   geom_point() +
   labs(
-    x = "Gap fee ($)",
+    x = "Mean Gap fee ($)",
     y = "Profit-loss ($)"
   ) +
   ggtitle("Net benefit to practice, per service") +
@@ -567,13 +579,13 @@ ggplot(
   theme_economist()
 ```
 
-The above code chunk creates a plot like this, with a dashed red line at 'zero' profit and a dotted blue line representing the current gap fee:
+The above code chunk creates a plot like this, with a dashed red line at 'zero' profit and a dotted blue line representing the current mean gap fee:
 
 ![](images/profit_gap.png)
 
 #### Different previous gap-billing proportion
 
-Likewise, we can examine the effect on net benefit through a range of different proportion of patients being privately billed prior to adopting universal bulk-billing. This graph is based on the second example.
+Likewise, we can examine the effect on net benefit through a range of different proportion of patients being concessionally bulk-billed prior to adopting universal bulk-billing. This graph is based on the second example.
 
 ```{webr-r}
 # note, depends on the previous code blocks already having been 'run'! 
@@ -581,8 +593,8 @@ library(tibble)
 library(ggplot2)
 library(ggthemes)
 
-# privately billed range from 0 to 100%
-privately_billed_range <- seq(from = 0, to = 100, by = 1)
+# concessional bulk billed range from 0 to 100%
+concessional_bulkbilled_range <- seq(from = 0, to = 100, by = 1)
 
 # this model is based on the second practice model described above
 # together with care plan item numbers
@@ -609,7 +621,7 @@ new_gap_fee <- c(
   rep(0, 3)
 )
 
-# Set the privately-billed proportion to 0.2 (20%), the gap fee to $35
+# Set the privately-billed proportion to 0.2 (20%), the mean gap fee to $35
 # and new service proportions
 new_practice_service_raw <- 
   # new A, B, C, D, E numbers
@@ -620,7 +632,7 @@ new_practice_service_proportions <-
   new_practice_service_raw/sum(new_practice_service_raw)
 
 profit_loss <- sapply(
-  X = privately_billed_range,
+  X = concessional_bulkbilled_range,
   function(x) {
     net_benefit(
       service_fees = new_service_fees,
@@ -628,12 +640,12 @@ profit_loss <- sapply(
       # set service proportions to longer consults
       service_proportion_bulk = new_practice_service_proportions,
       service_proportion_private = new_practice_service_proportions,
-      # set the gap fee to $35
+      # set the mean gap fee to $35
       gap_fee = new_gap_fee,
-      # set privately billed proportion to 'x'
+      # set concessional bulk-billed proportion to 'x'
       # divide by 100 to convert from
       # percentage to proportion
-      privately_billed = x/100,
+      concessional_bulkbilled = x/100,
       individual_bulkbill_incentive,
       individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
       monash_area,
@@ -653,13 +665,13 @@ ggplot(
   ) +
   geom_point() +
   labs(
-    x = "Privately-billed proportion (%)",
+    x = "Concessional bulk-billed proportion (%)",
     y = "Profit-loss ($)"
   ) +
   ggtitle("Net benefit to practice, per service") +
   geom_vline(
     # our current proportion
-    xintercept = 20,
+    xintercept = 80,
     linetype = "dotted",
     color = "blue"
   ) +
@@ -675,7 +687,7 @@ ggplot(
 
 The above code block will produce a graph as below.
 
-![](images/profit_private_proportion.png)
+![](images/profit_concessional_bulkbilled_proportion.png)
 
 #### Heatmaps of profit vs gap-fee and proportion privately-billed
 
@@ -697,10 +709,10 @@ library(plotly)
 library(ggplot2)
 library(dplyr)
 
-# gap fees from $0 to $60
+# mean gap fees from $0 to $60
 gap_fee_range <- seq(from = 0, to = 70, by = 1)
 # privately billed range from 0 to 100%
-privately_billed_range <- seq(from = 0, to = 100, by = 1)
+concessional_bulkbilled_range <- seq(from = 0, to = 100, by = 1)
 
 # this model is based on the first practice model described above
 # together with care plan item numbers
@@ -742,16 +754,16 @@ new_practice_service_proportions <-
 
 profit_loss <- tibble(
   gap = numeric(), 
-  private_billed = numeric(), 
+  concessional_bulkbilled = numeric(), 
   profit = numeric()
 )
 
 for (x in gap_fee_range) {
-  for (y in privately_billed_range) {
+  for (y in concessional_bulkbilled_range) {
     new_gap_fee <- c(
       rep(x, length((new_fee_names)))
-      # the same gap fee charged for every item, including GPMP/TCA/GPMPRV items
-      # a simplified approach would use the 'average' gap fee charged
+      # the same mean gap fee charged for every item, including GPMP/TCA/GPMPRV items
+      # a simplified approach would use the 'average' mean gap fee charged
       # for all relevant items
     )
     profit <- net_benefit(
@@ -760,18 +772,18 @@ for (x in gap_fee_range) {
       # set service proportions to longer consults
       service_proportion_bulk = new_practice_service_proportions,
       service_proportion_private = new_practice_service_proportions,
-      # set the gap fee to $35
+      # set the mean gap fee to $35
       gap_fee = new_gap_fee,
-      # set privately billed proportion to 'x'
+      # set concessional bulk-billed proportion to 'x'
       # divide by 100 to convert from
       # percentage to proportion
-      privately_billed = y/100,
+      concessional_bulkbilled = y/100,
       individual_bulkbill_incentive,
       individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
       monash_area,
       universal_bulkbill_incentive
     )
-    profit_loss <- add_row(profit_loss, gap = x, private_billed = y, profit = profit)
+    profit_loss <- add_row(profit_loss, gap = x, concessional_bulkbilled = y, profit = profit)
   }
 }
 
@@ -779,10 +791,10 @@ for (x in gap_fee_range) {
 # you will need to copy this code (and all the pre-requisites)
 # into a 'R/RStudio' and run it yourself :)
 fig_plotly_3d <- plot_ly(
-  data = profit_loss, x = ~gap, y = ~private_billed, z = ~profit,
+  data = profit_loss, x = ~gap, y = ~concessional_bulkbilled, z = ~profit,
   type = "scatter3d", mode = "markers",
   hovertemplate = paste(
-    "Gap fee: <b>%{x}</b><br>",
+    "Mean Gap fee: <b>$%{x}</b><br>",
     "Private: <b>%{y}</b>%<br>",
     "Profit: <b>%{z:$.2f}</b>",
     "<extra></extra>"
@@ -794,10 +806,13 @@ fig_plotly_3d <- plot_ly(
     line = list(width = 1, color = "DarkSlateGrey")) 
   ) |>
   layout(
-    title = "Profit-loss according to gap fee and proportion privately-billed",
+    title = "Profit-loss according to mean gap fee and proportion privately-billed",
     scene = list(
-      xaxis = list(title = list(text = "Gap fee ($)")),
-      yaxis = list(title = list(text = "Privately-billed (%)")),
+      xaxis = list(title = list(text = "Mean Gap fee ($)")),
+      yaxis = list(
+        title = list(text = "Concessional bulk-billed (%)"),
+        autorange = "reversed"
+      ),
       zaxis = list(title = list(text = "Net benefit per service ($)"))
     )
   )
@@ -807,7 +822,7 @@ fig_plotly_3d <- plot_ly(
 # into a 'R/RStudio' and run it yourself :)
 fig_ggplotly <- ggplot(
   data = profit_loss,
-  aes(x = gap, y = private_billed))+
+  aes(x = gap, y = concessional_bulkbilled))+
   geom_point(
     aes(fill = profit),
     size = 4, shape = 22, stroke = 0
@@ -818,13 +833,13 @@ fig_ggplotly <- ggplot(
 
 fig_ggplot <- ggplot(
   data = profit_loss |> 
-    dplyr::filter(gap == (gap %/% 5 * 5), private_billed == (private_billed %/% 5 * 5)),
-  aes(x = gap, y = private_billed, fill = profit)) +
+    dplyr::filter(gap == (gap %/% 5 * 5), concessional_bulkbilled == (concessional_bulkbilled %/% 5 * 5)),
+  aes(x = gap, y = concessional_bulkbilled, fill = profit)) +
   theme_bw() + geom_tile() + 
   geom_text(aes(label=round(profit, 2)), size = 8/.pt) +
   labs(
-    x = "Gap fee ($)",
-    y = "Privately-billed (%)",
+    x = "Mean Gap fee ($)",
+    y = "Concessional bulk-billed (%)",
     fill = "Profit ($)"
   ) +
   scale_x_continuous(breaks = seq(from = 0, to = 70, by = 10)) +
@@ -874,7 +889,7 @@ service_proportion_bulk <- service_proportion_raw/sum(service_proportion_raw)
 colnames(service_proportion_bulk) <- c("proportion")
 service_proportion_private <- service_proportion_bulk
 
-# Set the gap fee for the individual service items A, B, C, D and E
+# Set the mean gap fee for the individual service items A, B, C, D and E
 # for patients who were privately billed
 # for simplicity, set to the same fee of $50
 gap_fee <- array(
@@ -883,10 +898,9 @@ gap_fee <- array(
   dimnames = list(fee_names, "gap")
 )
 
-# the proportion of patients who are charge the gap fee
-# i.e. privately billed
+# the proportion of patients who are concessional bulkbilled
 # set to 50%
-privately_billed <-  0.5
+concessional_bulkbilled <-  0.5
 
 # the bulk billing incentive, in dollars
 # varies by location
@@ -937,7 +951,7 @@ fee_mean <- function(
   service_proportion_bulk,
   service_proportion_private,
   gap_fee,
-  privately_billed,
+  concessional_bulkbilled,
   individual_bulkbill_incentive,
   individual_bulkbill_incentive_by_fee,
   monash_area
@@ -950,9 +964,9 @@ fee_mean <- function(
   # change row name to the fee names
   rownames(fee_bulkbill_incentive) <- fee_names
   
-  privately_billed *
+  (1 - concessional_bulkbilled) *
     sum(service_fees * service_proportion_private) +
-    (1 - privately_billed) *
+    (concessional_bulkbilled) *
     sum(service_fees * service_proportion_bulk) +
     # the calculation above could be simplified, of course!, to
     # sum(service_fees * service_proportion_private), but is kept
@@ -960,11 +974,11 @@ fee_mean <- function(
     
     # calculate (and add) the individual service bulk-billing incentive applied
     # to patients currently bulk-billed
-    (1 - privately_billed) * 
+    concessional_bulkbilled * 
     sum(service_proportion_private * fee_bulkbill_incentive) +
     
     # calculate (and add) the private 'gap' fee
-    privately_billed * sum(service_proportion_private * gap_fee)
+    (1 - concessional_bulkbilled) * sum(service_proportion_private * gap_fee)
 }
 
 net_benefit <- function(
@@ -979,7 +993,7 @@ net_benefit <- function(
   service_proportion_bulk,
   service_proportion_private,
   gap_fee,
-  privately_billed,
+  concessional_bulkbilled,
   individual_bulkbill_incentive,
   individual_bulkbill_incentive_by_fee,
   monash_area,
@@ -993,26 +1007,26 @@ net_benefit <- function(
   
   # calculate the universal bulk-bill incentive
   # for patients formerly privately-billed
-  privately_billed *
+  (1 - concessional_bulkbilled) *
     sum(service_fees * service_proportion_private) *
     universal_bulkbill_incentive +
     # calculate (and add) benefit for patients already bulk-billed
-    (1 - privately_billed) *
+    concessional_bulkbilled *
     sum(service_fees * service_proportion_bulk) *
     universal_bulkbill_incentive +
     
     # calculate (and add) the individual service bulk-billing incentive applied
     # to patients formerly privately-billed
-    privately_billed * sum(service_proportion_private * fee_bulkbill_incentive) -
+    (1 - concessional_bulkbilled) * sum(service_proportion_private * fee_bulkbill_incentive) -
     
     # calculate (and subtract) the loss from not charging a private 'gap' fee
-    privately_billed * sum(service_proportion_private * gap_fee)
+    (1 - concessional_bulkbilled) * sum(service_proportion_private * gap_fee)
 }
 
-# gap fees from $0 to $60
+# mean gap fees from $0 to $60
 gap_fee_range <- seq(from = 0, to = 70, by = 1)
 # privately billed range from 0 to 100%
-privately_billed_range <- seq(from = 0, to = 100, by = 1)
+concessional_bulkbilled_range <- seq(from = 0, to = 100, by = 1)
 
 # this model is based on the first practice model described above
 # together with care plan item numbers
@@ -1054,18 +1068,18 @@ new_practice_service_proportions <-
 
 profit_loss_practice_standard <- tibble(
   gap = numeric(), 
-  private_billed = numeric(), 
+  concessional_bulkbilled = numeric(), 
   current_fee_mean = numeric(),
   profit = numeric(),
   profit_rel = numeric(),
 )
 
 for (x in gap_fee_range) {
-  for (y in privately_billed_range) {
+  for (y in concessional_bulkbilled_range) {
     new_gap_fee <- c(
       rep(x, 5),
       rep(x, length((new_fee_names))-5)
-      # gap fee charged for ABCDE, $0 for all others
+      # mean gap fee charged for ABCDE, $0 for all others
     )
     
     current_fee_mean <- fee_mean(
@@ -1074,10 +1088,10 @@ for (x in gap_fee_range) {
       service_proportion_bulk = new_practice_service_proportions,
       service_proportion_private = new_practice_service_proportions,
       gap_fee = new_gap_fee,
-      # set privately billed proportion to 'y'
+      # set concessionally bulk-billed proportion to 'y'
       # divide by 100 to convert from
       # percentage to proportion
-      privately_billed = y/100,
+      concessional_bulkbilled = y/100,
       individual_bulkbill_incentive,
       individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
       monash_area
@@ -1089,10 +1103,10 @@ for (x in gap_fee_range) {
       service_proportion_bulk = new_practice_service_proportions,
       service_proportion_private = new_practice_service_proportions,
       gap_fee = new_gap_fee,
-      # set privately billed proportion to 'y'
+      # set concessional bulk-billed proportion to 'y'
       # divide by 100 to convert from
       # percentage to proportion
-      privately_billed = y/100,
+      concessional_bulkbilled = y/100,
       individual_bulkbill_incentive,
       individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
       monash_area,
@@ -1100,7 +1114,7 @@ for (x in gap_fee_range) {
     )
     profit_loss_practice_standard <- add_row(
       profit_loss_practice_standard,
-      gap = x, private_billed = y,
+      gap = x, concessional_bulkbilled = y,
       current_fee_mean = current_fee_mean,
       profit = profit,
       profit_rel = profit/current_fee_mean
@@ -1113,12 +1127,12 @@ for (x in gap_fee_range) {
 # into a 'R/RStudio' and run it yourself :)
 fig_plotly_3d <- plot_ly(
   data = profit_loss_practice_standard,
-  x = ~gap, y = ~private_billed, z = ~profit,
+  x = ~gap, y = ~concessional_bulkbilled, z = ~profit,
   text = ~profit_rel * 100, customdata = ~current_fee_mean,
   type = "scatter3d", mode = "markers",
   hovertemplate = paste(
-    "Gap fee: <b>%{x}</b><br>",
-    "Private-billed: <b>%{y}</b>%<br>",
+    "Mean Gap fee: <b>$%{x}</b><br>",
+    "Concessional bulk-billed: <b>%{y}</b>%<br>",
     "Current mean fee: <b>%{customdata:$.2f}</b><br>",
     "Profit: <b>%{z:$.2f}</b><br>",
     "Revenue change (%): <b>%{text:.0f}</b>%",
@@ -1131,10 +1145,13 @@ fig_plotly_3d <- plot_ly(
     line = list(width = 1, color = "DarkSlateGrey")) 
   ) |>
   layout(
-    title = "Profit-loss according to gap fee and proportion privately-billed",
+    title = "Profit-loss according to mean gap fee and proportion concessional bulkbilled",
     scene = list(
-      xaxis = list(title = list(text = "Gap fee ($)")),
-      yaxis = list(title = list(text = "Privately-billed (%)")),
+      xaxis = list(title = list(text = "Mean Gap fee ($)")),
+      yaxis = list(
+        title = list(text = "Concessional bulk-billed (%)"),
+        autorange = "reversed"
+      ),
       zaxis = list(title = list(text = "Net benefit per service ($)"))
     ),
     margin = list(r = 150)
@@ -1147,7 +1164,7 @@ fig_plotly_3d <- plot_ly(
 # into a 'R/RStudio' and run it yourself :)
 fig_ggplotly <- ggplot(
   data = profit_loss_practice_standard,
-  aes(x = gap, y = private_billed))+
+  aes(x = gap, y = concessional_bulkbilled))+
   geom_point(
     aes(fill = profit),
     size = 4, shape = 22, stroke = 0
@@ -1161,7 +1178,7 @@ fig_plotly_3d # show the 3D Plotly
 
   
 
-The following interactive plot is based on the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown}, with relatively long consults and low gap fees and did not charge gap-fees for care plans or health assessments for any patients. Again, the plot below cannot be changed 'in-browser', but you can recreate this plot if you copy the code into R/RStudio.
+The following interactive plot is based on the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown}, with relatively long consults and low mean gap fees and did not charge gap-fees for care plans or health assessments for any patients. Again, the plot below cannot be changed 'in-browser', but you can recreate this plot if you copy the code into R/RStudio.
 
 ```{r}
 #| echo: true
@@ -1183,18 +1200,18 @@ new_practice_service_proportions <-
 
 profit_loss <- tibble(
   gap = numeric(), 
-  private_billed = numeric(),
+  concessional_bulkbilled = numeric(),
   current_fee_mean = numeric(),
   profit = numeric(),
   profit_rel = character()
 )
 
 for (x in gap_fee_range) {
-  for (y in privately_billed_range) {
+  for (y in concessional_bulkbilled_range) {
     new_gap_fee <- c(
       rep(x, length((new_fee_names)))
-      # the same gap fee charged for every item, including GPMP/TCA/GPMPRV items
-      # a simplified approach would use the 'average' gap fee charged
+      # the same mean gap fee charged for every item, including GPMP/TCA/GPMPRV items
+      # a simplified approach would use the 'average' mean gap fee charged
       # for all relevant items
     )
     current_fee_mean <- fee_mean(
@@ -1204,10 +1221,10 @@ for (x in gap_fee_range) {
       service_proportion_bulk = new_practice_service_proportions,
       service_proportion_private = new_practice_service_proportions,
       gap_fee = new_gap_fee,
-      # set privately billed proportion to 'y'
+      # set concessional bulk-billed proportion to 'y'
       # divide by 100 to convert from
       # percentage to proportion
-      privately_billed = y/100,
+      concessional_bulkbilled = y/100,
       individual_bulkbill_incentive,
       individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
       monash_area
@@ -1219,10 +1236,10 @@ for (x in gap_fee_range) {
       service_proportion_bulk = new_practice_service_proportions,
       service_proportion_private = new_practice_service_proportions,
       gap_fee = new_gap_fee,
-      # set privately billed proportion to 'y'
+      # set concessional bulk-billed proportion to 'y'
       # divide by 100 to convert from
       # percentage to proportion
-      privately_billed = y/100,
+      concessional_bulkbilled = y/100,
       individual_bulkbill_incentive,
       individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
       monash_area,
@@ -1230,7 +1247,7 @@ for (x in gap_fee_range) {
     )
     profit_loss <- add_row(
       profit_loss,
-      gap = x, private_billed = y,
+      gap = x, concessional_bulkbilled = y,
       current_fee_mean = current_fee_mean,
       profit = profit, 
       profit_rel = formatC((profit / current_fee_mean * 100), digits = 0, format = "f")
@@ -1244,13 +1261,13 @@ for (x in gap_fee_range) {
 fig_ggplotly <- ggplot(
   data = profit_loss,
   aes(
-    x = gap, y = private_billed, 
+    x = gap, y = concessional_bulkbilled, 
     text = sprintf(
       paste(
-        "Gap: $%d<br>Private-billed: %d%%<br>Current fee mean: $%.2f<br>",
+        "Gap: $%d<br>Concessional bulk-billed: %d%%<br>Current fee mean: $%.2f<br>",
         "Profit: $%.2f<br>Revenue change (%%): %s%%", sep = ""
       ),
-      gap, private_billed, current_fee_mean, profit, profit_rel
+      gap, concessional_bulkbilled, current_fee_mean, profit, profit_rel
     )
   )) +
   geom_point(
@@ -1258,8 +1275,8 @@ fig_ggplotly <- ggplot(
     size = 4, shape = 22, stroke = 0
   ) +
   labs(
-    x = "Gap fee ($)",
-    y = "Privately-billed (%)",
+    x = "Mean Gap fee ($)",
+    y = "Concessional bulk-billed (%)",
     fill = "Profit ($)"
   ) +
   scale_fill_viridis_c(option = "turbo", direction = -1)
@@ -1304,18 +1321,18 @@ new_practice_service_proportions <-
 
 profit_loss <- tibble(
   gap = numeric(), 
-  private_billed = numeric(),
+  concessional_bulkbilled = numeric(),
   current_fee_mean = numeric(),
   profit = numeric(),
   profit_rel = numeric()
 )
 
 for (x in gap_fee_range) {
-  for (y in privately_billed_range) {
+  for (y in concessional_bulkbilled_range) {
     new_gap_fee <- c(
       rep(x, length((new_fee_names)))
-      # the same gap fee charged for every item, including GPMP/TCA/GPMPRV items
-      # a simplified approach would use the 'average' gap fee charged
+      # the same mean gap fee charged for every item, including GPMP/TCA/GPMPRV items
+      # a simplified approach would use the 'average' mean gap fee charged
       # for all relevant items
     )
     current_fee_mean <- fee_mean(
@@ -1325,10 +1342,10 @@ for (x in gap_fee_range) {
       service_proportion_bulk = new_practice_service_proportions,
       service_proportion_private = new_practice_service_proportions,
       gap_fee = new_gap_fee,
-      # set privately billed proportion to 'y'
+      # set concessional bulk-billed proportion to 'y'
       # divide by 100 to convert from
       # percentage to proportion
-      privately_billed = y/100,
+      concessional_bulkbilled = y/100,
       individual_bulkbill_incentive,
       individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
       monash_area
@@ -1340,10 +1357,10 @@ for (x in gap_fee_range) {
       service_proportion_bulk = new_practice_service_proportions,
       service_proportion_private = new_practice_service_proportions,
       gap_fee = new_gap_fee,
-      # set privately billed proportion to 'y'
+      # set concessional bulk-billed proportion to 'y'
       # divide by 100 to convert from
       # percentage to proportion
-      privately_billed = y/100,
+      concessional_bulkbilled = y/100,
       individual_bulkbill_incentive,
       individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
       monash_area,
@@ -1351,7 +1368,7 @@ for (x in gap_fee_range) {
     )
     profit_loss <- add_row(
       profit_loss,
-      gap = x, private_billed = y,
+      gap = x, concessional_bulkbilled = y,
       current_fee_mean = current_fee_mean,
       profit = profit, 
       profit_rel = profit / current_fee_mean * 100
@@ -1361,13 +1378,13 @@ for (x in gap_fee_range) {
 
 fig_ggplot <- ggplot(
   data = profit_loss |> 
-    dplyr::filter(gap == (gap %/% 5 * 5), private_billed == (private_billed %/% 5 * 5)),
-  aes(x = gap, y = private_billed, fill = profit_rel)) +
+    dplyr::filter(gap == (gap %/% 5 * 5), concessional_bulkbilled == (concessional_bulkbilled %/% 5 * 5)),
+  aes(x = gap, y = concessional_bulkbilled, fill = profit_rel)) +
   theme_bw() + geom_tile() + 
   geom_text(aes(label=round(profit_rel, 0)), size = 8/.pt) +
   labs(
-    x = "Gap fee ($)",
-    y = "Privately-billed (%)",
+    x = "Mean Gap fee ($)",
+    y = "Concessional bulk-billed (%)",
     fill = "Revenue change (%)"
   ) +
   scale_x_continuous(breaks = seq(from = 0, to = 70, by = 10)) +
@@ -1388,19 +1405,19 @@ Following is a 3D plot of percentage change in revenue as the result of adopting
 #| code-overflow: wrap
 #| results: asis
 # 3D plot of 'standard' Australian practice
-# percentage change in revenue vs pre-existing gap fee and 'private'-billing proportion
+# percentage change in revenue vs pre-existing mean gap fee and 'private'-billing proportion
 
 # the data underlying this plot cannot be dynamically changed in the web-browser
 # you will need to copy this code (and all the pre-requisites)
 # into 'R/RStudio' and run it yourself :)
 fig_plotly_3d <- plot_ly(
   data = profit_loss_practice_standard,
-  x = ~gap, y = ~private_billed, z = ~profit_rel * 100,
+  x = ~gap, y = ~concessional_bulkbilled, z = ~profit_rel * 100,
   text = ~profit, customdata = ~current_fee_mean,
   type = "scatter3d", mode = "markers",
   hovertemplate = paste(
-    "Gap fee: <b>%{x}</b><br>",
-    "Private-billed: <b>%{y}</b>%<br>",
+    "Mean Gap fee: <b>$%{x}</b><br>",
+    "Concessional bulk-billed: <b>%{y}</b>%<br>",
     "Current mean fee: <b>%{customdata:$.2f}</b><br>",
     "Profit: <b>%{text:$.2f}</b><br>",
     "Revenue change (%): <b>%{z:.0f}</b>%",
@@ -1413,10 +1430,13 @@ fig_plotly_3d <- plot_ly(
     line = list(width = 1, color = "DarkSlateGrey")) 
   ) |>
   layout(
-    title = "Revenue change (%) according to gap fee and proportion privately-billed",
+    title = "Revenue change (%) according to mean gap fee and proportion privately-billed",
     scene = list(
-      xaxis = list(title = list(text = "Gap fee ($)")),
-      yaxis = list(title = list(text = "Privately-billed (%)")),
+      xaxis = list(title = list(text = "Mean Gap fee ($)")),
+      yaxis = list(
+        title = list(text = "Concessional bulk-billed (%)"),
+        autorange = "reversed"
+      ),
       zaxis = list(title = list(text = "Revenue change (%)"))
     ),
     margin = list(r = 150)
