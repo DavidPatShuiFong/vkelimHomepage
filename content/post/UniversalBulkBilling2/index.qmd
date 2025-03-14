@@ -45,21 +45,21 @@ The proposal to encourage general practices to 'bulk-bill' consisted of two part
 
 The government has released [case examples](https://www.health.gov.au/sites/default/files/2025-02/strengthening-medicare-with-more-bulk-billing.pdf) of practices which would all financially benefit from the universal bulk-billing incentives proposal. [Not all real general practices have considered the incentives proposed to be attractive](https://www.medicalrepublic.com.au/tell-dohac-theyre-dreaming-re-bulk-billing-calculations-estimates/114770), however. The [benefit to real practices may be more nuanced](https://www.medicalrepublic.com.au/how-the-new-bulk-billing-offer-is-okay-bad-and-ugly/114856), depending on current private billing levels and current fees charged over the government-set price.
 
-This model demonstrates the effect of pre-existing gap-fees, the proportion of patients which would normally be privately-billed and the inclusion of different non-referred general practice service items into the estimated profitability of adopting the proposed bulk-bill incentive program.
+This model demonstrates the effect of pre-existing gap-fees, the proportion of patients which would normally be privately-billed and the inclusion of different non-referred general practice service items into the estimated benefit-loss of adopting the proposed bulk-bill incentive program.
 
 Two examples are presented, followed by detailed description of the model and model variations.
 
 ### Practice 1, limited item number inclusion
 
-The first example practice currently concessionally bulk-bills (bulk-bills with the benefit of bulk-billing incentive payments) 50% of its patients. The profit-loss calculation is based on just a few item numbers ('A', 'B', 'C', 'D' and 'E'). The graph below demonstrates the effect on net-profitability of adopting the bulk-billing incentives, depending on the private 'gap-fee' charged by the practice (to those patients who were not bulk-billed *or* do not qualify for the current bulk-billing incentive payments) prior to adopting the universal-bulk-billing incentives. The light-blue vertical dotted line represents the net-profitability (-8.23 per service) if the practice charged an average gap-fee of $50.
+The first example practice currently concessionally bulk-bills (bulk-bills with the benefit of bulk-billing incentive payments) 50% of its patients. The benefit-loss calculation is based on just a few item numbers ('A', 'B', 'C', 'D' and 'E'). The graph below demonstrates the effect on net-benefit of adopting the bulk-billing incentives, depending on the private 'gap-fee' charged by the practice (to those patients who were not bulk-billed *or* do not qualify for the current bulk-billing incentive payments) prior to adopting the universal-bulk-billing incentives. The light-blue vertical dotted line represents the net-benefit (-8.23 per service) if the practice charged an average gap-fee of $50.
 
 ![](images/profit_gap.png)
 
 ### Practice 2, low gap-fee, care-plan item numbers included
 
-This example practice charges a low (mean) private gap-fee of $35, which applies to every person who is not bulk-billed or does not have access to current bulk-billing incentive rebates. The profit-loss calculation is based on both standard numbers ('A', 'B', 'C', 'D' and 'E') and care-plan item numbers. This practice did not charge a gap-fee at all for care-plan item numbers, even for patients who did not have access to to current bulk-billing incentive rebates. The graph below demonstrates the effect on net-profitability of the adopting the bulk-billing incentives, depending on the pre-existing proportion of patients who were concessionally bulk-billed (with the benefit of current bulk-billing incentives) before adopting the universal-bulk-billing incentives.
+This example practice charges a low (mean) private gap-fee of $35, which applies to every person who is not bulk-billed or does not have access to current bulk-billing incentive rebates. The benefit-loss calculation is based on both standard numbers ('A', 'B', 'C', 'D' and 'E') and care-plan item numbers. This practice did not charge a gap-fee at all for care-plan item numbers, even for patients who did not have access to to current bulk-billing incentive rebates. The graph below demonstrates the effect on net-benefit of the adopting the bulk-billing incentives, depending on the pre-existing proportion of patients who were concessionally bulk-billed (with the benefit of current bulk-billing incentives) before adopting the universal-bulk-billing incentives.
 
-The light-blue vertical dotted line represents the net-profitability (6.55 per service) if 80% of the practice population was concessionally bulk-billed.
+The light-blue vertical dotted line represents the net-benefit (6.55 per service) if 80% of the practice population was concessionally bulk-billed.
 
 ![](images/profit_concessional_bulkbilled_proportion.png)
 
@@ -252,7 +252,7 @@ fee_bulkbill_incentive
 
 We can now calculate the average benefit per patient if the practice adopts universal bulk-billing.
 
-If you 'Run Code' the block below With the default settings of 50% of patients are concessionally bulk-billed and a mean gap fee of 50, the profit-per-patient is shown as `-8.23`, i.e. a loss of 8.23 compared to the current mean fee of `86.28`.
+If you 'Run Code' the block below With the default settings of 50% of patients are concessionally bulk-billed and a mean gap fee of 50, the benefit-per-patient is shown as `-8.23`, i.e. a loss of 8.23 compared to the current mean fee of `86.28`.
 
 **Note that 'Run Code' below will not work unless the previous code blocks have already been 'Run'!!**
 
@@ -371,7 +371,7 @@ profit_loss <- net_benefit(
 
 # Show the value of average net_benefit
 paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
-paste("Profit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
+paste("Benefit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
 ```
 
 #### Modifying the model for a different practice
@@ -425,10 +425,10 @@ profit_loss <- net_benefit(
 
 # Show the value of average net_benefit
 paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
-paste("Profit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
+paste("Benefit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
 ```
 
-If the mean gap fee is set to 35, the average consult length is longer and 80% of patients are concessionally bulk-billed, the practice can expect an average profit of `5.37` per service more than the current mean fee of `89.91`. Note that this practice has a higher current mean fee than the first practice, but longer consultation times would likely result in a lower fee-rate per hour.
+If the mean gap fee is set to 35, the average consult length is longer and 80% of patients are concessionally bulk-billed, the practice can expect a mean benefit of `5.37` per service more than the current mean fee of `89.91`. Note that this practice has a higher current mean fee than the first practice, but longer consultation times would likely result in a lower fee-rate per hour.
 
 #### Including care plan item numbers {#including-care-plan-item-numbers}
 
@@ -436,7 +436,7 @@ The ['Strengthening Medicare with more bulk billing' information for GP provider
 
 *Model limitation - It is expected that the service item numbers and descriptors for general practice care-plans (721, 723 and 732) will change late in 2025. This model assumes that the fee-for-service revenue for the practice through care-plans will remain similar after the change in care-plan services items occurs.*
 
-Compared to the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown} described above, adding care plan item numbers increases the average profit from `5.37` to `6.55` per service. The current mean fee has also risen, from `89.91` to `94.43`, reflecting the higher value of service items included.
+Compared to the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown} described above, adding care plan item numbers increases the mean benefit from `5.37` to `6.55` per service. The current mean fee has also risen, from `89.91` to `94.43`, reflecting the higher value of service items included.
 
 ```{webr-r}
 # note, depends on the previous code blocks already having been 'run'! 
@@ -505,14 +505,14 @@ profit_loss <- net_benefit(
 
 # Show the value of average net_benefit
 paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
-paste("Profit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
+paste("Benefit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
 ```
 
 ### Graphing the benefit
 
 #### Different mean gap fees
 
-We can look at the effect on profit-loss by looking at a range of different mean gap fees. This graph is based on the first, original, example.
+We can look at the effect on benefit-loss by looking at a range of different mean gap fees. This graph is based on the first, original, example.
 
 ```{webr-r}
 # note, depends on the previous code blocks already having been 'run'! 
@@ -560,7 +560,7 @@ ggplot(
   geom_point() +
   labs(
     x = "Mean Gap fee ($)",
-    y = "Profit-loss ($)"
+    y = "Benefit-loss ($)"
   ) +
   ggtitle("Net benefit to practice, per service") +
   geom_vline(
@@ -570,7 +570,7 @@ ggplot(
     color = "blue"
   ) +
   geom_hline(
-    # zero profit-loss line
+    # zero benefit-loss line
     yintercept = 0,
     linetype = "dashed",
     color = "red",
@@ -579,7 +579,7 @@ ggplot(
   theme_economist()
 ```
 
-The above code chunk creates a plot like this, with a dashed red line at 'zero' profit and a dotted blue line representing the current mean gap fee:
+The above code chunk creates a plot like this, with a dashed red line at 'zero' benefit and a dotted blue line representing the current mean gap fee:
 
 ![](images/profit_gap.png)
 
@@ -666,7 +666,7 @@ ggplot(
   geom_point() +
   labs(
     x = "Concessional bulk-billed proportion (%)",
-    y = "Profit-loss ($)"
+    y = "Benefit-loss ($)"
   ) +
   ggtitle("Net benefit to practice, per service") +
   geom_vline(
@@ -676,7 +676,7 @@ ggplot(
     color = "blue"
   ) +
   geom_hline(
-    # zero profit-loss line
+    # zero benefit-loss line
     yintercept = 0,
     linetype = "dashed",
     color = "red",
@@ -689,9 +689,9 @@ The above code block will produce a graph as below.
 
 ![](images/profit_concessional_bulkbilled_proportion.png)
 
-#### Heatmaps of profit vs gap-fee and proportion privately-billed
+#### Heatmaps of benefit vs gap-fee and proportion privately-billed
 
-We can draw a heatmap of profit vs gap-fee and proportion privately-billed.
+We can draw a heatmap of benefit vs gap-fee and proportion privately-billed.
 
 The data in these plots are based on ABCDE/care plan/health assessment and mental health care plan item proportions as found on Medicare statistics for 2024 i.e. the 'mythical average' general practice. As usual, you can modify the proportion yourself in the code below.
 
@@ -796,7 +796,7 @@ fig_plotly_3d <- plot_ly(
   hovertemplate = paste(
     "Mean Gap fee: <b>$%{x}</b><br>",
     "Private: <b>%{y}</b>%<br>",
-    "Profit: <b>%{z:$.2f}</b>",
+    "Benefit: <b>%{z:$.2f}</b>",
     "<extra></extra>"
   ),
   marker = list(
@@ -806,7 +806,7 @@ fig_plotly_3d <- plot_ly(
     line = list(width = 1, color = "DarkSlateGrey")) 
   ) |>
   layout(
-    title = "Profit-loss according to mean gap fee and proportion privately-billed",
+    title = "Benefit-loss according to mean gap fee and proportion privately-billed",
     scene = list(
       xaxis = list(title = list(text = "Mean Gap fee ($)")),
       yaxis = list(
@@ -840,7 +840,7 @@ fig_ggplot <- ggplot(
   labs(
     x = "Mean Gap fee ($)",
     y = "Concessional bulk-billed (%)",
-    fill = "Profit ($)"
+    fill = "Benefit ($)"
   ) +
   scale_x_continuous(breaks = seq(from = 0, to = 70, by = 10)) +
   scale_y_continuous(breaks = seq(from = 0, to = 100, by = 10)) +
@@ -1134,8 +1134,8 @@ fig_plotly_3d <- plot_ly(
     "Mean Gap fee: <b>$%{x}</b><br>",
     "Concessional bulk-billed: <b>%{y}</b>%<br>",
     "Current mean fee: <b>%{customdata:$.2f}</b><br>",
-    "Profit: <b>%{z:$.2f}</b><br>",
-    "Revenue change (%): <b>%{text:.0f}</b>%",
+    "Benefit: <b>%{z:$.2f}</b><br>",
+    "Revenue change: <b>%{text:.0f}</b>%",
     "<extra></extra>"
   ),
   marker = list(
@@ -1145,7 +1145,7 @@ fig_plotly_3d <- plot_ly(
     line = list(width = 1, color = "DarkSlateGrey")) 
   ) |>
   layout(
-    title = "Profit-loss according to mean gap fee and proportion concessional bulkbilled",
+    title = "Benefit-loss according to mean gap fee and proportion concessional bulkbilled",
     scene = list(
       xaxis = list(title = list(text = "Mean Gap fee ($)")),
       yaxis = list(
@@ -1265,7 +1265,7 @@ fig_ggplotly <- ggplot(
     text = sprintf(
       paste(
         "Gap: $%d<br>Concessional bulk-billed: %d%%<br>Current fee mean: $%.2f<br>",
-        "Profit: $%.2f<br>Revenue change (%%): %s%%", sep = ""
+        "Benefit: $%.2f<br>Revenue change (%%): %s%%", sep = ""
       ),
       gap, concessional_bulkbilled, current_fee_mean, profit, profit_rel
     )
@@ -1277,7 +1277,7 @@ fig_ggplotly <- ggplot(
   labs(
     x = "Mean Gap fee ($)",
     y = "Concessional bulk-billed (%)",
-    fill = "Profit ($)"
+    fill = "Benefit ($)"
   ) +
   scale_fill_viridis_c(option = "turbo", direction = -1)
 # to look at this plot, either 'fig_ggplotly' in R/RStudio or
@@ -1287,7 +1287,7 @@ ggplotly(fig_ggplotly, tooltip = "text") |> # show the ggplotly
   layout(margin = list(r = 150))
 ```
 
-The interactive profit-loss heatmap above is reproduced in a more conventional table format below.
+The interactive benefit-loss heatmap above is reproduced in a more conventional table format below.
 
 ![](images/netbenefit_dg_heatmap.png)
 
@@ -1307,7 +1307,7 @@ The following table is based on the `[second practice model]({{< ref "#modifying
 #| warning: 'false'
 #| message: 'false'
 #| editor-max-height: 300
-# show profit-loss as a percentage change in mean fee
+# show benefit-loss as a percentage change in mean fee
 
 new_practice_service_raw <- 
   # A, B, C, D, E service items
@@ -1419,8 +1419,8 @@ fig_plotly_3d <- plot_ly(
     "Mean Gap fee: <b>$%{x}</b><br>",
     "Concessional bulk-billed: <b>%{y}</b>%<br>",
     "Current mean fee: <b>%{customdata:$.2f}</b><br>",
-    "Profit: <b>%{text:$.2f}</b><br>",
-    "Revenue change (%): <b>%{z:.0f}</b>%",
+    "Benefit: <b>%{text:$.2f}</b><br>",
+    "Revenue change: <b>%{z:.0f}</b>%",
     "<extra></extra>"
   ),
   marker = list(
