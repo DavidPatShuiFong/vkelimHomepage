@@ -23,7 +23,9 @@ filters:
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
 
-*Updated from [Calculating the practice benefit of universal bulk-billing](../UniversalBulkBilling). Updated model includes MBS Service Level A and, optionally, care plans (721/723/732)*
+*Updated from [Calculating the practice benefit of universal bulk-billing](../UniversalBulkBilling). Updated model includes MBS Service Level A and, optionally, care plans (721/723/732).*
+
+*Dashboard available on [ShinyApps](https://davidfong.shinyapps.io/universalbulkbilling).*
 
 ## Universal bulk-billing incentive
 
@@ -711,7 +713,7 @@ library(dplyr)
 
 # mean gap fees from $0 to $60
 gap_fee_range <- seq(from = 0, to = 70, by = 1)
-# privately billed range from 0 to 100%
+# concessional bulk-billed range from 0 to 100%
 concessional_bulkbilled_range <- seq(from = 0, to = 100, by = 1)
 
 # this model is based on the first practice model described above
