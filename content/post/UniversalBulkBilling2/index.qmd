@@ -25,7 +25,7 @@ filters:
 
 *Updated from [Calculating the practice benefit of universal bulk-billing](../UniversalBulkBilling). Updated model includes MBS Service Level A and, optionally, care plans (721/723/732).*
 
-*Dashboard available on [ShinyApps](https://davidfong.shinyapps.io/universalbulkbilling).*
+*Dashboard available on [Amazon Web Services](https://shiny.davidfong.org/universalbulkbilling/) and [ShinyApps](https://davidfong.shinyapps.io/universalbulkbilling).*
 
 ## Universal bulk-billing incentive
 
