@@ -358,7 +358,7 @@ current_fee_mean <- fee_mean(
   monash_area
 )
 
-profit_loss <- net_benefit(
+benefit_loss <- net_benefit(
   service_fees,
   fee_names,
   service_proportion_bulk,
@@ -373,7 +373,7 @@ profit_loss <- net_benefit(
 
 # Show the value of average net_benefit
 paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
-paste("Benefit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
+paste("Benefit-loss: ", formatC(benefit_loss, digits = 2, format = "f"))
 ```
 
 #### Modifying the model for a different practice
@@ -409,7 +409,7 @@ current_fee_mean <- fee_mean(
   monash_area
 )
 
-profit_loss <- net_benefit(
+benefit_loss <- net_benefit(
   service_fees,
   fee_names,
   service_proportion_bulk = new_practice_service_proportions,
@@ -427,7 +427,7 @@ profit_loss <- net_benefit(
 
 # Show the value of average net_benefit
 paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
-paste("Benefit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
+paste("Benefit-loss: ", formatC(benefit_loss, digits = 2, format = "f"))
 ```
 
 If the mean gap fee is set to 35, the average consult length is longer and 80% of patients are concessionally bulk-billed, the practice can expect a mean benefit of `5.37` per service more than the current mean fee of `89.91`. Note that this practice has a higher current mean fee than the first practice, but longer consultation times would likely result in a lower fee-rate per hour.
@@ -490,7 +490,7 @@ current_fee_mean <- fee_mean(
   monash_area
 )
 
-profit_loss <- net_benefit(
+benefit_loss <- net_benefit(
   service_fees = new_service_fees,
   fee_names = new_fee_names,
   service_proportion_bulk = new_practice_service_proportions,
@@ -507,7 +507,7 @@ profit_loss <- net_benefit(
 
 # Show the value of average net_benefit
 paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
-paste("Benefit-loss: ", formatC(profit_loss, digits = 2, format = "f"))
+paste("Benefit-loss: ", formatC(benefit_loss, digits = 2, format = "f"))
 ```
 
 ### Graphing the benefit
@@ -531,7 +531,7 @@ library(ggthemes)
 # mean gap fees from $0 to $60
 gap_fee_range <- seq(from = 0, to = 60, by = 1)
 
-profit_loss <- sapply(
+benefit_loss <- sapply(
   X = gap_fee_range,
   function(x) {
     net_benefit(
@@ -550,14 +550,14 @@ profit_loss <- sapply(
   }
 )
 
-gap_vs_profit <- tibble(
+gap_vs_benefit <- tibble(
   gap = gap_fee_range,
-  profit_loss = profit_loss
+  benefit_loss = benefit_loss
 )
 
 ggplot(
-  data = gap_vs_profit, 
-  mapping = aes(x = gap, y = profit_loss)
+  data = gap_vs_benefit, 
+  mapping = aes(x = gap, y = benefit_loss)
   ) +
   geom_point() +
   labs(
@@ -633,7 +633,7 @@ new_practice_service_raw <-
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
-profit_loss <- sapply(
+benefit_loss <- sapply(
   X = concessional_bulkbilled_range,
   function(x) {
     net_benefit(
@@ -656,14 +656,14 @@ profit_loss <- sapply(
   }
 )
 
-gap_vs_profit <- tibble(
-  gap = privately_billed_range,
-  profit_loss = profit_loss
+concessional_bulkbilled_vs_benefit <- tibble(
+  concessional_bulkbilled = concessional_bulkbilled_range,
+  benefit_loss = benefit_loss
 )
 
 ggplot(
-  data = gap_vs_profit, 
-  mapping = aes(x = gap, y = profit_loss)
+  data = concessional_bulkbilled_vs_benefit, 
+  mapping = aes(x = concessional_bulkbilled, y = benefit_loss)
   ) +
   geom_point() +
   labs(
@@ -754,10 +754,10 @@ new_practice_service_raw <-
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
-profit_loss <- tibble(
+benefit_loss <- tibble(
   gap = numeric(), 
   concessional_bulkbilled = numeric(), 
-  profit = numeric()
+  benefit = numeric()
 )
 
 for (x in gap_fee_range) {
@@ -768,7 +768,7 @@ for (x in gap_fee_range) {
       # a simplified approach would use the 'average' mean gap fee charged
       # for all relevant items
     )
-    profit <- net_benefit(
+    benefit <- net_benefit(
       service_fees = new_service_fees,
       fee_names = new_fee_names,
       # set service proportions to longer consults
@@ -785,7 +785,7 @@ for (x in gap_fee_range) {
       monash_area,
       universal_bulkbill_incentive
     )
-    profit_loss <- add_row(profit_loss, gap = x, concessional_bulkbilled = y, profit = profit)
+    benefit_loss <- add_row(benefit_loss, gap = x, concessional_bulkbilled = y, benefit = benefit)
   }
 }
 
@@ -793,7 +793,7 @@ for (x in gap_fee_range) {
 # you will need to copy this code (and all the pre-requisites)
 # into a 'R/RStudio' and run it yourself :)
 fig_plotly_3d <- plot_ly(
-  data = profit_loss, x = ~gap, y = ~concessional_bulkbilled, z = ~profit,
+  data = benefit_loss, x = ~gap, y = ~concessional_bulkbilled, z = ~benefit,
   type = "scatter3d", mode = "markers",
   hovertemplate = paste(
     "Mean Gap fee: <b>$%{x}</b><br>",
@@ -802,7 +802,7 @@ fig_plotly_3d <- plot_ly(
     "<extra></extra>"
   ),
   marker = list(
-    color = ~profit,
+    color = ~benefit,
     colorscale = "Rainbow",
     showscale = TRUE,
     line = list(width = 1, color = "DarkSlateGrey")) 
@@ -823,10 +823,10 @@ fig_plotly_3d <- plot_ly(
 # you will need to copy this code (and all the pre-requisites)
 # into a 'R/RStudio' and run it yourself :)
 fig_ggplotly <- ggplot(
-  data = profit_loss,
+  data = benefit_loss,
   aes(x = gap, y = concessional_bulkbilled))+
   geom_point(
-    aes(fill = profit),
+    aes(fill = benefit),
     size = 4, shape = 22, stroke = 0
   ) +
   scale_fill_viridis_c(option = "turbo", direction = -1)
@@ -834,11 +834,11 @@ fig_ggplotly <- ggplot(
 # 'ggplotly(fig_ggplotly)'
 
 fig_ggplot <- ggplot(
-  data = profit_loss |> 
+  data = benefit_loss |> 
     dplyr::filter(gap == (gap %/% 5 * 5), concessional_bulkbilled == (concessional_bulkbilled %/% 5 * 5)),
-  aes(x = gap, y = concessional_bulkbilled, fill = profit)) +
+  aes(x = gap, y = concessional_bulkbilled, fill = benefit)) +
   theme_bw() + geom_tile() + 
-  geom_text(aes(label=round(profit, 2)), size = 8/.pt) +
+  geom_text(aes(label=round(benefit, 2)), size = 8/.pt) +
   labs(
     x = "Mean Gap fee ($)",
     y = "Concessional bulk-billed (%)",
@@ -1068,12 +1068,12 @@ new_practice_service_raw <-
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
-profit_loss_practice_standard <- tibble(
+benefit_loss_practice_standard <- tibble(
   gap = numeric(), 
   concessional_bulkbilled = numeric(), 
   current_fee_mean = numeric(),
-  profit = numeric(),
-  profit_rel = numeric(),
+  benefit = numeric(),
+  benefit_rel = numeric(),
 )
 
 for (x in gap_fee_range) {
@@ -1099,7 +1099,7 @@ for (x in gap_fee_range) {
       monash_area
     )
 
-    profit <- net_benefit(
+    benefit <- net_benefit(
       service_fees = new_service_fees,
       fee_names = new_fee_names,
       service_proportion_bulk = new_practice_service_proportions,
@@ -1114,12 +1114,12 @@ for (x in gap_fee_range) {
       monash_area,
       universal_bulkbill_incentive
     )
-    profit_loss_practice_standard <- add_row(
-      profit_loss_practice_standard,
+    benefit_loss_practice_standard <- add_row(
+      benefit_loss_practice_standard,
       gap = x, concessional_bulkbilled = y,
       current_fee_mean = current_fee_mean,
-      profit = profit,
-      profit_rel = profit/current_fee_mean
+      benefit = benefit,
+      benefit_rel = benefit/current_fee_mean
     )
   }
 }
@@ -1128,9 +1128,9 @@ for (x in gap_fee_range) {
 # you will need to copy this code (and all the pre-requisites)
 # into a 'R/RStudio' and run it yourself :)
 fig_plotly_3d <- plot_ly(
-  data = profit_loss_practice_standard,
-  x = ~gap, y = ~concessional_bulkbilled, z = ~profit,
-  text = ~profit_rel * 100, customdata = ~current_fee_mean,
+  data = benefit_loss_practice_standard,
+  x = ~gap, y = ~concessional_bulkbilled, z = ~benefit,
+  text = ~benefit_rel * 100, customdata = ~current_fee_mean,
   type = "scatter3d", mode = "markers",
   hovertemplate = paste(
     "Mean Gap fee: <b>$%{x}</b><br>",
@@ -1141,7 +1141,7 @@ fig_plotly_3d <- plot_ly(
     "<extra></extra>"
   ),
   marker = list(
-    color = ~profit,
+    color = ~benefit,
     colorscale = "Rainbow",
     showscale = TRUE,
     line = list(width = 1, color = "DarkSlateGrey")) 
@@ -1165,10 +1165,10 @@ fig_plotly_3d <- plot_ly(
 # you will need to copy this code (and all the pre-requisites)
 # into a 'R/RStudio' and run it yourself :)
 fig_ggplotly <- ggplot(
-  data = profit_loss_practice_standard,
+  data = benefit_loss_practice_standard,
   aes(x = gap, y = concessional_bulkbilled))+
   geom_point(
-    aes(fill = profit),
+    aes(fill = benefit),
     size = 4, shape = 22, stroke = 0
   ) +
   scale_fill_viridis_c(option = "turbo", direction = -1)
@@ -1200,12 +1200,12 @@ new_practice_service_raw <-
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
-profit_loss <- tibble(
+benefit_loss <- tibble(
   gap = numeric(), 
   concessional_bulkbilled = numeric(),
   current_fee_mean = numeric(),
-  profit = numeric(),
-  profit_rel = character()
+  benefit = numeric(),
+  benefit_rel = character()
 )
 
 for (x in gap_fee_range) {
@@ -1231,7 +1231,7 @@ for (x in gap_fee_range) {
       individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
       monash_area
     )
-    profit <- net_benefit(
+    benefit <- net_benefit(
       service_fees = new_service_fees,
       fee_names = new_fee_names,
       # set service proportions to longer consults
@@ -1247,12 +1247,12 @@ for (x in gap_fee_range) {
       monash_area,
       universal_bulkbill_incentive
     )
-    profit_loss <- add_row(
-      profit_loss,
+    benefit_loss <- add_row(
+      benefit_loss,
       gap = x, concessional_bulkbilled = y,
       current_fee_mean = current_fee_mean,
-      profit = profit, 
-      profit_rel = formatC((profit / current_fee_mean * 100), digits = 0, format = "f")
+      benefit = benefit, 
+      benefit_rel = formatC((benefit / current_fee_mean * 100), digits = 0, format = "f")
     )
   }
 }
@@ -1261,19 +1261,19 @@ for (x in gap_fee_range) {
 # you will need to copy this code (and all the pre-requisites)
 # into a 'R/RStudio' and run it yourself :)
 fig_ggplotly <- ggplot(
-  data = profit_loss,
+  data = benefit_loss,
   aes(
     x = gap, y = concessional_bulkbilled, 
     text = sprintf(
       paste(
         "Gap: $%d<br>Concessional bulk-billed: %d%%<br>Current fee mean: $%.2f<br>",
-        "Benefit: $%.2f<br>Revenue change (%%): %s%%", sep = ""
+        "Benefit: $%.2f<br>Revenue change: %s%%", sep = ""
       ),
-      gap, concessional_bulkbilled, current_fee_mean, profit, profit_rel
+      gap, concessional_bulkbilled, current_fee_mean, benefit, benefit_rel
     )
   )) +
   geom_point(
-    aes(fill = profit),
+    aes(fill = benefit),
     size = 4, shape = 22, stroke = 0
   ) +
   labs(
@@ -1321,12 +1321,12 @@ new_practice_service_raw <-
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
-profit_loss <- tibble(
+benefit_loss <- tibble(
   gap = numeric(), 
   concessional_bulkbilled = numeric(),
   current_fee_mean = numeric(),
-  profit = numeric(),
-  profit_rel = numeric()
+  benefit = numeric(),
+  benefit_rel = numeric()
 )
 
 for (x in gap_fee_range) {
@@ -1352,7 +1352,7 @@ for (x in gap_fee_range) {
       individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
       monash_area
     )
-    profit <- net_benefit(
+    benefit <- net_benefit(
       service_fees = new_service_fees,
       fee_names = new_fee_names,
       # set service proportions to longer consults
@@ -1368,22 +1368,22 @@ for (x in gap_fee_range) {
       monash_area,
       universal_bulkbill_incentive
     )
-    profit_loss <- add_row(
-      profit_loss,
+    benefit_loss <- add_row(
+      benefit_loss,
       gap = x, concessional_bulkbilled = y,
       current_fee_mean = current_fee_mean,
-      profit = profit, 
-      profit_rel = profit / current_fee_mean * 100
+      benefit = benefit, 
+      benefit_rel = benefit / current_fee_mean * 100
     )
   }
 }
 
 fig_ggplot <- ggplot(
-  data = profit_loss |> 
+  data = benefit_loss |> 
     dplyr::filter(gap == (gap %/% 5 * 5), concessional_bulkbilled == (concessional_bulkbilled %/% 5 * 5)),
-  aes(x = gap, y = concessional_bulkbilled, fill = profit_rel)) +
+  aes(x = gap, y = concessional_bulkbilled, fill = benefit_rel)) +
   theme_bw() + geom_tile() + 
-  geom_text(aes(label=round(profit_rel, 0)), size = 8/.pt) +
+  geom_text(aes(label=round(benefit_rel, 0)), size = 8/.pt) +
   labs(
     x = "Mean Gap fee ($)",
     y = "Concessional bulk-billed (%)",
@@ -1413,9 +1413,9 @@ Following is a 3D plot of percentage change in revenue as the result of adopting
 # you will need to copy this code (and all the pre-requisites)
 # into 'R/RStudio' and run it yourself :)
 fig_plotly_3d <- plot_ly(
-  data = profit_loss_practice_standard,
-  x = ~gap, y = ~concessional_bulkbilled, z = ~profit_rel * 100,
-  text = ~profit, customdata = ~current_fee_mean,
+  data = benefit_loss_practice_standard,
+  x = ~gap, y = ~concessional_bulkbilled, z = ~benefit_rel * 100,
+  text = ~benefit, customdata = ~current_fee_mean,
   type = "scatter3d", mode = "markers",
   hovertemplate = paste(
     "Mean Gap fee: <b>$%{x}</b><br>",
@@ -1426,7 +1426,7 @@ fig_plotly_3d <- plot_ly(
     "<extra></extra>"
   ),
   marker = list(
-    color = ~profit,
+    color = ~benefit,
     colorscale = "Rainbow",
     showscale = TRUE,
     line = list(width = 1, color = "DarkSlateGrey")) 
