@@ -1528,7 +1528,7 @@ $$
 $$
 \small
 \begin{aligned}
-\text{where }b &= \text{proportion of patients bulk-billed concesionally (0-1)}\\\\\\
+\text{where }b &= \text{proportion of patients bulk-billed concessionally (0-1)}\\\\\\
 x &= \text{mean service fee}\\\\\\
 i &= \text{mean individual service bulk-billing incentive}\\\\\\
 g &= \text{mean gap-fee when patient not bulk-billed with incentive fee}\\\\\\
@@ -1597,7 +1597,7 @@ $$
 u &= \text{rebates (100%) plus quarterly bonus (12.5%)} = 1.125\\\\\\
 g &= \text{mean gap-fee when patient not bulk-billed with incentive fee}\\\\\\
 i &= \text{mean individual service bulk-billing incentive}\\\\\\
-b &= \text{proportion of patients bulk-billed concesionally (0-1)}\\\\\\
+b &= \text{proportion of patients bulk-billed concessionally (0-1)}\\\\\\
 \end{aligned}
 $$
 
