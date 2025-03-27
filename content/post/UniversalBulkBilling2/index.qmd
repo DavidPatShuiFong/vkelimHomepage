@@ -41,9 +41,11 @@ The proposal to encourage general practices to 'bulk-bill' consisted of two part
     - The government had provided *bulk-billing incentives* for general practitioners to bulk-bill patients previously deemed to benefit more from bulk-billing. The value of these incentives have been 7.15 to 21.35 dollars per service in urban areas.
     - Currently the bulk-billing incentive payment for individual consultations is only available to people, usually with less income or assets, who are [pensioners, recipients of a government-issued 'concession card' and children under the age of 16](https://www.ama.com.au/tas/bulk-billing-incentive-facts). The services which are bulk-billed and also qualify for the current bulk-billing incentive payment will be referred to as 'concessionally bulk-billed'.
     -   This bulk-billing incentive is paid with each individual consult
--   If the general practice agrees to bulk-bill all patients, i.e. universal bulk-billing, the government will pay the practice an additional 12.5% over and above the government-set price for each fee-for-service item.
-    -   The definition of which service items need to be 'bulk-billed', and which service items will attract the 15% bonus is not yet fully defined. The government-provided [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) and [RACGP FAQ](https://www.racgp.org.au/advocacy/advocacy-resources/medicare-announcement-member-faqs) suggests that consultation items A/B/C/D, mental health care plan and other GP non-referred attendances will attract the 12.5% bonus.
-    -   The 12.5% bonus is paid quarterly, together with the current quarterly practice incentive program (PIP) payments.
+-   If the general practice agrees to bulk-bill all patients, i.e. universal bulk-billing, the government will pay the practice an additional 12.5% over and above the government-set price for each fee-for-service item. This incentive payment is sometimes called a 'loading payment'.
+    - On 25th March 2025, the service items which needed to be bulk-billed, and attract the 'loading' payment were defined in the document [Bulk Blling Practice Incentive Program: Eligible Services](https://www.health.gov.au/resources/publications/bulk-billing-practice-incentive-program-eligible-services)
+    - The definition of which service items need to be 'bulk-billed', and which service items will attract the 12.5% loading was not initially fully defined in the government-provided [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) and [RACGP FAQ](https://www.racgp.org.au/advocacy/advocacy-resources/medicare-announcement-member-faqs), although they did suggest that consultation items A/B/C/D, mental health care plan and other GP non-referred attendances will attract the 12.5% loading.
+      - For this reason, and simplicity, the initial description of this model is constrained to a small number of service types. Later, the model is expanded to all major service numbers, and can be easily expanded to all service types.
+    - The 12.5% loading is paid quarterly, together with the current quarterly practice incentive program (PIP) payments.
 
 ## Will the proposed universal bulk-billing incentives be financially worthwhile for general practices?
 
@@ -75,8 +77,8 @@ An estimate of net benefit per service for a range of practices, assuming 'avera
 
 The heatmap table above helps demonstrate some of the definitions and assumptions in the presented model.
 
--   In the 'concessional bulk-billed 100%' row in the table above is demonstrated the effect of the universal-bulk-billing incentive scheme on a practice whose practice population all have health care cards etc., and the practice bulk-bills them all. In this case, no additional patients will qualify for the individual service item bulk-bill incentives, but the practice qualifies for the 12.5% bulk-billing incentive paid quarterly.
--   All patients who do *not* qualify the current bulk-bill incentive rebates are 'privately' billed, even if the 'gap fee' is zero dollars (i.e. no gap fee charged above the government rebate for the service item). In the heatmap table above, this is shown most starkly by the item in the top-left corner, where the practice 'privately' bills 100% of patients, with a gap fee of zero dollars. In this case, the practice can agree to receive the 12.5% bulk-billing incentive paid quarterly AND all patients will now potentially qualify for the individual service item bulk-bill incentive.
+-   In the 'concessional bulk-billed 100%' row in the table above is demonstrated the effect of the universal-bulk-billing incentive scheme on a practice whose practice population all have health care cards etc., and the practice bulk-bills them all. In this case, no additional patients will qualify for the individual service item bulk-bill incentives, but the practice qualifies for the 12.5% bulk-billing incentive 'loading' payment paid quarterly.
+-   All patients who do *not* qualify the current bulk-bill incentive rebates are 'privately' billed, even if the 'gap fee' is zero dollars (i.e. no gap fee charged above the government rebate for the service item). In the heatmap table above, this is shown most starkly by the item in the top-left corner, where the practice 'privately' bills 100% of patients, with a gap fee of zero dollars. In this case, the practice can agree to receive the 12.5% bulk-billing incentive loading payment paid quarterly AND all patients will now potentially qualify for the individual service item bulk-bill incentive.
 -   In practical terms, 'gap fee' in the heatmap table shown above is not the necessarily the 'nominal' gap fee for service items, but the mean gap fee charged when current individual service bulk-billing incentives do not apply. Which may be lower than the nominal gap fee, if lower gap fees are charged for certain services e.g. review appointments, care plans etc..
 
 Following sections will describe how the models were created.
@@ -123,7 +125,7 @@ $$
 
 'Bulk-billed' services includes only those bulk-billed service (no 'gap' payment) where the patient currently qualifies for bulk-billing incentive payments. 'Private' services include patients where a 'gap' fee is charged, but *also* includes services where the patient was charged no 'gap' fee, but does not currently qualify for bulk-billing incentive payments (but will in the future plan).
 
-If the practice agrees to universal bulk-billing, then all services which were previously 'bulk-billed' and previously 'private-billed' will benefit from the 12.5% universal bulk-billing incentive.
+If the practice agrees to universal bulk-billing, then all services which were previously 'bulk-billed' and previously 'private-billed' will benefit from the 12.5% universal bulk-billing incentive loading payment.
 
 For more discussion about the mathematical relationship between benefit-per-service, relative benefit and mean fees, mean gap-fees and proportion of existing services which currently receive individual bulk-billing incentives, see `['Further Mathematical exploration']({{< ref "#further-mathematical-exploration" >}})`{=markdown}
 
@@ -240,7 +242,7 @@ individual_bulkbill_incentive_by_fee <-
 # set the Monash area to the city
 monash_area <- "1"
 
-# universal bulk billing incentive
+# universal bulk billing incentive 'loading' payment
 # over the service fee
 # set to 12.5%
 universal_bulkbill_incentive <- 0.125
@@ -938,7 +940,7 @@ individual_bulkbill_incentive_by_fee <-
 # set the Monash area to the city
 monash_area <- "1"
 
-# universal bulk billing incentive
+# universal bulk billing incentive 'loading' payment
 # over the service fee
 # set to 12.5%
 universal_bulkbill_incentive <- 0.125
@@ -1547,7 +1549,7 @@ $$
 $$
 \small
 \begin{aligned}
-\text{where } u &= \text{rebates (100%) plus quarterly bonus (12.5%)} = 1.125\\\\\\
+\text{where } u &= \text{rebates (100%) plus quarterly loading payment (12.5%)} = 1.125\\\\\\
 x &= \text{ mean service fee}\\\\\\
 i &= \text{ mean individual service bulk-billing incentive}\\\\\\
 \end{aligned}
@@ -1594,7 +1596,7 @@ $$
 \small
 \begin{aligned}
 \text{where } x &= \text{mean service fee}\\\\\\
-u &= \text{rebates (100%) plus quarterly bonus (12.5%)} = 1.125\\\\\\
+u &= \text{rebates (100%) plus quarterly loading payment (12.5%)} = 1.125\\\\\\
 g &= \text{mean gap-fee when patient not bulk-billed with incentive fee}\\\\\\
 i &= \text{mean individual service bulk-billing incentive}\\\\\\
 b &= \text{proportion of patients bulk-billed concessionally (0-1)}\\\\\\
