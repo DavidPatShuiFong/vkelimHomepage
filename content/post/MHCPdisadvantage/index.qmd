@@ -1,0 +1,170 @@
+---
+title: Use of mental health care plans and disadvantage
+date: "2025-05-29"
+format: 
+  hugo-md:
+    code-fold: true
+    code-summary: "Show the code"
+  html:
+    code-fold: true
+    code-summary: "Show the code"
+number-sections: true
+toc: true
+tags: 
+- medicine
+- Medicare
+- mental health
+- disadvantage
+engine: knitr
+summary: ""
+---
+
+Photo by <a href="https://unsplash.com/@tex450?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Matthew Ball</a> on <a href="https://unsplash.com/photos/woman-in-black-and-white-long-sleeve-shirt-OJQFlWvUb2E?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+
+Exploring the question of whether Mental Health Care Plans (and the billing of them) are driven by patients, and the patient’s expected utility of MHCPs to unlock government funding for private psychological services.
+
+The number of MHCP-eligible patients at coHealth who were billed MHCPs in the previous twelve months were divided into groups according to Health Care Card (HCC)/pension status and high-prevalence and low-prevalence mental health disorders. It is postulated that HCC/pension holders have lower financial resources and are less able to utilise the government subsidies unlocked by MHCP plans for private psychology (as private psychology fees are far greater than the government subsidy to use private psychology). It is additionally postulated that patients with low-prevalence mental health disorders have more severe mental health conditions and are at greater need of mental health assessments and services. 
+
+```{r}
+#| message: false
+#| warning: false
+
+library(dplyr)
+library(tidyr)
+library(lme4)
+library(table1)
+library(sjPlot) # regression table plotting
+```
+
+```{r}
+# outcome
+#   MHCP - false/true
+# 
+# predictors
+#   concession - false = no, true = yes
+#   mental health condition - "high" = high-frequency, "low" = low-frequency
+# 
+# random effects
+#   (not considered to be a predictor of interest)
+#   clinic - the clinic's name, a categorical variable
+
+# the initial data was created as counts (i.e. aggregated data)
+# the original patient data can be recreated from the counts
+
+summary_df <- tibble(
+  mhcp = logical(),
+  concession = logical(),
+  condition = factor(),
+  clinic = character(),
+  n = integer() # the number of times this patient type occurs. this column will be removed
+)
+
+summary_df <- summary_df |>
+  add_row(mhcp = TRUE, concession = TRUE, condition = "high", clinic = "Kensington", n = 42) |>
+  add_row(mhcp = FALSE, concession = TRUE, condition = "high", clinic = "Kensington", n = 243) |>
+  add_row(mhcp = TRUE, concession = TRUE, condition = "low", clinic = "Kensington", n = 7) |>
+  add_row(mhcp = FALSE, concession = TRUE, condition = "low", clinic = "Kensington", n = 66) |>
+  add_row(mhcp = TRUE, concession = FALSE, condition = "high", clinic = "Kensington", n = 9) |>
+  add_row(mhcp = FALSE, concession = FALSE, condition = "high", clinic = "Kensington", n = 75) |>
+  add_row(mhcp = TRUE, concession = FALSE, condition = "low", clinic = "Kensington", n = 2) |>
+  add_row(mhcp = FALSE, concession = FALSE, condition = "low", clinic = "Kensington", n = 6) |>
+  add_row(mhcp = TRUE, concession = TRUE, condition = "high", clinic = "Paisley", n = 26) |>
+  add_row(mhcp = FALSE, concession = TRUE, condition = "high", clinic = "Paisley", n = 404) |>
+  add_row(mhcp = TRUE, concession = TRUE, condition = "low", clinic = "Paisley", n = 13) |>
+  add_row(mhcp = FALSE, concession = TRUE, condition = "low", clinic = "Paisley", n = 110) |>
+  add_row(mhcp = TRUE, concession = FALSE, condition = "high", clinic = "Paisley", n = 21) |>
+  add_row(mhcp = FALSE, concession = FALSE, condition = "high", clinic = "Paisley", n = 110) |>
+  add_row(mhcp = TRUE, concession = FALSE, condition = "low", clinic = "Paisley", n = 1) |>
+  add_row(mhcp = FALSE, concession = FALSE, condition = "low", clinic = "Paisley", n = 7) |>
+  add_row(mhcp = TRUE, concession = TRUE, condition = "high", clinic = "Laverton", n = 14) |>
+  add_row(mhcp = FALSE, concession = TRUE, condition = "high", clinic = "Laverton", n = 65) |>
+  add_row(mhcp = TRUE, concession = TRUE, condition = "low", clinic = "Laverton", n = 10) |>
+  add_row(mhcp = FALSE, concession = TRUE, condition = "low", clinic = "Laverton", n = 28) |>
+  add_row(mhcp = TRUE, concession = FALSE, condition = "high", clinic = "Laverton", n = 7) |>
+  add_row(mhcp = FALSE, concession = FALSE, condition = "high", clinic = "Laverton", n = 36) |>
+  add_row(mhcp = TRUE, concession = FALSE, condition = "low", clinic = "Laverton", n = 1) |>
+  add_row(mhcp = FALSE, concession = FALSE, condition = "low", clinic = "Laverton", n = 3) |>
+  add_row(mhcp = TRUE, concession = TRUE, condition = "high", clinic = "Collingwood", n = 35) |>
+  add_row(mhcp = FALSE, concession = TRUE, condition = "high", clinic = "Collingwood", n = 311) |>
+  add_row(mhcp = TRUE, concession = TRUE, condition = "low", clinic = "Collingwood", n = 5) |>
+  add_row(mhcp = FALSE, concession = TRUE, condition = "low", clinic = "Collingwood", n = 82) |>
+  add_row(mhcp = TRUE, concession = FALSE, condition = "high", clinic = "Collingwood", n = 14) |>
+  add_row(mhcp = FALSE, concession = FALSE, condition = "high", clinic = "Collingwood", n = 74) |>
+  add_row(mhcp = TRUE, concession = FALSE, condition = "low", clinic = "Collingwood", n = 1) |>
+  add_row(mhcp = FALSE, concession = FALSE, condition = "low", clinic = "Collingwood", n = 5) |>
+  add_row(mhcp = TRUE, concession = TRUE, condition = "high", clinic = "Fitzroy", n = 74) |>
+  add_row(mhcp = FALSE, concession = TRUE, condition = "high", clinic = "Fitzroy", n = 371) |>
+  add_row(mhcp = TRUE, concession = TRUE, condition = "low", clinic = "Fitzroy", n = 18) |>
+  add_row(mhcp = FALSE, concession = TRUE, condition = "low", clinic = "Fitzroy", n = 147) |>
+  add_row(mhcp = TRUE, concession = FALSE, condition = "high", clinic = "Fitzroy", n = 20) |>
+  add_row(mhcp = FALSE, concession = FALSE, condition = "high", clinic = "Fitzroy", n = 71) |>
+  add_row(mhcp = TRUE, concession = FALSE, condition = "low", clinic = "Fitzroy", n = 3) |>
+  add_row(mhcp = FALSE, concession = FALSE, condition = "low", clinic = "Fitzroy", n = 7)
+```
+
+```{r}
+# duplicate rows according to the weighting 'n',
+# hence "re-creating" the original patient-level data from the counts
+df <- summary_df |>
+  uncount(n) |>
+  mutate(
+    condition = as.factor(condition),
+    clinic = as.factor(clinic)
+  )
+
+label(df$mhcp) = "Mental Health Plan"
+label(df$concession) = "Concession card"
+label(df$condition) = "Condition frequency"
+
+table1(
+  x = ~ mhcp + concession + condition | clinic,
+  data = df,
+  overall = c(left = "Total"),
+  caption = "Mental health care plans",
+  footnote = "coHealth clinics, May 2025, 'active' patients"
+  )
+```
+
+```{r}
+table1(
+  x = ~ mhcp | concession,
+  data = df |>
+    mutate(concession = factor(concession, levels = c(FALSE, TRUE), label = c("No Concession", "Concession"))),
+  overall = FALSE
+)
+```
+
+```{r}
+model <- glm(
+  mhcp ~ concession + condition,
+  family = binomial(link = "logit"),
+  data = df
+)
+
+model_effects <- glmer(
+  mhcp ~ concession + condition + (1|clinic),
+  family = binomial(link = "logit"),
+  data = df
+)
+
+# in this case, using 'clinic' as a random effect makes little difference to the model
+```
+
+```{r}
+
+label(df$condition) = "condition"
+
+tab_model(
+  model, model_effects,
+  dv.labels = c(
+    "Logistic model",
+    "Logistic model - clinic random effects"
+  ),
+  show.aic = TRUE,
+  title = paste(
+    "The odds ratio of having been billed a mental health care plan,",
+    "according to concession card status and low-vs-high prevalence mental health condition",
+    "(coHealth GP clinics, May 2025)"
+  )
+)
+```
