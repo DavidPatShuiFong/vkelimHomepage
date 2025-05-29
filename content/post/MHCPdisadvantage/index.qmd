@@ -23,7 +23,11 @@ Photo by <a href="https://unsplash.com/@tex450?utm_content=creditCopyText&utm_me
 
 Exploring the question of whether Mental Health Care Plans (and the billing of them) are driven by patients, and the patient’s expected utility of MHCPs to unlock government funding for private psychological services.
 
-The number of MHCP-eligible patients at coHealth who were billed MHCPs in the previous twelve months were divided into groups according to Health Care Card (HCC)/pension status and high-prevalence and low-prevalence mental health disorders. It is postulated that HCC/pension holders have lower financial resources and are less able to utilise the government subsidies unlocked by MHCP plans for private psychology (as private psychology fees are far greater than the government subsidy to use private psychology). It is additionally postulated that patients with low-prevalence mental health disorders have more severe mental health conditions and are at greater need of mental health assessments and services. 
+The number of MHCP-eligible patients at coHealth who were billed MHCPs in the previous twelve months were divided into groups according to concession card holder patients (either health care card 'HCC' or pension card) and high-prevalence and low-prevalence mental health disorders.
+
+It is postulated that concession card holders have lower financial resources and are less able to utilise the government subsidies unlocked by MHCP plans for private psychology. This is because private psychology fees are far greater than the government subsidy to use private psychology.
+
+Mental health conditions can be broadly divided into low- and high- frequency mental health conditions. High-frequency mental health conditions are the common mental health conditions such as anxieyt and depression. Low-frequency mental health conditions are the less common, and often more serious and lifelong conditions, of schizophrenia and bipolar affective disorder. It is postulated that patients with low-prevalence mental health disorders have more severe mental health conditions and are at greater need of mental health assessments and services.
 
 ```{r}
 #| message: false
@@ -33,6 +37,7 @@ library(dplyr)
 library(tidyr)
 library(lme4)
 library(table1)
+library(effects)
 library(sjPlot) # regression table plotting
 ```
 
@@ -102,6 +107,7 @@ summary_df <- summary_df |>
   add_row(mhcp = FALSE, concession = FALSE, condition = "low", clinic = "Fitzroy", n = 7)
 ```
 
+
 ```{r}
 # duplicate rows according to the weighting 'n',
 # hence "re-creating" the original patient-level data from the counts
@@ -118,19 +124,37 @@ label(df$condition) = "Condition frequency"
 
 table1(
   x = ~ mhcp + concession + condition | clinic,
-  data = df,
+  data = df |>
+    mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
   overall = c(left = "Total"),
-  caption = "Mental health care plans",
+  caption = "Mental health care plans, concession card status and High- vs Low- frequency mental health conditions",
   footnote = "coHealth clinics, May 2025, 'active' patients"
   )
 ```
+
+Concession card holders (with either high-prevalence or low-prevalence mental health conditions) have lower annual rates of mental health care plans billing (11.8% vs 16.7%). 
 
 ```{r}
 table1(
   x = ~ mhcp | concession,
   data = df |>
     mutate(concession = factor(concession, levels = c(FALSE, TRUE), label = c("No Concession", "Concession"))),
-  overall = FALSE
+  overall = FALSE,
+  caption = "Mental health care plans and Concession card status",
+  footnote = "coHealth clinics, May 2025, 'active' patients"
+)
+```
+
+Low-prevalence conditions (schizophrenia and bipolar affective disorder) are often severe and lifelong mental health conditions. Patients with schizophrenia and bipolar affective disorder can benefit from psychological therapies. If mental health care plans were done on the basis of need, it would be expected that more patients with low-prevalence conditions would have mental health care plans compared to patients with high-prevalence mental health conditions. People with low-prevalence conditions have a similar, if slightly lower, rate of mental health care plans than those with high-prevalence conditions (11.7% vs 13.0%).
+
+```{r}
+table1(
+  x = ~ mhcp | condition,
+  data = df |>
+    mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
+  overall = FALSE,
+  caption = "Mental health care plans and High- vs Low- prevalence mental health conditions",
+  footnote = "coHealth clinics, May 2025, 'active' patients"
 )
 ```
 
@@ -149,6 +173,13 @@ model_effects <- glmer(
 
 # in this case, using 'clinic' as a random effect makes little difference to the model
 ```
+
+Probability comparison
+
+```{r}
+plot(effects::allEffects(model_effects))
+```
+
 
 ```{r}
 

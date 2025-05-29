@@ -26,7 +26,11 @@ Photo by <a href="https://unsplash.com/@tex450?utm_content=creditCopyText&utm_me
 
 Exploring the question of whether Mental Health Care Plans (and the billing of them) are driven by patients, and the patient's expected utility of MHCPs to unlock government funding for private psychological services.
 
-The number of MHCP-eligible patients at coHealth who were billed MHCPs in the previous twelve months were divided into groups according to Health Care Card (HCC)/pension status and high-prevalence and low-prevalence mental health disorders. It is postulated that HCC/pension holders have lower financial resources and are less able to utilise the government subsidies unlocked by MHCP plans for private psychology (as private psychology fees are far greater than the government subsidy to use private psychology). It is additionally postulated that patients with low-prevalence mental health disorders have more severe mental health conditions and are at greater need of mental health assessments and services.
+The number of MHCP-eligible patients at coHealth who were billed MHCPs in the previous twelve months were divided into groups according to concession card holder patients (either health care card 'HCC' or pension card) and high-prevalence and low-prevalence mental health disorders.
+
+It is postulated that concession card holders have lower financial resources and are less able to utilise the government subsidies unlocked by MHCP plans for private psychology. This is because private psychology fees are far greater than the government subsidy to use private psychology.
+
+Mental health conditions can be broadly divided into low- and high- frequency mental health conditions. High-frequency mental health conditions are the common mental health conditions such as anxieyt and depression. Low-frequency mental health conditions are the less common, and often more serious and lifelong conditions, of schizophrenia and bipolar affective disorder. It is postulated that patients with low-prevalence mental health disorders have more severe mental health conditions and are at greater need of mental health assessments and services.
 
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -36,6 +40,7 @@ library(dplyr)
 library(tidyr)
 library(lme4)
 library(table1)
+library(effects)
 library(sjPlot) # regression table plotting
 ```
 
@@ -129,15 +134,16 @@ label(df$condition) = "Condition frequency"
 
 table1(
   x = ~ mhcp + concession + condition | clinic,
-  data = df,
+  data = df |>
+    mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
   overall = c(left = "Total"),
-  caption = "Mental health care plans",
+  caption = "Mental health care plans, concession card status and High- vs Low- frequency mental health conditions",
   footnote = "coHealth clinics, May 2025, 'active' patients"
   )
 ```
 
 </details>
-<div class="Rtable1"><table class="Rtable1"><caption>Mental health care plans</caption>
+<div class="Rtable1"><table class="Rtable1"><caption>Mental health care plans, concession card status and High- vs Low- frequency mental health conditions</caption>
 
 <thead>
 <tr>
@@ -208,7 +214,7 @@ table1(
 <td class='lastrow'>139 (20.1%)</td>
 </tr>
 <tr>
-<td class='rowlabel firstrow'>Condition frequency</td>
+<td class='rowlabel firstrow'>condition</td>
 <td class='firstrow'></td>
 <td class='firstrow'></td>
 <td class='firstrow'></td>
@@ -217,7 +223,7 @@ table1(
 <td class='firstrow'></td>
 </tr>
 <tr>
-<td class='rowlabel'>high</td>
+<td class='rowlabel'>High-prevalence</td>
 <td>2022 (79.5%)</td>
 <td>434 (82.4%)</td>
 <td>536 (75.4%)</td>
@@ -226,7 +232,7 @@ table1(
 <td>561 (81.1%)</td>
 </tr>
 <tr>
-<td class='rowlabel lastrow'>low</td>
+<td class='rowlabel lastrow'>Low-prevalence</td>
 <td class='lastrow'>522 (20.5%)</td>
 <td class='lastrow'>93 (17.6%)</td>
 <td class='lastrow'>175 (24.6%)</td>
@@ -237,6 +243,9 @@ table1(
 </tbody>
 </table>
 </div>
+
+Concession card holders (with either high-prevalence or low-prevalence mental health conditions) have lower annual rates of mental health care plans billing (11.8% vs 16.7%).
+
 <details class="code-fold">
 <summary>Show the code</summary>
 
@@ -245,47 +254,90 @@ table1(
   x = ~ mhcp | concession,
   data = df |>
     mutate(concession = factor(concession, levels = c(FALSE, TRUE), label = c("No Concession", "Concession"))),
-  overall = FALSE
+  overall = FALSE,
+  caption = "Mental health care plans and Concession card status",
+  footnote = "coHealth clinics, May 2025, 'active' patients"
 )
 ```
 
 </details>
-<div class="Rtable1">
+<div class="Rtable1"><table class="Rtable1"><caption>Mental health care plans and Concession card status</caption>
 
-<table class="Rtable1" data-quarto-postprocess="true">
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
 <thead>
 <tr>
-<th class="rowlabel firstrow lastrow" data-quarto-table-cell-role="th"></th>
-<th class="firstrow lastrow" data-quarto-table-cell-role="th"><span class="stratlabel">No Concession<br />
-<span class="stratn">(N=473)</span></span></th>
-<th class="firstrow lastrow" data-quarto-table-cell-role="th"><span class="stratlabel">Concession<br />
-<span class="stratn">(N=2071)</span></span></th>
+<th class='rowlabel firstrow lastrow'></th>
+<th class='firstrow lastrow'><span class='stratlabel'>No Concession<br><span class='stratn'>(N=473)</span></span></th>
+<th class='firstrow lastrow'><span class='stratlabel'>Concession<br><span class='stratn'>(N=2071)</span></span></th>
 </tr>
+<tfoot><tr><td colspan="3" class="Rtable1-footnote"><p>coHealth clinics, May 2025, 'active' patients</p>
+</td></tr></tfoot>
 </thead>
 <tbody>
 <tr>
-<td class="rowlabel firstrow">Mental Health Plan</td>
-<td class="firstrow"></td>
-<td class="firstrow"></td>
+<td class='rowlabel firstrow'>Mental Health Plan</td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
 </tr>
 <tr>
-<td class="rowlabel">Yes</td>
+<td class='rowlabel'>Yes</td>
 <td>79 (16.7%)</td>
 <td>244 (11.8%)</td>
 </tr>
 <tr>
-<td class="rowlabel lastrow">No</td>
-<td class="lastrow">394 (83.3%)</td>
-<td class="lastrow">1827 (88.2%)</td>
+<td class='rowlabel lastrow'>No</td>
+<td class='lastrow'>394 (83.3%)</td>
+<td class='lastrow'>1827 (88.2%)</td>
 </tr>
 </tbody>
 </table>
+</div>
 
+Low-prevalence conditions (schizophrenia and bipolar affective disorder) are often severe and lifelong mental health conditions. Patients with schizophrenia and bipolar affective disorder can benefit from psychological therapies. If mental health care plans were done on the basis of need, it would be expected that more patients with low-prevalence conditions would have mental health care plans compared to patients with high-prevalence mental health conditions. People with low-prevalence conditions have a similar, if slightly lower, rate of mental health care plans than those with high-prevalence conditions (11.7% vs 13.0%).
+
+<details class="code-fold">
+<summary>Show the code</summary>
+
+``` r
+table1(
+  x = ~ mhcp | condition,
+  data = df |>
+    mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
+  overall = FALSE,
+  caption = "Mental health care plans and High- vs Low- prevalence mental health conditions",
+  footnote = "coHealth clinics, May 2025, 'active' patients"
+)
+```
+
+</details>
+<div class="Rtable1"><table class="Rtable1"><caption>Mental health care plans and High- vs Low- prevalence mental health conditions</caption>
+
+<thead>
+<tr>
+<th class='rowlabel firstrow lastrow'></th>
+<th class='firstrow lastrow'><span class='stratlabel'>High-prevalence<br><span class='stratn'>(N=2022)</span></span></th>
+<th class='firstrow lastrow'><span class='stratlabel'>Low-prevalence<br><span class='stratn'>(N=522)</span></span></th>
+</tr>
+<tfoot><tr><td colspan="3" class="Rtable1-footnote"><p>coHealth clinics, May 2025, 'active' patients</p>
+</td></tr></tfoot>
+</thead>
+<tbody>
+<tr>
+<td class='rowlabel firstrow'>Mental Health Plan</td>
+<td class='firstrow'></td>
+<td class='firstrow'></td>
+</tr>
+<tr>
+<td class='rowlabel'>Yes</td>
+<td>262 (13.0%)</td>
+<td>61 (11.7%)</td>
+</tr>
+<tr>
+<td class='rowlabel lastrow'>No</td>
+<td class='lastrow'>1760 (87.0%)</td>
+<td class='lastrow'>461 (88.3%)</td>
+</tr>
+</tbody>
+</table>
 </div>
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -307,6 +359,20 @@ model_effects <- glmer(
 ```
 
 </details>
+
+Probability comparison
+
+<details class="code-fold">
+<summary>Show the code</summary>
+
+``` r
+plot(effects::allEffects(model_effects))
+```
+
+</details>
+
+<img src="index.markdown_strict_files/figure-markdown_strict/unnamed-chunk-7-1.png" width="768" />
+
 <details class="code-fold">
 <summary>Show the code</summary>
 
