@@ -159,12 +159,14 @@ table1(
 ```
 
 ```{r}
+# the basic model
 model <- glm(
   mhcp ~ concession + condition,
   family = binomial(link = "logit"),
   data = df
 )
 
+# add clinic as a random effect
 model_effects <- glmer(
   mhcp ~ concession + condition + (1|clinic),
   family = binomial(link = "logit"),
