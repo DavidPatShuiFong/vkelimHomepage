@@ -57,74 +57,64 @@ library(sjPlot) # regression table plotting
 # the original patient data can be recreated from the counts
 
 summary_df <- tibble(
-  mhcp = logical(),
   concession = logical(),
   condition = factor(),
   clinic = character(),
-  n = integer() # the number of times this patient type occurs. this column will be removed
+  total = integer(), # number in this patient category (concession, condition, clinic) occurs
+  mhcp = integer() # number who had a mental health care plan (MHCP)
 )
 
 summary_df <- summary_df |>
-  add_row(mhcp = TRUE, concession = TRUE, condition = "high", clinic = "Kensington", n = 42) |>
-  add_row(mhcp = FALSE, concession = TRUE, condition = "high", clinic = "Kensington", n = 243) |>
-  add_row(mhcp = TRUE, concession = TRUE, condition = "low", clinic = "Kensington", n = 7) |>
-  add_row(mhcp = FALSE, concession = TRUE, condition = "low", clinic = "Kensington", n = 66) |>
-  add_row(mhcp = TRUE, concession = FALSE, condition = "high", clinic = "Kensington", n = 9) |>
-  add_row(mhcp = FALSE, concession = FALSE, condition = "high", clinic = "Kensington", n = 75) |>
-  add_row(mhcp = TRUE, concession = FALSE, condition = "low", clinic = "Kensington", n = 2) |>
-  add_row(mhcp = FALSE, concession = FALSE, condition = "low", clinic = "Kensington", n = 6) |>
-  add_row(mhcp = TRUE, concession = TRUE, condition = "high", clinic = "Paisley", n = 26) |>
-  add_row(mhcp = FALSE, concession = TRUE, condition = "high", clinic = "Paisley", n = 404) |>
-  add_row(mhcp = TRUE, concession = TRUE, condition = "low", clinic = "Paisley", n = 13) |>
-  add_row(mhcp = FALSE, concession = TRUE, condition = "low", clinic = "Paisley", n = 110) |>
-  add_row(mhcp = TRUE, concession = FALSE, condition = "high", clinic = "Paisley", n = 21) |>
-  add_row(mhcp = FALSE, concession = FALSE, condition = "high", clinic = "Paisley", n = 110) |>
-  add_row(mhcp = TRUE, concession = FALSE, condition = "low", clinic = "Paisley", n = 1) |>
-  add_row(mhcp = FALSE, concession = FALSE, condition = "low", clinic = "Paisley", n = 7) |>
-  add_row(mhcp = TRUE, concession = TRUE, condition = "high", clinic = "Laverton", n = 14) |>
-  add_row(mhcp = FALSE, concession = TRUE, condition = "high", clinic = "Laverton", n = 65) |>
-  add_row(mhcp = TRUE, concession = TRUE, condition = "low", clinic = "Laverton", n = 10) |>
-  add_row(mhcp = FALSE, concession = TRUE, condition = "low", clinic = "Laverton", n = 28) |>
-  add_row(mhcp = TRUE, concession = FALSE, condition = "high", clinic = "Laverton", n = 7) |>
-  add_row(mhcp = FALSE, concession = FALSE, condition = "high", clinic = "Laverton", n = 36) |>
-  add_row(mhcp = TRUE, concession = FALSE, condition = "low", clinic = "Laverton", n = 1) |>
-  add_row(mhcp = FALSE, concession = FALSE, condition = "low", clinic = "Laverton", n = 3) |>
-  add_row(mhcp = TRUE, concession = TRUE, condition = "high", clinic = "Collingwood", n = 35) |>
-  add_row(mhcp = FALSE, concession = TRUE, condition = "high", clinic = "Collingwood", n = 311) |>
-  add_row(mhcp = TRUE, concession = TRUE, condition = "low", clinic = "Collingwood", n = 5) |>
-  add_row(mhcp = FALSE, concession = TRUE, condition = "low", clinic = "Collingwood", n = 82) |>
-  add_row(mhcp = TRUE, concession = FALSE, condition = "high", clinic = "Collingwood", n = 14) |>
-  add_row(mhcp = FALSE, concession = FALSE, condition = "high", clinic = "Collingwood", n = 74) |>
-  add_row(mhcp = TRUE, concession = FALSE, condition = "low", clinic = "Collingwood", n = 1) |>
-  add_row(mhcp = FALSE, concession = FALSE, condition = "low", clinic = "Collingwood", n = 5) |>
-  add_row(mhcp = TRUE, concession = TRUE, condition = "high", clinic = "Fitzroy", n = 74) |>
-  add_row(mhcp = FALSE, concession = TRUE, condition = "high", clinic = "Fitzroy", n = 371) |>
-  add_row(mhcp = TRUE, concession = TRUE, condition = "low", clinic = "Fitzroy", n = 18) |>
-  add_row(mhcp = FALSE, concession = TRUE, condition = "low", clinic = "Fitzroy", n = 147) |>
-  add_row(mhcp = TRUE, concession = FALSE, condition = "high", clinic = "Fitzroy", n = 20) |>
-  add_row(mhcp = FALSE, concession = FALSE, condition = "high", clinic = "Fitzroy", n = 71) |>
-  add_row(mhcp = TRUE, concession = FALSE, condition = "low", clinic = "Fitzroy", n = 3) |>
-  add_row(mhcp = FALSE, concession = FALSE, condition = "low", clinic = "Fitzroy", n = 7)
+  add_row(concession = TRUE, condition = "high", clinic = "Kensington", total = 285, mhcp = 42) |>
+  add_row(concession = TRUE, condition = "low", clinic = "Kensington", total = 73, mhcp = 7) |>
+  add_row(concession = FALSE, condition = "high", clinic = "Kensington", total = 84, mhcp = 9) |>
+  add_row(concession = FALSE, condition = "low", clinic = "Kensington", total = 8, mhcp = 2) |>
+  add_row(concession = TRUE, condition = "high", clinic = "Paisley", total = 430, mhcp = 26) |>
+  add_row(concession = TRUE, condition = "low", clinic = "Paisley", total = 123, mhcp = 13) |>
+  add_row(concession = FALSE, condition = "high", clinic = "Paisley", total = 131, mhcp = 21) |>
+  add_row(concession = FALSE, condition = "low", clinic = "Paisley", total = 8, mhcp = 1) |>
+  add_row(concession = TRUE, condition = "high", clinic = "Laverton", total = 79, mhcp = 14) |>
+  add_row(concession = TRUE, condition = "low", clinic = "Laverton", total = 38, mhcp = 10) |>
+  add_row(concession = FALSE, condition = "high", clinic = "Laverton", total = 43, mhcp = 7) |>
+  add_row(concession = FALSE, condition = "low", clinic = "Laverton", total = 4, mhcp = 1) |>
+  add_row(concession = TRUE, condition = "high", clinic = "Collingwood", total = 346, mhcp = 35) |>
+  add_row(concession = TRUE, condition = "low", clinic = "Collingwood", total = 87, mhcp = 5) |>
+  add_row(concession = FALSE, condition = "high", clinic = "Collingwood", total = 88, mhcp = 14) |>
+  add_row(concession = FALSE, condition = "low", clinic = "Collingwood", total = 6, mhcp = 1) |>
+  add_row(concession = TRUE, condition = "high", clinic = "Fitzroy", total = 445, mhcp = 74) |>
+  add_row(concession = TRUE, condition = "low", clinic = "Fitzroy", total = 165, mhcp = 18) |>
+  add_row(concession = FALSE, condition = "high", clinic = "Fitzroy", total = 91, mhcp = 20) |>
+  add_row(concession = FALSE, condition = "low", clinic = "Fitzroy", total = 10, mhcp = 3)
 ```
 
 
 ```{r}
 # duplicate rows according to the weighting 'n',
 # hence "re-creating" the original patient-level data from the counts
-df <- summary_df |>
-  uncount(n) |>
-  mutate(
-    condition = as.factor(condition),
-    clinic = as.factor(clinic)
+mhcp <- summary_df |>
+  # duplicate rows by number of mental health care plans (mhcp)
+  uncount(mhcp) |>
+  # add back mhcp column to a logical
+  mutate(mhcp = TRUE) |> 
+  # don't need 'total' column any more
+  select(concession, condition, clinic, mhcp) |>
+  bind_rows(
+    # do the same, except
+    # now duplicate rows by number who do not have mental health care plans
+    summary_df |>
+      mutate(no_mhcp = total - mhcp) |>
+      uncount(no_mhcp) |>
+      mutate(mhcp = FALSE) |>
+      select(concession, condition, clinic, mhcp)
   )
-
-label(df$mhcp) = "Mental Health Plan"
-label(df$concession) = "Concession card"
-label(df$condition) = "Condition frequency"
+  
+label(mhcp$mhcp) = "Mental Health Plan"
+label(mhcp$concession) = "Concession card"
+label(mhcp$condition) = "Condition frequency"
 
 table1(
   x = ~ mhcp + concession + condition | clinic,
-  data = df |>
+  data = mhcp |>
     mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
   overall = c(left = "Total"),
   caption = "Mental health care plans, concession card status and High- vs Low- frequency mental health conditions",
@@ -137,7 +127,7 @@ Concession card holders (with either high-prevalence or low-prevalence mental he
 ```{r}
 table1(
   x = ~ mhcp | concession,
-  data = df |>
+  data = mhcp |>
     mutate(concession = factor(concession, levels = c(FALSE, TRUE), label = c("No Concession", "Concession"))),
   overall = FALSE,
   caption = "Mental health care plans and Concession card status",
@@ -150,7 +140,7 @@ Low-prevalence conditions (schizophrenia and bipolar affective disorder) are oft
 ```{r}
 table1(
   x = ~ mhcp | condition,
-  data = df |>
+  data = mhcp |>
     mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
   overall = FALSE,
   caption = "Mental health care plans and High- vs Low- prevalence mental health conditions",
@@ -163,14 +153,14 @@ table1(
 model <- glm(
   mhcp ~ concession + condition,
   family = binomial(link = "logit"),
-  data = df
+  data = mhcp
 )
 
 # add clinic as a random effect
 model_effects <- glmer(
   mhcp ~ concession + condition + (1|clinic),
   family = binomial(link = "logit"),
-  data = df
+  data = mhcp
 )
 
 # in this case, using 'clinic' as a random effect makes little difference to the model
@@ -185,7 +175,7 @@ plot(effects::allEffects(model_effects))
 
 ```{r}
 
-label(df$condition) = "condition"
+label(mhcp$condition) = "condition"
 
 tab_model(
   model, model_effects,
