@@ -1,6 +1,12 @@
 ---
 title: Use of mental health care plans and disadvantage
 date: '2025-05-29'
+author:
+  - Dr David Fong
+  - Dr Rowena Ryan
+  - Dr Bronwyn Wells
+  - Dr Franziska Levin
+  - cohealth Kensington medical team
 format:
   hugo-md:
     code-fold: true

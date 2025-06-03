@@ -1,18 +1,22 @@
 ---
 title: Use of mental health care plans and disadvantage
 date: "2025-05-29"
+author:
+  - Dr David Fong
+  - Dr Rowena Ryan
+  - Dr Bronwyn Wells
+  - Dr Franziska Levin
+  - cohealth Kensington medical team
 format: 
   html:
     output-file: MHCP
     code-fold: true
     code-summary: "Show the code"
+  docx:
+    output-file: MHCP
+    echo: FALSE
 number-sections: true
 toc: true
-tags: 
-- medicine
-- Medicare
-- mental health
-- disadvantage
 engine: knitr
 summary: ""
 ---
@@ -35,13 +39,18 @@ library(dplyr)
 library(tidyr)
 library(lme4)
 library(table1)
+library(flextable)
+library(officer)
 library(effects)
-library(sjPlot) # regression table plotting
+library(modelsummary)
 ```
 
 ```{r}
 # outcome
-#   MHCP - false/true
+#   counts of patients who have had, in the past year:
+#     mhcp- mental health care plan e.g. MBS item 2715, 2717
+#     mh2713 - general practitioner mental health consult i.e. MBS item 2713
+#     gpmp - general practitioenr chronic disease care plan i.e. MBS item 721
 # 
 # predictors
 #   concession - false = no, true = yes
@@ -112,6 +121,7 @@ label(mhcp$mhcp) = "Mental Health Plan"
 label(mhcp$concession) = "Concession card"
 label(mhcp$condition) = "Condition frequency"
 
+
 table1(
   x = ~ mhcp + concession + condition | clinic,
   data = mhcp |>
@@ -119,7 +129,8 @@ table1(
   overall = c(left = "Total"),
   caption = "Mental health care plans, concession card status and High- vs Low- frequency mental health conditions",
   footnote = "coHealth clinics, May 2025, 'active' patients"
-  )
+  ) |>
+  t1flex()
 ```
 
 Concession card holders (with either high-prevalence or low-prevalence mental health conditions) have lower annual rates of mental health care plans billing (11.8% vs 16.7%). 
@@ -132,7 +143,8 @@ table1(
   overall = FALSE,
   caption = "Mental health care plans and Concession card status",
   footnote = "coHealth clinics, May 2025, 'active' patients"
-)
+) |>
+  t1flex()
 ```
 
 Low-prevalence conditions (schizophrenia and bipolar affective disorder) are often severe and lifelong mental health conditions. Patients with schizophrenia and bipolar affective disorder can benefit from psychological therapies. If mental health care plans were done on the basis of need, it would be expected that more patients with low-prevalence conditions would have mental health care plans compared to patients with high-prevalence mental health conditions. People with low-prevalence conditions have a similar, if slightly lower, rate of mental health care plans than those with high-prevalence conditions (11.7% vs 13.0%).
@@ -145,7 +157,8 @@ table1(
   overall = FALSE,
   caption = "Mental health care plans and High- vs Low- prevalence mental health conditions",
   footnote = "coHealth clinics, May 2025, 'active' patients"
-)
+) |>
+  t1flex()
 ```
 
 ```{r}
@@ -172,24 +185,76 @@ Probability comparison
 plot(effects::allEffects(model_mhcp_effects))
 ```
 
+```{r}
+# personalised flextable theme
+
+my_flextable_theme <- function(x, ...) {
+    if (!inherits(x, "flextable")) {
+        stop(sprintf("Function `%s` supports only flextable objects.", 
+            "theme_alafoli()"))
+    }
+    #fp_bdr <- officer::fp_border(width = flextable_global$defaults$border.width, 
+    #  color = flextable_global$defaults$border.color)
+    x <- border_remove(x) |>
+      bg(bg = "transparent", part = "all") |>
+      color(color = "#000000", part = "all") |>
+      # the header text bold
+      bold(bold = TRUE, part = "header") |>
+      italic(italic = FALSE, part = "all") |>
+      padding(padding = 3, part = "all") |>
+      align_text_col(align = "left", header = TRUE) |>
+      # the first header row is centered text
+      align(i = 1, align = "center", part = "header") |>
+      align_nottext_col(align = "right", header = TRUE) |>
+      # make first column wider
+      width(j = 1, width = 1.5) |>
+      # thin horizontal line between models and other column headers
+      hline(i = 1, j = 2:7, border = officer::fp_border(color = "grey", width = 0.5), part = "header") |>
+      hline_bottom(part = "header") |>
+      hline_top(part = "body") |>
+      # place horizontal line below fourth row
+      hline(i = 4, border = officer::fp_border(color = "grey", width = 0.5), part = "body") |>
+      hline_bottom(part = "body") |>
+      fix_border_issues()
+}
+
+```
 
 ```{r}
+#| message: false
+#| warning: false
+
 label(mhcp$condition) = "condition"
 
-tab_model(
-  model_mhcp, model_mhcp_effects,
-  dv.labels = c(
-    "Logistic model",
-    "Logistic model - clinic random effects"
+table_mhcp_model <- modelsummary(
+  models = list(
+    "Logistic model" = model_mhcp,
+    "Logistic model - clinic random effect" = model_mhcp_effects
   ),
-  show.aic = TRUE,
-  title = paste(
-    "The odds ratio of having been billed a mental health care plan,",
-    "according to concession card status and low-vs-high prevalence mental health condition",
-    "(coHealth GP clinics, May 2025)"
+  estimate = c("Odds ratio" = "{estimate}"),
+  coef_rename = c(
+    "concessionTRUE" = "Concession holder",
+    "conditionlow" = "Low-frequency condition"
+  ),
+  shape = term ~ model + statistic,
+  exponentiate = TRUE,
+  statistic = c("CI (95%)" = "[{conf.low}, {conf.high}]", "p" = "{p.value}"),
+  output = "flextable"
+  ) |>
+  my_flextable_theme() |>
+  add_footer_lines(
+    paste(
+      "The odds ratio of having been billed a mental health care plan,",
+      "according to concession card status and low-vs-high prevalence mental health condition",
+      "(coHealth GP clinics, May 2025)"
+    )
   )
-)
+
+table_mhcp_model
 ```
+
+:::
+
 
 
 ```{r}
@@ -260,19 +325,31 @@ plot(effects::allEffects(model_mh2713_effects))
 ```{r}
 label(mh2713$condition) = "condition"
 
-tab_model(
-  model_mh2713, model_mh2713_effects,
-  dv.labels = c(
-    "Logistic model",
-    "Logistic model - clinic random effects"
+table_mh2713_model <- modelsummary(
+  models = list(
+    "Logistic model" = model_mh2713,
+    "Logistic model - clinic random effect" = model_mh2713_effects
   ),
-  show.aic = TRUE,
-  title = paste(
-    "The odds ratio of having been billed a GP mental health consult,",
-    "according to concession card status and low-vs-high prevalence mental health condition",
-    "(coHealth GP clinics, May 2025)"
+  estimate = c("Odds ratio" = "{estimate}"),
+  coef_rename = c(
+    "concessionTRUE" = "Concession holder",
+    "conditionlow" = "Low-frequency condition"
+  ),
+  shape = term ~ model + statistic,
+  exponentiate = TRUE,
+  statistic = c("CI (95%)" = "[{conf.low}, {conf.high}]", "p" = "{p.value}"),
+  output = "flextable"
+  ) |>
+  my_flextable_theme() |>
+  add_footer_lines(
+    paste(
+      "The odds ratio of having been billed a GP mental health consult",
+      "according to concession card status and low-vs-high prevalence mental health condition",
+      "(coHealth GP clinics, May 2025)"
+    )
   )
-)
+
+table_mh2713_model
 ```
 
 ```{r}
@@ -343,17 +420,29 @@ plot(effects::allEffects(model_gpmp_effects))
 ```{r}
 label(gpmp$condition) = "condition"
 
-tab_model(
-  model_gpmp, model_gpmp_effects,
-  dv.labels = c(
-    "Logistic model",
-    "Logistic model - clinic random effects"
+table_gpmp_model <- modelsummary(
+  models = list(
+    "Logistic model" = model_gpmp,
+    "Logistic model - clinic random effect" = model_gpmp_effects
   ),
-  show.aic = TRUE,
-  title = paste(
-    "The odds ratio of having been billed a GP chronic disease management plan 'GPMP',",
-    "according to concession card status and low-vs-high prevalence mental health condition",
-    "(coHealth GP clinics, May 2025)"
+  estimate = c("Odds ratio" = "{estimate}"),
+  coef_rename = c(
+    "concessionTRUE" = "Concession holder",
+    "conditionlow" = "Low-frequency condition"
+  ),
+  shape = term ~ model + statistic,
+  exponentiate = TRUE,
+  statistic = c("CI (95%)" = "[{conf.low}, {conf.high}]", "p" = "{p.value}"),
+  output = "flextable"
+  ) |>
+  my_flextable_theme() |>
+  add_footer_lines(
+    paste(
+      "The odds ratio of having been billed a GP chronic disease management plan 'GPMP',",
+      "according to concession card status and low-vs-high prevalence mental health condition",
+      "(coHealth GP clinics, May 2025)"
+    )
   )
-)
+
+table_gpmp_model
 ```
