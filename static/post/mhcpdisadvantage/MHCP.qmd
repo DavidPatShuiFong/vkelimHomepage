@@ -1,11 +1,13 @@
 ---
-title: Use of mental health care plans and disadvantage
+title: Mental health care plans and disadvantage
 date: "2025-05-29"
 author:
   - Dr David Fong
   - Dr Rowena Ryan
   - Dr Bronwyn Wells
   - Dr Franziska Levin
+  - Dr Lihini Samarawickrama
+  - Dr Simon Wilding
   - cohealth Kensington medical team
 format: 
   html:
@@ -15,13 +17,12 @@ format:
   docx:
     output-file: MHCP
     echo: FALSE
+    toc: TRUE
 number-sections: true
 toc: true
 engine: knitr
 summary: ""
 ---
-
-Photo by <a href="https://unsplash.com/@tex450?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Matthew Ball</a> on <a href="https://unsplash.com/photos/woman-in-black-and-white-long-sleeve-shirt-OJQFlWvUb2E?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 
 Exploring the question of whether Mental Health Care Plans (and the billing of them) are driven by patients, and the patient’s expected utility of MHCPs to unlock government funding for private psychological services.
 
@@ -29,7 +30,7 @@ The number of MHCP-eligible patients at coHealth who were billed MHCPs in the pr
 
 It is postulated that concession card holders have lower financial resources and are less able to utilise the government subsidies unlocked by MHCP plans for private psychology. This is because private psychology fees are far greater than the government subsidy to use private psychology.
 
-Mental health conditions can be broadly divided into low- and high- frequency mental health conditions. High-frequency mental health conditions are the common mental health conditions such as anxieyt and depression. Low-frequency mental health conditions are the less common, and often more serious and lifelong conditions, of schizophrenia and bipolar affective disorder. It is postulated that patients with low-prevalence mental health disorders have more severe mental health conditions and are at greater need of mental health assessments and services.
+Mental health conditions can be broadly divided into low- and high- frequency mental health conditions. High-frequency mental health conditions are the common mental health conditions such as anxiety and depression. Low-frequency mental health conditions are the less common, and often more serious and lifelong conditions, of schizophrenia and bipolar affective disorder. It is postulated that patients with low-prevalence mental health disorders have more severe mental health conditions and are at greater need of mental health assessments and services.
 
 ```{r}
 #| message: false
@@ -41,6 +42,7 @@ library(lme4)
 library(table1)
 library(flextable)
 library(officer)
+library(ggplot2)
 library(effects)
 library(modelsummary)
 ```
@@ -96,6 +98,7 @@ summary_df <- summary_df |>
   add_row(concession = FALSE, condition = "low", clinic = "Fitzroy", total = 10, mhcp = 3, mh2713 = 1, gpmp = 1)
 ```
 
+## Mental health care plans
 
 ```{r}
 # duplicate rows according to the weighting 'mhcp',
@@ -121,17 +124,18 @@ label(mhcp$mhcp) = "Mental Health Plan"
 label(mhcp$concession) = "Concession card"
 label(mhcp$condition) = "Condition frequency"
 
-
 table1(
-  x = ~ mhcp + concession + condition | clinic,
+  x = ~ mhcp + concession + Condition | clinic,
   data = mhcp |>
-    mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
-  overall = c(left = "Total"),
-  caption = "Mental health care plans, concession card status and High- vs Low- frequency mental health conditions",
-  footnote = "coHealth clinics, May 2025, 'active' patients"
+    mutate(Condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
+  overall = c(left = "Total")
   ) |>
-  t1flex()
+  t1flex(tablefn = "flextable", cwidth = 0.85) |>
+  fontsize(size = 9, part = "all") |>
+  footnote(i = 1, j = 1, value = as_paragraph("Mental health care plans (claimed in the previous twelve months), concession card status and High- vs Low- frequency mental health conditions."), ref_symbols = "a", part = "body") |>
+  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
 ```
+
 
 Concession card holders (with either high-prevalence or low-prevalence mental health conditions) have lower annual rates of mental health care plans billing (11.8% vs 16.7%). 
 
@@ -140,11 +144,12 @@ table1(
   x = ~ mhcp | concession,
   data = mhcp |>
     mutate(concession = factor(concession, levels = c(FALSE, TRUE), label = c("No Concession", "Concession"))),
-  overall = FALSE,
-  caption = "Mental health care plans and Concession card status",
-  footnote = "coHealth clinics, May 2025, 'active' patients"
+  overall = FALSE
 ) |>
-  t1flex()
+  t1flex(tablefn = "flextable", cwidth = 0.85) |>
+  fontsize(size = 9, part = "all") |>
+  footnote(i = 1, j = 1, value = as_paragraph("Mental health care plans and Concession card status"), ref_symbols = "a", part = "body") |>
+  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
 ```
 
 Low-prevalence conditions (schizophrenia and bipolar affective disorder) are often severe and lifelong mental health conditions. Patients with schizophrenia and bipolar affective disorder can benefit from psychological therapies. If mental health care plans were done on the basis of need, it would be expected that more patients with low-prevalence conditions would have mental health care plans compared to patients with high-prevalence mental health conditions. People with low-prevalence conditions have a similar, if slightly lower, rate of mental health care plans than those with high-prevalence conditions (11.7% vs 13.0%).
@@ -154,11 +159,12 @@ table1(
   x = ~ mhcp | condition,
   data = mhcp |>
     mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
-  overall = FALSE,
-  caption = "Mental health care plans and High- vs Low- prevalence mental health conditions",
-  footnote = "coHealth clinics, May 2025, 'active' patients"
+  overall = FALSE
 ) |>
-  t1flex()
+  t1flex(tablefn = "flextable", cwidth = 0.85) |>
+  fontsize(size = 9, part = "all") |>
+  footnote(i = 1, j = 1, value = as_paragraph("Mental health care plans and High- vs Low- prevalence mental health conditions"), ref_symbols = "a", part = "body") |>
+  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
 ```
 
 ```{r}
@@ -253,9 +259,50 @@ table_mhcp_model <- modelsummary(
 table_mhcp_model
 ```
 
-:::
+```{r}
+#| warning: false
 
+modelplot(
+  models = model_mhcp_effects,
+  coef_map = c(
+    'conditionlow' = "Low-frequency condition",
+    'concessionTRUE' = "Concession holder"
+  ),
+  exponentiate = TRUE
+) +
+  labs(
+    x = "Odds ratio co-efficient estimates and 95% confidence intervals",
+    y = "Predictors",
+    title = "'Mental Health Care Plan' billed in previous twelve months",
+    caption = "(coHealth GP clinics, May 2025)"
+  )
+```
 
+## Mental health consultations (MBS Item '2713')
+
+Do patients with mental health conditions *and* a concession card not only have less mental health care plans billed in general practice, but *also* have less mental health care delivered by those general practitioners?
+
+Are there any other potential ways to measure mental health care delivery in general practice?
+
+Potential measurements:
+
+1. Examination of 'reasons for consult' in general practice electronic medical record (EMR) notes
+   i) Relatively easy to do, as reasons for consult are part of 'structured data' within the EMR
+2. Examination of the electronic medical record (EMR) consultation notes
+   i) More difficult to do than option (1), but can be done with basic natural language processing (NLP)
+3. Examination of other billing items associated with mental health care
+
+Unfortunately, although options (1) and (2) are relatively easy to perform with a basic database search and simple application of data science, only option (3) is currently available for use to clinicians at cohealth.
+
+There *is* another billing item associated with mental health care, which is the [general practitioner attendance in relation to a mental health disorder, Medicare Benefit Schedule - Item 2713](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=2713). Unfortunately, MBS item 2713 is little used. Item 2713 has a requirement for minimum consultation length of 20 minutes, and has a rebate value of $81.70. 
+
+However, there is an alternative item number which can also be claimed if a consult is between 20 to 40 minutes in length, [the level 'C' consult, Medicare Benefit Schedule - Item 36](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=36&qt=item), which has a rebate value of $82.90. In almost all cases where an item 2713 could be claimed, an item 36 could be claimed instead, with greater revenue than an item 2713.
+
+This is even more the case when a patient has a concession card, as there is a bulk-billing incentive payment for item 36 which is at least $14 more (depending on the practice's 'MMM' location) than the bulk-biling incentive payment for an item 2713.
+
+Nevertheless, occasionally general practitioners *do* claim an item 2713. One possible reason is because it - depending on the duration and content of the consult - it is sometimes possible to 'co-bill' an item 2713 with a standard consult item (such as level B or C consult).
+
+Are concession card holders, or patients living with low-frequency mental health disorders, billed the general practice mental health item '2713' the same, more, or less than patients without concession card holders at cohealth clinics?
 
 ```{r}
 # duplicate rows according to the weighting 'mh2713',
@@ -282,13 +329,16 @@ label(mh2713$concession) = "Concession card"
 label(mh2713$condition) = "Condition frequency"
 
 table1(
-  x = ~ mh2713 + concession + condition | clinic,
+  x = ~ mh2713 | clinic,
   data = mh2713 |>
     mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
-  overall = c(left = "Total"),
-  caption = "Mental health GP consults, concession card status and High- vs Low- frequency mental health conditions",
-  footnote = "coHealth clinics, May 2025, 'active' patients"
-  )
+  overall = c(left = "Total")
+) |>
+  t1flex(tablefn = "flextable", cwidth = 0.85) |>
+  fontsize(size = 9, part = "all") |>
+  footnote(i = 1, j = 1, value = as_paragraph("Mental health GP consultations, claimed in the previous twelve months"), ref_symbols = "a", part = "body") |>
+  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
+
 ```
 
 ```{r}
@@ -296,10 +346,12 @@ table1(
   x = ~ mh2713 | concession,
   data = mh2713 |>
     mutate(concession = factor(concession, levels = c(FALSE, TRUE), label = c("No Concession", "Concession"))),
-  overall = FALSE,
-  caption = "Mental health GP consultations and Concession card status",
-  footnote = "coHealth clinics, May 2025, 'active' patients"
-)
+  overall = FALSE
+) |>
+  t1flex(tablefn = "flextable", cwidth = 0.85) |>
+  fontsize(size = 9, part = "all") |>
+  footnote(i = 1, j = 1, value = as_paragraph("Mental health GP consultations, claimed in the previous twelve months"), ref_symbols = "a", part = "body") |>
+  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
 ```
 
 ```{r}
@@ -353,6 +405,29 @@ table_mh2713_model
 ```
 
 ```{r}
+#| warning: false
+
+modelplot(
+  models = model_mh2713_effects,
+  coef_map = c(
+    'conditionlow' = "Low-frequency condition",
+    'concessionTRUE' = "Concession holder"
+  ),
+  exponentiate = TRUE
+) +
+  labs(
+    x = "Odds ratio co-efficient estimates and 95% confidence intervals",
+    y = "Predictors",
+    title = "Mental health item 2713 consults billed in previous twelve months",
+    caption = "(coHealth GP clinics, May 2025)"
+  )
+```
+
+## Chronic disease management plans (MBS item '721')
+
+Another potential indicator of care provision, using billing data, is the billing of [general practitioner chronic disease management plans, Medicare Benefit Schedule item 721](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=721). Chronic disease management plans are the purpose of planning, setting goals, coordinating and reviewing an ongoing chronic condition (present for more than six months or expected to be present for more than six months). People living with mental health conditions, particularly low-frequency mental health conditions and those living with socio-economic disadvantage are more likely to live with both chronic health conditions and experience disability as the result of those conditions.
+
+```{r}
 # duplicate rows according to the weighting 'gpmp',
 # hence "re-creating" the original patient-level data from the counts
 gpmp<- summary_df |>
@@ -377,13 +452,15 @@ label(gpmp$concession) = "Concession card"
 label(gpmp$condition) = "Condition frequency"
 
 table1(
-  x = ~ gpmp + concession + condition | clinic,
+  x = ~ gpmp | clinic,
   data = gpmp |>
     mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
   overall = c(left = "Total"),
-  caption = "GP chronic disease management plans, concession card status and High- vs Low- frequency mental health conditions",
-  footnote = "coHealth clinics, May 2025, 'active' patients"
-  )
+) |>
+  t1flex(tablefn = "flextable", cwidth = 0.85) |>
+  fontsize(size = 9, part = "all") |>
+  footnote(i = 1, j = 1, value = as_paragraph("GP chronic disease management plans claimed in the previous twelve months"), ref_symbols = "a", part = "body") |>
+  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
 ```
 
 ```{r}
@@ -445,4 +522,23 @@ table_gpmp_model <- modelsummary(
   )
 
 table_gpmp_model
+```
+
+```{r}
+#| warning: false
+
+modelplot(
+  models = model_gpmp_effects,
+  coef_map = c(
+    'conditionlow' = "Low-frequency condition",
+    'concessionTRUE' = "Concession holder"
+  ),
+  exponentiate = TRUE
+) +
+  labs(
+    x = "Odds ratio co-efficient estimates and 95% confidence intervals",
+    y = "Predictors",
+    title = "'Chronic Disease Care Plan' billed in previous twelve months",
+    caption = "(coHealth GP clinics, May 2025)"
+  )
 ```
