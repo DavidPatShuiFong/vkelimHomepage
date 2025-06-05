@@ -17,7 +17,7 @@ format:
   docx:
     output-file: MHCP
     echo: FALSE
-    toc: TRUE
+    toc: FALSE
 number-sections: true
 toc: true
 engine: knitr
@@ -45,6 +45,7 @@ library(officer)
 library(ggplot2)
 library(effects)
 library(modelsummary)
+library(wesanderson)
 ```
 
 ```{r}
@@ -146,7 +147,8 @@ table1(
     mutate(concession = factor(concession, levels = c(FALSE, TRUE), label = c("No Concession", "Concession"))),
   overall = FALSE
 ) |>
-  t1flex(tablefn = "flextable", cwidth = 0.85) |>
+  t1flex(tablefn = "flextable") |>
+  width(width = 2) |>
   fontsize(size = 9, part = "all") |>
   footnote(i = 1, j = 1, value = as_paragraph("Mental health care plans and Concession card status"), ref_symbols = "a", part = "body") |>
   footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
@@ -161,7 +163,8 @@ table1(
     mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
   overall = FALSE
 ) |>
-  t1flex(tablefn = "flextable", cwidth = 0.85) |>
+  t1flex(tablefn = "flextable") |>
+  width(width = 2) |>
   fontsize(size = 9, part = "all") |>
   footnote(i = 1, j = 1, value = as_paragraph("Mental health care plans and High- vs Low- prevalence mental health conditions"), ref_symbols = "a", part = "body") |>
   footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
@@ -259,25 +262,6 @@ table_mhcp_model <- modelsummary(
 table_mhcp_model
 ```
 
-```{r}
-#| warning: false
-
-modelplot(
-  models = model_mhcp_effects,
-  coef_map = c(
-    'conditionlow' = "Low-frequency condition",
-    'concessionTRUE' = "Concession holder"
-  ),
-  exponentiate = TRUE
-) +
-  labs(
-    x = "Odds ratio co-efficient estimates and 95% confidence intervals",
-    y = "Predictors",
-    title = "'Mental Health Care Plan' billed in previous twelve months",
-    caption = "(coHealth GP clinics, May 2025)"
-  )
-```
-
 ## Mental health consultations (MBS Item '2713')
 
 Do patients with mental health conditions *and* a concession card not only have less mental health care plans billed in general practice, but *also* have less mental health care delivered by those general practitioners?
@@ -348,7 +332,8 @@ table1(
     mutate(concession = factor(concession, levels = c(FALSE, TRUE), label = c("No Concession", "Concession"))),
   overall = FALSE
 ) |>
-  t1flex(tablefn = "flextable", cwidth = 0.85) |>
+  t1flex(tablefn = "flextable") |>
+  width(width = 2) |>
   fontsize(size = 9, part = "all") |>
   footnote(i = 1, j = 1, value = as_paragraph("Mental health GP consultations, claimed in the previous twelve months"), ref_symbols = "a", part = "body") |>
   footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
@@ -368,60 +353,14 @@ model_mh2713_effects <- glmer(
   family = binomial(link = "logit"),
   data = mh2713
 )
+
+label(mh2713$condition) = "condition"
 ```
 
 ```{r}
 plot(effects::allEffects(model_mh2713_effects))
 ```
 
-```{r}
-label(mh2713$condition) = "condition"
-
-table_mh2713_model <- modelsummary(
-  models = list(
-    "Logistic model" = model_mh2713,
-    "Logistic model - clinic random effect" = model_mh2713_effects
-  ),
-  estimate = c("Odds ratio" = "{estimate}"),
-  coef_rename = c(
-    "concessionTRUE" = "Concession holder",
-    "conditionlow" = "Low-frequency condition"
-  ),
-  shape = term ~ model + statistic,
-  exponentiate = TRUE,
-  statistic = c("CI (95%)" = "[{conf.low}, {conf.high}]", "p" = "{p.value}"),
-  output = "flextable"
-  ) |>
-  my_flextable_theme() |>
-  add_footer_lines(
-    paste(
-      "The odds ratio of having been billed a GP mental health consult",
-      "according to concession card status and low-vs-high prevalence mental health condition",
-      "(coHealth GP clinics, May 2025)"
-    )
-  )
-
-table_mh2713_model
-```
-
-```{r}
-#| warning: false
-
-modelplot(
-  models = model_mh2713_effects,
-  coef_map = c(
-    'conditionlow' = "Low-frequency condition",
-    'concessionTRUE' = "Concession holder"
-  ),
-  exponentiate = TRUE
-) +
-  labs(
-    x = "Odds ratio co-efficient estimates and 95% confidence intervals",
-    y = "Predictors",
-    title = "Mental health item 2713 consults billed in previous twelve months",
-    caption = "(coHealth GP clinics, May 2025)"
-  )
-```
 
 ## Chronic disease management plans (MBS item '721')
 
@@ -468,10 +407,13 @@ table1(
   x = ~ gpmp | concession,
   data = gpmp |>
     mutate(concession = factor(concession, levels = c(FALSE, TRUE), label = c("No Concession", "Concession"))),
-  overall = FALSE,
-  caption = "GP chronic disease management plan 'GPMP' and Concession card status",
-  footnote = "coHealth clinics, May 2025, 'active' patients"
-)
+  overall = FALSE
+) |>
+  t1flex(tablefn = "flextable") |>
+  width(width = 2) |>
+  fontsize(size = 9, part = "all") |>
+  footnote(i = 1, j = 1, value = as_paragraph("GP chronic disease management plan 'GPMP' and Concession card status"), ref_symbols = "a", part = "body") |>
+  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
 ```
 
 ```{r}
@@ -494,13 +436,14 @@ model_gpmp_effects <- glmer(
 plot(effects::allEffects(model_gpmp_effects))
 ```
 
+
 ```{r}
 label(gpmp$condition) = "condition"
 
 table_gpmp_model <- modelsummary(
   models = list(
-    "Logistic model" = model_gpmp,
-    "Logistic model - clinic random effect" = model_gpmp_effects
+    "Logistic model - MH2713" = model_mh2713_effects,
+    "Logistic model - GPMP" = model_gpmp_effects
   ),
   estimate = c("Odds ratio" = "{estimate}"),
   coef_rename = c(
@@ -515,7 +458,8 @@ table_gpmp_model <- modelsummary(
   my_flextable_theme() |>
   add_footer_lines(
     paste(
-      "The odds ratio of having been billed a GP chronic disease management plan 'GPMP',",
+      "The odds ratio of having been billed a GP mental health consultation 'MH2713'",
+      "or GP chronic disease management plan 'GPMP',",
       "according to concession card status and low-vs-high prevalence mental health condition",
       "(coHealth GP clinics, May 2025)"
     )
@@ -527,8 +471,14 @@ table_gpmp_model
 ```{r}
 #| warning: false
 
+model_list <- list(
+  "MHCP" = model_mhcp_effects,
+  "MH2713" = model_mh2713_effects,
+  "GPMP" = model_gpmp_effects
+)
+
 modelplot(
-  models = model_gpmp_effects,
+  models = model_list,
   coef_map = c(
     'conditionlow' = "Low-frequency condition",
     'concessionTRUE' = "Concession holder"
@@ -536,9 +486,10 @@ modelplot(
   exponentiate = TRUE
 ) +
   labs(
-    x = "Odds ratio co-efficient estimates and 95% confidence intervals",
+    x = "Odds ratio estimates and 95% confidence intervals",
     y = "Predictors",
-    title = "'Chronic Disease Care Plan' billed in previous twelve months",
+    title = "MHCP, MH2713 and GPMP billed in previous twelve months",
     caption = "(coHealth GP clinics, May 2025)"
-  )
+  ) +
+  scale_color_manual(values = wes_palette('Darjeeling1'))
 ```
