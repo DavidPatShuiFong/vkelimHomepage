@@ -21,10 +21,18 @@ format:
 number-sections: true
 toc: true
 engine: knitr
-summary: ""
+summary: "Are Mental Health Care Plans - and the billing of them - a good indicator of patient need for mental health services? Is the billing of mental health care plans (MHCPs) driven by patients, and the patient’s expected utility of MHCPs to unlock government funding for private psychological services."
 ---
 
-Exploring the question of whether Mental Health Care Plans (and the billing of them) are driven by patients, and the patient’s expected utility of MHCPs to unlock government funding for private psychological services.
+cohealth, a community health service in inner-west urban Melbourne, has a relatively high proportion of patients with mental health conditions. According to statistics derived from a clinical decision support tool ([Doctor's Control Panel](https://www.doctorscontrolpanel.com.au/), 49.8% of patients seen by cohealth clinics in the four weeks from 28th April 2025 are eligible for a mental health care plan (i.e. have a recorded mental health condition), compared to a national average of 35.0% nationally among practices which use Doctor's Control Panel (see @sec-appendix-mhcpeligible).
+
+That cohealth medical clinic patients have a relatively high propotion of mental health conditions is consistent with other available statistics. At one of the cohealth general practice sites, Kensington, 4.3% of active patients (76 of 1737[^PenCSlofreq]) have a recorded low-frequency mental health condition (schizophrenia or bipolar affective disorder) compared to the Australian general practice average of 0.5%[^BEACH].
+
+[^PenCSlofreq]: [PenCS](https://www.pencs.com.au/) data extract, Kensington clinic, 1st June 2025. 'Active' patient defined as those who (according to PenCS) have had three visits in the past two years *and* billed one of the standard and common Medicare item numbers (3, 23, 36, 44, 123, 2713, 91890,91891) in the previous twelve months.
+
+[^BEACH]: “[General practice activity in Australia 2015-2016](https://www.sydney.edu.au/medicine-health/our-research/research-centres/bettering-the-evaluation-and-care-of-health/publication.html)”, Sydney University Press, 2016.  
+
+
 
 The number of MHCP-eligible patients at coHealth who were billed MHCPs in the previous twelve months were divided into groups according to concession card holder patients (either health care card 'HCC' or pension card) and high-prevalence and low-prevalence mental health disorders.
 
@@ -493,3 +501,19 @@ modelplot(
   ) +
   scale_color_manual(values = wes_palette('Darjeeling1'))
 ```
+
+## Appendices
+
+### Proportion of patients eligible and who have a mental health care plan {#sec-appendix-mhcpeligible}
+
+Figures derived from [Doctor's Control Panel](https://www.doctorscontrolpanel.com.au/) 'Performance' charts, for the four weeks starting from 28th April 2025. The charts are included below.
+
+The total number of unique patients seen during that time period can be calculated from the numbers who are expected to have 'Allergies Documented', which is all patients seen. For cohealth, the figure is 5557+720 = `{r} 5557+720`. For all practices which use Doctor's Control Panel ('national'), the figure is 245991+12826 = `{r} format(245991+12826, scientific = FALSE)`.
+
+The total number of unique patients seen during that time period considered eligible for a mental health care plan (because they have a recorded and coded mental health condition) can be calculated from the 'MHCP' (Mental Health Care Plan) bar. For cohealth, the figure is 43+441+1201+1441 = `{r} 43+441+1201+1441`, which is `{r} sprintf("%0.1f%%",(43+441+1201+1441)/(5557+720)*100)` of the total. For 'national' practices, the figure is 2455+16839+34885+36287 = `{r} format(2455+16839+34885+36287, scientific = FALSE)`, which is `{r} sprintf("%0.1f%%", (2455+16839+34885+36287)/(245991+12826)*100)` of the total.
+
+The total number of unique patients seen during that time period who had an 'up-to-date' (i.e. within the previous twelve months) mental health care plan can be calculated from the 'up-to-date' and 'updated' sections of the MHCP bar. For cohealth, the figure is 43+441 = `{r} 43+441`, which is `{r} sprintf("%0.1f%%", (43+441)/(43+441+1201+1441)*100)` of patients with recorded mental health conditions. For 'national' practices, the figure is 2455 + 16839 = `{r} format(2455+16839, scientific = FALSE)`, which is `{r} sprintf("%0.1f%%", (2455+16839)/(2455+16839+34885+36287)*100)` of patients with mental health conditions.
+
+![cohealth, DCP statistics, 28/Apr/2025 to 25/May/2025](./images/cohealth_20250428_mhcpeligible.png)
+
+![National, DCP statistics, 28/Apr/2025 to 25/May/2025](./images/national_20250428_mhcpeligible.png)
