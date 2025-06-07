@@ -21,24 +21,8 @@ format:
 number-sections: true
 toc: true
 engine: knitr
-summary: "Are Mental Health Care Plans - and the billing of them - a good indicator of patient need for mental health services? Is the billing of mental health care plans (MHCPs) driven by patients, and the patient’s expected utility of MHCPs to unlock government funding for private psychological services."
+summary: "Are Mental Health Care Plans - and the billing of them - a good indicator of patient need for mental health services?"
 ---
-
-cohealth, a community health service in inner-west urban Melbourne, has a relatively high proportion of patients with mental health conditions. According to statistics derived from a clinical decision support tool ([Doctor's Control Panel](https://www.doctorscontrolpanel.com.au/), 49.8% of patients seen by cohealth clinics in the four weeks from 28th April 2025 are eligible for a mental health care plan (i.e. have a recorded mental health condition), compared to a national average of 35.0% nationally among practices which use Doctor's Control Panel (see @sec-appendix-mhcpeligible).
-
-That cohealth medical clinic patients have a relatively high propotion of mental health conditions is consistent with other available statistics. At one of the cohealth general practice sites, Kensington, 4.3% of active patients (76 of 1737[^PenCSlofreq]) have a recorded low-frequency mental health condition (schizophrenia or bipolar affective disorder) compared to the Australian general practice average of 0.5%[^BEACH].
-
-[^PenCSlofreq]: [PenCS](https://www.pencs.com.au/) data extract, Kensington clinic, 1st June 2025. 'Active' patient defined as those who (according to PenCS) have had three visits in the past two years *and* billed one of the standard and common Medicare item numbers (3, 23, 36, 44, 123, 2713, 91890,91891) in the previous twelve months.
-
-[^BEACH]: “[General practice activity in Australia 2015-2016](https://www.sydney.edu.au/medicine-health/our-research/research-centres/bettering-the-evaluation-and-care-of-health/publication.html)”, Sydney University Press, 2016.  
-
-
-
-The number of MHCP-eligible patients at coHealth who were billed MHCPs in the previous twelve months were divided into groups according to concession card holder patients (either health care card 'HCC' or pension card) and high-prevalence and low-prevalence mental health disorders.
-
-It is postulated that concession card holders have lower financial resources and are less able to utilise the government subsidies unlocked by MHCP plans for private psychology. This is because private psychology fees are far greater than the government subsidy to use private psychology.
-
-Mental health conditions can be broadly divided into low- and high- frequency mental health conditions. High-frequency mental health conditions are the common mental health conditions such as anxiety and depression. Low-frequency mental health conditions are the less common, and often more serious and lifelong conditions, of schizophrenia and bipolar affective disorder. It is postulated that patients with low-prevalence mental health disorders have more severe mental health conditions and are at greater need of mental health assessments and services.
 
 ```{r}
 #| message: false
@@ -51,10 +35,168 @@ library(table1)
 library(flextable)
 library(officer)
 library(ggplot2)
+library(highcharter)
 library(effects)
 library(modelsummary)
 library(wesanderson)
 ```
+
+```{r}
+# see Appendix 1 for the derivation of these numbers
+# number of mental health care plans, cohealth and 'other'
+n_mhcp_cohealth <- 43+441 
+n_mhcp_other <- 2455 + 16839
+
+# number of patients with mental health conditions
+n_mentalhealth_cohealth <- 43+441+1201+1441
+n_mentalhealth_other <- 2455+16839+34885+36287
+
+# total number of patients
+n_total_cohealth <- 5557+720
+n_total_other <- 245991+12826
+```
+
+## Introduction
+
+cohealth, a community health service in inner-west urban Melbourne, has a relatively high proportion of patients with mental health conditions. According to statistics derived from a clinical decision support tool ([Doctor's Control Panel](https://www.doctorscontrolpanel.com.au/), `{r} sprintf("%0.1f%%", n_mentalhealth_cohealth/n_total_cohealth*100)` of patients consulted by cohealth clinics in the four weeks from 28th April 2025 are eligible for a mental health care plan (i.e. have a recorded mental health condition), compared to a national average of `{r} sprintf("%0.1f%%", n_mentalhealth_other/n_total_other*100)` nationally among practices which use Doctor's Control Panel (see @sec-appendix-mhcpeligible).
+
+That cohealth medical clinic patients have a relatively high proportion of mental health conditions is consistent with other available statistics. At one of the cohealth general practice sites, Kensington, approximately `{r} sprintf("%0.1f%%", 52/774*100)` of consultations (52 of 774[^PenCSlofreq]) are with patients who have a recorded low-frequency mental health condition (schizophrenia or bipolar affective disorder) compared to the Australian general practice average of 0.5%[^BEACH]. To help meet the needs of cohealth patients with mental health conditions, cohealth medical clinics work closely and co-operatively with area mental health services (e.g. [Inner West Area Mental Health Service](https://vahi.vic.gov.au/mental-health-services/inner-west-adult-area-mental-health-service)) and cohealth clinics also employ mental health nurses through the Primary Health Network [CAREinMIND](https://nwmphn.org.au/our-work/mental-health/careinmind-mental-health-services/) program.
+
+[^PenCSlofreq]: [PenCS](https://www.pencs.com.au/) data extract, Kensington clinic, 1st June 2025. 'Consultation' defined as those who (according to PenCS) have had a visit in the month of May 2025, having been billed at least one of the standard and common Medicare item numbers (3, 23, 36, 44, 123, 2713, 91890,91891, 721, 723, 732, 701, 703, 705, 707, 2700, 2701, 2712, 2715, 2717). Each patient can only be counted once during the specified time period (one month).
+
+[^BEACH]: “[General practice activity in Australia 2015-2016](https://www.sydney.edu.au/medicine-health/our-research/research-centres/bettering-the-evaluation-and-care-of-health/publication.html)”, Sydney University Press, 2016.  
+
+```{r}
+# Data for the first plot
+# patients with a recorded mental health condition
+df1 <- data.frame(
+  Clinic = c("cohealth", "Other clinics"),
+  Percentage = c(
+    round(n_mentalhealth_cohealth/n_total_cohealth * 100, 1),
+    round(n_mentalhealth_other/n_total_other * 100, 1)
+  )
+)
+
+# Data for the second plot
+# consults with patients who have a low-frequency mental health condition
+df2 <- data.frame(
+  Clinic = c("cohealth, Kensington", "Other clinics"),
+  Percentage = c(round(52/774*100, 1), 0.5)
+)
+
+# Choose a Wes Anderson palette (e.g., 'Rushmore')
+palette <- wes_palette("Darjeeling1", 2, type = "discrete")
+
+hc1 <- highchart() %>%
+  hc_chart(type = "column") %>%
+  hc_title(text = "Patients with Recorded Mental Health Condition") %>%
+  hc_xAxis(categories = df1$Clinic) %>%
+  hc_yAxis(title = list(text = "Proportion (%)")) %>%
+  hc_add_series(
+    name = "Proportion",
+    data = df1$Percentage,
+    colorByPoint = TRUE,
+    colors = palette
+  ) %>%
+  hc_tooltip(pointFormat = "<b>{point.y}%</b>") %>%
+  hc_legend(enabled = FALSE)
+
+# Second highcharter plot
+hc2 <- highchart() %>%
+  hc_chart(type = "column") %>%
+  hc_title(text = "Proportion of consultations with patients with recorded Low-Frequency Mental Health Disorder") %>%
+  hc_xAxis(categories = df2$Clinic) %>%
+  hc_yAxis(title = list(text = "Proportion (%)")) %>%
+  hc_add_series(
+    name = "Proportion",
+    data = df2$Percentage,
+    colorByPoint = TRUE,
+    colors = palette
+  ) %>%
+  hc_tooltip(pointFormat = "<b>{point.y}%</b>") %>%
+  hc_legend(enabled = FALSE)
+```
+
+```{r}
+#| layout-ncol: 2
+ 
+hc1
+hc2
+```
+
+Although cohealth consults a high proportion of patients with recorded mental health conditions and are potentially eligible for mental health care plans (MHCP), a relatively small proportion of those patients have had - and been billed - an 'up-to-date' care plan i.e. within the past twelve months. At cohealth, `{r} sprintf("%0.1f%%", n_mhcp_cohealth/n_mentalhealth_cohealth*100)` of eligible patients have an up-to-date care plan, compared to `{r} sprintf("%0.1f%%", n_mhcp_other/n_mentalhealth_other*100)` nationally (see @sec-appendix-mhcpeligible). The proportion of all patients at cohealth who have an up-to-date mental health care plan (`{r} sprintf("%0.1f%%", n_mhcp_cohealth/n_total_cohealth*100)`) is almost indistinguishable from the proportion of other clinics (`{r} sprintf("%0.1f%%", n_mhcp_other/n_total_other*100)`).
+
+```{r}
+# Data for the first plot
+# patients eligible for MHCP who have an up-to-date MHCP
+df1 <- data.frame(
+  Clinic = c("cohealth", "Other clinics"),
+  Percentage = c(
+    round(n_mhcp_cohealth/n_mentalhealth_cohealth * 100, 1),
+    round(n_mhcp_other/n_mentalhealth_other * 100, 1)
+  )
+)
+
+# Data for the second plot
+# all patients, proportion who have an up-to-date MHCP
+df2 <- data.frame(
+  Clinic = c("cohealth", "Other clinics"),
+  Percentage = c(
+    round(n_mhcp_cohealth/n_total_cohealth * 100, 1),
+    round(n_mhcp_other/n_total_other * 100, 1)
+  )
+)
+
+# Choose a Wes Anderson palette (e.g., 'Rushmore')
+palette <- wes_palette("Darjeeling1", 2, type = "discrete")
+
+hc1 <- highchart() %>%
+  hc_chart(type = "bar") %>%
+  hc_title(text = "Eligible patients with an up-to-date mental health care plan (MHCP)") %>%
+  hc_xAxis(categories = df1$Clinic) %>%
+  hc_yAxis(title = list(text = "Proportion (%)")) %>%
+  hc_add_series(
+    name = "Proportion",
+    data = df1$Percentage,
+    colorByPoint = TRUE,
+    colors = palette
+  ) %>%
+  hc_tooltip(pointFormat = "<b>{point.y}%</b>") %>%
+  hc_legend(enabled = FALSE)
+
+# Second highcharter plot
+hc2 <- highchart() %>%
+  hc_chart(type = "bar") %>%
+  hc_title(text = "Proportion of all patients with an up-to-date mental health care plan (MHCP)") %>%
+  hc_xAxis(categories = df2$Clinic) %>%
+  hc_yAxis(title = list(text = "Proportion (%)")) %>%
+  hc_add_series(
+    name = "Proportion",
+    data = df2$Percentage,
+    colorByPoint = TRUE,
+    colors = palette
+  ) %>%
+  hc_tooltip(pointFormat = "<b>{point.y}%</b>") %>%
+  hc_legend(enabled = FALSE)
+```
+
+```{r}
+#| layout-ncol: 2
+
+hc1
+hc2
+```
+
+Why, despite the high prevalence of mental health conditions among cohealth clinic patients, do cohealth general practice clinics do - and bill - relatively few mental health care plans? 
+
+cohealth clinics have - in some ways - more mental health support in the form of on-site counselling (through mental health nurses and social workers) and close liaison with area mental health services compared to many other Australian general practices.
+
+
+The number of MHCP-eligible patients at coHealth who were billed MHCPs in the previous twelve months were divided into groups according to concession card holder patients (either health care card 'HCC' or pension card) and high-prevalence and low-prevalence mental health disorders.
+
+It is postulated that concession card holders have lower financial resources and are less able to utilise the government subsidies unlocked by MHCP plans for private psychology. This is because private psychology fees are far greater than the government subsidy to use private psychology.
+
+Mental health conditions can be broadly divided into low- and high- frequency mental health conditions. High-frequency mental health conditions are the common mental health conditions such as anxiety and depression. Low-frequency mental health conditions are the less common, and often more serious and lifelong conditions, of schizophrenia and bipolar affective disorder. It is postulated that patients with low-prevalence mental health disorders have more severe mental health conditions and are at greater need of mental health assessments and services.
 
 ```{r}
 # outcome
