@@ -18,6 +18,7 @@ format:
     output-file: MHTP
     echo: FALSE
     toc: FALSE
+    tbl-cap-location: bottom
 number-sections: true
 toc: true
 engine: knitr
@@ -42,7 +43,10 @@ library(wesanderson)
 ```
 
 ```{r}
-# see Appendix 1 for the derivation of these numbers
+# Statistics derived from Doctor's Control Panel
+# for the four weeks starting from 28th April 2025
+# see Appendix "Proportion of patients eligible and who have a mental health treatment plan
+
 # number of mental health treatment plans, cohealth and 'other'
 n_mhtp_cohealth <- 43+441 
 n_mhtp_other <- 2455 + 16839
@@ -254,15 +258,57 @@ I need to shift my approach – can I generate a document that is worthwhile for
 cohealth clinics have - in some ways - more mental health support in the form of on-site counselling (through mental health nurses and social workers) and close liaison with area mental health services compared to many other Australian general practices.
 :::
 
-## Method and Results
+## Method
 
-### Mental Health Treatment Plans
+### Mental health treatment plans
 
-The number of mental health treatment plan (MHTP) eligible and active patients at coHealth who were billed MHTPs in the previous twelve months are counted using PenCS, for the one year up to 1st May 2025 (for details of the extraction procedure using PenCS, see @sec-appendix-mhtpgroups). The patients were divided into groups according to concession card holder patients (either health care card 'HCC' or pension card), high-prevalence and low-prevalence mental health disorders and the cohealth clinic site attended.
+*   It is postulated that concession card holders have lower financial resources and are less able to utilise the government subsidies unlocked by MHTP plans for private psychology. This is because private psychology fees are often far greater than the government subsidy to use private psychology.
 
-It is postulated that concession card holders have lower financial resources and are less able to utilise the government subsidies unlocked by MHTP plans for private psychology. This is because private psychology fees are often far greater than the government subsidy to use private psychology.
+*   Mental health conditions can be broadly divided into low- and high- frequency mental health conditions. High-frequency mental health conditions are the common mental health conditions such as anxiety and depression. Low-frequency mental health conditions are the less common, and often more serious and lifelong conditions, of schizophrenia and bipolar affective disorder. Patients with schizophrenia and bipolar affective disorder can benefit from psychological therapies. If mental health treatment plans were done on the basis of need, it would be expected that more patients with low-prevalence conditions would have mental health treatment plans compared to patients with high-prevalence mental health conditions.
 
-Mental health conditions can be broadly divided into low- and high- frequency mental health conditions. High-frequency mental health conditions are the common mental health conditions such as anxiety and depression. Low-frequency mental health conditions are the less common, and often more serious and lifelong conditions, of schizophrenia and bipolar affective disorder. It is postulated that patients with low-prevalence mental health disorders have more severe mental health conditions and are at greater need of mental health assessments and services.
+### Mental health consultation (MBS item '2713')
+
+If patients with mental health conditions *and* a health concession card have less mental health treatment plans billed at cohealth general practices, perhaps those patients *also* have less mental health care delivered by those general practitioners.
+
+There other potential ways to measure mental health care delivery in general practice.
+
+Potential measurements:
+
+1. Examination of 'reasons for consult' in general practice electronic medical record (EMR) notes
+   i) Relatively easy to do, as reasons for consult are part of 'structured data' within the EMR
+2. Examination of the electronic medical record (EMR) consultation notes
+   i) More difficult to do than option (1), but can be done with basic natural language processing (NLP)
+3. Examination of other billing items associated with mental health care
+
+Options (1) and (2) are relatively easy to perform with a basic database search and simple application of data science. However, at the time of writing, only option (3) is currently available to use at cohealth.
+
+There *is* another billing item associated with mental health care, which is the [general practitioner attendance in relation to a mental health disorder, Medicare Benefit Schedule - Item 2713](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=2713). Unfortunately, MBS item 2713 is little used, because there are alternative item numbers - not specific to mental health - which are easy to use and bill[^mbs_item_36].
+
+[^mbs_item_36]: [MBS item 2713](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=2713) has a requirement for minimum consultation length of 20 minutes, and has a rebate value of $81.70.
+
+    There is an alternative item number which can also be claimed if a consult is between 20 to 40 minutes in length, the level 'C' consult, [MBS item 36](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=36&qt=item), which has a rebate value of $82.90. Where an item 2713 could be claimed, an item 36 could be claimed instead, with greater revenue than an item 2713.
+
+    This is even more the case when a patient has a concession card. In that case, the bulk-billing incentive payment for item 36 is $14 or more (depending on the practice's country-rural 'MMM' location) than the bulk-biling incentive payment for an item 2713.
+
+Nevertheless, occasionally general practitioners *do* claim an item 2713. One possible reason is because item 2713 - depending on the duration and content of the consult - can sometimes be 'co-billed' with a standard consult item (such as level B or C consult).
+
+*Are concession card holders, or patients living with low-frequency mental health disorders, billed the general practice mental health item '2713' the same, more, or less than patients without concession card holders at cohealth clinics?*
+
+### Chronic disease management plans (MBS item '721')
+
+Another indicator of care provision is the billing of [general practitioner chronic disease management plans, Medicare Benefit Schedule item 721](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=721). Chronic disease management plans are for the purpose of planning, setting goals, coordinating and reviewing an ongoing chronic condition (present for more than six months or expected to be present for more than six months). People living with mental health conditions, particularly low-frequency mental health conditions and those living with socio-economic disadvantage are more likely to live with both chronic health conditions and experience disability as the result of those conditions.
+
+### Data gathering and analysis 
+
+The number of mental health treatment plan (MHTP) eligible and active patients at coHealth who were billed MHTPs, mental health consult items (MBS item 2713) or chronic disease management plans (MBS item 721) in the previous twelve months were counted using PenCS, for the one year up to 1st May 2025 (for details of the extraction procedure using PenCS, see @sec-appendix-mhtpgroups). The patients were divided into groups according to concession card holder patients (either health care card 'HCC' or pension card), high-prevalence and low-prevalence mental health disorders and the cohealth clinic site attended.
+
+The results are analysed using [R version 4.3.1](https://www.r-project.org/). Logistic regression was used, with clinic location as a random effect[^clinic_random_effect]. Source code can be viewed on www.github.com/DavidPatShuiFong[^github] and davidfong.org[^inline_sourcecode].
+
+[^clinic_random_effect]: It is to be noted that using clinic location as a random effect added little information to the model.
+[^github]: [R source code on Github](https://github.com/DavidPatShuiFong/vkelimHomepage/tree/master/static/post/mhtpdisadvantage)
+[^inline_sourcecode]: [R source code 'inline' on davidfong.org](https://www.davidfong.org/post/mhtpdisadvantage/)
+
+## Results
 
 ```{r}
 # outcome
@@ -333,7 +379,8 @@ mhtp <- summary_df |>
       uncount(no_mhtp) |>
       mutate(mhtp = FALSE) |>
       select(concession, condition, clinic, mhtp)
-  )
+  ) |>
+  arrange(clinic, concession, condition)
   
 label(mhtp$mhtp) = "Mental Health Plan"
 label(mhtp$concession) = "Concession card"
@@ -351,38 +398,9 @@ table1(
   footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
 ```
 
-
 Concession card holders (with either high-prevalence or low-prevalence mental health conditions) have lower annual rates of mental health treatment plans billing (11.8% vs 16.7%). 
 
-```{r}
-table1(
-  x = ~ mhtp | concession,
-  data = mhtp |>
-    mutate(concession = factor(concession, levels = c(FALSE, TRUE), label = c("No Concession", "Concession"))),
-  overall = FALSE
-) |>
-  t1flex(tablefn = "flextable") |>
-  width(width = 2) |>
-  fontsize(size = 9, part = "all") |>
-  footnote(i = 1, j = 1, value = as_paragraph("Mental health treatment plans and Concession card status"), ref_symbols = "a", part = "body") |>
-  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
-```
-
-Low-prevalence conditions (schizophrenia and bipolar affective disorder) are often severe and lifelong mental health conditions. Patients with schizophrenia and bipolar affective disorder can benefit from psychological therapies. If mental health treatment plans were done on the basis of need, it would be expected that more patients with low-prevalence conditions would have mental health treatment plans compared to patients with high-prevalence mental health conditions. People with low-prevalence conditions have a similar, if slightly lower, rate of mental health treatment plans than those with high-prevalence conditions (11.7% vs 13.0%).
-
-```{r}
-table1(
-  x = ~ mhtp | condition,
-  data = mhtp |>
-    mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
-  overall = FALSE
-) |>
-  t1flex(tablefn = "flextable") |>
-  width(width = 2) |>
-  fontsize(size = 9, part = "all") |>
-  footnote(i = 1, j = 1, value = as_paragraph("Mental health treatment plans and High- vs Low- prevalence mental health conditions"), ref_symbols = "a", part = "body") |>
-  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
-```
+People with low-prevalence conditions have a similar, if slightly lower, rate of mental health treatment plans than those with high-prevalence conditions (11.7% vs 13.0%).
 
 ```{r}
 # the basic model
@@ -399,7 +417,9 @@ model_mhtp_effects <- glmer(
   data = mhtp
 )
 
-# in this case, using 'clinic' as a random effect makes little difference to the model
+label(mhtp$condition) = "condition"
+
+# using 'clinic' as a random effect makes little difference to the model
 ```
 
 ```{r}
@@ -441,66 +461,9 @@ my_flextable_theme <- function(x, ...) {
 
 ```
 
-```{r}
-#| message: false
-#| warning: false
+A slightly higher proportion of patients with concession cards (7.8%) were billed a mental health GP consult (item 2713) than those without a concession card (5.7%), though the difference is not statistically significant. A higher proportion of patients with a low-frequency mental health condition (10.9%) were billed a mental health GP consult than those with high-frequency mental health conditions (6.5%) (p=0.002).
 
-label(mhtp$condition) = "condition"
-
-table_mhtp_model <- modelsummary(
-  models = list(
-    "Logistic model" = model_mhtp,
-    "Logistic model - clinic random effect" = model_mhtp_effects
-  ),
-  estimate = c("Odds ratio" = "{estimate}"),
-  coef_rename = c(
-    "concessionTRUE" = "Concession holder",
-    "conditionlow" = "Low-frequency condition"
-  ),
-  shape = term ~ model + statistic,
-  exponentiate = TRUE,
-  statistic = c("CI (95%)" = "[{conf.low}, {conf.high}]", "p" = "{p.value}"),
-  output = "flextable"
-  ) |>
-  my_flextable_theme() |>
-  add_footer_lines(
-    paste(
-      "The odds ratio of having been billed a mental health treatment plan,",
-      "according to concession card status and low-vs-high prevalence mental health condition",
-      "(coHealth GP clinics, May 2025)"
-    )
-  )
-
-table_mhtp_model
-```
-
-### Mental health consultations (MBS Item '2713')
-
-Do patients with mental health conditions *and* a concession card not only have less mental health treatment plans billed at cohealth general practices, but *also* have less mental health care delivered by those general practitioners?
-
-Apart from mental health treatment plans, are there other potential ways to measure mental health care delivery in general practice?
-
-Potential measurements:
-
-1. Examination of 'reasons for consult' in general practice electronic medical record (EMR) notes
-   i) Relatively easy to do, as reasons for consult are part of 'structured data' within the EMR
-2. Examination of the electronic medical record (EMR) consultation notes
-   i) More difficult to do than option (1), but can be done with basic natural language processing (NLP)
-3. Examination of other billing items associated with mental health care
-
-Options (1) and (2) are relatively easy to perform with a basic database search and simple application of data science. However, at the time of writing, only option (3) is currently available for use to clinicians at cohealth.
-
-There *is* another billing item associated with mental health care, which is the [general practitioner attendance in relation to a mental health disorder, Medicare Benefit Schedule - Item 2713](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=2713). Unfortunately, MBS item 2713 is little used. Item 2713 has a requirement for minimum consultation length of 20 minutes, and has a rebate value of $81.70. 
-
-However, there is an alternative item number which can also be claimed if a consult is between 20 to 40 minutes in length, [the level 'C' consult, Medicare Benefit Schedule - Item 36](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=36&qt=item), which has a rebate value of $82.90. In almost all cases where an item 2713 could be claimed, an item 36 could be claimed instead, with greater revenue than an item 2713.
-
-This is even more the case when a patient has a concession card. In that case, the bulk-billing incentive payment for item 36 is $14 or more (depending on the practice's country-rural 'MMM' location) than the bulk-biling incentive payment for an item 2713.
-
-Nevertheless, occasionally general practitioners *do* claim an item 2713. One possible reason is because item 2713 - depending on the duration and content of the consult - can sometimes be 'co-billed' with a standard consult item (such as level B or C consult).
-
-*Are concession card holders, or patients living with low-frequency mental health disorders, billed the general practice mental health item '2713' the same, more, or less than patients without concession card holders at cohealth clinics?*
-
-The results show that a slightly higher proportion of patients with concession cards (7.8%) were billed a mental health GP consult (item 2713) than those without a concession card (5.7%), though the difference is not statistically significant. A higher proportion of patients with a low-frequency mental health condition (10.9%) were billed a mental health GP consult than those with high-frequency mental health conditions (6.5%), the difference is statisically significant (p=0.002).
+A higher proportion of patients with concession cards (31.6%) were billed a chronic disease management plan (item 721) than those without a concession card (21.6%) (p<0.001). A higher proportion of patients with patients with low-frequency mental health conditions (33.9%) were billed a mental health GP consult than those with a high-frequency mental health condition (28.6%) (p=0.059).
 
 ```{r}
 # duplicate rows according to the weighting 'mh2713',
@@ -520,40 +483,13 @@ mh2713 <- summary_df |>
       uncount(no_mh2713) |>
       mutate(mh2713 = FALSE) |>
       select(concession, condition, clinic, mh2713)
-  )
-  
+  ) |>
+  arrange(clinic, concession, condition)
+
 label(mh2713$mh2713) = "Mental Health GP Consult"
 label(mh2713$concession) = "Concession card"
 label(mh2713$condition) = "Condition frequency"
 
-```
-
-```{r}
-table1(
-  x = ~ mh2713 | concession,
-  data = mh2713 |>
-    mutate(concession = factor(concession, levels = c(FALSE, TRUE), label = c("No Concession", "Concession"))),
-  overall = FALSE
-) |>
-  t1flex(tablefn = "flextable") |>
-  width(width = 2) |>
-  fontsize(size = 9, part = "all") |>
-  footnote(i = 1, j = 1, value = as_paragraph("Mental health GP consultations, claimed in the previous twelve months"), ref_symbols = "a", part = "body") |>
-  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
-```
-
-```{r}
-table1(
-  x = ~ mh2713 | condition,
-  data = mh2713 |>
-    mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
-  overall = FALSE
-) |>
-  t1flex(tablefn = "flextable") |>
-  width(width = 2) |>
-  fontsize(size = 9, part = "all") |>
-  footnote(i = 1, j = 1, value = as_paragraph("Mental health GP consultations and High- vs Low-prevalence mental health conditions"), ref_symbols = "a", part = "body") |>
-  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
 ```
 
 ```{r}
@@ -574,13 +510,9 @@ model_mh2713_effects <- glmer(
 label(mh2713$condition) = "condition"
 ```
 
-```{r}
+```{r effects_plot_2713}
 plot(effects::allEffects(model_mh2713_effects))
 ```
-
-### Chronic disease management plans (MBS item '721')
-
-Another indicator of care provision is the billing of [general practitioner chronic disease management plans, Medicare Benefit Schedule item 721](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=721). Chronic disease management plans are for the purpose of planning, setting goals, coordinating and reviewing an ongoing chronic condition (present for more than six months or expected to be present for more than six months). People living with mental health conditions, particularly low-frequency mental health conditions and those living with socio-economic disadvantage are more likely to live with both chronic health conditions and experience disability as the result of those conditions.
 
 ```{r}
 # duplicate rows according to the weighting 'gpmp',
@@ -600,25 +532,51 @@ gpmp<- summary_df |>
       uncount(no_gpmp) |>
       mutate(gpmp = FALSE) |>
       select(concession, condition, clinic, gpmp)
-  )
+  ) |>
+  arrange(clinic, concession, condition)
   
 label(gpmp$gpmp) = "Chronic Disease Management Plan"
 label(gpmp$concession) = "Concession card"
 label(gpmp$condition) = "Condition frequency"
 ```
 
-```{r}
+```{r tbl_all_gpmp}
+#| label: tbl_all_concession
+#| tbl-cap: "MBS items by concession card status"
+
+# create a combined dataframe which has the correct number of mhtp, mh2713 and gpmp
+# in each clinic/concession/condition category
+# note that the relationship *between* mhtp, mh2713 and gpmp in this table is not correct
+combined_synthetic <- mhtp |>
+  mutate(mh2713 = mh2713$mh2713) |>
+  mutate(gpmp = gpmp$gpmp)
+
 table1(
-  x = ~ gpmp | concession,
-  data = gpmp |>
+  x = ~ mhtp + mh2713 + gpmp | concession,
+  data = combined_synthetic |>
     mutate(concession = factor(concession, levels = c(FALSE, TRUE), label = c("No Concession", "Concession"))),
   overall = FALSE
 ) |>
   t1flex(tablefn = "flextable") |>
   width(width = 2) |>
   fontsize(size = 9, part = "all") |>
-  footnote(i = 1, j = 1, value = as_paragraph("GP chronic disease management plan 'GPMP' and Concession card status"), ref_symbols = "a", part = "body") |>
-  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
+  add_footer_lines("coHealth clinics, May 2025, 'active' patients")
+```
+
+```{r tbl_all_conditions}
+#| label: tbl_all_conditions
+#| tbl-cap: "MBS items by high- and low- prevalence mental health conditions"
+
+table1(
+  x = ~ mhtp + mh2713 + gpmp | condition,
+  data = combined_synthetic |>
+    mutate(condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
+  overall = FALSE
+) |>
+  t1flex(tablefn = "flextable") |>
+  width(width = 2) |>
+  fontsize(size = 9, part = "all") |>
+  add_footer_lines("coHealth clinics, May 2025, 'active' patients")
 ```
 
 ```{r}
@@ -635,20 +593,25 @@ model_gpmp_effects <- glmer(
   family = binomial(link = "logit"),
   data = gpmp
 )
+
+label(gpmp$condition) = "condition"
 ```
 
 ```{r}
 plot(effects::allEffects(model_gpmp_effects))
 ```
 
-
 ```{r}
-label(gpmp$condition) = "condition"
+#| label: tbl_mbs_logistic_model
+#| tbl-cap: "Logistic model, MBS items by concession status and mental health condition"
+#| message: false
+#| warning: false
 
-table_gpmp_model <- modelsummary(
+table_mbs_model <- modelsummary(
   models = list(
-    "Logistic model - MH2713" = model_mh2713_effects,
-    "Logistic model - GPMP" = model_gpmp_effects
+    "MHTP" = model_mhtp_effects,
+    "MH2713" = model_mh2713_effects,
+    "GPMP" = model_gpmp_effects
   ),
   estimate = c("Odds ratio" = "{estimate}"),
   coef_rename = c(
@@ -670,7 +633,7 @@ table_gpmp_model <- modelsummary(
     )
   )
 
-table_gpmp_model
+table_mbs_model
 ```
 
 ```{r}
@@ -785,7 +748,3 @@ table1(
   footnote(i = 1, j = 1, value = as_paragraph("GP chronic disease management plans claimed in the previous twelve months"), ref_symbols = "a", part = "body") |>
   footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
 ```
-
-    
-
-    
