@@ -21,6 +21,21 @@ format:
     tbl-cap-location: bottom
 number-sections: true
 toc: true
+crossref: 
+  custom:
+    - kind: float
+      key: table
+      latex-env: table
+      reference-prefix: Table
+      space-before-numbering: true
+      latex-list-of-description: Table
+    - kind: float
+      key: figure
+      latex-env: figure
+      reference-prefix: Figure
+      space-before-numbering: true
+      latex-list-of-description: Figure
+    
 engine: knitr
 summary: "Are Mental Health Treatment Plans - and the billing of them - a good indicator of patient need for mental health services?"
 ---
@@ -64,9 +79,7 @@ n_total_other <- 245991+12826
 
 cohealth, a community health service in inner-west urban Melbourne, has a relatively high proportion of patients with mental health conditions. According to statistics derived from a clinical decision support tool ([Doctor's Control Panel](https://www.doctorscontrolpanel.com.au/), `{r} sprintf("%0.1f%%", n_mentalhealth_cohealth/n_total_cohealth*100)` of patients consulted by cohealth clinics in the four weeks from 28th April 2025 are eligible for a mental health treatment plan (i.e. have a recorded mental health condition), compared to a national average of `{r} sprintf("%0.1f%%", n_mentalhealth_other/n_total_other*100)` nationally among practices which use Doctor's Control Panel (see @sec-appendix-mhtpeligible).
 
-That cohealth medical clinic patients have a relatively high proportion of mental health conditions is consistent with other available statistics. At one of the cohealth general practice sites, Kensington, approximately `{r} sprintf("%0.1f%%", 52/774*100)` of consultations (52 of 774[^PenCSlofreq]) are with patients who have a recorded low-frequency mental health condition (schizophrenia or bipolar affective disorder) compared to the Australian general practice average of 0.5%[^BEACH]. To help meet the needs of cohealth patients with mental health conditions, cohealth medical clinics work closely and co-operatively with area mental health services (e.g. [Inner West Area Mental Health Service](https://vahi.vic.gov.au/mental-health-services/inner-west-adult-area-mental-health-service)) and cohealth clinics also employ mental health nurses through the Primary Health Network [CAREinMIND](https://nwmphn.org.au/our-work/mental-health/careinmind-mental-health-services/) program.
-
-[^PenCSlofreq]: [PenCS](https://www.pencs.com.au/) data extract, Kensington clinic, 1st June 2025. 'Consultation' defined as those who (according to PenCS) have had a visit in the month of May 2025, having been billed at least one of the standard and common Medicare item numbers (3, 23, 36, 44, 123, 2713, 91890, 91891, 721, 723, 732, 701, 703, 705, 707, 2700, 2701, 2712, 2715, 2717). Each patient can only be counted once during the specified time period (one month).
+That cohealth medical clinic patients have a relatively high proportion of mental health conditions is consistent with other available statistics. At one of the cohealth general practice sites, Kensington, approximately `{r} sprintf("%0.1f%%", 52/774*100)` of consultations (52 of 774, see @sec-appendix-mhtpeligible for details on how 'active' patient numbers were determined using PenCS) are with patients who have a recorded low-frequency mental health condition (schizophrenia or bipolar affective disorder) compared to the Australian general practice average of 0.5%[^BEACH]. To help meet the needs of cohealth patients with mental health conditions, cohealth medical clinics work closely and co-operatively with area mental health services (e.g. [Inner West Area Mental Health Service](https://vahi.vic.gov.au/mental-health-services/inner-west-adult-area-mental-health-service)) and cohealth clinics also employ mental health nurses through the Primary Health Network [CAREinMIND](https://nwmphn.org.au/our-work/mental-health/careinmind-mental-health-services/) program.
 
 [^BEACH]: “[General practice activity in Australia 2015-2016](https://www.sydney.edu.au/medicine-health/our-research/research-centres/bettering-the-evaluation-and-care-of-health/publication.html)”, Sydney University Press, 2016.  
 
@@ -91,35 +104,37 @@ df2 <- data.frame(
 # Choose a Wes Anderson palette (e.g., 'Rushmore')
 palette <- wes_palette("Darjeeling1", 2, type = "discrete")
 
-hc1 <- highchart() %>%
-  hc_chart(type = "column") %>%
-  hc_title(text = "Patients with Recorded Mental Health Condition") %>%
-  hc_xAxis(categories = df1$Clinic) %>%
-  hc_yAxis(title = list(text = "Proportion (%)")) %>%
+hc1 <- highchart() |>
+  hc_chart(type = "column") |>
+  hc_title(text = "Patients with Recorded Mental Health Condition") |>
+  hc_xAxis(categories = df1$Clinic) |>
+  hc_yAxis(title = list(text = "Proportion (%)")) |>
   hc_add_series(
     name = "Proportion",
     data = df1$Percentage,
     colorByPoint = TRUE,
     colors = palette
-  ) %>%
-  hc_tooltip(pointFormat = "<b>{point.y}%</b>") %>%
+  ) |>
+  hc_tooltip(pointFormat = "<b>{point.y}%</b>") |>
   hc_legend(enabled = FALSE)
 
 # Second highcharter plot
-hc2 <- highchart() %>%
-  hc_chart(type = "column") %>%
-  hc_title(text = "Proportion of consultations with patients with recorded Low-Frequency Mental Health Disorder") %>%
-  hc_xAxis(categories = df2$Clinic) %>%
-  hc_yAxis(title = list(text = "Proportion (%)")) %>%
+hc2 <- highchart() |>
+  hc_chart(type = "column") |>
+  hc_title(text = "Proportion of consultations with patients with recorded Low-Frequency Mental Health Disorder") |>
+  hc_xAxis(categories = df2$Clinic) |>
+  hc_yAxis(title = list(text = "Proportion (%)")) |>
   hc_add_series(
     name = "Proportion",
     data = df2$Percentage,
     colorByPoint = TRUE,
     colors = palette
-  ) %>%
-  hc_tooltip(pointFormat = "<b>{point.y}%</b>") %>%
+  ) |>
+  hc_tooltip(pointFormat = "<b>{point.y}%</b>") |>
   hc_legend(enabled = FALSE)
 ```
+
+::: {#figure-mhtpdcp}
 
 ```{r}
 #| layout-ncol: 2
@@ -127,6 +142,10 @@ hc2 <- highchart() %>%
 hc1
 hc2
 ```
+
+Prevalence of mental health conditions at cohealth general practice clinics
+
+:::
 
 To encourage general practitioners to provide a structured framework for assessing, managing and coordinating the mental health care of patients with mental health conditions, the Medicare Benefits Schedule (MBS) provides reimbursement for general practitioners to write (and bill) 'GP Mental Health Treatment Plans (MHTPs)'. The preparation and billing of a mental health treatment plan also enables a patient to access Medicare rebates for private psychological services[^gpmhsc_mhtp]. A secondary use of MHTP item billing, and billing of the [mental health treatment plan 'review' item 2712](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=2713), is as a - perhaps misleading - indicator of mental health services delivered in general practice[^racgp_mhtp_oversight] [^mjainsight_mythbusting_mh] [^mjainsight_mhcare_access].
 
@@ -162,35 +181,37 @@ df2 <- data.frame(
 # Choose a Wes Anderson palette (e.g., 'Rushmore')
 palette <- wes_palette("Darjeeling1", 2, type = "discrete")
 
-hc1 <- highchart() %>%
-  hc_chart(type = "bar") %>%
-  hc_title(text = "Eligible patients with an up-to-date mental health treatment plan (MHTP)") %>%
-  hc_xAxis(categories = df1$Clinic) %>%
-  hc_yAxis(title = list(text = "Proportion (%)")) %>%
+hc1 <- highchart() |>
+  hc_chart(type = "bar") |>
+  hc_title(text = "Eligible patients with an up-to-date mental health treatment plan (MHTP)") |>
+  hc_xAxis(categories = df1$Clinic) |>
+  hc_yAxis(title = list(text = "Proportion (%)")) |>
   hc_add_series(
     name = "Proportion",
     data = df1$Percentage,
     colorByPoint = TRUE,
     colors = palette
-  ) %>%
-  hc_tooltip(pointFormat = "<b>{point.y}%</b>") %>%
+  ) |>
+  hc_tooltip(pointFormat = "<b>{point.y}%</b>") |>
   hc_legend(enabled = FALSE)
 
 # Second highcharter plot
-hc2 <- highchart() %>%
-  hc_chart(type = "bar") %>%
-  hc_title(text = "Proportion of all patients with an up-to-date mental health treatment plan (MHTP)") %>%
-  hc_xAxis(categories = df2$Clinic) %>%
-  hc_yAxis(title = list(text = "Proportion (%)")) %>%
+hc2 <- highchart() |>
+  hc_chart(type = "bar") |>
+  hc_title(text = "Proportion of all patients with an up-to-date mental health treatment plan (MHTP)") |>
+  hc_xAxis(categories = df2$Clinic) |>
+  hc_yAxis(title = list(text = "Proportion (%)")) |>
   hc_add_series(
     name = "Proportion",
     data = df2$Percentage,
     colorByPoint = TRUE,
     colors = palette
-  ) %>%
-  hc_tooltip(pointFormat = "<b>{point.y}%</b>") %>%
+  ) |>
+  hc_tooltip(pointFormat = "<b>{point.y}%</b>") |>
   hc_legend(enabled = FALSE)
 ```
+
+::: {#figure-mhtp_dcp}
 
 ```{r}
 #| layout-ncol: 2
@@ -199,11 +220,15 @@ hc1
 hc2
 ```
 
+cohealth general practice clinics usage of mental health treatment plans (MHTPs)
+
+:::
+
 ## The problem with Mental Health Treatment Plans (MHTP)
 
 Why, despite the high prevalence of mental health conditions among cohealth clinic patients, do cohealth general practice clinics do - and bill - relatively few mental health treatment plans (MHTPs)? 
 
-When asked, cohealth general practitioners suggested reasons which can be broadly summarised as:
+cohealth general practitioners suggested the following reasons, broadly summarised as:
 
 * Some patients benefit more from mental health treatment plans than others
 * Patients at cohealth, particularly those with lower socio-economic resources, might not enjoy as many benefits from mental health treatment plans as others
@@ -249,14 +274,6 @@ Some of the reasons listed can be tested through examination of practice billing
 [^equally_well]: "[Improving the physical health and wellbeing of people living with mental illness in Australia](https://www.equallywell.org.au/wp-content/uploads/2018/12/Equally-Well-National-Consensus-Booklet-47537.pdf)", National Mental Health Commission (NHMC), 2016.
 
 [^gpmp_information]: "[General practice and the management of chronic conditions, Where to now?](https://www.racgp.org.au/getattachment/b85620ff-5aa3-489a-b423-c667d142bca6/attachment.aspx)" (Jan Newland, Nicholas Zwar. *Australian Family Physician*, Jan/Feb/2006, Vol 36:No 1-2, pp 16-19). Note that the [chronic disease management item numbers in use as of May 2025 are scheduled to be changed on July 2025](https://www1.racgp.org.au/newsgp/professional/full-details-of-incoming-cdm-changes-revealed).
-
-::: {.content-hidden}
-MHTP preparation can be done over several consults so maybe co-billing a 2717 once a year could be an option if you appropriately document the time spent, but that seems like more trouble than it's worth compared to just doing treatment plans and reviews.
-
-I need to shift my approach – can I generate a document that is worthwhile for the patient to have and work off (which would also happen to meet the criteria for a MHTP) -if so, then I would likely give my useful MHTP to many more patients regardless of need for rebated psychology.
-
-cohealth clinics have - in some ways - more mental health support in the form of on-site counselling (through mental health nurses and social workers) and close liaison with area mental health services compared to many other Australian general practices.
-:::
 
 ## Method
 
@@ -361,7 +378,7 @@ summary_df <- summary_df |>
   add_row(concession = FALSE, condition = "low", clinic = "Fitzroy", total = 10, mhtp = 3, mh2713 = 1, gpmp = 1)
 ```
 
-```{r}
+```{r mhtp}
 # duplicate rows according to the weighting 'mhtp',
 # hence "re-creating" the original patient-level data from the counts
 mhtp <- summary_df |>
@@ -384,25 +401,8 @@ mhtp <- summary_df |>
   
 label(mhtp$mhtp) = "Mental Health Plan"
 label(mhtp$concession) = "Concession card"
-label(mhtp$condition) = "Condition frequency"
+label(mhtp$condition) = "condition"
 
-table1(
-  x = ~ mhtp + concession + Condition | clinic,
-  data = mhtp |>
-    mutate(Condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
-  overall = c(left = "Total")
-  ) |>
-  t1flex(tablefn = "flextable", cwidth = 0.85) |>
-  fontsize(size = 9, part = "all") |>
-  footnote(i = 1, j = 1, value = as_paragraph("Mental health treatment plans (claimed in the previous twelve months), concession card status and High- vs Low- frequency mental health conditions."), ref_symbols = "a", part = "body") |>
-  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
-```
-
-Concession card holders (with either high-prevalence or low-prevalence mental health conditions) have lower annual rates of mental health treatment plans billing (11.8% vs 16.7%). 
-
-People with low-prevalence conditions have a similar, if slightly lower, rate of mental health treatment plans than those with high-prevalence conditions (11.7% vs 13.0%).
-
-```{r}
 # the basic model
 model_mhtp <- glm(
   mhtp ~ concession + condition,
@@ -417,55 +417,10 @@ model_mhtp_effects <- glmer(
   data = mhtp
 )
 
-label(mhtp$condition) = "condition"
-
 # using 'clinic' as a random effect makes little difference to the model
 ```
 
-```{r}
-plot(effects::allEffects(model_mhtp_effects))
-```
-
-```{r}
-# personalised flextable theme
-
-my_flextable_theme <- function(x, ...) {
-    if (!inherits(x, "flextable")) {
-        stop(sprintf("Function `%s` supports only flextable objects.", 
-            "theme_alafoli()"))
-    }
-    #fp_bdr <- officer::fp_border(width = flextable_global$defaults$border.width, 
-    #  color = flextable_global$defaults$border.color)
-    x <- border_remove(x) |>
-      bg(bg = "transparent", part = "all") |>
-      color(color = "#000000", part = "all") |>
-      # the header text bold
-      bold(bold = TRUE, part = "header") |>
-      italic(italic = FALSE, part = "all") |>
-      padding(padding = 3, part = "all") |>
-      align_text_col(align = "left", header = TRUE) |>
-      # the first header row is centered text
-      align(i = 1, align = "center", part = "header") |>
-      align_nottext_col(align = "right", header = TRUE) |>
-      # make first column wider
-      width(j = 1, width = 1.5) |>
-      # thin horizontal line between models and other column headers
-      hline(i = 1, j = 2:7, border = officer::fp_border(color = "grey", width = 0.5), part = "header") |>
-      hline_bottom(part = "header") |>
-      hline_top(part = "body") |>
-      # place horizontal line below fourth row
-      hline(i = 4, border = officer::fp_border(color = "grey", width = 0.5), part = "body") |>
-      hline_bottom(part = "body") |>
-      fix_border_issues()
-}
-
-```
-
-A slightly higher proportion of patients with concession cards (7.8%) were billed a mental health GP consult (item 2713) than those without a concession card (5.7%), though the difference is not statistically significant. A higher proportion of patients with a low-frequency mental health condition (10.9%) were billed a mental health GP consult than those with high-frequency mental health conditions (6.5%) (p=0.002).
-
-A higher proportion of patients with concession cards (31.6%) were billed a chronic disease management plan (item 721) than those without a concession card (21.6%) (p<0.001). A higher proportion of patients with patients with low-frequency mental health conditions (33.9%) were billed a mental health GP consult than those with a high-frequency mental health condition (28.6%) (p=0.059).
-
-```{r}
+```{r mh2713}
 # duplicate rows according to the weighting 'mh2713',
 # hence "re-creating" the original patient-level data from the counts
 mh2713 <- summary_df |>
@@ -488,11 +443,8 @@ mh2713 <- summary_df |>
 
 label(mh2713$mh2713) = "Mental Health GP Consult"
 label(mh2713$concession) = "Concession card"
-label(mh2713$condition) = "Condition frequency"
+label(mh2713$condition) = "condition"
 
-```
-
-```{r}
 # the basic model
 model_mh2713 <- glm(
   mh2713 ~ concession + condition,
@@ -506,18 +458,12 @@ model_mh2713_effects <- glmer(
   family = binomial(link = "logit"),
   data = mh2713
 )
-
-label(mh2713$condition) = "condition"
 ```
 
-```{r effects_plot_2713}
-plot(effects::allEffects(model_mh2713_effects))
-```
-
-```{r}
+```{r gpmp}
 # duplicate rows according to the weighting 'gpmp',
 # hence "re-creating" the original patient-level data from the counts
-gpmp<- summary_df |>
+gpmp <- summary_df |>
   # duplicate rows by number of GP chronic disease management plans (gpmp)
   uncount(gpmp) |>
   # add back mhtp column to a logical
@@ -537,16 +483,88 @@ gpmp<- summary_df |>
   
 label(gpmp$gpmp) = "Chronic Disease Management Plan"
 label(gpmp$concession) = "Concession card"
-label(gpmp$condition) = "Condition frequency"
+label(gpmp$condition) = "condition"
+
+# the basic model
+model_gpmp <- glm(
+  gpmp ~ concession + condition,
+  family = binomial(link = "logit"),
+  data = gpmp
+)
+
+# add clinic as a random effect
+model_gpmp_effects <- glmer(
+  gpmp ~ concession + condition + (1|clinic),
+  family = binomial(link = "logit"),
+  data = gpmp
+)
 ```
 
-```{r tbl_all_gpmp}
+::: {#table-tableone}
+
+```{r tableone}
+table1(
+  x = ~ mhtp + concession + Condition | clinic,
+  data = mhtp |>
+    mutate(Condition = factor(condition, label = c("High-prevalence", "Low-prevalence"))),
+  overall = c(left = "Total")
+  ) |>
+  t1flex(tablefn = "flextable", cwidth = 0.85) |>
+  fontsize(size = 9, part = "all") |>
+  add_footer_lines(value = as_paragraph("coHealth clinics, May 2025, 'active' patients"))
+```
+
+Mental health treatment plans (claimed in the previous twelve months), concession card status and High- vs Low- frequency mental health conditions.
+
+:::
+
+A lower proportion of concession card holders (with either high-prevalence or low-prevalence mental health conditions) were billed a mental health treatment plans in the previous year compared to those without a concession card (11.8% vs 16.7%, Odds ratio 0.664, p = 0.004). The proportion of people with low-frequency mental health conditions were billed a mental health treatment plans in the previous year was similar, if lower, to those with high-frequency conditions (11.7% vs 13.0%, Odds ratio 0.910, p = 0.543).
+
+Relatively few patients are billed mental health GP consults (item 2713), far fewer than those who are billed for mental health treatment plans. A higher proportion of concession cards holders were billed a mental health GP consult (item 2713) in the previous year more than those without a concession card (5.7% vs 6.5%, Odds ratio 1.329, p = 0.193), though the difference is not statistically significant. A higher proportion of people with low-frequency conditions were billed a mental health GP consult (item 2713) in the previous year than those with a high-frequency condition (10.9% vs 6.5%, Odds ratio 1.685, p = 0.002)
+
+A higher proportion of concession card holders were billed with a chronic disease management plan (item 721) in the previous year than those without a concession card (31.6% vs 21.6%, Odds ratio 1.779, p<0.001). A higher proportion of patients with patients with low-frequency mental health conditions were billed a chronic disease management plan in the previous year than those with a high-frequency mental health condition (33.9% vs 28.6%, Odds ratio = 1.227, p=0.059), though the result is not statistically significant at the 5% level.
+
+```{r my_flextable_theme}
+# personalised flextable theme
+my_flextable_theme <- function(x, ...) {
+    if (!inherits(x, "flextable")) {
+        stop(sprintf("Function `%s` supports only flextable objects.", 
+            "theme_alafoli()"))
+    }
+    #fp_bdr <- officer::fp_border(width = flextable_global$defaults$border.width, 
+    #  color = flextable_global$defaults$border.color)
+    x <- border_remove(x) |>
+      bg(bg = "transparent", part = "all") |>
+      color(color = "#000000", part = "all") |>
+      # the header text bold
+      bold(bold = TRUE, part = "header") |>
+      italic(italic = FALSE, part = "all") |>
+      padding(padding = 3, part = "all") |>
+      align_text_col(align = "left", header = TRUE) |>
+      # the first header row is centered text
+      align(i = 1, align = "center", part = "header") |>
+      align_nottext_col(align = "right", header = TRUE) |>
+      # make first column wider
+      width(j = 1, width = 1.5) |>
+      # thin horizontal line between models and other column headers
+      hline(i = 1, j = 2:10, border = officer::fp_border(color = "grey", width = 0.5), part = "header") |>
+      hline_bottom(part = "header") |>
+      hline_top(part = "body") |>
+      # place horizontal line below fourth row
+      hline(i = 4, border = officer::fp_border(color = "grey", width = 0.5), part = "body") |>
+      hline_bottom(part = "body") |>
+      fix_border_issues()
+}
+```
+
+::: {#table-mbs_concession}
+
+```{r tbl_all_concession}
 #| label: tbl_all_concession
-#| tbl-cap: "MBS items by concession card status"
 
 # create a combined dataframe which has the correct number of mhtp, mh2713 and gpmp
 # in each clinic/concession/condition category
-# note that the relationship *between* mhtp, mh2713 and gpmp in this table is not correct
+# note that the relationship *between* mhtp, mh2713 and gpmp in this dataframe is not correct
 combined_synthetic <- mhtp |>
   mutate(mh2713 = mh2713$mh2713) |>
   mutate(gpmp = gpmp$gpmp)
@@ -563,9 +581,14 @@ table1(
   add_footer_lines("coHealth clinics, May 2025, 'active' patients")
 ```
 
+MBS items by concession card status
+
+:::
+
+::: {#table-mbs_condition}
+
 ```{r tbl_all_conditions}
 #| label: tbl_all_conditions
-#| tbl-cap: "MBS items by high- and low- prevalence mental health conditions"
 
 table1(
   x = ~ mhtp + mh2713 + gpmp | condition,
@@ -579,31 +602,44 @@ table1(
   add_footer_lines("coHealth clinics, May 2025, 'active' patients")
 ```
 
-```{r}
-# the basic model
-model_gpmp <- glm(
-  gpmp ~ concession + condition,
-  family = binomial(link = "logit"),
-  data = gpmp
-)
+MBS items by high- and low- prevalence mental health conditions
 
-# add clinic as a random effect
-model_gpmp_effects <- glmer(
-  gpmp ~ concession + condition + (1|clinic),
-  family = binomial(link = "logit"),
-  data = gpmp
-)
+:::
 
-label(gpmp$condition) = "condition"
+::: {#figure-mhtp_effects}
+
+```{r effects_plot_mhtp}
+plot(effects::allEffects(model_mhtp_effects), ylab = "mhtp proportion")
 ```
 
-```{r}
-plot(effects::allEffects(model_gpmp_effects))
+Relationship between Mental Health Treatment Plan (MHTP) billing and concession card status or low- vs high- frequency mental health condition
+
+:::
+
+::: {#figure-mh2713_effects}
+
+```{r effects_plot_mh2713}
+plot(effects::allEffects(model_mh2713_effects), ylab = "mh2713 proportion")
 ```
 
-```{r}
+Relationship between GP mental health consultation (MBS item 2713) billing and concession card status or low- vs high- frequency mental health condition
+
+:::
+
+::: {#figure-gpmp-effects}
+
+```{r effects_plot_gpmp}
+plot(effects::allEffects(model_gpmp_effects), ylab = "gpmp proportion")
+```
+
+Relationship between GP chronic disease management plan (MBS item 721) billing and concession card status or low- vs high- frequency mental health condition
+
+:::
+
+::: {#table-logistic}
+
+```{r logistic model}
 #| label: tbl_mbs_logistic_model
-#| tbl-cap: "Logistic model, MBS items by concession status and mental health condition"
 #| message: false
 #| warning: false
 
@@ -624,17 +660,29 @@ table_mbs_model <- modelsummary(
   output = "flextable"
   ) |>
   my_flextable_theme() |>
+  fontsize(size = 8, part = "all") |>
   add_footer_lines(
     paste(
-      "The odds ratio of having been billed a GP mental health consultation 'MH2713'",
+      "The odds ratio of having been billed a GP mental health treatment plan 'MPTP', GP mental health consultation 'MH2713'",
       "or GP chronic disease management plan 'GPMP',",
       "according to concession card status and low-vs-high prevalence mental health condition",
       "(coHealth GP clinics, May 2025)"
     )
   )
 
-table_mbs_model
+# column width adjustment for Word (.docx) output
+# from https://stackoverflow.com/questions/70355001/how-to-fit-flextable-to-the-width-of-the-side-borders-in-the-word-document-outpu
+w = 6 # page width, in inches
+auto_widths <- dim(table_mbs_model)$widths/sum(dim(table_mbs_model)$widths)
+table_mbs_model |>
+  width(width = w * auto_widths)
 ```
+
+Logistic model, MBS items by concession status and mental health condition
+
+:::
+
+::: {#figure-oddsratio}
 
 ```{r}
 #| warning: false
@@ -656,11 +704,40 @@ modelplot(
   labs(
     x = "Odds ratio estimates and 95% confidence intervals",
     y = "Predictors",
-    title = "MHTP, MH2713 and GPMP billed in previous twelve months",
     caption = "(coHealth GP clinics, May 2025)"
   ) +
   scale_color_manual(values = wes_palette('Darjeeling1'))
 ```
+
+MHTP, MH2713 and GPMP billed in previous twelve months compared to concession and low- vs high- frequency mental health condition status. Odds ratio estimates.
+
+:::
+
+## Discussion
+
+A relatively high proportion of coHealth patients have high-frequency and low-frequency mental health conditions 
+
+Relatively few patients at coHealth with mental health conditions have had a recent billed mental health care plan. 
+
+Low MHCP billing may reflect low patient demand or awareness of mental health care plans and/or access to private psychology services. 
+
+Low access to psychology services may be related to patients having relatively few resources (‘inverse care law’[^inverse_care_law]) e.g. pensioners and health care card holders. Barriers to access for those with the least resources but greater needs applies not only to mental health services, but also to other Medicare-funded allied health services[^strengthening_general_practice].
+
+[^inverse_care_law]: "[The Inverse Care Law](https://doi.org/10.1016/S0140-6736(71)92410-X)", Julian Tudor Hart. The Lancet, Vol 297:7696 pp 405-412, 27 February 1971.
+
+![Medicare-funded allied health services are needed most, but used least, by more disadvantaged Australians. 'A new Medicare: Strengthening general practice', Grattan Institute, 2022.](./images/Medicare_funded_alliedhealth.png)
+
+[^strengthening_general_practice]: "[A new Medicare: Strengthening general practice](https://grattan.edu.au/wp-content/uploads/2022/12/A-new-Medicare-strengthening-general-practice-Grattan-Report.pdf)" Breadon, P., Romanes, D., Fox, L., Bolton, J., and Richardson, L. Grattan Institute, 2022
+
+If mental health care plans offer an opportunity to plan for and review mental health care, including for patients with reduced resources, deliberate actions may need to be considered to improve uptake of mental health care plans among patients who already have reduced access to healthcare.
+
+General practitioners at cohealth have suggested:
+
+* Is could be possible to document a mental health treatment plan (MHTP) that is worthwhile for the patient and meet the criteria for a mental health treatment plan. If this could be done, then a MHTP could be prepared to many more patients regardless of need for rebated psychology.
+
+* Mental health treatment plan (MHTP) preparation can be done over several consults. Maybe preparation and 'co-billing' a mental health care plan could be done after taking care to appropriately document the time and plan. Nevertheless, the effort required would still be considerably more than, for example, general practitioner chronic disease management plans. There may be a role for large-language-model (LLM) assisted plan generation to help reduce the manual workload of MHTP creation.
+
+* Currently, clinic mental health nurses can help prepare mental health treatment plans. However, due to funding arrangements, clinic mental health nurse involvement is often limited to patients who are *already* referred (or at least, will be referred) to the clinic mental health nurse program.
 
 ## Appendices
 
