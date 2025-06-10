@@ -16,6 +16,7 @@ format:
     output-file: MHTP
     code-fold: true
     code-summary: "Show the code"
+    reference-location: margin
   docx:
     output-file: MHTP
     echo: FALSE
@@ -24,29 +25,30 @@ format:
   pdf:
     toc: true
     number-sections: true
+    echo: FALSE
+    reference-location: document
     colorlinks: true
 format-links: false
 number-sections: true
 toc: true
-reference-location: margin
 crossref: 
   custom:
     - kind: float
       key: table
-      latex-env: table
+      latex-env: mytable
       reference-prefix: Table
       space-before-numbering: true
       latex-list-of-description: Table
     - kind: float
       key: figure
-      latex-env: figure
+      latex-env: myfigure
       reference-prefix: Figure
       space-before-numbering: true
       latex-list-of-description: Figure
 engine: knitr
 summary: "Is there a disparity between Mental Health Treatment Plan services and mental health need? Are Mental Health Treatment Plans - and the billing of them - a good indicator of patient need for mental health services?"
 abstract: |
-  Cohealth, a community health organisation serving inner-urban Melbourne, provides primary care to a population with a markedly higher prevalence of both high- and low- prevalence mental health conditions. Despite the high burden of mental illness, only 15.5% of eligible cohealth patients had an up-to-date general practitioner Mental Health Treatment Plan (MHTP), compared to 21.3% nationally. This paradox — high clinical need but low service uptake — prompts an investigation into the barriers to MHTP provision in this setting.
+  Cohealth, a community health organisation serving inner-urban Melbourne, provides primary care to a population with a markedly higher prevalence of both high- and low- prevalence mental health conditions. Despite the high burden of mental illness, only 15.5% of eligible cohealth patients had an up-to-date general practitioner Mental Health Treatment Plan (MHTP), compared to 21.3% nationally. This contradiction — high clinical need but low service uptake — prompted an investigation into potential barriers to MHTP provision in this setting.
   
   Using clinical and billing data, this study explores factors affecting the delivery of MHTPs, including socioeconomic disadvantage (proxied by concession card status), illness severity (low- vs high-prevalence mental health disorders). Logistic regression analysis reveals that patients with a mental health condition and a concession card are less likely to be billed an MHTP than patients with a mental health condition and without a concession card. Patients with low-prevalence (and typically more severe or lifelong) mental health conditions were no more likely to be billed an MHTP than patients with a high-prevalence mental health conditions.
   
@@ -165,10 +167,68 @@ hc2
 ::::
 
 :::: {.content-hidden when-format="html"}
-::::: {layout = "[[1,1]]"}
-![](./images/patients-with-recorded-mentalhealth.png){width=45%}
-![](./images/proportion-of-consultation-lowprevalence.png){width=45%}
-:::::
+```{r}
+#| layout-ncol: 2
+
+# Data for the first plot
+# patients with a recorded mental health condition
+df1 <- data.frame(
+  Clinic = c("cohealth", "Other clinics"),
+  Percentage = c(
+    round(n_mentalhealth_cohealth/n_total_cohealth * 100, 1),
+    round(n_mentalhealth_other/n_total_other * 100, 1)
+  )
+)
+
+# Data for the second plot
+# consults with patients who have a low-prevalence mental health condition
+df2 <- data.frame(
+  Clinic = c("cohealth, Kensington", "Other clinics"),
+  Percentage = c(round(52 / 774 * 100, 1), 0.5)
+)
+
+# Use the 'Darjeeling1' palette from Wes Anderson
+palette <- wes_palette("Darjeeling1", 2, type = "discrete")
+
+# Create the ggplot2 bar plot
+ggplot(df1, aes(x = Clinic, y = Percentage, fill = Clinic)) +
+  geom_col(width = 0.6) +
+  scale_fill_manual(values = palette) +
+  labs(
+    title = "Patients with Recorded\nMental Health Condition",
+    y = "Proportion (%)",
+    x = NULL
+  ) +
+  geom_text(aes(label = paste0(Percentage, "%")), vjust = -0.5) +
+  scale_y_continuous(
+    name = "Proportion (%)",
+    expand = expansion(mult = c(0, 0.1))  # 10% space above the highest value
+  ) +
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(size = 14, face = "bold", margin = margin(b = 15))
+  )
+
+ggplot(df2, aes(x = Clinic, y = Percentage, fill = Clinic)) +
+  geom_col(width = 0.6) +
+  scale_fill_manual(values = palette) +
+  labs(
+    title = "Proportion of consultations with patients\nwith recorded Low-Prevalence Mental\nHealth Disorder",
+    y = "Proportion (%)",
+    x = NULL
+  ) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0.1))  # 10% space above the highest value
+  ) +
+  geom_text(aes(label = paste0(Percentage, "%")), vjust = -0.5) +
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(size = 14, face = "bold", margin = margin(b = 15))
+  )
+```
+
 ::::
 
 Prevalence of mental health conditions at cohealth general practice clinics
@@ -252,10 +312,70 @@ hc2
 ::::
 
 :::: {.content-hidden when-format="html"}
-::::: {layout-ncol=2}
-![](./images/eligible-patients-with-mhtp.png){width=45%}
-![](./images/active-patients-with-mhtp.png){width=45%}
-:::::
+```{r}
+#| layout-ncol: 2
+
+# Data for the first plot
+# patients eligible for MHTP who have an up-to-date MHTP
+df1 <- data.frame(
+  Clinic = c("cohealth", "Other clinics"),
+  Percentage = c(
+    round(n_mhtp_cohealth/n_mentalhealth_cohealth * 100, 1),
+    round(n_mhtp_other/n_mentalhealth_other * 100, 1)
+  )
+)
+
+# Data for the second plot
+# all patients, proportion who have an up-to-date MHTP
+df2 <- data.frame(
+  Clinic = c("cohealth", "Other clinics"),
+  Percentage = c(
+    round(n_mhtp_cohealth/n_total_cohealth * 100, 1),
+    round(n_mhtp_other/n_total_other * 100, 1)
+  )
+)
+
+# Choose a Wes Anderson palette (e.g., 'Rushmore')
+palette <- wes_palette("Darjeeling1", 2, type = "discrete")
+
+# Create the ggplot2 bar plot
+ggplot(df1, aes(x = Clinic, y = Percentage, fill = Clinic)) +
+  geom_col(width = 0.6) +
+  scale_fill_manual(values = palette) +
+  labs(
+    title = "Eligible patients with\nan up-to-date mental health\ntreatment plan (MHTP)",
+    y = "Proportion (%)",
+    x = NULL
+  ) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0.1))  # 10% space above the highest value
+  ) +
+  geom_text(aes(label = paste0(Percentage, "%")), vjust = -0.5) +
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(size = 14, face = "bold", margin = margin(b = 15))
+  )
+
+ggplot(df2, aes(x = Clinic, y = Percentage, fill = Clinic)) +
+  geom_col(width = 0.6) +
+  scale_fill_manual(values = palette) +
+  labs(
+    title = "Proportion of all patients\nwith an up-to-date mental health\ntreatment plan (MHTP)",
+    y = "Proportion (%)",
+    x = NULL
+  ) +
+  scale_y_continuous(
+    expand = expansion(mult = c(0, 0.1))  # 10% space above the highest value
+  ) +
+  geom_text(aes(label = paste0(Percentage, "%")), vjust = -0.5) +
+  theme_classic() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(size = 14, face = "bold", margin = margin(b = 15))
+  )
+```
+
 ::::
 
 cohealth general practice clinics usage of mental health treatment plans (MHTPs)
@@ -572,39 +692,6 @@ Relatively few patients are billed mental health GP consults (item 2713), far fe
 
 A higher proportion of concession card holders were billed with a chronic disease management plan (item 721) in the previous year than those without a concession card (31.6% vs 21.6%, Odds ratio 1.779, p<0.001). A higher proportion of patients with patients with low-prevalence mental health conditions were billed a chronic disease management plan in the previous year than those with a high-prevalence mental health condition (33.9% vs 28.6%, Odds ratio = 1.227, p=0.059), though the result is not statistically significant at the 5% level.
 
-```{r my_flextable_theme}
-# personalised flextable theme
-my_flextable_theme <- function(x, ...) {
-    if (!inherits(x, "flextable")) {
-        stop(sprintf("Function `%s` supports only flextable objects.", 
-            "theme_alafoli()"))
-    }
-    #fp_bdr <- officer::fp_border(width = flextable_global$defaults$border.width, 
-    #  color = flextable_global$defaults$border.color)
-    x <- border_remove(x) |>
-      bg(bg = "transparent", part = "all") |>
-      color(color = "#000000", part = "all") |>
-      # the header text bold
-      bold(bold = TRUE, part = "header") |>
-      italic(italic = FALSE, part = "all") |>
-      padding(padding = 3, part = "all") |>
-      align_text_col(align = "left", header = TRUE) |>
-      # the first header row is centered text
-      align(i = 1, align = "center", part = "header") |>
-      align_nottext_col(align = "right", header = TRUE) |>
-      # make first column wider
-      width(j = 1, width = 1.5) |>
-      # thin horizontal line between models and other column headers
-      hline(i = 1, j = 2:10, border = officer::fp_border(color = "grey", width = 0.5), part = "header") |>
-      hline_bottom(part = "header") |>
-      hline_top(part = "body") |>
-      # place horizontal line below fourth row
-      hline(i = 4, border = officer::fp_border(color = "grey", width = 0.5), part = "body") |>
-      hline_bottom(part = "body") |>
-      fix_border_issues()
-}
-```
-
 ::: {#table-mbs_concession}
 
 ```{r tbl_all_concession}
@@ -654,35 +741,38 @@ MBS items by high- and low- prevalence mental health conditions
 
 :::
 
-::: {#figure-mhtp_effects}
-
-```{r effects_plot_mhtp}
-plot(effects::allEffects(model_mhtp_effects), ylab = "mhtp proportion")
+```{r my_flextable_theme}
+# personalised flextable theme
+my_flextable_theme <- function(x, ...) {
+    if (!inherits(x, "flextable")) {
+        stop(sprintf("Function `%s` supports only flextable objects.", 
+            "theme_alafoli()"))
+    }
+    #fp_bdr <- officer::fp_border(width = flextable_global$defaults$border.width, 
+    #  color = flextable_global$defaults$border.color)
+    x <- border_remove(x) |>
+      bg(bg = "transparent", part = "all") |>
+      color(color = "#000000", part = "all") |>
+      # the header text bold
+      bold(bold = TRUE, part = "header") |>
+      italic(italic = FALSE, part = "all") |>
+      padding(padding = 3, part = "all") |>
+      align_text_col(align = "left", header = TRUE) |>
+      # the first header row is centered text
+      align(i = 1, align = "center", part = "header") |>
+      align_nottext_col(align = "right", header = TRUE) |>
+      # make first column wider
+      width(j = 1, width = 1.5) |>
+      # thin horizontal line between models and other column headers
+      hline(i = 1, j = 2:10, border = officer::fp_border(color = "grey", width = 0.5), part = "header") |>
+      hline_bottom(part = "header") |>
+      hline_top(part = "body") |>
+      # place horizontal line below fourth row
+      hline(i = 4, border = officer::fp_border(color = "grey", width = 0.5), part = "body") |>
+      hline_bottom(part = "body") |>
+      fix_border_issues()
+}
 ```
-
-Relationship between Mental Health Treatment Plan (MHTP) billing and concession card status or low- vs high- prevalence mental health condition
-
-:::
-
-::: {#figure-mh2713_effects}
-
-```{r effects_plot_mh2713}
-plot(effects::allEffects(model_mh2713_effects), ylab = "mh2713 proportion")
-```
-
-Relationship between GP mental health consultation (MBS item 2713) billing and concession card status or low- vs high- prevalence mental health condition
-
-:::
-
-::: {#figure-gpmp-effects}
-
-```{r effects_plot_gpmp}
-plot(effects::allEffects(model_gpmp_effects), ylab = "gpmp proportion")
-```
-
-Relationship between GP chronic disease management plan (MBS item 721) billing and concession card status or low- vs high- prevalence mental health condition
-
-:::
 
 ::: {#table-logistic}
 
@@ -777,7 +867,7 @@ Low access to psychology services via MHTP may be related to patients having rel
 
 ![](./images/Medicare_funded_alliedhealth.png)
 
-Medicare-funded allied health services are needed most, but used least, by more disadvantaged Australians. 'A new Medicare: Strengthening general practice'[^strengthening_general_practice], Grattan Institute, 2022.
+Medicare-funded allied health services are needed most, but used least, by more disadvantaged Australians. 'A new Medicare: Strengthening general practice', Grattan Institute, 2022.
 
 :::
 
@@ -907,5 +997,37 @@ table1(
 ```
 
 GP chronic disease management plans (MBS item 721) claimed in the previous twelve months, by clinic site.
+
+:::
+
+### Supplementary plots
+
+::: {#figure-mhtp_effects}
+
+```{r effects_plot_mhtp}
+plot(effects::allEffects(model_mhtp_effects), ylab = "mhtp proportion")
+```
+
+Relationship between Mental Health Treatment Plan (MHTP) billing and concession card status or low- vs high- prevalence mental health condition
+
+:::
+
+::: {#figure-mh2713_effects}
+
+```{r effects_plot_mh2713}
+plot(effects::allEffects(model_mh2713_effects), ylab = "mh2713 proportion")
+```
+
+Relationship between GP mental health consultation (MBS item 2713) billing and concession card status or low- vs high- prevalence mental health condition
+
+:::
+
+::: {#figure-gpmp-effects}
+
+```{r effects_plot_gpmp}
+plot(effects::allEffects(model_gpmp_effects), ylab = "gpmp proportion")
+```
+
+Relationship between GP chronic disease management plan (MBS item 721) billing and concession card status or low- vs high- prevalence mental health condition
 
 :::
