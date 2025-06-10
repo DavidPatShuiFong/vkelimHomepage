@@ -21,8 +21,14 @@ format:
     echo: FALSE
     toc: FALSE
     tbl-cap-location: bottom
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+format-links: false
 number-sections: true
 toc: true
+reference-location: margin
 crossref: 
   custom:
     - kind: float
@@ -149,12 +155,21 @@ hc2 <- highchart() |>
 
 ::: {#figure-mhtpdcp}
 
+:::: {.content-visible when-format="html"}
 ```{r}
 #| layout-ncol: 2
- 
+
 hc1
 hc2
 ```
+::::
+
+:::: {.content-hidden when-format="html"}
+::::: {layout = "[[1,1]]"}
+![](./images/patients-with-recorded-mentalhealth.png){width=45%}
+![](./images/proportion-of-consultation-lowprevalence.png){width=45%}
+:::::
+::::
 
 Prevalence of mental health conditions at cohealth general practice clinics
 
@@ -228,12 +243,20 @@ hc2 <- highchart() |>
 
 ::: {#figure-mhtp_dcp}
 
+:::: {.content-visible when-format="html"}
 ```{r}
 #| layout-ncol: 2
-
 hc1
 hc2
 ```
+::::
+
+:::: {.content-hidden when-format="html"}
+::::: {layout-ncol=2}
+![](./images/eligible-patients-with-mhtp.png){width=45%}
+![](./images/active-patients-with-mhtp.png){width=45%}
+:::::
+::::
 
 cohealth general practice clinics usage of mental health treatment plans (MHTPs)
 
