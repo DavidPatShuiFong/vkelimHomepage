@@ -22,29 +22,8 @@ format:
     echo: FALSE
     toc: FALSE
     tbl-cap-location: bottom
-  pdf:
-    toc: true
-    number-sections: true
-    echo: FALSE
-    reference-location: document
-    colorlinks: true
-format-links: false
 number-sections: true
 toc: true
-crossref: 
-  custom:
-    - kind: float
-      key: table
-      latex-env: mytable
-      reference-prefix: Table
-      space-before-numbering: true
-      latex-list-of-description: Table
-    - kind: float
-      key: figure
-      latex-env: myfigure
-      reference-prefix: Figure
-      space-before-numbering: true
-      latex-list-of-description: Figure
 engine: knitr
 summary: "Is there a disparity between Mental Health Treatment Plan services and mental health need? Are Mental Health Treatment Plans - and the billing of them - a good indicator of patient need for mental health services?"
 abstract: |
@@ -155,7 +134,7 @@ hc2 <- highchart() |>
   hc_exporting(enabled = TRUE)
 ```
 
-::: {#figure-mhtpdcp}
+::: {#fig-mhtpdcp fig-pos="h"}
 
 :::: {.content-visible when-format="html"}
 ```{r}
@@ -301,7 +280,7 @@ hc2 <- highchart() |>
   hc_exporting(enabled = TRUE)
 ```
 
-::: {#figure-mhtp_dcp}
+::: {#fig-mhtp_dcp}
 
 :::: {.content-visible when-format="html"}
 ```{r}
@@ -668,7 +647,7 @@ model_gpmp_effects <- glmer(
 )
 ```
 
-::: {#table-tableone}
+::: {#tbl-tableone tbl-pos="t" layout-ncol="1"}
 
 ```{r tableone}
 table1(
@@ -692,7 +671,7 @@ Relatively few patients are billed mental health GP consults (item 2713), far fe
 
 A higher proportion of concession card holders were billed with a chronic disease management plan (item 721) in the previous year than those without a concession card (31.6% vs 21.6%, Odds ratio 1.779, p<0.001). A higher proportion of patients with patients with low-prevalence mental health conditions were billed a chronic disease management plan in the previous year than those with a high-prevalence mental health condition (33.9% vs 28.6%, Odds ratio = 1.227, p=0.059), though the result is not statistically significant at the 5% level.
 
-::: {#table-mbs_concession}
+::: {#tbl-mbs_concession tbl-pos="t" layout-ncol="1"}
 
 ```{r tbl_all_concession}
 #| label: tbl_all_concession
@@ -720,7 +699,7 @@ MBS items by concession card status
 
 :::
 
-::: {#table-mbs_condition}
+::: {#tbl-mbs_condition tbl-pos="t" layout-ncol="1"}
 
 ```{r tbl_all_conditions}
 #| label: tbl_all_conditions
@@ -774,7 +753,7 @@ my_flextable_theme <- function(x, ...) {
 }
 ```
 
-::: {#table-logistic}
+::: {#tbl-logistic tbl-pos="t" layout-ncol="1"}
 
 ```{r logistic model}
 #| label: tbl_mbs_logistic_model
@@ -820,7 +799,7 @@ Logistic model, MBS items by concession status and mental health condition
 
 :::
 
-::: {#figure-oddsratio}
+::: {#fig-oddsratio fig-pos="h"}
 
 ```{r}
 #| warning: false
@@ -863,7 +842,7 @@ Low access to psychology services via MHTP may be related to patients having rel
 
 [^inverse_care_law]: "[The Inverse Care Law](https://doi.org/10.1016/S0140-6736(71)92410-X)", Julian Tudor Hart. The Lancet, Vol 297:7696 pp 405-412, 27 February 1971.
 
-::: {#figure-medicare_alliedhealth}
+::: {#fig-medicare_alliedhealth fig-pos="h"}
 
 ![](./images/Medicare_funded_alliedhealth.png)
 
@@ -895,7 +874,7 @@ The total number of unique patients seen during that time period considered elig
 
 The total number of unique patients seen during that time period who had an 'up-to-date' (i.e. within the previous twelve months) mental health treatment plan can be calculated from the 'up-to-date' and 'updated' sections of the MHTP bar. For cohealth, the figure is 43+441 = `{r} 43+441`, which is `{r} sprintf("%0.1f%%", (43+441)/(43+441+1201+1441)*100)` of patients with recorded mental health conditions. For 'national' practices, the figure is 2455 + 16839 = `{r} format(2455+16839, scientific = FALSE)`, which is `{r} sprintf("%0.1f%%", (2455+16839)/(2455+16839+34885+36287)*100)` of patients with mental health conditions.
 
-::: {#figure-dcp_mhtpeligible}
+::: {#fig-dcp_mhtpeligible fig-pos="h"}
 
 ![](./images/cohealth_20250428_mhtpeligible.png)
 
@@ -903,7 +882,7 @@ cohealth, DCP statistics, 28/Apr/2025 to 25/May/2025
 
 :::
 
-::: {#figure-dcp_national}
+::: {#fig-dcp_national fig-pos="h"}
 
 ![](./images/national_20250428_mhtpeligible.png)
 
@@ -929,7 +908,7 @@ Patient activity:
     + Set 'MBS Item Numbers' to 'Any of selected', and choose item numbers "3, 23, 36, 44, 123, 2713, 91890, 91891, 721, 723, 732, 701, 703, 705, 707, 2700, 2701, 2712, 2715, 2717". These item number include most of the common item numbers.
         - Choosing the most common item numbers was not actually necessary. By not selecting any item numbers in this panel, the default search appears to be 'any item number'.
 
-::: {#figure-pencs}
+::: {#fig-pencs fig-pos="h"}
 
 ![](./images/PenCS.png)
 
@@ -964,7 +943,7 @@ Patient mental health treatment plan or other item numbers
 
 ### Supplementary tables
 
-::: {#table-mh2713_by_clinic}
+::: {#tbl-mh2713_by_clinic tbl-pos="t" layout-ncol="1"}
 
 ```{r}
 table1(
@@ -982,7 +961,7 @@ Mental health GP consultations (MBS 2713) claimed in the previous twelve months,
 
 :::
 
-::: {#table-gpmp_by_clinic}
+::: {#tbl-gpmp_by_clinic tbl-pos="t" layout-ncol="1"}
 
 ```{r}
 table1(
@@ -1002,7 +981,7 @@ GP chronic disease management plans (MBS item 721) claimed in the previous twelv
 
 ### Supplementary plots
 
-::: {#figure-mhtp_effects}
+::: {#fig-mhtp_effects fig-pos="h"}
 
 ```{r effects_plot_mhtp}
 plot(effects::allEffects(model_mhtp_effects), ylab = "mhtp proportion")
@@ -1012,7 +991,7 @@ Relationship between Mental Health Treatment Plan (MHTP) billing and concession 
 
 :::
 
-::: {#figure-mh2713_effects}
+::: {#fig-mh2713_effects}
 
 ```{r effects_plot_mh2713}
 plot(effects::allEffects(model_mh2713_effects), ylab = "mh2713 proportion")
@@ -1022,7 +1001,7 @@ Relationship between GP mental health consultation (MBS item 2713) billing and c
 
 :::
 
-::: {#figure-gpmp-effects}
+::: {#fig-gpmp-effects}
 
 ```{r effects_plot_gpmp}
 plot(effects::allEffects(model_gpmp_effects), ylab = "gpmp proportion")
