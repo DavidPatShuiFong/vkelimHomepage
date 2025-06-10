@@ -9,6 +9,8 @@ author:
   - Dr Lihini Samarawickrama
   - Dr Simon Wilding
   - cohealth Kensington medical team
+affiliation:
+  name: cohealth
 format: 
   html:
     output-file: MHTP
@@ -35,9 +37,18 @@ crossref:
       reference-prefix: Figure
       space-before-numbering: true
       latex-list-of-description: Figure
-    
 engine: knitr
-summary: "Are Mental Health Treatment Plans - and the billing of them - a good indicator of patient need for mental health services?"
+summary: "Is there a disparity between Mental Health Treatment Plan services and mental health need? Are Mental Health Treatment Plans - and the billing of them - a good indicator of patient need for mental health services?"
+abstract: |
+  Cohealth, a community health organisation serving inner-urban Melbourne, provides primary care to a population with a markedly higher prevalence of both high- and low- prevalence mental health conditions. Despite the high burden of mental illness, only 15.5% of eligible cohealth patients had an up-to-date general practitioner Mental Health Treatment Plan (MHTP), compared to 21.3% nationally. This paradox — high clinical need but low service uptake — prompts an investigation into the barriers to MHTP provision in this setting.
+  
+  Using clinical and billing data, this study explores factors affecting the delivery of MHTPs, including socioeconomic disadvantage (proxied by concession card status), illness severity (low- vs high-prevalence mental health disorders). Logistic regression analysis reveals that patients with a mental health condition and a concession card are less likely to be billed an MHTP than patients with a mental health condition and without a concession card. Patients with low-prevalence (and typically more severe or lifelong) mental health conditions were no more likely to be billed an MHTP than patients with a high-prevalence mental health conditions.
+  
+  By contrast, patients with a mental health condition and concession card were more likely to be billed a chronic disease management plan and tended to have higher rates of mental health consultations than a patient with a mental health condition and without a concession card. Patients with a low-prevalence condition were more likely to be billed a mental health consultation and tended to have rates of chronic disease management plan billing than patients with a high-prevalence condition.
+  
+  General practitioners may perceive limited utility in preparing MHTPs for patients unable to afford private psychological care due to high out-of-pocket costs. Patients with severe and persistent mental illness may instead access mental health care through alternative funding pathways that do not depend on an MHTP as a mechanism for care access.
+  
+  The findings raise questions about equity, access, and the appropriateness of MHTP billing as a proxy for mental health service provision in community health settings or other settings with high levels of patient complexity.
 ---
 
 ```{r}
@@ -79,7 +90,7 @@ n_total_other <- 245991+12826
 
 cohealth, a community health service in inner-west urban Melbourne, has a relatively high proportion of patients with mental health conditions. According to statistics derived from a clinical decision support tool ([Doctor's Control Panel](https://www.doctorscontrolpanel.com.au/), `{r} sprintf("%0.1f%%", n_mentalhealth_cohealth/n_total_cohealth*100)` of patients consulted by cohealth clinics in the four weeks from 28th April 2025 are eligible for a mental health treatment plan (i.e. have a recorded mental health condition), compared to a national average of `{r} sprintf("%0.1f%%", n_mentalhealth_other/n_total_other*100)` nationally among practices which use Doctor's Control Panel (see @sec-appendix-mhtpeligible).
 
-That cohealth medical clinic patients have a relatively high proportion of mental health conditions is consistent with other available statistics. At one of the cohealth general practice sites, Kensington, approximately `{r} sprintf("%0.1f%%", 52/774*100)` of consultations (52 of 774, see @sec-appendix-mhtpeligible for details on how 'active' patient numbers were determined using PenCS) are with patients who have a recorded low-frequency mental health condition (schizophrenia or bipolar affective disorder) compared to the Australian general practice average of 0.5%[^BEACH]. To help meet the needs of cohealth patients with mental health conditions, cohealth medical clinics work closely and co-operatively with area mental health services (e.g. [Inner West Area Mental Health Service](https://vahi.vic.gov.au/mental-health-services/inner-west-adult-area-mental-health-service)) and cohealth clinics also employ mental health nurses through the Primary Health Network [CAREinMIND](https://nwmphn.org.au/our-work/mental-health/careinmind-mental-health-services/) program.
+That cohealth medical clinic patients have a relatively high proportion of mental health conditions is consistent with other available statistics. At one of the cohealth general practice sites, Kensington, approximately `{r} sprintf("%0.1f%%", 52/774*100)` of consultations (52 of 774, see @sec-appendix-mhtpgroups for details on how 'active' patient numbers were determined using PenCS) are with patients who have a recorded low-prevalence mental health condition (schizophrenia or bipolar affective disorder) compared to the Australian general practice average of 0.5%[^BEACH]. To help meet the needs of cohealth patients with mental health conditions, cohealth medical clinics work closely and co-operatively with area mental health services (e.g. [Inner West Area Mental Health Service](https://vahi.vic.gov.au/mental-health-services/inner-west-adult-area-mental-health-service)) and cohealth clinics also employ mental health nurses through the Primary Health Network [CAREinMIND](https://nwmphn.org.au/our-work/mental-health/careinmind-mental-health-services/) program.
 
 [^BEACH]: “[General practice activity in Australia 2015-2016](https://www.sydney.edu.au/medicine-health/our-research/research-centres/bettering-the-evaluation-and-care-of-health/publication.html)”, Sydney University Press, 2016.  
 
@@ -95,7 +106,7 @@ df1 <- data.frame(
 )
 
 # Data for the second plot
-# consults with patients who have a low-frequency mental health condition
+# consults with patients who have a low-prevalence mental health condition
 df2 <- data.frame(
   Clinic = c("cohealth, Kensington", "Other clinics"),
   Percentage = c(round(52/774*100, 1), 0.5)
@@ -116,12 +127,13 @@ hc1 <- highchart() |>
     colors = palette
   ) |>
   hc_tooltip(pointFormat = "<b>{point.y}%</b>") |>
-  hc_legend(enabled = FALSE)
+  hc_legend(enabled = FALSE) |>
+  hc_exporting(enabled = TRUE)
 
 # Second highcharter plot
 hc2 <- highchart() |>
   hc_chart(type = "column") |>
-  hc_title(text = "Proportion of consultations with patients with recorded Low-Frequency Mental Health Disorder") |>
+  hc_title(text = "Proportion of consultations with patients with recorded Low-Prevalence Mental Health Disorder") |>
   hc_xAxis(categories = df2$Clinic) |>
   hc_yAxis(title = list(text = "Proportion (%)")) |>
   hc_add_series(
@@ -131,7 +143,8 @@ hc2 <- highchart() |>
     colors = palette
   ) |>
   hc_tooltip(pointFormat = "<b>{point.y}%</b>") |>
-  hc_legend(enabled = FALSE)
+  hc_legend(enabled = FALSE) |>
+  hc_exporting(enabled = TRUE)
 ```
 
 ::: {#figure-mhtpdcp}
@@ -152,7 +165,7 @@ To encourage general practitioners to provide a structured framework for assessi
 [^gpmhsc_mhtp]: [General Practitioner Mental Health Standards Collaboration - 'What is a mental health treatment plan?'](https://gpmhsc.org.au/info/detail/11920366-5b75-449e-9503-e8143478817b/why-do-mental-health-treatment-plans)
 
 [^racgp_mhtp_oversight]: "[GPs rebut criticism of mental health care plan oversight](https://www1.racgp.org.au/newsgp/professional/gps-rebut-criticism-of-mental-health-care-plan-ove)". Joyon Attwooll, RACGP newsGP, 8 August 2022.
-[^mjainsight_mythbusting_mh]: "[Myth-busting: role of the GP in primary mental health care](https://insightplus.mja.com.au/2022/30/myth-busting-role-of-the-gp-in-primary-mental-health-care/)". Louise Stone et al, MJA Insight+, 8 August 2022.
+[^mjainsight_mythbusting_mh]: "[Myth-busting: role of the GP in primary mental health care](https://insightplus.mja.com.au/2022/30/myth-busting-role-of-the-gp-in-primary-mental-health-care/)". Louise Stone, Karen Spielman, Michael Tam, Johanna Lynch, May Su, Tim Senior, Karen Price, Sarah Chalmers, Gwendoline Burton. MJA Insight+, 8 August 2022.
 [^mjainsight_mhcare_access]: "[Access to primary mental health care remains critical](https://insightplus.mja.com.au/2022/28/access-to-primary-mental-health-care-remains-critical/)". Sebastian Rosenberg, Ian Hickie. MJA Insight+, 25 July 2022.
 
 Although cohealth consults a high proportion of patients with recorded mental health conditions and are potentially eligible for mental health treatment plans (MHTP), a relatively small proportion of those patients have had - and been billed - an 'up-to-date' treatment plan i.e. within the past twelve months. At cohealth, `{r} sprintf("%0.1f%%", n_mhtp_cohealth/n_mentalhealth_cohealth*100)` of eligible patients have an up-to-date treatment plan, compared to `{r} sprintf("%0.1f%%", n_mhtp_other/n_mentalhealth_other*100)` nationally (see @sec-appendix-mhtpeligible). The proportion of all patients at cohealth who have an up-to-date mental health treatment plan (`{r} sprintf("%0.1f%%", n_mhtp_cohealth/n_total_cohealth*100)`) is almost indistinguishable from the proportion of other clinics (`{r} sprintf("%0.1f%%", n_mhtp_other/n_total_other*100)`).
@@ -193,7 +206,8 @@ hc1 <- highchart() |>
     colors = palette
   ) |>
   hc_tooltip(pointFormat = "<b>{point.y}%</b>") |>
-  hc_legend(enabled = FALSE)
+  hc_legend(enabled = FALSE) |>
+  hc_exporting(enabled = TRUE)
 
 # Second highcharter plot
 hc2 <- highchart() |>
@@ -208,7 +222,8 @@ hc2 <- highchart() |>
     colors = palette
   ) |>
   hc_tooltip(pointFormat = "<b>{point.y}%</b>") |>
-  hc_legend(enabled = FALSE)
+  hc_legend(enabled = FALSE) |>
+  hc_exporting(enabled = TRUE)
 ```
 
 ::: {#figure-mhtp_dcp}
@@ -230,10 +245,10 @@ Why, despite the high prevalence of mental health conditions among cohealth clin
 
 cohealth general practitioners suggested the following reasons, broadly summarised as:
 
-* Some patients benefit more from mental health treatment plans than others
-* Patients at cohealth, particularly those with lower socio-economic resources, might not enjoy as many benefits from mental health treatment plans as others
-* Mental health treatment plans are cumbersome to prepare, particularly if the patient does not particularly benefit the preparation of a mental health treatment plan
-* Patients with lower socio-economic resources or more severe mental health illness might have lower access to care. This includes access to third-party services, and might even include access to cohealth general practice (primary care) and other services.
+* Some patients benefit more from mental health treatment plans than others.
+* Patients at cohealth, particularly those with lower socio-economic resources, might not benefit from mental health treatment plans as much as patients with financial resources to pay for private psychological services.
+* Mental health treatment plans are cumbersome to prepare, particularly if the patient does not particularly benefit the preparation of a mental health treatment plan.
+* Patients with lower socio-economic resources or more severe mental health illness might have generally lower access to care. This includes access to third-party services, and might even include access to cohealth general practice (primary care) and other services.
 
 In detail:
 
@@ -245,7 +260,7 @@ In detail:
         d. Through cohealth's other counselling services (e.g. provided by social workers).
     ii) Paradoxically, patients who can have considerable disability as the result of a mental health condition (e.g. schizophrenia, or qualifying for NDIS) may have less benefit from a mental health treatment plan, if the mental health treatment plan is primarily being used to help fund private psychological services.
 2. As a result, mental health treatment plans are not equivalent to referral to psychological care for patients, as at least some patients with mental health conditions can receive psychological care through other funding sources.
-3. A general-practitioner prepared (and billed) mental health care/treatment plan does [provide access to Medicare funding for private psychological services](https://www.servicesaustralia.gov.au/mental-health-care-and-medicare?context=60092). However, increasing private psychologists charge fees in excess of the Medicare rebate for psychological services, resulting in a large 'gap' fee for patients[^APAgapfees].
+3. A general-practitioner prepared (and billed) mental health care/treatment plan does [provide access to Medicare funding for private psychological services](https://www.servicesaustralia.gov.au/mental-health-care-and-medicare?context=60092). However, many private psychologists charge fees in excess of the Medicare rebate for psychological services, resulting in a large 'gap' fee for patients[^APAgapfees].
 
     The size of the 'gap fee' is a potential barrier for some patients to access psychological services, particularly those from low socio-economic backgrounds. For patients who do not have the financial resources to pay the 'gap fees' of private psychological care, the preparation of a general-practitioner mental health treatment plan could be of less value compared to a patient who is not deterred by the 'gap fee' and is seeking Medicare subsidies for private psychological treatment.
 4. The general practitioner may view the preparation of a mental health treatment plan to be of little use to the patient, particularly those who cannot afford to pay the 'gap fee' of private psychological services. Although there is some financial return for the general practitioner to prepare a mental health treatment plan, the patient may have more pressing concerns e.g. immediate counselling provided by the general practitioner, housing issues or addressing 'physical' health needs.
@@ -253,17 +268,17 @@ In detail:
 
 [^APAgapfees]: "[Long wait times $90 gap fees preventing access to psychology services" ](https://psychology.org.au/about-us/news-and-media/aps-in-the-media/2023/long-wait-times-$90-gap-fees-preventing-access-to)" Australian Psychological Society, 30 January 2023. 
 
-[^phcris_ses_accessibility]: "[Socioeconomic status and accessibility to health care services in Australia](https://fac.flinders.edu.au/dspace/api/core/bitstreams/15a05634-bc77-4107-8582-69820927b6b5/content)". RKatteri, Research Roundup, Primary Health Care Research and Information Services (PHCRIS), Issue 22, December 2011.
+[^phcris_ses_accessibility]: "[Socioeconomic status and accessibility to health care services in Australia](https://fac.flinders.edu.au/dspace/api/core/bitstreams/15a05634-bc77-4107-8582-69820927b6b5/content)". R Katteri, Research Roundup, Primary Health Care Research and Information Services (PHCRIS), Issue 22, December 2011.
 
 Some of the reasons listed can be tested through examination of practice billing compared to patient characteristics:
 
 * Are patients with mental health conditions and with fewer financial resources more or less likely to have a mental health treatment plan billed?
     + The patient's possession of a [health concession or pension card](https://www.servicesaustralia.gov.au/concession-and-health-care-cards?context=60091) is potential proxy for less financial resources[^beach_concession_card] [^ses_emergency_qld].
-* Are patients with higher-need mental health conditions, e.g. low-frequency disorders (schizophrenia and bipolar affective disorder) more or less likely to have a mental health treatment plan billed?
-* MHTPs may be perceived to have burdensome time and documentation requirements. Other mental health-related MBS service items may not have as burdensome time and documentation requirements as MHTPs. Are mental health MBS service items with less burdensome requirements more or less commonly used for patients with limited financial resources or those with low-frequency mental health disorders?
+* Are patients with higher-need mental health conditions, e.g. low-prevalence disorders (schizophrenia and bipolar affective disorder) more or less likely to have a mental health treatment plan billed?
+* MHTPs may be perceived to have burdensome time and documentation requirements. Other mental health-related MBS service items may not have as burdensome time and documentation requirements as MHTPs. Are mental health MBS service items with less burdensome requirements more or less commonly used for patients with limited financial resources or those with low-prevalence mental health disorders?
     + One mental health-related MBS service item number is "Professional attendance by a general practitioner  in relation to a mental disorder and of at least 20 minutes in duration" (MBS item 2713, full details can be found on [MBS Online](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=2713))
-    + Another group of relevant mental health-related MBS services are the focused psychological strategies (FPS) MBS service items (items 2721, 2723, 2725 and 2727. More details can be found on the [General Practice Mental Health Standards Collaboration](https://gpmhsc.org.au/info/detail/56bb2adf-75b6-4d2e-97c0-85b6d0f295fd/level-2-focussed-psychological-strategies) website). However, none of the practice sites (Kensington, Paisley St, Laverton, Fitzroy and Collingwood) had claimed any of these MBS items in the year prior to 1 May 2025.
-* If patients living with mental health conditions and low socio-economic resources or low-frequency mental conditions have difficulty with access or provision of co-ordinated care from cohealth general practitioners, they might also receive less care planning for other (e.g. physical) conditions.
+    + Another group of relevant mental health-related MBS services are the focused psychological strategies (FPS) MBS service items (items 2721, 2723, 2725 and 2727. More details can be found on the [General Practice Mental Health Standards Collaboration](https://gpmhsc.org.au/info/detail/56bb2adf-75b6-4d2e-97c0-85b6d0f295fd/level-2-focussed-psychological-strategies) website). However, none of the practice sites (Kensington, Paisley St, Laverton, Fitzroy and Collingwood) had claimed any of the FPS MBS items in the year prior to 1 May 2025.
+* If patients living with mental health conditions and low socio-economic resources or low-prevalence mental conditions have difficulty with access or provision of co-ordinated care from cohealth general practitioners, they might also receive less care planning for other (e.g. physical) conditions.
     + People living with a mental health condition are, compared to the general population, more likely to to live with other co-existing physical conditions, including chronic and life-changing conditions such as cardiovascular disease, airways disease and diabetes. People living with mental health illness are also more likely to struggle with regular activities[^equally_well]. Patient living with a mental health condition are more likely to require planning and coordination for health care needs (e.g. diabetes) in addition to their mental health needs.
     + To encourage general practitioners to plan and coordinate the health care of patients with ongoing chronic health conditions, the Medicare Benefits Schedule (MBS) provides reimbursement for general practitioners to write (and bill) 'GP Chronic Disease and Management Plan (GPMP, [MBS item 721](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=721))[^gpmp_information]'.
 
@@ -281,7 +296,11 @@ Some of the reasons listed can be tested through examination of practice billing
 
 *   It is postulated that concession card holders have lower financial resources and are less able to utilise the government subsidies unlocked by MHTP plans for private psychology. This is because private psychology fees are often far greater than the government subsidy to use private psychology.
 
-*   Mental health conditions can be broadly divided into low- and high- frequency mental health conditions. High-frequency mental health conditions are the common mental health conditions such as anxiety and depression. Low-frequency mental health conditions are the less common, and often more serious and lifelong conditions, of schizophrenia and bipolar affective disorder. Patients with schizophrenia and bipolar affective disorder can benefit from psychological therapies. If mental health treatment plans were done on the basis of need, it would be expected that more patients with low-prevalence conditions would have mental health treatment plans compared to patients with high-prevalence mental health conditions.
+*   Mental health conditions can be broadly divided into low- and high- prevalence mental health conditions. High-prevalence mental health conditions are the common mental health conditions such as anxiety and depression. Low-prevalence mental health conditions are the less common, and often lifelong conditions, of schizophrenia and bipolar affective disorder. Low-prevalence mental health conditions often have a substantial impact on individuals and their family, requiring extensive support[^aihw_australiahealth]. Patients with schizophrenia and bipolar affective disorder can benefit from psychological therapies. If mental health treatment plans were done on the basis of need, it would be expected that more patients with low-prevalence conditions would have mental health treatment plans compared to patients with high-prevalence mental health conditions.
+
+[^aihw_australiahealth]: "[Australia's health 2018](https://www.aihw.gov.au/getmedia/1838295a-5588-4747-9515-b826a5ab3d5a/aihw-aus-221-chapter-3-12.pdf)", Chapter 3.12, Mental Health. Australian Institute of Health and Welfare (AIHW), 2018.
+
+*Are concession card holders, or patients living with low-prevalence mental health disorders, billed the mental health treatment plans (MHTP) the same, more, or less than patients without concession card holders at cohealth clinics?*
 
 ### Mental health consultation (MBS item '2713')
 
@@ -307,19 +326,25 @@ There *is* another billing item associated with mental health care, which is the
 
     This is even more the case when a patient has a concession card. In that case, the bulk-billing incentive payment for item 36 is $14 or more (depending on the practice's country-rural 'MMM' location) than the bulk-biling incentive payment for an item 2713.
 
-Nevertheless, occasionally general practitioners *do* claim an item 2713. One possible reason is because item 2713 - depending on the duration and content of the consult - can sometimes be 'co-billed' with a standard consult item (such as level B or C consult).
+Nevertheless, occasionally general practitioners *do* claim an item 2713[^why_bill_2713].
 
-*Are concession card holders, or patients living with low-frequency mental health disorders, billed the general practice mental health item '2713' the same, more, or less than patients without concession card holders at cohealth clinics?*
+[^why_bill_2713]: One possible reason a 2713 is billed, despite the relatively low financial return compared to an 'item C', is because item 2713 - depending on the duration and content of the consult - can sometimes be 'co-billed' together with a standard consult item (such as level B or C consult).
+
+*Are concession card holders, or patients living with low-prevalence mental health disorders, billed the general practice mental health item 'MBS Item 2713' the same, more, or less than patients without concession card holders at cohealth clinics?*
 
 ### Chronic disease management plans (MBS item '721')
 
-Another indicator of care provision is the billing of [general practitioner chronic disease management plans, Medicare Benefit Schedule item 721](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=721). Chronic disease management plans are for the purpose of planning, setting goals, coordinating and reviewing an ongoing chronic condition (present for more than six months or expected to be present for more than six months). People living with mental health conditions, particularly low-frequency mental health conditions and those living with socio-economic disadvantage are more likely to live with both chronic health conditions and experience disability as the result of those conditions.
+Another indicator of care provision is the billing of [general practitioner chronic disease management plans, Medicare Benefit Schedule item 721](https://www9.health.gov.au/mbs/fullDisplay.cfm?type=item&q=721). Chronic disease management plans are for the purpose of planning, setting goals, coordinating and reviewing an ongoing chronic condition (present for more than six months or expected to be present for more than six months). People living with mental health conditions, particularly low-prevalence mental health conditions and those living with socio-economic disadvantage are more likely to live with chronic health conditions and experience disability as the result of those conditions.
+
+*Are concession card holders, or patients living with low-prevalence mental health disorders, billed chronic disease management plans 'MBS item 721' the same, more, or less than patients without concession card holders at cohealth clinics?*
 
 ### Data gathering and analysis 
 
-The number of mental health treatment plan (MHTP) eligible and active patients at coHealth who were billed MHTPs, mental health consult items (MBS item 2713) or chronic disease management plans (MBS item 721) in the previous twelve months were counted using PenCS, for the one year up to 1st May 2025 (for details of the extraction procedure using PenCS, see @sec-appendix-mhtpgroups). The patients were divided into groups according to concession card holder patients (either health care card 'HCC' or pension card), high-prevalence and low-prevalence mental health disorders and the cohealth clinic site attended.
+The number of active patients at coHealth living with mental health conditions, who were billed MHTPs, mental health consult items (MBS item 2713) or chronic disease management plans (MBS item 721) in the previous twelve months (up to 1st May 2025) were counted using PenCS (for details of the extraction procedure using PenCS, see @sec-appendix-mhtpgroups). The patients were divided into groups according to concession card holder patients (either health care card 'HCC' or pension card), high-prevalence and low-prevalence mental health disorders and the cohealth clinic site attended.
 
-The results are analysed using [R version 4.3.1](https://www.r-project.org/). Logistic regression was used, with clinic location as a random effect[^clinic_random_effect]. Source code can be viewed on www.github.com/DavidPatShuiFong[^github] and davidfong.org[^inline_sourcecode].
+The results are analysed using [R version 4.3.1](https://www.r-project.org/). Logistic regression was used, with clinic location as a random effect[^clinic_random_effect]. Clinic location was used as a random effect because clinicians, support staff (e.g. mental health nurses) availability, and potentially workplace cultures are expected to be different at each clinic site. Some clinic sites are relatively close together geographically, but other sites are located in geographically distinct communities.
+
+Source code can be viewed on www.github.com/DavidPatShuiFong[^github] and davidfong.org[^inline_sourcecode].
 
 [^clinic_random_effect]: It is to be noted that using clinic location as a random effect added little information to the model.
 [^github]: [R source code on Github](https://github.com/DavidPatShuiFong/vkelimHomepage/tree/master/static/post/mhtpdisadvantage)
@@ -336,7 +361,7 @@ The results are analysed using [R version 4.3.1](https://www.r-project.org/). Lo
 # 
 # predictors
 #   concession - false = no, true = yes
-#   mental health condition - "high" = high-frequency, "low" = low-frequency
+#   mental health condition - "high" = high-prevalence, "low" = low-prevalence
 # 
 # random effects
 #   (not considered to be a predictor of interest)
@@ -514,15 +539,15 @@ table1(
   add_footer_lines(value = as_paragraph("coHealth clinics, May 2025, 'active' patients"))
 ```
 
-Mental health treatment plans (claimed in the previous twelve months), concession card status and High- vs Low- frequency mental health conditions.
+Mental health treatment plans (claimed in the previous twelve months), concession card status and High- vs Low- prevalence mental health conditions.
 
 :::
 
-A lower proportion of concession card holders (with either high-prevalence or low-prevalence mental health conditions) were billed a mental health treatment plans in the previous year compared to those without a concession card (11.8% vs 16.7%, Odds ratio 0.664, p = 0.004). The proportion of people with low-frequency mental health conditions were billed a mental health treatment plans in the previous year was similar, if lower, to those with high-frequency conditions (11.7% vs 13.0%, Odds ratio 0.910, p = 0.543).
+A lower proportion of concession card holders (with either high-prevalence or low-prevalence mental health conditions) were billed a mental health treatment plans in the previous year compared to those without a concession card (11.8% vs 16.7%, Odds ratio 0.664, p = 0.004). The proportion of people with low-prevalence mental health conditions were billed a mental health treatment plans in the previous year was similar, if lower, to those with high-prevalence conditions (11.7% vs 13.0%, Odds ratio 0.910, p = 0.543).
 
-Relatively few patients are billed mental health GP consults (item 2713), far fewer than those who are billed for mental health treatment plans. A higher proportion of concession cards holders were billed a mental health GP consult (item 2713) in the previous year more than those without a concession card (5.7% vs 6.5%, Odds ratio 1.329, p = 0.193), though the difference is not statistically significant. A higher proportion of people with low-frequency conditions were billed a mental health GP consult (item 2713) in the previous year than those with a high-frequency condition (10.9% vs 6.5%, Odds ratio 1.685, p = 0.002)
+Relatively few patients are billed mental health GP consults (item 2713), far fewer than those who are billed for mental health treatment plans. A higher proportion of concession cards holders were billed a mental health GP consult (item 2713) in the previous year more than those without a concession card (5.7% vs 6.5%, Odds ratio 1.329, p = 0.193), though the difference is not statistically significant. A higher proportion of people with low-prevalence conditions were billed a mental health GP consult (item 2713) in the previous year than those with a high-prevalence condition (10.9% vs 6.5%, Odds ratio 1.685, p = 0.002)
 
-A higher proportion of concession card holders were billed with a chronic disease management plan (item 721) in the previous year than those without a concession card (31.6% vs 21.6%, Odds ratio 1.779, p<0.001). A higher proportion of patients with patients with low-frequency mental health conditions were billed a chronic disease management plan in the previous year than those with a high-frequency mental health condition (33.9% vs 28.6%, Odds ratio = 1.227, p=0.059), though the result is not statistically significant at the 5% level.
+A higher proportion of concession card holders were billed with a chronic disease management plan (item 721) in the previous year than those without a concession card (31.6% vs 21.6%, Odds ratio 1.779, p<0.001). A higher proportion of patients with patients with low-prevalence mental health conditions were billed a chronic disease management plan in the previous year than those with a high-prevalence mental health condition (33.9% vs 28.6%, Odds ratio = 1.227, p=0.059), though the result is not statistically significant at the 5% level.
 
 ```{r my_flextable_theme}
 # personalised flextable theme
@@ -612,7 +637,7 @@ MBS items by high- and low- prevalence mental health conditions
 plot(effects::allEffects(model_mhtp_effects), ylab = "mhtp proportion")
 ```
 
-Relationship between Mental Health Treatment Plan (MHTP) billing and concession card status or low- vs high- frequency mental health condition
+Relationship between Mental Health Treatment Plan (MHTP) billing and concession card status or low- vs high- prevalence mental health condition
 
 :::
 
@@ -622,7 +647,7 @@ Relationship between Mental Health Treatment Plan (MHTP) billing and concession 
 plot(effects::allEffects(model_mh2713_effects), ylab = "mh2713 proportion")
 ```
 
-Relationship between GP mental health consultation (MBS item 2713) billing and concession card status or low- vs high- frequency mental health condition
+Relationship between GP mental health consultation (MBS item 2713) billing and concession card status or low- vs high- prevalence mental health condition
 
 :::
 
@@ -632,7 +657,7 @@ Relationship between GP mental health consultation (MBS item 2713) billing and c
 plot(effects::allEffects(model_gpmp_effects), ylab = "gpmp proportion")
 ```
 
-Relationship between GP chronic disease management plan (MBS item 721) billing and concession card status or low- vs high- frequency mental health condition
+Relationship between GP chronic disease management plan (MBS item 721) billing and concession card status or low- vs high- prevalence mental health condition
 
 :::
 
@@ -652,7 +677,7 @@ table_mbs_model <- modelsummary(
   estimate = c("Odds ratio" = "{estimate}"),
   coef_rename = c(
     "concessionTRUE" = "Concession holder",
-    "conditionlow" = "Low-frequency condition"
+    "conditionlow" = "Low-prevalence condition"
   ),
   shape = term ~ model + statistic,
   exponentiate = TRUE,
@@ -696,7 +721,7 @@ model_list <- list(
 modelplot(
   models = model_list,
   coef_map = c(
-    'conditionlow' = "Low-frequency condition",
+    'conditionlow' = "Low-prevalence condition",
     'concessionTRUE' = "Concession holder"
   ),
   exponentiate = TRUE
@@ -709,23 +734,29 @@ modelplot(
   scale_color_manual(values = wes_palette('Darjeeling1'))
 ```
 
-MHTP, MH2713 and GPMP billed in previous twelve months compared to concession and low- vs high- frequency mental health condition status. Odds ratio estimates.
+MHTP, MH2713 and GPMP billed in previous twelve months compared to concession and low- vs high- prevalence mental health condition status. Odds ratio estimates.
 
 :::
 
 ## Discussion
 
-A relatively high proportion of coHealth patients have high-frequency and low-frequency mental health conditions 
+A relatively high proportion of coHealth patients have high-prevalence and low-prevalence mental health conditions, but relatively few patients at coHealth with mental health conditions have had a recent billed mental health care plan (MHTP). Significantly fewer patients living with a mental health condition and who have a health concession card have had a MHTP compared to patients living with a mental health condition and who do not have a concession card. This suggests that socio-economic factors have a role in determining MHTP creation and billing. Patients with low-prevalence conditions are no more likely to have an MHTP than patients with high-prevalence conditions, although it is expected that low-prevalence conditions are often more severe and lifelong.
 
-Relatively few patients at coHealth with mental health conditions have had a recent billed mental health care plan. 
+Low MHTP billing may reflect low patient demand or need or awareness of mental health treatment plans and/or access to private psychology services.  However, patients with mental health conditions and concession cards were no less likely to have mental health consultations with the general practitioner or chronic disease management plans compared to patients without concession cards. Likewise, patients with low-prevalence mental health disorders were no less likely to have mental health consultations with the general practitioner or chronic disease management plans than patients with high-prevalence disorders. This suggests that identified needs exist and are catered for patients with concession cards or low-prevalence conditions, just not with an MHTP.
 
-Low MHCP billing may reflect low patient demand or awareness of mental health care plans and/or access to private psychology services. 
+Barriers to doing an using an MHTP for patients with concession cards or low-prevalence mental health conditions may be due to the cost of accessing psychological services through an MHTP and the burden of creating an MHTP.
 
-Low access to psychology services may be related to patients having relatively few resources (‘inverse care law’[^inverse_care_law]) e.g. pensioners and health care card holders. Barriers to access for those with the least resources but greater needs applies not only to mental health services, but also to other Medicare-funded allied health services[^strengthening_general_practice].
+Low access to psychology services via MHTP may be related to patients having relatively few resources (‘inverse care law’[^inverse_care_law]) e.g. pensioners and health care card holders. Barriers to access for those with the least resources but greater needs applies not only to mental health services, but also to other Medicare-funded allied health services[^strengthening_general_practice].
 
 [^inverse_care_law]: "[The Inverse Care Law](https://doi.org/10.1016/S0140-6736(71)92410-X)", Julian Tudor Hart. The Lancet, Vol 297:7696 pp 405-412, 27 February 1971.
 
-![Medicare-funded allied health services are needed most, but used least, by more disadvantaged Australians. 'A new Medicare: Strengthening general practice', Grattan Institute, 2022.](./images/Medicare_funded_alliedhealth.png)
+::: {#figure-medicare_alliedhealth}
+
+![](./images/Medicare_funded_alliedhealth.png)
+
+Medicare-funded allied health services are needed most, but used least, by more disadvantaged Australians. 'A new Medicare: Strengthening general practice'[^strengthening_general_practice], Grattan Institute, 2022.
+
+:::
 
 [^strengthening_general_practice]: "[A new Medicare: Strengthening general practice](https://grattan.edu.au/wp-content/uploads/2022/12/A-new-Medicare-strengthening-general-practice-Grattan-Report.pdf)" Breadon, P., Romanes, D., Fox, L., Bolton, J., and Richardson, L. Grattan Institute, 2022
 
@@ -733,9 +764,9 @@ If mental health care plans offer an opportunity to plan for and review mental h
 
 General practitioners at cohealth have suggested:
 
-* Is could be possible to document a mental health treatment plan (MHTP) that is worthwhile for the patient and meet the criteria for a mental health treatment plan. If this could be done, then a MHTP could be prepared to many more patients regardless of need for rebated psychology.
+* It could be possible to document a mental health treatment plan (MHTP) that is worthwhile for the patient and meet the criteria for a mental health treatment plan. If this could be done, then an MHTP could be prepared for many more patients, regardless of need for rebated private psychology.
 
-* Mental health treatment plan (MHTP) preparation can be done over several consults. Maybe preparation and 'co-billing' a mental health care plan could be done after taking care to appropriately document the time and plan. Nevertheless, the effort required would still be considerably more than, for example, general practitioner chronic disease management plans. There may be a role for large-language-model (LLM) assisted plan generation to help reduce the manual workload of MHTP creation.
+* Mental health treatment plan (MHTP) preparation can be done over several consults. Maybe preparation and 'co-billing' a mental health care plan could be done after taking care to appropriately document the time and plan. Nevertheless, the effort required would still be considerably more than, for example, general practitioner chronic disease management plans. There may be a role for large-language-model (LLM 'AI') assisted plan generation to help reduce the manual workload of MHTP creation.
 
 * Currently, clinic mental health nurses can help prepare mental health treatment plans. However, due to funding arrangements, clinic mental health nurse involvement is often limited to patients who are *already* referred (or at least, will be referred) to the clinic mental health nurse program.
 
@@ -751,13 +782,25 @@ The total number of unique patients seen during that time period considered elig
 
 The total number of unique patients seen during that time period who had an 'up-to-date' (i.e. within the previous twelve months) mental health treatment plan can be calculated from the 'up-to-date' and 'updated' sections of the MHTP bar. For cohealth, the figure is 43+441 = `{r} 43+441`, which is `{r} sprintf("%0.1f%%", (43+441)/(43+441+1201+1441)*100)` of patients with recorded mental health conditions. For 'national' practices, the figure is 2455 + 16839 = `{r} format(2455+16839, scientific = FALSE)`, which is `{r} sprintf("%0.1f%%", (2455+16839)/(2455+16839+34885+36287)*100)` of patients with mental health conditions.
 
-![cohealth, DCP statistics, 28/Apr/2025 to 25/May/2025](./images/cohealth_20250428_mhtpeligible.png)
+::: {#figure-dcp_mhtpeligible}
 
-![National, DCP statistics, 28/Apr/2025 to 25/May/2025](./images/national_20250428_mhtpeligible.png)
+![](./images/cohealth_20250428_mhtpeligible.png)
+
+cohealth, DCP statistics, 28/Apr/2025 to 25/May/2025
+
+:::
+
+::: {#figure-dcp_national}
+
+![](./images/national_20250428_mhtpeligible.png)
+
+National, DCP statistics, 28/Apr/2025 to 25/May/2025
+
+:::
 
 ### Patients eligible and who have a mental health treatment plan according to concession card status, mental health condition and clinic attended {#sec-appendix-mhtpgroups}
 
-[PenCS](https://www.pencs.com.au/) was used to identify patients with recorded mental health conditions, whether the condition was high- or low- frequency, concession card status, patient 'activity', MBS item numbers billed (mental health care plans, other mental health items or chronic disease management plans) and site of attendance. The Electronic Health Record (EHR) used was [Best Practice](https://bestpracticesoftware.com/), the data extract was done on 1st May 2025, a separate extract for each of five clinic sites (Kensington, Paisley Street, Laverton, Fitzroy and Collingwood). The period of interest is the one year from 1st May 2024 to 30th April 2025.
+[PenCS](https://www.pencs.com.au/) was used to identify patients with recorded mental health conditions, whether the condition was high- or low- prevalence, concession card status, patient 'activity', MBS item numbers billed (mental health care plans, other mental health items or chronic disease management plans) and site of attendance. The Electronic Health Record (EHR) used was [Best Practice](https://bestpracticesoftware.com/), the data extract was done on 1st May 2025, a separate extract for each of five clinic sites (Kensington, Paisley Street, Laverton, Fitzroy and Collingwood). The period of interest is the one year from 1st May 2024 to 30th April 2025.
 
 Patient activity:
 
@@ -773,17 +816,23 @@ Patient activity:
     + Set 'MBS Item Numbers' to 'Any of selected', and choose item numbers "3, 23, 36, 44, 123, 2713, 91890, 91891, 721, 723, 732, 701, 703, 705, 707, 2700, 2701, 2712, 2715, 2717". These item number include most of the common item numbers.
         - Choosing the most common item numbers was not actually necessary. By not selecting any item numbers in this panel, the default search appears to be 'any item number'.
 
-![PenCS example, Kensington extract 1st June 2025 (note, not from 1st May 2025!)](./images/PenCS.png)
+::: {#figure-pencs}
 
-Patient high- or low- frequency mental health condition status
+![](./images/PenCS.png)
+
+PenCS example, Kensington extract 1st June 2025 (note, not from 1st May 2025!)
+
+:::
+
+Patient high- or low- prevalence mental health condition status
 
 * Using Filter 'Conditions', sub-filter 'Mental Health'
-    + For patients with high-frequency conditions
+    + For patients with high-prevalence conditions
         - Set 'High Prevalence' to yes (ticked).
-        - In this case, we are interested in patients with recorded low-frequency conditions *without* high-frequency conditions. Set both the low-prevalence conditions (schizophrenia and bipolar) to 'No' by ticking the 'No' box for those two conditions.
-    + For patients with low-frequency conditions
+        - In this case, we are interested in patients with recorded low-prevalence conditions *without* high-prevalence conditions. Set both the low-prevalence conditions (schizophrenia and bipolar) to 'No' by ticking the 'No' box for those two conditions.
+    + For patients with low-prevalence conditions
         - Set 'Low Prevalence' to yes (ticked).
-        - Many patients with low-frequency conditions will also have high-frequency mental health conditions. For this search, we are interested in the presence or absence of a low-frequency mental health condition, regardless of the presence or absence of a high-frequency condition.
+        - Many patients with low-prevalence conditions will also have high-prevalence mental health conditions. For this search, we are interested in the presence or absence of a low-prevalence mental health condition, regardless of the presence or absence of a high-prevalence condition.
 
 Patient concession card status
 
@@ -800,6 +849,10 @@ Patient mental health treatment plan or other item numbers
     + For Chronic Disease management plans (MBS item '721')
         - In 'MBS Item Numbers' tick only item '721'
 
+### Supplementary tables
+
+::: {#table-mh2713_by_clinic}
+
 ```{r}
 table1(
   x = ~ mh2713 | clinic,
@@ -809,9 +862,14 @@ table1(
 ) |>
   t1flex(tablefn = "flextable", cwidth = 0.85) |>
   fontsize(size = 9, part = "all") |>
-  footnote(i = 1, j = 1, value = as_paragraph("Mental health GP consultations, claimed in the previous twelve months"), ref_symbols = "a", part = "body") |>
-  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
+  add_footer_lines(value = as_paragraph("coHealth clinics, May 2025, 'active' patients"))
 ```
+
+Mental health GP consultations (MBS 2713) claimed in the previous twelve months, by clinic site.
+
+:::
+
+::: {#table-gpmp_by_clinic}
 
 ```{r}
 table1(
@@ -822,6 +880,9 @@ table1(
 ) |>
   t1flex(tablefn = "flextable", cwidth = 0.85) |>
   fontsize(size = 9, part = "all") |>
-  footnote(i = 1, j = 1, value = as_paragraph("GP chronic disease management plans claimed in the previous twelve months"), ref_symbols = "a", part = "body") |>
-  footnote(i = 1, j = 2, value = as_paragraph("coHealth clinics, May 2025, 'active' patients"), part = "header")
+  add_footer_lines(value = as_paragraph("coHealth clinics, May 2025, 'active' patients"))
 ```
+
+GP chronic disease management plans (MBS item 721) claimed in the previous twelve months, by clinic site.
+
+:::
