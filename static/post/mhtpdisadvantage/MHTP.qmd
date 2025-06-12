@@ -17,6 +17,14 @@ format:
     code-fold: true
     code-summary: "Show the code"
     reference-location: margin
+    code-links:
+      - text: "Github source code"
+        icon: github
+        href: https://github.com/DavidPatShuiFong/vkelimHomepage/tree/master/static/post/mhtpdisadvantage
+    other-links:
+      - text: "David Fong homepage"
+        icon: house
+        href: https://www.davidfong.org/
   docx:
     output-file: MHTP
     echo: FALSE
