@@ -508,6 +508,8 @@ summary_df <- tibble(
   mhtp = integer(), # number who had a mental health treatment plan (MHTP e.g. 2715/2717)
   mh2713 = integer(), # number who had a billed GP mental health consult (MBS item 2713)
   gpmp = integer() # number who had a chronic disease management plan (MBS item 721)
+  # later we will also add...
+  #   mhtp_no, mh2713_no, gpmp_no - then number in the group who did *not* have the service/item
 )
 
 summary_df <- summary_df |>
@@ -530,7 +532,14 @@ summary_df <- summary_df |>
   add_row(concession = TRUE, condition = "high", clinic = "Fitzroy", total = 445, mhtp = 74, mh2713 = 29, gpmp = 94) |>
   add_row(concession = TRUE, condition = "low", clinic = "Fitzroy", total = 165, mhtp = 18, mh2713 = 13, gpmp = 38) |>
   add_row(concession = FALSE, condition = "high", clinic = "Fitzroy", total = 91, mhtp = 20, mh2713 = 2, gpmp = 14) |>
-  add_row(concession = FALSE, condition = "low", clinic = "Fitzroy", total = 10, mhtp = 3, mh2713 = 1, gpmp = 1)
+  add_row(concession = FALSE, condition = "low", clinic = "Fitzroy", total = 10, mhtp = 3, mh2713 = 1, gpmp = 1) |>
+  mutate(
+    # create an 'absent' outcome column for each outcome
+    mhtp_no = total - mhtp,
+    mh2713_no = total - mh2713,
+    gpmp_no = total - gpmp
+  )
+
 ```
 
 ```{r mhtp}
@@ -553,10 +562,14 @@ mhtp <- summary_df |>
       select(concession, condition, clinic, mhtp)
   ) |>
   arrange(clinic, concession, condition)
-  
+
 label(mhtp$mhtp) = "Mental Health Plan"
 label(mhtp$concession) = "Concession card"
 label(mhtp$condition) = "condition"
+
+label(summary_df$mhtp) = "Mental Health Plan"
+label(summary_df$concession) = "Concession card"
+label(summary_df$condition) = "condition"
 
 # the basic model
 model_mhtp <- glm(
@@ -572,7 +585,22 @@ model_mhtp_effects <- glmer(
   data = mhtp
 )
 
-# using 'clinic' as a random effect makes little difference to the model
+# using 'clinic' as a random effect makes little difference to the model, but does 'explain' variance in the R squared calculation
+
+# a grouped model
+model_mhtp_grouped <- glmer(
+  cbind(mhtp, mhtp_no) ~ concession + condition + (1|clinic),
+  family = "binomial",
+  data = summary_df
+)
+# perhaps more valid, as we are modeling a population, rather than predicting an individual
+# note that this makes no difference to the actual estimated effect of 'concession' or 'condition'
+# but does make a difference to (Nakagawa) R squared calculation
+#   R squared in logistic regression
+#   https://thestatsgeek.com/2014/02/08/r-squared-in-logistic-regression/
+#   "The explanation for the large difference is (I believe) that for the grouped binomial data setup, the model can accurately predict the number of successes in a binomial observation with n=1,000 with good accuracy. In contrast, for the individual binary data model, the observed outcomes are 0 or 1, while the predicted outcomes are 0.7 and 0.3 for x=0 and x=1 groups. The low R squared for the individual binary data model reflects the fact that the covariate x does not enable accurate prediction of the individual binary outcomes. In contrast, x can give a good prediction for the number of successes in a large group of individuals."
+#   also "A note on R2 measures for Poisson and logistic regression models when both models are applicable"
+#   (Mittlböck, Martina et al., Journal of Clinical Epidemiology, Volume 54, Issue 1, 99 - 103 )
 ```
 
 ```{r mh2713}
@@ -600,6 +628,8 @@ label(mh2713$mh2713) = "Mental Health GP Consult"
 label(mh2713$concession) = "Concession card"
 label(mh2713$condition) = "condition"
 
+label(summary_df$mh2713) = "Mental Health GP Consult"
+
 # the basic model
 model_mh2713 <- glm(
   mh2713 ~ concession + condition,
@@ -612,6 +642,13 @@ model_mh2713_effects <- glmer(
   mh2713 ~ concession + condition + (1|clinic),
   family = binomial(link = "logit"),
   data = mh2713
+)
+
+# a grouped model
+model_mh2713_grouped <- glmer(
+  cbind(mh2713, mh2713_no) ~ concession + condition + (1|clinic),
+  family = "binomial",
+  data = summary_df
 )
 ```
 
@@ -640,6 +677,8 @@ label(gpmp$gpmp) = "Chronic Disease Management Plan"
 label(gpmp$concession) = "Concession card"
 label(gpmp$condition) = "condition"
 
+label(summary_df$gpmp) = "Chronic Disease Management Plan"
+
 # the basic model
 model_gpmp <- glm(
   gpmp ~ concession + condition,
@@ -652,6 +691,13 @@ model_gpmp_effects <- glmer(
   gpmp ~ concession + condition + (1|clinic),
   family = binomial(link = "logit"),
   data = gpmp
+)
+
+# a grouped model
+model_gpmp_grouped <- glmer(
+  cbind(gpmp, gpmp_no) ~ concession + condition + (1|clinic),
+  family = "binomial",
+  data = summary_df
 )
 ```
 
@@ -770,9 +816,9 @@ my_flextable_theme <- function(x, ...) {
 
 table_mbs_model <- modelsummary(
   models = list(
-    "MHTP" = model_mhtp_effects,
-    "MH2713" = model_mh2713_effects,
-    "GPMP" = model_gpmp_effects
+    "MHTP" = model_mhtp_grouped,
+    "MH2713" = model_mh2713_grouped,
+    "GPMP" = model_gpmp_grouped
   ),
   estimate = c("Odds ratio" = "{estimate}"),
   coef_rename = c(
@@ -813,9 +859,9 @@ Logistic model, MBS items by concession status and mental health condition
 #| warning: false
 
 model_list <- list(
-  "MHTP" = model_mhtp_effects,
-  "MH2713" = model_mh2713_effects,
-  "GPMP" = model_gpmp_effects
+  "MHTP" = model_mhtp_grouped,
+  "MH2713" = model_mh2713_grouped,
+  "GPMP" = model_gpmp_grouped
 )
 
 modelplot(
@@ -992,7 +1038,7 @@ GP chronic disease management plans (MBS item 721) claimed in the previous twelv
 ::: {#fig-mhtp_effects fig-pos="h"}
 
 ```{r effects_plot_mhtp}
-plot(effects::allEffects(model_mhtp_effects), ylab = "mhtp proportion")
+plot(effects::allEffects(model_mhtp_grouped), ylab = "mhtp proportion")
 ```
 
 Relationship between Mental Health Treatment Plan (MHTP) billing and concession card status or low- vs high- prevalence mental health condition
@@ -1002,7 +1048,7 @@ Relationship between Mental Health Treatment Plan (MHTP) billing and concession 
 ::: {#fig-mh2713_effects}
 
 ```{r effects_plot_mh2713}
-plot(effects::allEffects(model_mh2713_effects), ylab = "mh2713 proportion")
+plot(effects::allEffects(model_mh2713_grouped), ylab = "mh2713 proportion")
 ```
 
 Relationship between GP mental health consultation (MBS item 2713) billing and concession card status or low- vs high- prevalence mental health condition
@@ -1012,7 +1058,7 @@ Relationship between GP mental health consultation (MBS item 2713) billing and c
 ::: {#fig-gpmp-effects}
 
 ```{r effects_plot_gpmp}
-plot(effects::allEffects(model_gpmp_effects), ylab = "gpmp proportion")
+plot(effects::allEffects(model_gpmp_grouped), ylab = "gpmp proportion")
 ```
 
 Relationship between GP chronic disease management plan (MBS item 721) billing and concession card status or low- vs high- prevalence mental health condition
