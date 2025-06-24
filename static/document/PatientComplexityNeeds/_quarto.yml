@@ -1,0 +1,15 @@
+project:
+  type: default
+
+format:
+  html: default
+  pdf: default
+
+  # (other formats)
+  # pdf: default
+
+execute:
+  freeze: true
+
+editor: visual
+
