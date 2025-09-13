@@ -27,6 +27,8 @@ filters:
 
 *Updated from [Calculating the practice benefit of universal bulk-billing](../UniversalBulkBilling). Updated model includes MBS Service Level A and, optionally, care plans (721/723/732).*
 
+*Update: includes display of Universal-Bulk-Bill incentive payment, paid quarterly with PIP (13 Sep 2025)*
+
 *Dashboard available on [Amazon Web Services](https://shiny.davidfong.org/universalbulkbilling/) and [ShinyApps](https://davidfong.shinyapps.io/universalbulkbilling).*
 
 ## Universal bulk-billing incentive
@@ -276,6 +278,9 @@ net_benefit <- function(
   # the variable names used in this function
   # are the same as used in previous code chunks
   # but will be 'local' to this function
+  # 
+  # if 'return_ubb_incentive' is TRUE then return the ubb_incentive only
+  # 'return_ubb_incentive' is an optional parameter, default is FALSE
   service_fees,
   fee_names,
   service_proportion_bulk,
@@ -285,7 +290,8 @@ net_benefit <- function(
   individual_bulkbill_incentive,
   individual_bulkbill_incentive_by_fee,
   monash_area,
-  universal_bulkbill_incentive) {
+  universal_bulkbill_incentive,
+  return_ubb_incentive = FALSE) {
   # calculate individual bulk-bill incentive applicable to defined Monash area
   fee_bulkbill_incentive <- 
     individual_bulkbill_incentive[monash_area, individual_bulkbill_incentive_by_fee]
@@ -293,26 +299,37 @@ net_benefit <- function(
   dim(fee_bulkbill_incentive) <- c(length(fee_names), 1)
   # change row name to the fee names
   rownames(fee_bulkbill_incentive) <- fee_names
-  
-  # calculate the universal bulk-bill incentive
-  # for patients formerly privately-billed
-  (1 -concessional_bulkbilled) *
+
+  ubb_incentive <- 
+    # the universal bulk-bill incentive (which will be paid as a quarterly PIP)
+    # first the UBB applied to patients who are already concessionally bulk-billed
+    # calculate the universal bulk-bill incentive
+    # for patients formerly privately-billed
+    (1 - concessional_bulkbilled) *
     sum(service_fees * service_proportion_private) *
     universal_bulkbill_incentive +
     # calculate (and add) benefit for patients already bulk-billed
     concessional_bulkbilled *
     sum(service_fees * service_proportion_bulk) *
-    universal_bulkbill_incentive +
+    universal_bulkbill_incentive
     # the calculation above could be simplified, of course!, to
     # sum(service_fees * service_proportion_private), but is kept
     # separate to two different portions to clarify the calculation
-    
+
+  service_bulkbill_benefit <- 
     # calculate (and add) the individual service bulk-billing incentive applied
     # to patients formerly privately-billed
     (1 - concessional_bulkbilled) * sum(service_proportion_private * fee_bulkbill_incentive) -
-    
     # calculate (and subtract) the loss from not charging a private 'gap' fee
     (1 - concessional_bulkbilled) * sum(service_proportion_private * gap_fee)
+  
+  if (return_ubb_incentive) {
+    return (ubb_incentive)
+  } else {
+    # returning both the ubb_incentive and benefit-loss of not charging gap fees
+    # is the default
+    return (ubb_incentive + service_bulkbill_benefit)
+  }
 }
 
 fee_mean <- function(
@@ -377,9 +394,24 @@ benefit_loss <- net_benefit(
   universal_bulkbill_incentive
 )
 
+ubb_incentive <- net_benefit(
+  service_fees,
+  fee_names,
+  service_proportion_bulk,
+  service_proportion_private,
+  gap_fee,
+  concessional_bulkbilled,
+  individual_bulkbill_incentive,
+  individual_bulkbill_incentive_by_fee,
+  monash_area,
+  universal_bulkbill_incentive,
+  return_ubb_incentive = TRUE
+)
+
 # Show the value of average net_benefit
 paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
-paste("Benefit-loss: ", formatC(benefit_loss, digits = 2, format = "f"))
+paste("Total Benefit-loss: ", formatC(benefit_loss, digits = 2, format = "f"))
+paste("Quarterly UBB incentive:", formatC(ubb_incentive, digits = 2, format = "f"))
 ```
 
 #### Modifying the model for a different practice
@@ -431,9 +463,24 @@ benefit_loss <- net_benefit(
   universal_bulkbill_incentive
 )
 
+ubb_incentive <- net_benefit(
+  service_fees,
+  fee_names,
+  service_proportion_bulk,
+  service_proportion_private,
+  gap_fee,
+  concessional_bulkbilled = 0.8,
+  individual_bulkbill_incentive,
+  individual_bulkbill_incentive_by_fee,
+  monash_area,
+  universal_bulkbill_incentive,
+  return_ubb_incentive = TRUE
+)
+
 # Show the value of average net_benefit
 paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
-paste("Benefit-loss: ", formatC(benefit_loss, digits = 2, format = "f"))
+paste("Total Benefit-loss: ", formatC(benefit_loss, digits = 2, format = "f"))
+paste("UBB quarterly incentive:", formatC(ubb_incentive, digits = 2, format = "f"))
 ```
 
 If the mean gap fee is set to 35, the average consult length is longer and 80% of patients are concessionally bulk-billed, the practice can expect a mean benefit of `5.37` per service more than the current mean fee of `89.91`. Note that this practice has a higher current mean fee than the first practice, but longer consultation times would likely result in a lower fee-rate per hour.
@@ -511,9 +558,26 @@ benefit_loss <- net_benefit(
   universal_bulkbill_incentive
 )
 
+ubb_incentive <- net_benefit(
+  service_fees = new_service_fees,
+  fee_names = new_fee_names,
+  service_proportion_bulk = new_practice_service_proportions,
+  service_proportion_private = new_practice_service_proportions,
+  # replace the mean gap fees
+  gap_fee = new_gap_fee,
+  # reduce the privately billed proportion to 20%
+  concessional_bulkbilled = 0.8,
+  individual_bulkbill_incentive,
+  individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
+  monash_area,
+  universal_bulkbill_incentive,
+  return_ubb_incentive = TRUE
+)
+
 # Show the value of average net_benefit
 paste("Current mean fee: ", formatC(current_fee_mean, digits = 2, format = "f"))
 paste("Benefit-loss: ", formatC(benefit_loss, digits = 2, format = "f"))
+paste("UBB quarterly incentive:", formatC(ubb_incentive, digits = 2, format = "f"))
 ```
 
 ### Graphing the benefit
@@ -763,7 +827,8 @@ new_practice_service_proportions <-
 benefit_loss <- tibble(
   gap = numeric(), 
   concessional_bulkbilled = numeric(), 
-  benefit = numeric()
+  benefit = numeric(),
+  ubb_incentive = numeric()
 )
 
 for (x in gap_fee_range) {
@@ -791,20 +856,46 @@ for (x in gap_fee_range) {
       monash_area,
       universal_bulkbill_incentive
     )
-    benefit_loss <- add_row(benefit_loss, gap = x, concessional_bulkbilled = y, benefit = benefit)
+    ubb_incentive <- net_benefit(
+      service_fees = new_service_fees,
+      fee_names = new_fee_names,
+      # set service proportions to longer consults
+      service_proportion_bulk = new_practice_service_proportions,
+      service_proportion_private = new_practice_service_proportions,
+      # set the mean gap fee to $35
+      gap_fee = new_gap_fee,
+      # set concessional bulk-billed proportion to 'x'
+      # divide by 100 to convert from
+      # percentage to proportion
+      concessional_bulkbilled = y/100,
+      individual_bulkbill_incentive,
+      individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
+      monash_area,
+      universal_bulkbill_incentive,
+      return_ubb_incentive = TRUE
+    )
+      
+    benefit_loss <- add_row(
+      benefit_loss,
+      gap = x, concessional_bulkbilled = y,
+      benefit = benefit, ubb_incentive = ubb_incentive
+    )
   }
 }
 
 # this plot cannot be shown in the web-browser using this code block!
 # you will need to copy this code (and all the pre-requisites)
 # into a 'R/RStudio' and run it yourself :)
+
 fig_plotly_3d <- plot_ly(
-  data = benefit_loss, x = ~gap, y = ~concessional_bulkbilled, z = ~benefit,
+  data = benefit_loss, 
+  x = ~gap, y = ~concessional_bulkbilled, z = ~benefit, customdata = ~ubb_incentive,
   type = "scatter3d", mode = "markers",
   hovertemplate = paste(
     "Mean Gap fee: <b>$%{x}</b><br>",
     "Private: <b>%{y}</b>%<br>",
-    "Benefit: <b>%{z:$.2f}</b>",
+    "Benefit: <b>%{z:$.2f}</b><br>",
+    "UBB incentive: <b>%{customdata:$.2f}</b>",
     "<extra></extra>"
   ),
   marker = list(
@@ -872,6 +963,7 @@ library(tibble)
 library(plotly)
 library(ggplot2)
 library(dplyr)
+library(purrr)
 
 fee_names <- c("a", "b", "c", "d", "e")
 service_fees <- array(
@@ -996,6 +1088,9 @@ net_benefit <- function(
   # the variable names used in this function
   # are the same as used in previous code chunks
   # but will be 'local' to this function
+  
+  # if 'return_ubb_incentive' is TRUE then return the ubb_incentive only
+  # 'return_ubb_incentive' is an optional parameter, default is FALSE
   service_fees,
   fee_names,
   service_proportion_bulk,
@@ -1005,7 +1100,8 @@ net_benefit <- function(
   individual_bulkbill_incentive,
   individual_bulkbill_incentive_by_fee,
   monash_area,
-  universal_bulkbill_incentive) {
+  universal_bulkbill_incentive,
+  return_ubb_incentive = FALSE) {
   # calculate individual bulk-bill incentive applicable to defined Monash area
   fee_bulkbill_incentive <- individual_bulkbill_incentive[monash_area, individual_bulkbill_incentive_by_fee]
   # re-define dimensions of the 'x' array
@@ -1013,22 +1109,35 @@ net_benefit <- function(
   # change row name to the fee names
   rownames(fee_bulkbill_incentive) <- fee_names
   
-  # calculate the universal bulk-bill incentive
-  # for patients formerly privately-billed
-  (1 - concessional_bulkbilled) *
+  ubb_incentive <- 
+    # the universal bulk-bill incentive (which will be paid as a quarterly PIP)
+    # first the UBB applied to patients who are already concessionally bulk-billed
+     
+    # calculate the universal bulk-bill incentive
+    # for patients formerly privately-billed
+    (1 - concessional_bulkbilled) *
     sum(service_fees * service_proportion_private) *
     universal_bulkbill_incentive +
     # calculate (and add) benefit for patients already bulk-billed
     concessional_bulkbilled *
     sum(service_fees * service_proportion_bulk) *
-    universal_bulkbill_incentive +
+    universal_bulkbill_incentive
     
+  service_bulkbill_benefit <- 
     # calculate (and add) the individual service bulk-billing incentive applied
     # to patients formerly privately-billed
     (1 - concessional_bulkbilled) * sum(service_proportion_private * fee_bulkbill_incentive) -
     
     # calculate (and subtract) the loss from not charging a private 'gap' fee
     (1 - concessional_bulkbilled) * sum(service_proportion_private * gap_fee)
+  
+  if (return_ubb_incentive) {
+    return (ubb_incentive)
+  } else {
+    # returning both the ubb_incentive and benefit-loss of not charging gap fees
+    # is the default
+    return (ubb_incentive + service_bulkbill_benefit)
+  }
 }
 
 # mean gap fees from $0 to $60
@@ -1080,6 +1189,7 @@ benefit_loss_practice_standard <- tibble(
   current_fee_mean = numeric(),
   benefit = numeric(),
   benefit_rel = numeric(),
+  ubb_incentive = numeric()
 )
 
 for (x in gap_fee_range) {
@@ -1120,12 +1230,30 @@ for (x in gap_fee_range) {
       monash_area,
       universal_bulkbill_incentive
     )
+    ubb_incentive <- net_benefit(
+      service_fees = new_service_fees,
+      fee_names = new_fee_names,
+      service_proportion_bulk = new_practice_service_proportions,
+      service_proportion_private = new_practice_service_proportions,
+      gap_fee = new_gap_fee,
+      # set concessional bulk-billed proportion to 'y'
+      # divide by 100 to convert from
+      # percentage to proportion
+      concessional_bulkbilled = y/100,
+      individual_bulkbill_incentive,
+      individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
+      monash_area,
+      universal_bulkbill_incentive,
+      return_ubb_incentive = TRUE
+    )
+    
     benefit_loss_practice_standard <- add_row(
       benefit_loss_practice_standard,
       gap = x, concessional_bulkbilled = y,
       current_fee_mean = current_fee_mean,
       benefit = benefit,
-      benefit_rel = benefit/current_fee_mean
+      benefit_rel = benefit/current_fee_mean,
+      ubb_incentive = ubb_incentive
     )
   }
 }
@@ -1133,16 +1261,19 @@ for (x in gap_fee_range) {
 # this plot cannot be shown in the web-browser using this code block!
 # you will need to copy this code (and all the pre-requisites)
 # into a 'R/RStudio' and run it yourself :)
+benefit_loss_practice_standard <- benefit_loss_practice_standard |>
+      mutate(custom_data_list = purrr::map2(current_fee_mean, ubb_incentive, ~list(val1 = .x, val2 = .y)))
 fig_plotly_3d <- plot_ly(
   data = benefit_loss_practice_standard,
   x = ~gap, y = ~concessional_bulkbilled, z = ~benefit,
-  text = ~benefit_rel * 100, customdata = ~current_fee_mean,
+  text = ~benefit_rel * 100, customdata = ~custom_data_list,
   type = "scatter3d", mode = "markers",
   hovertemplate = paste(
     "Mean Gap fee: <b>$%{x}</b><br>",
     "Concessional bulk-billed: <b>%{y}</b>%<br>",
-    "Current mean fee: <b>%{customdata:$.2f}</b><br>",
-    "Benefit: <b>%{z:$.2f}</b><br>",
+    "Current mean fee: <b>%{customdata.val1:$.2f}</b><br>",
+    "Quarterly UBB incentive: <b>%{customdata.val2:$.2f}</b><br>",
+    "Total Benefit: <b>%{z:$.2f}</b><br>",
     "Revenue change: <b>%{text:.0f}</b>%",
     "<extra></extra>"
   ),
@@ -1210,6 +1341,7 @@ benefit_loss <- tibble(
   gap = numeric(), 
   concessional_bulkbilled = numeric(),
   current_fee_mean = numeric(),
+  ubb_incentive = numeric(),
   benefit = numeric(),
   benefit_rel = character()
 )
@@ -1253,10 +1385,27 @@ for (x in gap_fee_range) {
       monash_area,
       universal_bulkbill_incentive
     )
+    ubb_incentive <- net_benefit(
+      service_fees = new_service_fees,
+      fee_names = new_fee_names,
+      service_proportion_bulk = new_practice_service_proportions,
+      service_proportion_private = new_practice_service_proportions,
+      gap_fee = new_gap_fee,
+      # set concessional bulk-billed proportion to 'y'
+      # divide by 100 to convert from
+      # percentage to proportion
+      concessional_bulkbilled = y/100,
+      individual_bulkbill_incentive,
+      individual_bulkbill_incentive_by_fee = new_individual_bulkbill_incentive_by_fee,
+      monash_area,
+      universal_bulkbill_incentive,
+      return_ubb_incentive = TRUE
+    )
     benefit_loss <- add_row(
       benefit_loss,
       gap = x, concessional_bulkbilled = y,
       current_fee_mean = current_fee_mean,
+      ubb_incentive = ubb_incentive,
       benefit = benefit, 
       benefit_rel = formatC((benefit / current_fee_mean * 100), digits = 0, format = "f")
     )
@@ -1273,9 +1422,10 @@ fig_ggplotly <- ggplot(
     text = sprintf(
       paste(
         "Gap: $%d<br>Concessional bulk-billed: %d%%<br>Current fee mean: $%.2f<br>",
+        "Quartly UBB incentive: $%.2f<br>",
         "Benefit: $%.2f<br>Revenue change: %s%%", sep = ""
       ),
-      gap, concessional_bulkbilled, current_fee_mean, benefit, benefit_rel
+      gap, concessional_bulkbilled, current_fee_mean, ubb_incentive, benefit, benefit_rel
     )
   )) +
   geom_point(
