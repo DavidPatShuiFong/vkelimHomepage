@@ -1,0 +1,130 @@
+---
+title: "openSuSE Aeon on VMWare Workstation 18 Pro"
+author: "David Fong"
+date: "2025-09-17T00:00:00Z"
+categories:
+- Computers
+- Linux
+aliases: null
+featured: false
+tags:
+- VMWare Workstation
+- openSuSE
+- Aeon
+- Linux
+- Remote desktop
+image:
+  caption: <span><a href="https://en.opensuse.org/Portal:Aeon">openSuSE Aeon</a></span>
+  focal_point: Smart
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+## Using openSuSE Aeon on VMWare Workstation
+
+[openSuSE Aeon](https://aeondesktop.github.io/) is a low-maintenance, minimal desktop system based on an 'immutable' version ([MicroOS](https://get.opensuse.org/microos/)) of [openSuSE](https://www.opensuse.org/). Aeon and MicroOS are 'atomic rolling releases' which emphasise stability.
+
+That sounds great, but Aeon is also experimental and under development. Sometimes what makes an operating system 'easy-to-use' and 'low-maintenance' is not entirely consistent with being flexible to use in different environments. In the case of openSuSE Aeon, that includes being installed in a [VMWare Workstation](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion)! Using openSuSE Aeon on VMWare Workstation is not for the faint-hearted.
+
+## Installing openSuSE Aeon on VMWare Workstation
+
+Instead of providing an ISO image, currently openSuSE Aeon provides a [`.raw.xz` file](https://en.opensuse.org/Portal:Aeon/InstallGuide) disk image!
+
+Firstly, the `.xz` file needs to be expanded to a `.raw` file. In Linux (I used an openSuSE Leap 15.6 host), that can be done with `xz` or `unxz`. The resulting `.raw` disk image cannot be used as an ISO, it needs to be converted to a virtual disk image.
+
+VMWare Workstation prefers `.vmdk` disk images. `.vmdk` images can be created from `.raw` images by using either `qemu-img` from `qemu` or `VBoxManage` from [Oracle Virtualbox](https://www.virtualbox.org/). I used `VBoxManage`.
+
+```
+VBoxManage convertfromraw ./Aeon-Installer.x86_64.raw Aeon2.vmdk --format=vmdk
+```
+
+## Creating the virtual machine in VMware workstation
+
+The openSuSE Aeon installation disk image uses EFI. Under 'Options-Advanced', the VMware Workstation settings for the Aeon machine needs to be set to 'UEFI' firmware type (rather than 'BIOS'). Aeon also strongly prefers "Trusted Platform Module (TPM)", so the 'Secure Boot' setting (under 'UEFI') should also be enabled.
+
+Trusted Platform Module (TPM) is preferred for Aeon, this can be added to the VMware Workstation settings for the Aeon machine under 'Hardware'. TPM might not be available by default for machines set to 'Linux' under 'Options-General', but *is* available for machines set to 'Windows 11'! It is possible to set the machine to 'Windows 11' temporarily and then change back to 'Linux'.
+
+I set the 'Hardware - Network Adapter' to 'Bridged - Replicate physical network connection state'.
+
+openSuSE Aeon prefers disk encryption to be set. I needed to set 'fully encrypted' under 'Options-Access Control', partial encryption resulted in Aeon asking for the disk password each time I booted the machine.
+
+## VMware encryption (and decryption) of the settings file `.vmx`
+
+Unfortunately, if the VMware machine is 'fully encrypted', the settings `.vmx` file is encrypted as well! Which make changes to the virtual machine much more difficult, or just viewing a plain text version of the settings.
+
+Fortunately, there is a Python tool on Github, [`VMwareVMX`](https://github.com/RF3/VMwareVMX) which allows decryption (or encryption) of `.vmx` files using the same password that was used to encrypt the files under VMware's 'Options-Access Control'.
+
+`pycryptodome` packages, which are required by `VMwareVMX` can be installed through openSuSE YaST.
+
+Critical settings include:
+
+```
+firmware = "efi"
+uefi.secureBoot.enabled = "TRUE"
+vtpm.present = "TRUE"
+```
+
+The MAC ID can be found under `ethernet0.generatedAddress`
+
+## open-vm-tools
+
+openSuSE Aeon does not by default include [`open-vm-tools`](https://www.github.com/vmware/open-vm-tools), which improves interaction between the Aeon guest and (in my case) the openSuSE Leap host. I installed `open-vm-tools` and `open-vm-tools-desktop` on the base Aeon system using [`transactional-update`](https://en.opensuse.org/Portal:Aeon/SoftwareInstall).
+
+## Remote Desktop (RDP)
+
+I mostly access the Aeon virtual machine through Microsoft Remote Desktop or [Remmina], both of which use Remote Desktop Protocol (RDP). RDP can be easily enabled through GNOME settings, under 'Settings - Remote Desktop - Remote Login'.
+
+### Insecure connection with Microsoft Remote Desktop
+
+When accessing using Microsoft Remote Desktop, GNOME complains of "Continue with an insecure connection? The Remote Desktop connection is not secure. To secure this connection save the connection settings to an RDP file and set 'use redirection server name:i:1' on it". The solution can be found in [GNOME forums - 'Notification for unsecure connections incomprehensible and ugly'](https://gitlab.gnome.org/GNOME/gnome-remote-desktop/-/issues/189).
+
+In summary:
+
+* From Microsoft Remote Desktop, save the connection settings to an RDP file
+* Edit the connections settings RDP file. Edit a `use redirection server name...` line to `use redirection server name:i:1`
+* Open the edited RDP connection settings file in Microsoft Remote Desktop.
+
+### Audio
+
+GNOME in openSuSE Aeon uses `pipewire` for audio. At first, I had not sound/audio coming through to the Microsoft Remote Desktop, and no selectable audio output device in GNOME settings under 'Sound'.
+
+I tried at least two things, one (or both?) of which might have helped the sound to start working.
+
+* Adding my default user to the `audio` group
+* Adding the `pipewire-module-xrdp` RPM package via [`transactional-update`](https://en.opensuse.org/Portal:Aeon/SoftwareInstall).
+
+Adding the default user (let's say, `johnsmith`) can be done with the command:
+
+```
+sudo usermod -a G audio johnsmith
+```
+
+Sometimes playing the sound can be quite choppy. The change in pulsewire settings in [Simple Guide: Fix Audio Crackling or Sudden Distortion in Games (Linux + Proton)](https://www.reddit.com/r/linux_gaming/comments/1kk3ddo/simple_guide_fix_audio_crackling_or_sudden/) seem to help, at least partly:
+
+```
+pw-metadata -n settings 0 clock.force-rate 48000
+pw-metadata -n settings 0 clock.force-quantum 500
+```
+
+The reddit post includes recommendations to make the pulsewire changes permanent:
+
+```
+mkdir -p ~/.config/pipewire/pipewire.conf.d/
+cp /usr/share/pipewire/pipewire.conf ~/.config/pipewire/
+```
+
+## Auto-start services in a distrobox
+
+The preferred way to install software in openSuSE Aeon are through flatpaks and [distroboxes](https://en.opensuse.org/Portal:Aeon/SoftwareInstall#Distrobox).
+
+If planning to use a `systemctl`-style service, note that not all distroboxes have `systemd` available, and I couldn't figure out how add `systemd` after distrobox creation! Best to specify the required `systemd` options at the time of [distrobox creation](https://github.com/89luca89/distrobox).
+
+A distrobox can be autostarted, after a user has started the GNOME desktop, by copying the `.desktop` file into `~/.config/autostart`. If the distrobox is named `ubuntu2404` then:
+
+```
+cp .local/share/applications/ubuntu2404.desktop ~/.config/autostart/
+```
+
+Note that the `ubuntu2404` distrobox is one of those distroboxes that *don't* have `systemd` available with the default installation settings!

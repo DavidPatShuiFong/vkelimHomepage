@@ -1,0 +1,95 @@
+---
+title: "openSuSE Aeon on VMWare Workstation 18 Pro"
+author: "David Fong"
+date: "2025-09-17T00:00:00Z"
+categories:
+- Computers
+- Linux
+aliases: null
+featured: false
+tags:
+- VMWare Workstation
+- openSuSE
+- Aeon
+- Linux
+- Remote desktop
+image:
+  caption: <span><a href="https://en.opensuse.org/Portal:Aeon">openSuSE Aeon</a></span>
+  focal_point: Smart
+---
+
+
+
+<div id="using-opensuse-aeon-on-vmware-workstation" class="section level2">
+<h2>Using openSuSE Aeon on VMWare Workstation</h2>
+<p><a href="https://aeondesktop.github.io/">openSuSE Aeon</a> is a low-maintenance, minimal desktop system based on an ‘immutable’ version (<a href="https://get.opensuse.org/microos/">MicroOS</a>) of <a href="https://www.opensuse.org/">openSuSE</a>. Aeon and MicroOS are ‘atomic rolling releases’ which emphasise stability.</p>
+<p>That sounds great, but Aeon is also experimental and under development. Sometimes what makes an operating system ‘easy-to-use’ and ‘low-maintenance’ is not entirely consistent with being flexible to use in different environments. In the case of openSuSE Aeon, that includes being installed in a <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion">VMWare Workstation</a>! Using openSuSE Aeon on VMWare Workstation is not for the faint-hearted.</p>
+</div>
+<div id="installing-opensuse-aeon-on-vmware-workstation" class="section level2">
+<h2>Installing openSuSE Aeon on VMWare Workstation</h2>
+<p>Instead of providing an ISO image, currently openSuSE Aeon provides a <a href="https://en.opensuse.org/Portal:Aeon/InstallGuide"><code>.raw.xz</code> file</a> disk image!</p>
+<p>Firstly, the <code>.xz</code> file needs to be expanded to a <code>.raw</code> file. In Linux (I used an openSuSE Leap 15.6 host), that can be done with <code>xz</code> or <code>unxz</code>. The resulting <code>.raw</code> disk image cannot be used as an ISO, it needs to be converted to a virtual disk image.</p>
+<p>VMWare Workstation prefers <code>.vmdk</code> disk images. <code>.vmdk</code> images can be created from <code>.raw</code> images by using either <code>qemu-img</code> from <code>qemu</code> or <code>VBoxManage</code> from <a href="https://www.virtualbox.org/">Oracle Virtualbox</a>. I used <code>VBoxManage</code>.</p>
+<pre><code>VBoxManage convertfromraw ./Aeon-Installer.x86_64.raw Aeon2.vmdk --format=vmdk</code></pre>
+</div>
+<div id="creating-the-virtual-machine-in-vmware-workstation" class="section level2">
+<h2>Creating the virtual machine in VMware workstation</h2>
+<p>The openSuSE Aeon installation disk image uses EFI. Under ‘Options-Advanced’, the VMware Workstation settings for the Aeon machine needs to be set to ‘UEFI’ firmware type (rather than ‘BIOS’). Aeon also strongly prefers “Trusted Platform Module (TPM)”, so the ‘Secure Boot’ setting (under ‘UEFI’) should also be enabled.</p>
+<p>Trusted Platform Module (TPM) is preferred for Aeon, this can be added to the VMware Workstation settings for the Aeon machine under ‘Hardware’. TPM might not be available by default for machines set to ‘Linux’ under ‘Options-General’, but <em>is</em> available for machines set to ‘Windows 11’! It is possible to set the machine to ‘Windows 11’ temporarily and then change back to ‘Linux’.</p>
+<p>I set the ‘Hardware - Network Adapter’ to ‘Bridged - Replicate physical network connection state’.</p>
+<p>openSuSE Aeon prefers disk encryption to be set. I needed to set ‘fully encrypted’ under ‘Options-Access Control’, partial encryption resulted in Aeon asking for the disk password each time I booted the machine.</p>
+</div>
+<div id="vmware-encryption-and-decryption-of-the-settings-file-.vmx" class="section level2">
+<h2>VMware encryption (and decryption) of the settings file <code>.vmx</code></h2>
+<p>Unfortunately, if the VMware machine is ‘fully encrypted’, the settings <code>.vmx</code> file is encrypted as well! Which make changes to the virtual machine much more difficult, or just viewing a plain text version of the settings.</p>
+<p>Fortunately, there is a Python tool on Github, <a href="https://github.com/RF3/VMwareVMX"><code>VMwareVMX</code></a> which allows decryption (or encryption) of <code>.vmx</code> files using the same password that was used to encrypt the files under VMware’s ‘Options-Access Control’.</p>
+<p><code>pycryptodome</code> packages, which are required by <code>VMwareVMX</code> can be installed through openSuSE YaST.</p>
+<p>Critical settings include:</p>
+<pre><code>firmware = &quot;efi&quot;
+uefi.secureBoot.enabled = &quot;TRUE&quot;
+vtpm.present = &quot;TRUE&quot;</code></pre>
+<p>The MAC ID can be found under <code>ethernet0.generatedAddress</code></p>
+</div>
+<div id="open-vm-tools" class="section level2">
+<h2>open-vm-tools</h2>
+<p>openSuSE Aeon does not by default include <a href="https://www.github.com/vmware/open-vm-tools"><code>open-vm-tools</code></a>, which improves interaction between the Aeon guest and (in my case) the openSuSE Leap host. I installed <code>open-vm-tools</code> and <code>open-vm-tools-desktop</code> on the base Aeon system using <a href="https://en.opensuse.org/Portal:Aeon/SoftwareInstall"><code>transactional-update</code></a>.</p>
+</div>
+<div id="remote-desktop-rdp" class="section level2">
+<h2>Remote Desktop (RDP)</h2>
+<p>I mostly access the Aeon virtual machine through Microsoft Remote Desktop or [Remmina], both of which use Remote Desktop Protocol (RDP). RDP can be easily enabled through GNOME settings, under ‘Settings - Remote Desktop - Remote Login’.</p>
+<div id="insecure-connection-with-microsoft-remote-desktop" class="section level3">
+<h3>Insecure connection with Microsoft Remote Desktop</h3>
+<p>When accessing using Microsoft Remote Desktop, GNOME complains of “Continue with an insecure connection? The Remote Desktop connection is not secure. To secure this connection save the connection settings to an RDP file and set ‘use redirection server name:i:1’ on it”. The solution can be found in <a href="https://gitlab.gnome.org/GNOME/gnome-remote-desktop/-/issues/189">GNOME forums - ‘Notification for unsecure connections incomprehensible and ugly’</a>.</p>
+<p>In summary:</p>
+<ul>
+<li>From Microsoft Remote Desktop, save the connection settings to an RDP file</li>
+<li>Edit the connections settings RDP file. Edit a <code>use redirection server name...</code> line to <code>use redirection server name:i:1</code></li>
+<li>Open the edited RDP connection settings file in Microsoft Remote Desktop.</li>
+</ul>
+</div>
+<div id="audio" class="section level3">
+<h3>Audio</h3>
+<p>GNOME in openSuSE Aeon uses <code>pipewire</code> for audio. At first, I had not sound/audio coming through to the Microsoft Remote Desktop, and no selectable audio output device in GNOME settings under ‘Sound’.</p>
+<p>I tried at least two things, one (or both?) of which might have helped the sound to start working.</p>
+<ul>
+<li>Adding my default user to the <code>audio</code> group</li>
+<li>Adding the <code>pipewire-module-xrdp</code> RPM package via <a href="https://en.opensuse.org/Portal:Aeon/SoftwareInstall"><code>transactional-update</code></a>.</li>
+</ul>
+<p>Adding the default user (let’s say, <code>johnsmith</code>) can be done with the command:</p>
+<pre><code>sudo usermod -a G audio johnsmith</code></pre>
+<p>Sometimes playing the sound can be quite choppy. The change in pulsewire settings in <a href="https://www.reddit.com/r/linux_gaming/comments/1kk3ddo/simple_guide_fix_audio_crackling_or_sudden/">Simple Guide: Fix Audio Crackling or Sudden Distortion in Games (Linux + Proton)</a> seem to help, at least partly:</p>
+<pre><code>pw-metadata -n settings 0 clock.force-rate 48000
+pw-metadata -n settings 0 clock.force-quantum 500</code></pre>
+<p>The reddit post includes recommendations to make the pulsewire changes permanent:</p>
+<pre><code>mkdir -p ~/.config/pipewire/pipewire.conf.d/
+cp /usr/share/pipewire/pipewire.conf ~/.config/pipewire/</code></pre>
+</div>
+</div>
+<div id="auto-start-services-in-a-distrobox" class="section level2">
+<h2>Auto-start services in a distrobox</h2>
+<p>The preferred way to install software in openSuSE Aeon are through flatpaks and <a href="https://en.opensuse.org/Portal:Aeon/SoftwareInstall#Distrobox">distroboxes</a>.</p>
+<p>If planning to use a <code>systemctl</code>-style service, note that not all distroboxes have <code>systemd</code> available, and I couldn’t figure out how add <code>systemd</code> after distrobox creation! Best to specify the required <code>systemd</code> options at the time of <a href="https://github.com/89luca89/distrobox">distrobox creation</a>.</p>
+<p>A distrobox can be autostarted, after a user has started the GNOME desktop, by copying the <code>.desktop</code> file into <code>~/.config/autostart</code>. If the distrobox is named <code>ubuntu2404</code> then:</p>
+<pre><code>cp .local/share/applications/ubuntu2404.desktop ~/.config/autostart/</code></pre>
+<p>Note that the <code>ubuntu2404</code> distrobox is one of those distroboxes that <em>don’t</em> have <code>systemd</code> available with the default installation settings!</p>
+</div>
