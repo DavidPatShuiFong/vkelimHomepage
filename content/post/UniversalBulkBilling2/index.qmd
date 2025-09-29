@@ -25,10 +25,6 @@ filters:
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
 
-*Updated from [Calculating the practice benefit of universal bulk-billing](../UniversalBulkBilling). Updated model includes MBS Service Level A and, optionally, care plans (721/723/732).*
-
-*Update: includes display of Universal-Bulk-Bill incentive payment, paid quarterly with PIP (13 Sep 2025)*
-
 *Dashboard available on [Amazon Web Services](https://shiny.davidfong.org/universalbulkbilling/) and [ShinyApps](https://davidfong.shinyapps.io/universalbulkbilling).*
 
 ## Universal bulk-billing incentive
@@ -40,10 +36,10 @@ The alternative to 'bulk-billing' is that the clinician charges the patient a pr
 The proposal to encourage general practices to 'bulk-bill' consisted of two parts:
 
 -   Broadening the current *bulk-billing incentive* for individual consultations/services to all patients.
-    - The government had provided *bulk-billing incentives* for general practitioners to bulk-bill patients previously deemed to benefit more from bulk-billing. The value of these incentives have been 7.15 to 21.35 dollars per service in urban areas.
+    - The government had provided *bulk-billing incentives* for general practitioners to bulk-bill patients previously deemed to benefit more from bulk-billing. The value of these incentives have been 7.35 to 21.85 dollars per service in urban areas.
     - Currently the bulk-billing incentive payment for individual consultations is only available to people, usually with less income or assets, who are [pensioners, recipients of a government-issued 'concession card' and children under the age of 16](https://www.ama.com.au/tas/bulk-billing-incentive-facts). The services which are bulk-billed and also qualify for the current bulk-billing incentive payment will be referred to as 'concessionally bulk-billed'.
     -   This bulk-billing incentive is paid with each individual consult
--   If the general practice agrees to bulk-bill all patients, i.e. universal bulk-billing, the government will pay the practice an additional 12.5% over and above the government-set price for each fee-for-service item. This incentive payment is sometimes called a 'loading payment'.
+-   If the general practice agrees to bulk-bill all patients, i.e. universal bulk-billing, the government will pay the practice an additional 12.5% over and above the government-set price for each fee-for-service item. This incentive payment is sometimes called a 'loading payment'. Half (50%) of this payment is to be paid to the practice, [the other half (50%) is to be paid to the individual doctor](https://www.medicalrepublic.com.au/practices-gps-to-split-new-pip-50-50/119243).
     - On 25th March 2025, the service items which needed to be bulk-billed, and attract the 'loading' payment were defined in the document [Bulk Blling Practice Incentive Program: Eligible Services](https://www.health.gov.au/resources/publications/bulk-billing-practice-incentive-program-eligible-services)
     - The definition of which service items need to be 'bulk-billed', and which service items will attract the 12.5% loading was not initially fully defined in the government-provided [fact sheet](https://mcusercontent.com/8a3d58d1cfb663c4dcefbc00d/files/bd321db2-d98f-0c87-efb9-1456a6053389/More_bulk_billing_fact_sheet.pdf) and [RACGP FAQ](https://www.racgp.org.au/advocacy/advocacy-resources/medicare-announcement-member-faqs), although they did suggest that consultation items A/B/C/D, mental health care plan and other GP non-referred attendances will attract the 12.5% loading.
       - For this reason, and simplicity, the initial description of this model is constrained to a small number of service types. Later, the model is expanded to all major service numbers, and can be easily expanded to all service types.
@@ -148,9 +144,10 @@ For more discussion about the mathematical relationship between benefit-per-serv
 # government-set price for service items A, B, C, D and E
 # Medicare items 3, 23, 36, 44, and 123
 # in AUD (Australian dollars)
+# fees correct as of 28 Sep 2025
 fee_names <- c("a", "b", "c", "d", "e")
 service_fees <- array(
-  data = c(19.6, 42.85, 82.90, 122.15, 197.9),
+  data = c(20.05, 43.90, 84.90, 125.10, 202.65),
   dim = c(length(fee_names), 1),
   dimnames = list(fee_names, "fee")
 )
@@ -228,10 +225,10 @@ individual_bulkbill_incentive <- array(
   data = c(
     # standard bulk-billing incentive applies to service items like item A/'3'
     # items 10990, 10991, 75855, 75856, 75857, 75858
-    c(7.15, 10.80, 11.45, 12.20, 12.85, 13.70),
+    c(7.35, 11.05, 11.70, 12.50, 13.15, 14.05),
     # triple bulk-billing incentive applies to service items like item B, C and D
     # items 75870, 75871, 75873, 75874, 75875, 75876
-    c(21.35, 32.50, 34.50, 36.65, 38.70, 41.10)
+    c(21.85, 33.25, 35.30, 37.55, 39.65, 42.05)
   ),
   dim = c(n_monash, 2),
   dimnames = list(c("1", "2", "3+4", "5", "6", "7"), c("single", "triple"))
@@ -262,7 +259,7 @@ fee_bulkbill_incentive
 
 We can now calculate the average benefit per patient if the practice adopts universal bulk-billing.
 
-If you 'Run Code' the block below With the default settings of 50% of patients are concessionally bulk-billed and a mean gap fee of 50, the benefit-per-patient is shown as `-8.23`, i.e. a loss of 8.23 compared to the current mean fee of `86.28`.
+If you 'Run Code' the block below With the default settings of 50% of patients are concessionally bulk-billed and a mean gap fee of 50, the benefit-per-patient is shown as `-7.84`, i.e. a loss of $7.84 compared to the current mean fee of `87.76`.
 
 **Note that 'Run Code' below will not work unless the previous code blocks have already been 'Run'!!**
 
@@ -483,49 +480,75 @@ paste("Total Benefit-loss: ", formatC(benefit_loss, digits = 2, format = "f"))
 paste("UBB quarterly incentive:", formatC(ubb_incentive, digits = 2, format = "f"))
 ```
 
-If the mean gap fee is set to 35, the average consult length is longer and 80% of patients are concessionally bulk-billed, the practice can expect a mean benefit of `5.37` per service more than the current mean fee of `89.91`. Note that this practice has a higher current mean fee than the first practice, but longer consultation times would likely result in a lower fee-rate per hour.
+If the mean gap fee is set to 35, the average consult length is longer and 80% of patients are concessionally bulk-billed, the practice can expect a mean benefit of `5.66` per service more than the current mean fee of `91.91`. Note that this practice has a higher current mean fee than the first practice, but longer consultation times would likely result in a lower fee-rate per hour.
 
 #### Including care plan item numbers {#including-care-plan-item-numbers}
 
 The ['Strengthening Medicare with more bulk billing' information for GP providers](https://www.health.gov.au/resources/publications/strengthening-medicare-with-more-bulk-billing?language=en) and [RACGP FAQ](https://www.racgp.org.au/advocacy/advocacy-resources/medicare-announcement-member-faqs) state that non-referred general practice service items such as care-plans and health assessments will also qualify for the new bulk-bill incentive payments. We can add these service items to our model. We will base this model on the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown}.
 
-*Model limitation - It is expected that the service item numbers and descriptors for general practice care-plans (721, 723 and 732) will change late in 2025. This model assumes that the fee-for-service revenue for the practice through care-plans will remain similar after the change in care-plan services items occurs.*
-
-Compared to the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown} described above, adding care plan item numbers increases the mean benefit from `5.37` to `6.55` per service. The current mean fee has also risen, from `89.91` to `94.43`, reflecting the higher value of service items included.
+Compared to the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown} described above, adding care plan item numbers increases the mean benefit from `5.66` to `6.95` per service. The current mean fee has also risen, from `91.91` to `97.81`, reflecting the higher value of service items included.
 
 ```{webr-r}
 # note, depends on the previous code blocks already having been 'run'! 
 
 # this model is based on the second practice model described above
 # add new service fee descriptions
+
+# old gpmp/tca/cdmrv item numbers, superseded in second half of 2025
+# new_fee_names <- c(
+#   fee_names,
+#   # append items 721, 723 and 732
+#   c("GPMP", "TCA", "CDM RV")
+# )
+# new_service_fees <- array(
+#   # append fees for 721, 723 and 732
+#   data = c(service_fees, 164.35, 130.25, 82.10),
+#   dim = c(length(new_fee_names), 1),
+#   dimnames = list(new_fee_names, "fee")
+# )
+# new_gap_fee <- c(
+#   rep(35, 5),
+#   # no gap fees were charged for these GPMP/TCA/GPMPRV items,
+#   # even 'private' patients
+#   rep(0, 3)
+# )
+
 new_fee_names <- c(
   fee_names,
-  # append items 721, 723 and 732
-  c("GPMP", "TCA", "CDM RV")
+  # append items 965, 967
+  # GP chronic condition management plan and review
+  c("GPCCMP", "GPCCMP RV")
 )
 new_service_fees <- array(
-  # append fees for 721, 723 and 732
-  data = c(service_fees, 164.35, 130.25, 82.10),
+  # append fees for 965 and 967
+  data = c(service_fees, 156.55, 156.55),
   dim = c(length(new_fee_names), 1),
   dimnames = list(new_fee_names, "fee")
 )
+
 new_gap_fee <- c(
   rep(35, 5),
-  # no gap fees were charged for these GPMP/TCA/GPMPRV items,
+  # no gap fees charged for GPCCMP and review,
   # even 'private' patients
-  rep(0, 3)
+  rep(0, 2)
 )
 new_individual_bulkbill_incentive_by_fee <- c(
   individual_bulkbill_incentive_by_fee,
-  rep("single", 3)
+  # only 'single' incentive for GPCCMP and review
+  rep("single", 2)
 )
 # Set the privately-billed proportion to 0.2 (20%), the mean gap fee to $35
 # and new service proportions
 new_practice_service_raw <- 
   # new A, B, C, D, E numbers
   # (long average consults)
-  # and GPMP/TCA/reviews
-  c(950, 3956, 4171, 1146, 75, 416, 402, 255)
+  # and GPCCMP and reviews
+  # based on combination of July 2024-June 2025 (for ABCDE) and
+  # July 2025 statistics (for GPCCPMP and GPCCMP RV)
+  # as no GPCCMP (965) had been charged prior to July 2025,
+  # no GPCCMP review (967) could be charged in July 2025
+  # (as a review '967' could only be charged 3+ months after a '965')
+  c(950, 3956, 4171, 1146, 75, 941, 0)
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
@@ -673,24 +696,24 @@ concessional_bulkbilled_range <- seq(from = 0, to = 100, by = 1)
 # add new service fee descriptions
 new_fee_names <- c(
   fee_names,
-  # append items 721, 723 and 732
-  c("GPMP", "TCA", "CDM RV")
+  # append items 'care plan' (965) and 'care plan review' (967)
+  c("GPCCMP", "GPCCMP RV")
 )
 new_service_fees <- array(
-  # append fees for 721, 723 and 732
-  data = c(service_fees, 164.35, 130.25, 82.10),
+  # append fees for 965 and 967
+  data = c(service_fees, 156.55, 156.55),
   dim = c(length(new_fee_names), 1),
   dimnames = list(new_fee_names, "fee")
 )
 new_individual_bulkbill_incentive_by_fee <- c(
   individual_bulkbill_incentive_by_fee,
-  rep("single", 3)
+  rep("single", 2)
 )
 new_gap_fee <- c(
   rep(35, 5),
   # no gap fees were charged for these GPMP/TCA/GPMPRV items,
   # even 'private' patients
-  rep(0, 3)
+  rep(0, 2)
 )
 
 # Set the privately-billed proportion to 0.2 (20%), the mean gap fee to $35
@@ -699,7 +722,7 @@ new_practice_service_raw <-
   # new A, B, C, D, E numbers
   # (long average consults)
   # and GPMP/TCA/reviews
-  c(950, 3956, 4171, 1146, 75, 416, 402, 255)
+  c(950, 3956, 4171, 1146, 75, 941, 0)
 new_practice_service_proportions <- 
   new_practice_service_raw/sum(new_practice_service_raw)
 
@@ -791,34 +814,37 @@ concessional_bulkbilled_range <- seq(from = 0, to = 100, by = 1)
 # add new service fee descriptions
 new_fee_names <- c(
   fee_names,
-  # append chronic disease item numbers (721, 723, 732)
+  # append chronic condition management plan item numbers (965, 967)
   # health assessment item numbers (701 -- 715)
   # and mental health care plan item numbers (2700 -- 271)
-  c("GPMP", "TCA", "CDM RV",
+  c("GPCCMP", "GPCCMP RV",
     "HA701", "HA703", "HA705", "HA707", "HA715",
     "MHCP2700", "MHCP2701", "MHCP2715", "MHCP2717", "MHCP RV")
 )
 new_service_fees <- array(
-  # append fees for 721, 723 and 732
+  # append fees for 965, 967 and health assessments and mental health plans
   data = c(service_fees,
-           164.35, 130.25, 82.10,
-           67.60, 157.10, 216.80, 306.25, 241.85,
-           81.70, 120.25, 103.70, 152.80, 81.70
+           156.55, 156.55,
+           69.2, 160.85, 222, 313.6, 247.65,
+           83.65, 123.15, 106.2, 156.45, 83.65
            ),
   dim = c(length(new_fee_names), 1),
   dimnames = list(new_fee_names, "fee")
 )
 new_individual_bulkbill_incentive_by_fee <- c(
   individual_bulkbill_incentive_by_fee,
-  rep("single", 3+5+5)
+  rep("single", 2+5+5)
 )
 # and new service proportions
 # from http://medicarestatistics.humanservices.gov.au/statistics/mbs_item.jsp (2024)
 new_practice_service_raw <- 
   # A, B, C, D, E service items
-  # and GPMP/TCA/reviews (CDM), health assessment and mental health plan items
+  # and care plans (CCMP), health assessment and mental health plan items
   c(4037130, 81240293, 19899953, 1609147, 174664,
-    3357364, 2954994, 4319542,
+    # the following two numbers are for care plans (965) and care plan review (967)
+    # they are 'imputed' from July 2025 statistics (965/967 replaced 721/723/732 in July 2025)
+    # keeping them in the same proportion to ABCDE (2024) as they were in July 2025
+    6982325, 260080,
     21383, 165878, 273690, 463237, 263931,
     97733, 31550, 904320, 211540, 504901)
 new_practice_service_proportions <- 
@@ -967,7 +993,7 @@ library(purrr)
 
 fee_names <- c("a", "b", "c", "d", "e")
 service_fees <- array(
-  data = c(19.6, 42.85, 82.90, 122.15, 197.9),
+  data = c(20.05, 43.90, 84.90, 125.10, 202.65),
   dim = c(length(fee_names), 1),
   dimnames = list(fee_names, "fee")
 )
@@ -1016,10 +1042,10 @@ individual_bulkbill_incentive <- array(
   data = c(
     # standard bulk-billing incentive applies to service items like item A/'3'
     # items 10990, 10991, 75855, 75856, 75857, 75858
-    c(7.15, 10.80, 11.45, 12.20, 12.85, 13.70),
+    c(7.35, 11.05, 11.70, 12.50, 13.15, 14.05),
     # triple bulk-billing incentive applies to service items like item B, C and D
     # items 75870, 75871, 75873, 75874, 75875, 75876
-    c(21.35, 32.50, 34.50, 36.65, 38.70, 41.10)
+    c(21.85, 33.25, 35.30, 37.55, 39.65, 42.05)
   ),
   dim = c(n_monash, 2),
   dimnames = list(c("1", "2", "3+4", "5", "6", "7"), c("single", "triple"))
@@ -1150,34 +1176,37 @@ concessional_bulkbilled_range <- seq(from = 0, to = 100, by = 1)
 # add new service fee descriptions
 new_fee_names <- c(
   fee_names,
-  # append chronic disease item numbers (721, 723, 732)
+  # append chronic condition management plan item numbers (965, 967)
   # health assessment item numbers (701 -- 715)
   # and mental health care plan item numbers (2700 -- 271)
-  c("GPMP", "TCA", "CDM RV",
+  c("GPCCMP", "GPCCMP RV",
     "HA701", "HA703", "HA705", "HA707", "HA715",
     "MHCP2700", "MHCP2701", "MHCP2715", "MHCP2717", "MHCP RV")
 )
 new_service_fees <- array(
-  # append fees for 721, 723 and 732
+  # append fees for 965, 967 and health assessments and mental health plans
   data = c(service_fees,
-           164.35, 130.25, 82.10,
-           67.60, 157.10, 216.80, 306.25, 241.85,
-           81.70, 120.25, 103.70, 152.80, 81.70
+           156.55, 156.55,
+           69.2, 160.85, 222, 313.6, 247.65,
+           83.65, 123.15, 106.2, 156.45, 83.65
            ),
   dim = c(length(new_fee_names), 1),
   dimnames = list(new_fee_names, "fee")
 )
 new_individual_bulkbill_incentive_by_fee <- c(
   individual_bulkbill_incentive_by_fee,
-  rep("single", 3+5+5)
+  rep("single", 2+5+5)
 )
 # and new service proportions
 # from http://medicarestatistics.humanservices.gov.au/statistics/mbs_item.jsp (2024)
 new_practice_service_raw <- 
   # A, B, C, D, E service items
-  # and GPMP/TCA/reviews (CDM), health assessment and mental health plan items
+  # and care plans (CCMP), health assessment and mental health plan items
   c(4037130, 81240293, 19899953, 1609147, 174664,
-    3357364, 2954994, 4319542,
+    # the following two numbers are for care plans (965) and care plan review (967)
+    # they are 'imputed' from July 2025 statistics (965/967 replaced 721/723/732 in July 2025)
+    # keeping them in the same proportion to ABCDE (2024) as they were in July 2025
+    6982325, 260080,
     21383, 165878, 273690, 463237, 263931,
     97733, 31550, 904320, 211540, 504901)
 new_practice_service_proportions <- 
@@ -1315,7 +1344,6 @@ fig_ggplotly <- ggplot(
 fig_plotly_3d # show the 3D Plotly
 ```
 
-  
 
 The following interactive plot is based on the `[second practice model]({{< ref "#modifying-the-model-for-a-different-practice" >}})`{=markdown}, with relatively long consults and low mean gap fees and did not charge gap-fees for care plans or health assessments for any patients. Again, the plot below cannot be changed 'in-browser', but you can recreate this plot if you copy the code into R/RStudio.
 
@@ -1329,9 +1357,9 @@ The following interactive plot is based on the `[second practice model]({{< ref 
 
 new_practice_service_raw_2 <- 
   # A, B, C, D, E service items
-  # and GPMP/TCA/reviews (CDM), health assessment and mental health plan items
+  # GPCCMP, health assessment and mental health plan items
   c(950, 3956, 4171, 1146, 75,
-    416, 402, 255,
+    941, 0,
     0, 13, 101, 45, 1,
     7, 5, 64, 31, 41)
 new_practice_service_proportions_2 <- 
@@ -1422,7 +1450,7 @@ fig_ggplotly <- ggplot(
     text = sprintf(
       paste(
         "Gap: $%d<br>Concessional bulk-billed: %d%%<br>Current fee mean: $%.2f<br>",
-        "Quartly UBB incentive: $%.2f<br>",
+        "Quarterly UBB incentive: $%.2f<br>",
         "Benefit: $%.2f<br>Revenue change: %s%%", sep = ""
       ),
       gap, concessional_bulkbilled, current_fee_mean, ubb_incentive, benefit, benefit_rel
@@ -1440,6 +1468,24 @@ fig_ggplotly <- ggplot(
   scale_fill_viridis_c(option = "turbo", direction = -1)
 # to look at this plot, either 'fig_ggplotly' in R/RStudio or
 # 'ggplotly(fig_ggplotly)'
+
+fig_ggplot <- ggplot(
+  data = benefit_loss |> 
+    dplyr::filter(gap == (gap %/% 5 * 5), concessional_bulkbilled == (concessional_bulkbilled %/% 5 * 5)),
+  aes(x = gap, y = concessional_bulkbilled, fill = benefit)) +
+  theme_bw() + geom_tile() + 
+  geom_text(aes(label=round(benefit, 2)), size = 8/.pt) +
+  labs(
+    x = "Mean Gap fee ($)",
+    y = "Concessional bulk-billed (%)",
+    fill = "Benefit ($)"
+  ) +
+  scale_x_continuous(breaks = seq(from = 0, to = 70, by = 10)) +
+  scale_y_continuous(breaks = seq(from = 0, to = 100, by = 10)) +
+  ggtitle("Net benefit to practice, per service") +
+  scale_fill_gradientn(colors = rainbow(5), limits = c(-45, 45))
+# to view thee above plot (the 'conventional table' below), use
+# 'fig_ggplot + theme_tufte()'
 
 ggplotly(fig_ggplotly, tooltip = "text") |> # show the ggplotly
   layout(margin = list(r = 150))
@@ -1469,9 +1515,9 @@ The following table is based on the `[second practice model]({{< ref "#modifying
 
 new_practice_service_raw <- 
   # A, B, C, D, E service items
-  # and GPMP/TCA/reviews (CDM), health assessment and mental health plan items
+  # and GPCCMP care plan, health assessment and mental health plan items
   c(950, 3956, 4171, 1146, 75,
-    416, 402, 255,
+    941, 0,
     0, 13, 101, 45, 1,
     7, 5, 64, 31, 41)
 new_practice_service_proportions <- 
@@ -1622,8 +1668,30 @@ install.packages("knitr", quiet = TRUE)
 library(tibble)
 library(knitr)
 
+# the table shown in the government-provided fact sheet used 'old' MBS rebates
+old_fee_names <- c("a", "b", "c", "d", "e")
+old_service_fees <- array(
+  data = c(19.6, 42.85, 82.9, 122.15, 197.9),
+  dim = c(length(old_fee_names), 1),
+  dimnames = list(old_fee_names, "fee")
+)
 # just include service items B, C and D
-short_service_list <- service_fees[c("b", "c", "d"),]
+short_service_list <- old_service_fees[c("b", "c", "d"),]
+
+old_individual_bulkbill_incentive <- array(
+  # there are two different individual bulk-billing incentive fees,
+  # 'standard' and 'triple'
+  data = c(
+    # standard bulk-billing incentive applies to service items like item A/'3'
+    # items 10990, 10991, 75855, 75856, 75857, 75858
+    c(7.15, 10.80, 11.45, 12.20, 12.85, 13.70),
+    # triple bulk-billing incentive applies to service items like item B, C and D
+    # items 75870, 75871, 75873, 75874, 75875, 75876
+    c(21.35, 32.50, 34.50, 36.65, 38.70, 41.10)
+  ),
+  dim = c(n_monash, 2),
+  dimnames = list(c("1", "2", "3+4", "5", "6", "7"), c("single", "triple"))
+)
 
 new_payments <- 
   tibble(
@@ -1633,27 +1701,27 @@ new_payments <-
     ),
     Metro = num(
       short_service_list*(1+universal_bulkbill_incentive)+
-        individual_bulkbill_incentive[1, 2],
+        old_individual_bulkbill_incentive[1, 2],
       digits = 2
     ),
     Regional = num(
       short_service_list*(1+universal_bulkbill_incentive)+
-        individual_bulkbill_incentive[2, 2],
+        old_individual_bulkbill_incentive[2, 2],
       digits = 2
     ),
     `Large Rural` = num(
       short_service_list*(1+universal_bulkbill_incentive)+
-        individual_bulkbill_incentive[3, 2],
+        old_individual_bulkbill_incentive[3, 2],
       digits = 2
     ),
     `Small Rural` = num(
       short_service_list*(1+universal_bulkbill_incentive)+
-        individual_bulkbill_incentive[4, 2],
+        old_individual_bulkbill_incentive[4, 2],
       digits = 2
     ),
     Remote = num(
       short_service_list*(1+universal_bulkbill_incentive)+
-        individual_bulkbill_incentive[5, 2],
+        old_individual_bulkbill_incentive[5, 2],
       digits = 2
     ),
   )
@@ -1769,3 +1837,11 @@ Thanks to the [quarto-webr extension](https://quarto-webr.thecoatlessprofessor.c
 ### External commentary and other models
 
 An article on the Medical Republic ['Which of these four Medicare BB models is Right for You?'](https://www.medicalrepublic.com.au/which-of-these-four-medicare-bb-models-is-right-for-you/114995) compares some of the available (and not yet available) models - including this one! - and the advantages and disadvantages of each.
+
+### Updates
+
+*This article is an updated version of [Calculating the practice benefit of universal bulk-billing](../UniversalBulkBilling). Updated model includes MBS Service Level A and, optionally, care plans (721/723/732).*
+
+*Update: includes display of Universal-Bulk-Bill incentive payment, paid quarterly with PIP (13 Sep 2025)*
+
+*Update: includes new GPCCMP item numbers (965/967), replacing GPMP/TCA item numbers (721/723)*
