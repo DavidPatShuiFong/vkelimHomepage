@@ -11,7 +11,19 @@ author:
   - cohealth Kensington medical team
 affiliation:
   name: cohealth
-format: 
+categories: 
+  - medicine
+  - Medicare
+  - mental health
+  - R
+tags:
+  - medicine
+  - Medicare
+  - mental health
+  - R
+format:
+  hugo-md:
+    code-fold: true
   html:
     output-file: MHTP
     code-fold: true
