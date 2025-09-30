@@ -1043,6 +1043,6 @@ Relationship between GP chronic disease management plan (MBS item 721) billing a
 
 :::
 
-Article in Quarto format ["Use of mental health treatment plans and disadvantage"](./MHTP.html)
+Article in Quarto format ["Use of mental health treatment plans and disadvantage"](../mhtpdisadvantage_quarto/MHTP.html)
 
 *Photo by <a href="https://unsplash.com/@tex450?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Matthew Ball</a> on <a href="https://unsplash.com/photos/woman-in-black-and-white-long-sleeve-shirt-OJQFlWvUb2E?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>*
