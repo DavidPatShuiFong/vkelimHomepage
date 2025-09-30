@@ -11,6 +11,7 @@ tags:
 - medicine
 - Medicare
 - bulk-billing
+- R
 engine: knitr
 summary: 'Does the proposed universal bulk-billing incentive make financial sense for individual general practices? - an updated model'
 webr:
