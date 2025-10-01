@@ -31,7 +31,7 @@ social:
   link: '#contact'
 - icon: "google-scholar"
   icon_pack: "ai"
-  link: "https://scholar.google.com/citations?user=r_9Ml0cAAAAJ"
+  link: "https://scholar.google.com/citations?user=MthHI18AAAAJ&hl=en"
 - icon: github
   icon_pack: fab
   link: https://github.com/DavidPatShuiFong
