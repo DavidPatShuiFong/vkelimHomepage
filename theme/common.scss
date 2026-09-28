@@ -1,0 +1,92 @@
+// Shared typography and layout matching the Hugo Academic site
+// (theme "1950s", font set "Rose", font_size "L" in config/_default/params.toml).
+
+/*-- scss:defaults --*/
+
+@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap");
+
+$font-family-sans-serif: "Roboto", sans-serif;
+$headings-font-family: "Lora", sans-serif;
+$font-family-monospace: "Cutive Mono", monospace;
+
+// Academic font_size "L": 21px root from 58em up, 0.77 x 21 = 16.17px below
+// (see the html rule below), line-height 1.65
+$font-size-root: 16.17px;
+$line-height-base: 1.65;
+$headings-font-weight: 400;
+$headings-line-height: 1.25;
+$h1-font-size: 2.25rem;
+$h2-font-size: 1.5rem;
+$h3-font-size: 1.25rem;
+$h4-font-size: 1rem;
+$h5-font-size: 1rem;
+$h6-font-size: 1rem;
+$code-font-size: 0.7em;
+
+$link-decoration: none;
+$border-radius: 0.25rem;
+
+/*-- scss:rules --*/
+
+// Bootstrap sets `:root { font-size: var(--bs-root-font-size) }`
+@media screen and (min-width: 58em) {
+  :root {
+    --bs-root-font-size: 21px;
+  }
+}
+
+h1, h2, .h1, .h2 {
+  font-weight: 400;
+}
+h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+// Academic headings have no rule underneath
+h2 {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+// Home page sections use Academic's large section titles
+.home-page section.level2 > h2 {
+  font-size: 2.25rem;
+  margin-top: 3rem;
+}
+
+// Navbar: Lora, 0.77rem links, bold 1.2rem site title, soft shadow
+.navbar {
+  font-family: "Lora", sans-serif;
+  box-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, 0.11);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+// Don't let the menu squeeze the site title into an ellipsis on desktop
+@include media-breakpoint-up(lg) {
+  .navbar-brand-container {
+    flex-shrink: 0;
+  }
+}
+.navbar .nav-link {
+  font-size: 16.17px;
+}
+.navbar-brand .navbar-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+// Academic cards: white, light border, drop shadow
+.quarto-grid-item.card {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  border-radius: $border-radius;
+  overflow: hidden;
+}
+
+// Grid listing images at 4:3 (Quarto sets an inline fixed height)
+.quarto-grid-item .card-img-top img,
+.quarto-grid-item .card-img-top .listing-item-img-placeholder {
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}

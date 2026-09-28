@@ -1,0 +1,22 @@
+// Dark palette: Hugo Academic's day/night mode defaults, used because the
+// "1950s" theme defines no dark colours
+// (themes/hugo-academic/layouts/partials/functions/parse_theme.html,
+//  themes/hugo-academic/assets/scss/academic/_dark.scss)
+
+/*-- scss:defaults --*/
+
+$primary: #EF525B;
+$link-color: #EF525B;
+$body-bg: hsl(231, 15%, 16%);
+$body-color: rgb(248, 248, 242);
+$headings-color: rgb(152, 166, 173);
+
+$navbar-bg: rgb(40, 42, 54);
+$navbar-fg: #fff;
+$navbar-hl: rgba(255, 255, 255, 0.8);
+
+$card-bg: #343a40;
+$code-color: rgb(139, 233, 253);
+$code-bg: rgb(68, 71, 90);
+$code-block-bg: rgb(68, 71, 90);
+$footer-bg: hsl(231, 15%, 16%);

@@ -8,7 +8,6 @@ listing:
   type: grid
   grid-columns: 3
   fields: [image, title, date]
-  image-height: 250px
   categories: true
   sort-ui: false
   filter-ui: false

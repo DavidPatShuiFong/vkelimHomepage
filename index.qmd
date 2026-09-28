@@ -5,6 +5,7 @@ image: images/avatar.jpg
 toc: false
 comments: false
 page-layout: full
+body-classes: home-page
 # Sections follow the Hugo Academic home page (content/home/*.md):
 # featured, posts, projects, postsGallery, publications, about, tags, contact.
 # Heading ids keep the old #anchors working.
@@ -41,7 +42,6 @@ listing:
     type: grid
     grid-columns: 5
     fields: [image, title]
-    image-height: 180px
     categories: false
   - id: listing-publications
     contents: "publication/*/index.qmd"

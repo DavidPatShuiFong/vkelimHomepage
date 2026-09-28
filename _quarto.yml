@@ -66,9 +66,10 @@ website:
 
 format:
   html:
+    # Colours and fonts match the Hugo Academic site: see theme/*.scss
     theme:
-      light: cosmo
-      dark: darkly
+      light: [default, theme/common.scss, theme/light.scss]
+      dark: [default, theme/common.scss, theme/dark.scss]
     css: styles.css
     toc: true
 
