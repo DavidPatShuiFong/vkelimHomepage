@@ -1,0 +1,49 @@
+---
+title: Kenya Spur Afrika 2021 - Christmas 1
+author: Rosalie Lui
+date: '2021-12-25'
+categories:
+- Christianity
+- Kenya
+- Spur Afrika
+- Spur Afrika 2021
+image: featured.jpg
+comments:
+  utterances:
+    repo: DavidPatShuiFong/vkelimHomepage
+    issue-term: post/kenya2021christmas1/
+    theme: github-dark-orange
+---
+
+![](featured.jpg){fig-alt=""}
+
+Update!! What a stressful day!!
+
+Covid results didn't come back so I decided to go to the airport to get a rapid PCR test.
+Sorry to my family as I skipped most of Christmas lunch. And was too stressed to talk much. 
+
+Shout out to Grace for taking me to the airport earlier. David will enjoy his family lunch and join me later. 
+
+Praying results come back quick!! There was no waiting at the airport.
+It's a ghost town here...
+
+[Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
+
+```{=html}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+/> <script 
+    src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js">
+ </script> <script 
+    src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js">
+ </script> <div 
+   class="grid" 
+   data-isotope='{
+     "itemSelector": ".isotope-grid-item",
+     "masonry": "{"columnWidth": ".grid-sizer"}",
+     "percentPosition": "true",
+     "gutter": 0
+   }'
+ >   <div id="grid-sizer"></div>   <div class="isotope-grid-item" style="float:left; width: 95%">     <a data-fancybox="gallery" href="./result.jpg">       <img src="./result.jpg" style="margin:0px 0px">     </a>   </div> </div> <br clear="left"><br>
+```

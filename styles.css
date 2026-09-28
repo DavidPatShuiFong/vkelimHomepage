@@ -1,0 +1,14 @@
+/* Galleries carried over from Hugo Academic posts (fancybox + isotope).
+   Bootstrap 5's `.grid` is a CSS grid, which breaks the floated layout. */
+.grid[data-isotope] {
+  display: block;
+}
+.isotope-grid-item img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Hugo Academic constrained embedded videos to the content width */
+video {
+  max-width: 100%;
+}

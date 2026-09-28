@@ -1,0 +1,14 @@
+---
+title: "Spur Afrika Kenya 2023"
+subtitle: "Visiting a child support program, 1st January 2022 to 18th January 2022"
+toc: false
+comments: false
+listing:
+  contents: "../post/**/index.qmd"
+  include:
+    categories: "Spur Afrika 2023"
+  sort: "date asc"
+  type: grid
+  categories: false
+page-layout: full
+---

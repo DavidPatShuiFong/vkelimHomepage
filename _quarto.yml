@@ -2,15 +2,16 @@
 #
 # During the transition the Hugo sources in content/, config/, layouts/ and
 # themes/ are left in place, so only files listed under `render` are built.
-# Add each post here as it is migrated to post/<lowercase-hugo-slug>/index.qmd.
+# Migrated posts live in post/<lowercase-hugo-slug>/index.qmd.
 project:
   type: website
   output-dir: _site
   render:
     - index.qmd
     - posts.qmd
-    - post/hugoacademiccommentswithutterances/index.qmd
-    - post/kdeoverview/index.qmd
+    - /post/*/index.qmd
+    - spurafrika2021/index.qmd
+    - spurafrika2023/index.qmd
   # static/ holds files served as-is from the site root (CV, documents, Paulus...)
   post-render: scripts/copy-static.ts
 
@@ -24,6 +25,16 @@ website:
         href: posts.qmd
       - text: CV
         href: /CV/
+      - text: Topics
+        menu:
+          - text: Fong family name
+            href: post/fong/index.qmd
+          - text: Christianity
+            href: posts.qmd#category=Christianity
+          - text: Spur Afrika Kenya 2021-2022
+            href: spurafrika2021/index.qmd
+          - text: Spur Afrika Kenya 2023
+            href: spurafrika2023/index.qmd
     right:
       - icon: github
         href: https://github.com/DavidPatShuiFong
@@ -46,6 +57,7 @@ format:
     theme:
       light: cosmo
       dark: darkly
+    css: styles.css
     toc: true
 
 execute:

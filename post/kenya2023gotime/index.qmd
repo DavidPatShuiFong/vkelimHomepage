@@ -1,0 +1,29 @@
+---
+title: Kenya Spur Afrika 2023 - Go Time!
+author: Rosalie Lui
+date: '2022-12-31'
+categories:
+- Christianity
+- Kenya
+- travel
+- Spur Afrika
+- Spur Afrika 2023
+image: featured.jpg
+comments:
+  utterances:
+    repo: DavidPatShuiFong/vkelimHomepage
+    issue-term: post/kenya2023gotime/
+    theme: github-dark-orange
+---
+
+![](featured.jpg){fig-alt=""}
+
+It's go time!! ✈️
+
+We managed to check in over 100kg of donated goodies. There was a wait to get checked in but we managed to get through.
+
+It's nearly time to board! We have about 24 hours of travelling. Pray for safety and good health.
+
+Kenya here we come! 😁🥰
+
+[Spur Afrika trip 2023 posts](/spurafrika2023/)
