@@ -12,6 +12,10 @@ project:
     - /post/*/index.qmd
     - spurafrika2021/index.qmd
     - spurafrika2023/index.qmd
+    - /publication/index.qmd
+    - /publication/*/index.qmd
+    - /project/index.qmd
+    - /project/*/index.qmd
   # static/ holds files served as-is from the site root (CV, documents, Paulus...)
   post-render: scripts/copy-static.ts
 
@@ -23,6 +27,10 @@ website:
     left:
       - text: Posts
         href: posts.qmd
+      - text: Projects
+        href: project/index.qmd
+      - text: Publications
+        href: publication/index.qmd
       - text: CV
         href: /CV/
       - text: Topics
