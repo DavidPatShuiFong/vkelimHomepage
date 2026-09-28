@@ -1,14 +1,12 @@
+# develop branch: Quarto website (master still builds the Hugo site).
+# The Quarto plugin installs Quarto and runs `quarto render` on Netlify.
+# Netlify cannot run R, so computations come from the committed _freeze/.
 [build]
-  publish = "public"
-  command = "hugo"
+  publish = "_site"
+  command = ""
 
-[context.production.environment]
-  HUGO_VERSION = "0.76.4" # if older than 0.54.0, use format: 0.53 (no trailing zero)
-  HUGO_ENV = "production"
-  HUGO_ENABLEGITINFO = "true"
-
-[context.branch-deploy.environment]
-  HUGO_VERSION = "0.76.4" # if older, use format: 0.53 (no trailing zero)
-
-[context.deploy-preview.environment]
-  HUGO_VERSION = "0.76.4"
+[[plugins]]
+  package = "@quarto/netlify-plugin-quarto"
+  [plugins.inputs]
+    # keep in step with the local Quarto used to create _freeze/
+    version = "v1.9.36"

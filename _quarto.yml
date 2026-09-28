@@ -1,0 +1,53 @@
+# Quarto website (transition from Hugo/blogdown, on the `develop` branch).
+#
+# During the transition the Hugo sources in content/, config/, layouts/ and
+# themes/ are left in place, so only files listed under `render` are built.
+# Add each post here as it is migrated to post/<lowercase-hugo-slug>/index.qmd.
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - posts.qmd
+    - post/hugoacademiccommentswithutterances/index.qmd
+    - post/kdeoverview/index.qmd
+  # static/ holds files served as-is from the site root (CV, documents, Paulus...)
+  post-render: scripts/copy-static.ts
+
+website:
+  title: "David Fong  |  方拔萃"
+  site-url: https://www.davidfong.org
+  description: "General practitioner at coHealth Kensington. Development work, teaching, monitoring and evaluation."
+  navbar:
+    left:
+      - text: Posts
+        href: posts.qmd
+      - text: CV
+        href: /CV/
+    right:
+      - icon: github
+        href: https://github.com/DavidPatShuiFong
+      - icon: linkedin
+        href: https://au.linkedin.com/in/david-p-fong-0b266970
+      - icon: rss
+        href: posts.xml
+
+  # Existing Hugo comments are GitHub issues titled by the lowercase Hugo
+  # pathname (e.g. "post/kdeoverview/"). Quarto pages can also be reached at
+  # .../index.html, so each post sets `comments.utterances.issue-term`
+  # explicitly to keep matching the old issue.
+  comments:
+    utterances:
+      repo: DavidPatShuiFong/vkelimHomepage
+      theme: github-dark-orange
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    toc: true
+
+execute:
+  # Netlify cannot run R: render locally and commit _freeze/.
+  freeze: auto

@@ -1,0 +1,33 @@
+---
+title: "David Fong"
+subtitle: "Lead doctor, Kensington site, coHealth"
+image: images/avatar.jpg
+toc: false
+comments: false
+about:
+  template: jolla
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/DavidPatShuiFong
+    - icon: linkedin
+      text: LinkedIn
+      href: https://au.linkedin.com/in/david-p-fong-0b266970
+    - icon: mortarboard
+      text: Google Scholar
+      href: https://scholar.google.com/citations?user=MthHI18AAAAJ&hl=en
+    - icon: file-earmark-person
+      text: CV
+      href: /CV/
+---
+
+David Fong is a general practitioner (family medicine doctor) working at [coHealth](https://www.cohealth.org.au/), Kensington site. He volunteers with Spur Afrika (child development program) in Kibera, Kenya, and Elim and Agape childrens' home (HIV and disability) in Xi'an, China.
+
+My interests include sustainable development in low-resource populations, teaching and the uses of monitoring and evaluation in clinical practice.
+
+## Education
+
+- Data, Economics and Development Policy, Massachusetts Institute of Technology (MITx), 2019
+- Fellowship of the Royal Australian College of General Practice (RACGP), 2001
+- Diploma of Obstetrics & Gynaecology (RANZCOG), 1999
+- MBBS, University of Melbourne, 1994

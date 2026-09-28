@@ -13,3 +13,9 @@ Resources
 Thumbs.db
 
 /.quarto/
+
+# Quarto
+/_site/
+node_modules/
+
+**/*.quarto_ipynb
