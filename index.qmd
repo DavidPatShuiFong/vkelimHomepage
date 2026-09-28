@@ -31,7 +31,7 @@ listing:
     contents: "project/*/index.qmd"
     sort: "date desc"
     type: grid
-    grid-columns: 2
+    grid-columns: 3
     fields: [image, title, description]
     max-description-length: 200
     categories: false

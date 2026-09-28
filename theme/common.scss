@@ -90,3 +90,92 @@ h2 {
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+// Default (list) listings, sized like Academic's post stream:
+// 1.2rem bold title, 0.8rem summary, 0.7rem metadata, 150px thumbnail.
+// `div.quarto-post .body h3...` matches the specificity of Quarto's rules.
+// Like Academic, the date/author line sits under the summary rather than in
+// its own column, leaving the text the full width beside the image.
+div.quarto-post {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  grid-template-areas:
+    "body thumbnail"
+    "metadata thumbnail";
+  column-gap: 1.5rem;
+  row-gap: 0;
+  align-items: start;
+  padding-bottom: 1rem;
+  .body {
+    grid-area: body;
+  }
+  .thumbnail {
+    grid-area: thumbnail;
+  }
+  .metadata {
+    grid-area: metadata;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1rem;
+    margin-top: 0;
+    color: $text-muted;
+  }
+  .body h3.listing-title {
+    font-size: 1.2rem;
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+  }
+  .body .listing-subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+  .listing-categories {
+    margin-bottom: 0.4rem;
+  }
+  .listing-categories .listing-category {
+    font-size: 0.6rem;
+  }
+  .listing-description {
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+  .metadata,
+  .listing-date,
+  .listing-author {
+    font-size: 0.7rem;
+  }
+  .thumbnail {
+    max-width: 150px;
+  }
+  .thumbnail img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+  }
+}
+// Lists without images (e.g. publications) use the full width
+div.quarto-post:not(:has(.thumbnail)) {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "body"
+    "metadata";
+}
+
+// Grid cards use the same compact text sizes as the lists
+.quarto-grid-item {
+  .card-title.listing-title {
+    font-size: 1rem;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+  .card-text.listing-description {
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+  .card-attribution,
+  .listing-date,
+  .listing-author {
+    font-size: 0.7rem;
+  }
+}
