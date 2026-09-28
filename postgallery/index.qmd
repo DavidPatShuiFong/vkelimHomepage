@@ -1,0 +1,16 @@
+---
+title: "Gallery"
+toc: false
+comments: false
+listing:
+  contents: "*/index.qmd"
+  sort: "date desc"
+  type: grid
+  grid-columns: 3
+  fields: [image, title, date]
+  image-height: 250px
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+---

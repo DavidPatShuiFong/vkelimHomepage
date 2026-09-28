@@ -1,6 +1,7 @@
 ---
 title: Carolling with Pandoc - 'automatic' PowerPoint lyric slides
 author: David Fong
+featured: true
 date: '2020-12-20'
 categories:
 - Computers

@@ -16,6 +16,8 @@ project:
     - /publication/*/index.qmd
     - /project/index.qmd
     - /project/*/index.qmd
+    - /postgallery/index.qmd
+    - /postgallery/*/index.qmd
   # static/ holds files served as-is from the site root (CV, documents, Paulus...)
   post-render: scripts/copy-static.ts
 
@@ -31,6 +33,8 @@ website:
         href: project/index.qmd
       - text: Publications
         href: publication/index.qmd
+      - text: Gallery
+        href: postgallery/index.qmd
       - text: CV
         href: /CV/
       - text: Topics

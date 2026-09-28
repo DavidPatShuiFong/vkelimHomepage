@@ -1,6 +1,7 @@
 ---
 title: Kenya Spur Afrika 2021 - Kibera informal settlement
 author: David Fong
+featured: true
 date: '2021-12-30'
 categories:
 - Christianity

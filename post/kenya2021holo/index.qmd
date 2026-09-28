@@ -1,12 +1,13 @@
 ---
 title: Kenya Spur Afrika 2021 - Holo
 author: David Fong
+featured: true
 date: '2022-01-02'
 categories:
 - Christianity
 - Kenya
 - Spur Afrika
-- Spur AFrika 2021
+- Spur Afrika 2021
 - Holo
 - Kisumu
 image: featured.jpg

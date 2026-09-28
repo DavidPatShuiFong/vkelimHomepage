@@ -1,6 +1,7 @@
 ---
 title: Contributing to the Tidyverse (dbplyr)
 author: David Fong
+featured: true
 date: '2020-12-21'
 categories:
 - R

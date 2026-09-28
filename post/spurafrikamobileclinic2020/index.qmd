@@ -1,5 +1,6 @@
 ---
 title: Spur Afrika Mobile Clinics 2020
+featured: true
 date: '2020-07-29'
 description: Spur Afrika mobile clinics were held in January 2020, seeing children from several schools in Kibera, Kenya, and children sponsored by the Spur Afrika Elimsha program. Health activities included medical and dental checks, dental hygiene education and medication education.
 categories:

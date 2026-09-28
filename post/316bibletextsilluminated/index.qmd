@@ -1,6 +1,7 @@
 ---
 title: 3:16 Bible Texts Illuminated
 author: David Fong
+featured: true
 date: '2020-09-12'
 categories:
 - Christianity

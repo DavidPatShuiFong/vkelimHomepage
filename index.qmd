@@ -1,33 +1,181 @@
 ---
-title: "David Fong"
-subtitle: "Lead doctor, Kensington site, coHealth"
+pagetitle: "David Fong"
+description: "General practitioner at coHealth Kensington. Development work, teaching, monitoring and evaluation."
 image: images/avatar.jpg
 toc: false
 comments: false
-about:
-  template: jolla
-  links:
-    - icon: github
-      text: GitHub
-      href: https://github.com/DavidPatShuiFong
-    - icon: linkedin
-      text: LinkedIn
-      href: https://au.linkedin.com/in/david-p-fong-0b266970
-    - icon: mortarboard
-      text: Google Scholar
-      href: https://scholar.google.com/citations?user=MthHI18AAAAJ&hl=en
-    - icon: file-earmark-person
-      text: CV
-      href: /CV/
+page-layout: full
+# Sections follow the Hugo Academic home page (content/home/*.md):
+# featured, posts, projects, postsGallery, publications, about, tags, contact.
+# Heading ids keep the old #anchors working.
+listing:
+  - id: listing-featured
+    contents: post
+    include:
+      featured: true
+    sort: "date desc"
+    type: grid
+    grid-columns: 3
+    fields: [image, title, date, description]
+    max-description-length: 150
+    categories: false
+  - id: listing-posts
+    contents: post
+    sort: "date desc"
+    max-items: 5
+    type: default
+    fields: [image, date, title, description]
+    categories: false
+  - id: listing-projects
+    contents: "project/*/index.qmd"
+    sort: "date desc"
+    type: grid
+    grid-columns: 2
+    fields: [image, title, description]
+    max-description-length: 200
+    categories: false
+  - id: listing-gallery
+    contents: "postgallery/*/index.qmd"
+    sort: "date desc"
+    max-items: 5
+    type: grid
+    grid-columns: 5
+    fields: [image, title]
+    image-height: 180px
+    categories: false
+  - id: listing-publications
+    contents: "publication/*/index.qmd"
+    sort: "date desc"
+    max-items: 5
+    type: default
+    fields: [date, title, subtitle, author, description]
+    date-format: "YYYY"
+    categories: false
+  - id: listing-tags
+    contents: [post, "project/*/index.qmd", "publication/*/index.qmd", "postgallery/*/index.qmd"]
+    template: _templates/tagcloud.ejs
 ---
 
-David Fong is a general practitioner (family medicine doctor) working at [coHealth](https://www.cohealth.org.au/), Kensington site. He volunteers with Spur Afrika (child development program) in Kibera, Kenya, and Elim and Agape childrens' home (HIV and disability) in Xi'an, China.
+## Featured Posts {#featured}
 
-My interests include sustainable development in low-resource populations, teaching and the uses of monitoring and evaluation in clinical practice.
+::: {#listing-featured}
+:::
 
-## Education
+## Posts {#posts}
 
-- Data, Economics and Development Policy, Massachusetts Institute of Technology (MITx), 2019
-- Fellowship of the Royal Australian College of General Practice (RACGP), 2001
-- Diploma of Obstetrics & Gynaecology (RANZCOG), 1999
-- MBBS, University of Melbourne, 1994
+::: {#listing-posts}
+:::
+
+[See all posts](posts.qmd){.btn .btn-outline-primary .btn-sm}
+
+## Projects {#projects}
+
+::: {#listing-projects}
+:::
+
+## Gallery {#postsGallery}
+
+::: {#listing-gallery}
+:::
+
+[See all](postgallery/index.qmd){.btn .btn-outline-primary .btn-sm}
+
+## Publications {#publications}
+
+::: {#listing-publications}
+:::
+
+[See all publications](publication/index.qmd){.btn .btn-outline-primary .btn-sm}
+
+## Biography {#about}
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-4 .text-center .profile}
+![](images/avatar.jpg){.rounded-circle width="220" fig-alt="David Fong"}
+
+### David Fong {.unnumbered .unlisted}
+
+Lead doctor, Kensington site, coHealth
+
+[coHealth community health service](https://www.cohealth.org.au/)
+
+[<i class="bi bi-envelope-fill"></i>](#contact){aria-label="Contact"}
+[<i class="bi bi-mortarboard-fill"></i>](https://scholar.google.com/citations?user=MthHI18AAAAJ&hl=en){aria-label="Google Scholar"}
+[<i class="bi bi-github"></i>](https://github.com/DavidPatShuiFong){aria-label="GitHub"}
+[<i class="bi bi-linkedin"></i>](https://au.linkedin.com/in/david-p-fong-0b266970){aria-label="LinkedIn"}
+[<i class="bi bi-twitter"></i>](https://twitter.com/DavidBaCuiFong){aria-label="Twitter"}
+:::
+
+::: {.g-col-12 .g-col-md-8}
+David Fong is a general practitioner (family medicine doctor) working at coHealth, Kensington site. He volunteers with Spur Afrika (child development program) in Kibera, Kenya, and Elim and Agape childrens' home (HIV and disability) in Xi'an, China.
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-5}
+#### Interests {.unnumbered .unlisted}
+
+- development work
+- teaching
+- monitoring and evaluation
+:::
+
+::: {.g-col-12 .g-col-md-7}
+#### Education {.unnumbered .unlisted}
+
+- **Data, Economics and Development Policy**, 2019\
+  Massachusetts Institute of Technology (MITx)
+- **Fellowship of the Royal Australian College of General Practice**, 2001\
+  Royal Australian College of General Practitioners (RACGP)
+- **Diploma of Obstetrics & Gynaecology**, 1999\
+  Royal Australia & New Zealand College of Obstetrics & Gynaecology (RANZCOG)
+- **MBBS**, 1994\
+  University of Melbourne
+:::
+
+:::
+
+:::
+
+:::
+
+## Popular Topics {#tags}
+
+::: {#listing-tags}
+:::
+
+## Contact {#contact}
+
+::: {.grid}
+
+::: {.g-col-12 .g-col-md-7}
+```{=html}
+<!-- Netlify Forms: same form name as the Hugo Academic contact widget -->
+<form name="contact" method="POST" data-netlify="true" netlify-honeypot="welcome-bot">
+  <div class="mb-3">
+    <label class="visually-hidden" for="inputName">Name</label>
+    <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" required>
+  </div>
+  <div class="mb-3">
+    <label class="visually-hidden" for="inputEmail">Email</label>
+    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" required>
+  </div>
+  <div class="mb-3">
+    <label class="visually-hidden" for="inputMessage">Message</label>
+    <textarea name="message" class="form-control" id="inputMessage" rows="5" placeholder="Message" required></textarea>
+  </div>
+  <div class="d-none">
+    <label>Do not fill this field unless you are a bot: <input name="welcome-bot"></label>
+  </div>
+  <button type="submit" class="btn btn-outline-primary px-3 py-2">Send</button>
+</form>
+```
+:::
+
+::: {.g-col-12 .g-col-md-5}
+<i class="bi bi-geo-alt-fill"></i> 12 Gower Street, Kensington, Victoria, 3031
+
+<i class="bi bi-linkedin"></i> [Linkedin](https://au.linkedin.com/in/david-p-fong-0b266970)
+:::
+
+:::
