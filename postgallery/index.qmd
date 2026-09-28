@@ -2,14 +2,19 @@
 title: "Gallery"
 toc: false
 comments: false
-listing:
-  contents: "*/index.qmd"
-  sort: "date desc"
-  type: grid
-  grid-columns: 3
-  fields: [image, title, date]
-  categories: true
-  sort-ui: false
-  filter-ui: false
 page-layout: full
+# Masonry photo gallery (andrewheiss/quarto-static-photo-gallery). The
+# extension runs `uv run` on each render to make thumbnails in img/thumbs/
+# (gitignored) and read captions from img/album.yml.
+extensions:
+  photo-gallery:
+    album-files: img
+    layout: masonry
+    columns: 3
+    gap: 8
+    thumbnail-height: 600
+    show-exif: false
+    date-format: "D MMMM YYYY"
 ---
+
+{{< photo-gallery >}}

@@ -1,12 +1,6 @@
 # develop branch: Quarto website (master still builds the Hugo site).
-# The Quarto plugin installs Quarto and runs `quarto render` on Netlify.
+# scripts/netlify-build.sh installs uv and Quarto, then runs `quarto render`.
 # Netlify cannot run R, so computations come from the committed _freeze/.
 [build]
   publish = "_site"
-  command = ""
-
-[[plugins]]
-  package = "@quarto/netlify-plugin-quarto"
-  [plugins.inputs]
-    # keep in step with the local Quarto used to create _freeze/
-    version = "v1.9.36"
+  command = "bash scripts/netlify-build.sh"

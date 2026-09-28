@@ -4,11 +4,11 @@ author: David Fong
 date: '2021-02-08'
 categories:
 - flower
-image: featured.jpg
+image: ../img/20210208_1720-flower.jpg
 comments: false
 toc: false
 ---
 
-![[20210208_1720 flower](https://vkelim.smugmug.com/Flowers/2021/i-hfLjjrt/A)](featured.jpg){fig-alt="20210208_1720 flower"}
+![[20210208_1720 flower](https://vkelim.smugmug.com/Flowers/2021/i-hfLjjrt/A)](../img/20210208_1720-flower.jpg){fig-alt="20210208_1720 flower"}
 
 [20210208_1720 flower (Kensington, Victoria)](https://vkelim.smugmug.com/Flowers/2021/i-hfLjjrt/A)

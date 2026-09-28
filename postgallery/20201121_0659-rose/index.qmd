@@ -4,11 +4,11 @@ author: David Fong
 date: '2020-11-21'
 categories:
 - rose
-image: featured.jpg
+image: ../img/20201121_0659-rose.jpg
 comments: false
 toc: false
 ---
 
-![[20201121_0659_0367 rose](https://vkelim.smugmug.com/Flowers/2020/i-dxG9GKd/A)](featured.jpg){fig-alt="20201121_0659 rose"}
+![[20201121_0659_0367 rose](https://vkelim.smugmug.com/Flowers/2020/i-dxG9GKd/A)](../img/20201121_0659-rose.jpg){fig-alt="20201121_0659 rose"}
 
 [20201121_0659 rose](https://vkelim.smugmug.com/Flowers/2020/i-dxG9GKd/A)

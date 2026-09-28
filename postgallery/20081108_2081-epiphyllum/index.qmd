@@ -4,11 +4,11 @@ author: David Fong
 date: '2008-11-08'
 categories:
 - epiphyllum
-image: featured.jpg
+image: ../img/20081108_2081-epiphyllum.jpg
 comments: false
 toc: false
 ---
 
-![[20081108_2081 epiphyllum cactus 'Bold Venture'](https://vkelim.smugmug.com/Flowers/2008SpringSummer/i-BVwZDnb/A)](featured.jpg){fig-alt="20081108_2081 epiphyllum"}
+![[20081108_2081 epiphyllum cactus 'Bold Venture'](https://vkelim.smugmug.com/Flowers/2008SpringSummer/i-BVwZDnb/A)](../img/20081108_2081-epiphyllum.jpg){fig-alt="20081108_2081 epiphyllum"}
 
 [20081108_2081 epiphyllum cactus 'Bold Venture'](https://vkelim.smugmug.com/Flowers/2008SpringSummer/i-BVwZDnb/A)
