@@ -18,3 +18,13 @@ $code-color: #333;
 $code-bg: #f8f8f8;
 $code-block-bg: #f8f8f8;
 $footer-bg: #EAE7D6;
+
+// Form fields (contact form, listing filters): white on the beige page with a
+// clearly visible border, and a coral ring when a field is selected
+$input-bg: #fff;
+$input-color: rgba(0, 0, 0, 0.8);
+$input-border-color: rgba(0, 0, 0, 0.35);
+$input-placeholder-color: #6c757d;
+$input-focus-bg: #fff;
+$input-focus-border-color: $primary;
+$input-focus-box-shadow: 0 0 0 0.2rem rgba(239, 82, 91, 0.25);
