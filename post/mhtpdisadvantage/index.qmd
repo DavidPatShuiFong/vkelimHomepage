@@ -26,14 +26,7 @@ format:
 number-sections: true
 toc: true
 engine: knitr
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/mhtpdisadvantage/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Why does a community health service in Victoria bill relatively few mental health treatment plans (MHTPs), although the practice consults and treats a disproportionately high number of patients with mental health conditions (both high- and low-prevalence, such as schizophrenia and bipolar affective disorder)? Are there barriers to access to mental health care due to socio-economic situation? Is mental health need at times unrelated to provision of mental health care in primary care?
 

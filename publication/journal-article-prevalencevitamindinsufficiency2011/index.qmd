@@ -16,12 +16,8 @@ author:
 - David Fong
 - Janina DeSilva
 subtitle: '*Asia Pacific journal of clinical nutrition* vol. 20, no. 3, pp. 397-403'
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: publication/journal-article-prevalencevitamindinsufficiency2011/
-    theme: github-dark-orange
 ---
+
 
 [PDF](http://dro.deakin.edu.au/eserv/DU:30036933/renzaho-prevalenceofvitamin-2011.pdf){.btn .btn-outline-primary .btn-sm} [Cite](cite.bib){.btn .btn-outline-primary .btn-sm}
 

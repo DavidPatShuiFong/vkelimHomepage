@@ -7,14 +7,7 @@ categories:
 - Panasonic DMC FZ-10
 - rough guide
 image: featured.jpeg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/dmc-fz-10/
-    theme: github-dark-orange
 ---
-
-![](featured.jpeg){fig-alt=""}
 
 ## Panasonic DMC FZ-10 'rough guide'
 

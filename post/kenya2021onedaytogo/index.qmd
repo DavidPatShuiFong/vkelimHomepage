@@ -8,14 +8,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2021
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021onedaytogo/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Flight is tomorrow night 10:55pm 🙂 
 

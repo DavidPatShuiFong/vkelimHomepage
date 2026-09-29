@@ -9,14 +9,7 @@ categories:
 - Christmas
 - Magi
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021christmastravel/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Travelling at Christmas time can always seem a bit hectic. There are often many competing demands, co-ordination with multiple parties and tight deadlines. This year has added uncertainty, with COVID-related concerns and travel restrictions. This has also affected the planned visit to [Spur Afrika](https://spurafrika.org/) Kenya.
 

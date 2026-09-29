@@ -15,14 +15,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023clinic2/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 On Friday, we had the last of four busy days of free clinics run by Spur Afrika at the K.A.G. school in Kibera, Kenya!
 
@@ -46,8 +39,4 @@ Indeed, for many children and families in Kibera, the day has sufficient enough 
 
 [Spur Afrika trip 2023 posts](/spurafrika2023/)
 
-```{=html}
-<video controls>
-  <source src="/media/20230106_Kibera_Clinic.mp4" type="video/mp4">
-</video>
-```
+{{< video /media/20230106_Kibera_Clinic.mp4 >}}

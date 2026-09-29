@@ -8,14 +8,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023happybirthday/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Happy 13th birthday Spur!! 🎂 🤪👯‍♂️💃
 
@@ -32,8 +25,4 @@ Thanks for praying for our Spur community. I am praying for many more birthdays 
 
 [Spur Afrika trip 2023 posts](/spurafrika2023/)
 
-```{=html}
-<video controls>
-  <source src="/media/20230115_HappyBirthdaySpur.mp4" type="video/mp4">
-</video>
-```
+{{< video /media/20230115_HappyBirthdaySpur.mp4 >}}

@@ -1,17 +1,14 @@
 ---
-title: "KDE Activities Overview --- Simulating GNOME Super-Key ('Windows' Key)"
-author: "David Fong"
+title: KDE Activities Overview --- Simulating GNOME Super-Key ('Windows' Key)
+author: David Fong
 date: 2023-10-30
-categories: [KDE, Gnome, Overview]
+categories:
+- KDE
+- Gnome
+- Overview
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: "post/kdeoverview/"
-    theme: github-dark-orange
+image-caption: Photo by [Cem Ersozlu](https://unsplash.com/@cemersozlu?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) on [Unsplash](https://unsplash.com/photos/person-in-building-fiSXwmacuVw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)
 ---
-
-![Photo by [Cem Ersozlu](https://unsplash.com/@cemersozlu?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash) on [Unsplash](https://unsplash.com/photos/person-in-building-fiSXwmacuVw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash)](featured.jpg){fig-alt=""}
 
 After my AMD RX570 graphics card no longer seemed to be supported in openSuSE
 Leap 15.5 (or perhaps any other Linux) for use with Da Vinci Resolve video editor,

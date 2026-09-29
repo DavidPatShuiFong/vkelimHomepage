@@ -5,7 +5,6 @@ date: '2021-01-28'
 categories:
 - rose
 image: ../img/20210128_1635-rose.jpg
-comments: false
 toc: false
 ---
 

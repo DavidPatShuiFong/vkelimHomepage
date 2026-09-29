@@ -9,14 +9,8 @@ categories:
 - Kenya
 - Holo
 image: featured.png
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: project/holochilddevelopmentplan/
-    theme: github-dark-orange
+image-caption: Children of Holo and visiting Spur Afrika Australia team
 ---
-
-![Children of Holo and visiting Spur Afrika Australia team](featured.png){fig-alt=""}
 
 [PDF](/document/DEVP S-599 Summer 2023 Development Plan - David Fong v8 unlinked disclaimer.pdf){.btn .btn-outline-primary .btn-sm} 
 

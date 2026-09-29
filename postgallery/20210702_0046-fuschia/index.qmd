@@ -5,7 +5,6 @@ date: '2021-07-02'
 categories:
 - fuchsia
 image: ../img/20210702_0046-fuschia.jpg
-comments: false
 toc: false
 ---
 

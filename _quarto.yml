@@ -60,22 +60,12 @@ website:
       - icon: rss
         href: posts.xml
 
-  # Existing Hugo comments are GitHub issues titled by the lowercase Hugo
-  # pathname (e.g. "post/kdeoverview/"). Quarto pages can also be reached at
-  # .../index.html, so each post sets `comments.utterances.issue-term`
-  # explicitly to keep matching the old issue.
-  comments:
-    utterances:
-      repo: DavidPatShuiFong/vkelimHomepage
-      theme: github-dark-orange
-
 format:
   html:
     # Colours and fonts match the Hugo Academic site: see theme/*.scss
     theme:
       light: [default, theme/common.scss, theme/light.scss]
       dark: [default, theme/common.scss, theme/dark.scss]
-    css: styles.css
     toc: true
 
 execute:

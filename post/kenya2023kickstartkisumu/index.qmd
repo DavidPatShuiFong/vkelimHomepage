@@ -8,14 +8,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023kickstartkisumu/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 PRAYER NEEDED: it has come to our attention that we are behind in our fundraising, so therefore there are lots of issues to tackle as well as figuring out what we are doing for the Spur trip in January.
 

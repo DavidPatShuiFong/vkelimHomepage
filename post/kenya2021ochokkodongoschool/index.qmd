@@ -10,14 +10,7 @@ categories:
 - Holo
 - Kisumu
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021ochokkodongoschool/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Today we visited Ochok Kodongo Primary School, in Holo (near Kisumu, Western Kenya). Ochok Kodongo teaches students from pre-school to Year 8. Ochok Kodongo has about 900 students in total. Four of the primary school children supported by Spur Afrika attend this primary school, and another recently graduated from Ochok Kodongo. It was wonderful to be welcomed by the headmaster and enthusiastic teachers. It was an even more of treat to be welcomed by school children performing a traditional dance and inviting us to wear a 'sisal' dance skirt and dance with them.
 
@@ -35,14 +28,6 @@ Please pray for Rosalie and myself as we share training with the local staff, in
 
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
-```{=html}
-<video controls>
-  <source src="/media/20220104_OchokKodongoSchool.mp4" type="video/mp4">
-</video>
-```
+{{< video /media/20220104_OchokKodongoSchool.mp4 >}}
 
-```{=html}
-<video controls>
-  <source src="/media/20220104_OchokKodongoSchool_Dance.mp4" type="video/mp4">
-</video>
-```
+{{< video /media/20220104_OchokKodongoSchool_Dance.mp4 >}}

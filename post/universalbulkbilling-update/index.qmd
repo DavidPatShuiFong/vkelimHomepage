@@ -17,14 +17,7 @@ webr:
     editor-font-scale: 0.65
 filters:
 - webr
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/universalbulkbilling-update/
-    theme: github-dark-orange
 ---
-
-![](featured.jpeg){fig-alt=""}
 
 <!-- All source Code on this page is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this

@@ -11,14 +11,7 @@ categories:
 - Holo
 - Kisumu
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021holo/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Today we visited six of the supported children at Holo, Kisumu, Kenya. 
 As in the previous two days, it was a pleasure to be welcomed to the homes of the families of the supported children. 

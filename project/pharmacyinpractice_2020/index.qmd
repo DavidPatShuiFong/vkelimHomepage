@@ -9,16 +9,8 @@ categories:
 - general practice
 - polypharmacy
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: project/pharmacyinpractice_2020/
-    theme: github-dark-orange
+image-caption: Photo by Kate Hliznitsova on Unsplash
 ---
-
-![Photo by Kate Hliznitsova on Unsplash](featured.jpg){fig-alt=""}
-
-
 
 [Pharmacy in Practice](https://rpubs.com/DavidFong/PharmacyInPractice) on [RPubs](https://rpubs.com)
 

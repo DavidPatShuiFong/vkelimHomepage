@@ -12,14 +12,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023dancedancedance/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 > "Praise [God] for his mighty deeds;  
 praise him according to the abundance of his greatness.  
@@ -44,14 +37,6 @@ Something about public praise, worship and joy the Kenyans haven't yet forgotten
 
 [Spur Afrika trip 2023 posts](/spurafrika2023/)
 
-```{=html}
-<video controls>
-  <source src="/media/20230107_team_danceoff.mp4" type="video/mp4">
-</video>
-```
+{{< video /media/20230107_team_danceoff.mp4 >}}
 
-```{=html}
-<video controls>
-  <source src="/media/20230109_kisumu_welcome.mp4" type="video/mp4">
-</video>
-```
+{{< video /media/20230109_kisumu_welcome.mp4 >}}

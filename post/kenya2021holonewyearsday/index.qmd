@@ -10,14 +10,7 @@ categories:
 - Holo
 - Kisumu
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021holonewyearsday/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Holo Day 2 - Happy New Year 2022! 
 
@@ -49,26 +42,33 @@ Hope you enjoy the photos.😍 I will show more later in the Spur fb or at event
 
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
-```{=html}
-<p> <video controls = ""> <source src = "/media/20220101_Holo_Dance.mp4" type = "video/mp4"> </video> </p>
-```
+{{< video /media/20220101_Holo_Dance.mp4 >}}
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script 
-    src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js">
- </script> <script 
-    src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js">
- </script> <div 
-   class="grid" 
-   data-isotope='{
-     "itemSelector": ".isotope-grid-item",
-     "masonry": "{"columnWidth": ".grid-sizer"}",
-     "percentPosition": "true",
-     "gutter": 0
-   }'
- >   <div id="grid-sizer"></div>   <div class="isotope-grid-item" style="float:left; width: 63%">     <a data-fancybox="gallery" href="./Holo_cards.jpg">       <img src="./Holo_cards.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 36%">     <a data-fancybox="gallery" href="./Holo_auscultate.jpg">       <img src="./Holo_auscultate.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 35%">     <a data-fancybox="gallery" href="./Holo_gift_box.jpg">       <img src="./Holo_gift_box.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 63%">     <a data-fancybox="gallery" href="./Holo_group.jpg">       <img src="./Holo_group.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 63%">     <a data-fancybox="gallery" href="./Holo_introduction.jpg">       <img src="./Holo_introduction.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 36%">     <a data-fancybox="gallery" href="./Holo_hills.jpg">       <img src="./Holo_hills.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 40%">     <a data-fancybox="gallery" href="./Holo_child_gift.jpg">       <img src="./Holo_child_gift.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 58%">     <a data-fancybox="gallery" href="./Holo_chat.jpg">       <img src="./Holo_chat.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 63%">     <a data-fancybox="gallery" href="./Holo_house.jpg">       <img src="./Holo_house.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 35%">     <a data-fancybox="gallery" href="./Holo_clothes.jpg">       <img src="./Holo_clothes.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 49%">     <a data-fancybox="gallery" href="./Holo_clothes2.jpg">       <img src="./Holo_clothes2.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 49%">     <a data-fancybox="gallery" href="./Holo_house_inside.jpg">       <img src="./Holo_house_inside.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 38%">     <a data-fancybox="gallery" href="./Holo_tree.jpg">       <img src="./Holo_tree.jpg" style="margin:0px 0px">     </a>   </div> </div> <br clear="left"><br>
-```
+::: {layout="[[63,36],[35,63],[63,36],[40,58],[63,35],[49,49],[38,-62]]"}
+![](Holo_cards.jpg){.lightbox group="kenya2021holonewyearsday"}
+
+![](Holo_auscultate.jpg){.lightbox group="kenya2021holonewyearsday"}
+
+![](Holo_gift_box.jpg){.lightbox group="kenya2021holonewyearsday"}
+
+![](Holo_group.jpg){.lightbox group="kenya2021holonewyearsday"}
+
+![](Holo_introduction.jpg){.lightbox group="kenya2021holonewyearsday"}
+
+![](Holo_hills.jpg){.lightbox group="kenya2021holonewyearsday"}
+
+![](Holo_child_gift.jpg){.lightbox group="kenya2021holonewyearsday"}
+
+![](Holo_chat.jpg){.lightbox group="kenya2021holonewyearsday"}
+
+![](Holo_house.jpg){.lightbox group="kenya2021holonewyearsday"}
+
+![](Holo_clothes.jpg){.lightbox group="kenya2021holonewyearsday"}
+
+![](Holo_clothes2.jpg){.lightbox group="kenya2021holonewyearsday"}
+
+![](Holo_house_inside.jpg){.lightbox group="kenya2021holonewyearsday"}
+
+![](Holo_tree.jpg){.lightbox group="kenya2021holonewyearsday"}
+:::
 

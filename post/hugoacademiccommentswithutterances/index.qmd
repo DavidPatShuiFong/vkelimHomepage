@@ -1,18 +1,17 @@
 ---
-title: "Comments for Hugo Academic (Wowchemy) with Utterances"
-author: "David Fong"
+title: Comments for Hugo Academic (Wowchemy) with Utterances
+author: David Fong
 date: 2020-12-23
 date-modified: 2021-08-18
-categories: [blog, hugo academic, wowchemy, utterances, comments]
+categories:
+- blog
+- hugo academic
+- wowchemy
+- utterances
+- comments
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: "post/hugoacademiccommentswithutterances/"
-    theme: github-dark-orange
+image-caption: Photo by [Daria Nepriakhina](https://unsplash.com/@epicantus?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/notes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 ---
-
-![Photo by [Daria Nepriakhina](https://unsplash.com/@epicantus?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/notes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)](featured.jpg){fig-alt=""}
 
 There are endless numbers of blogs out there, often providing tidbits of useful
 information which I find useful. And occasionally, someone even finds *my* posts

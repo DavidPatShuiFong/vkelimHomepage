@@ -13,14 +13,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023danceplayfootball/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Dance, play, football and a lots of fun! ☺️🕺⚽️
 
@@ -41,15 +34,14 @@ Please pray for safe travels as we go to Kisumu tomorrow.
 
 [Spur Afrika trip 2023 posts](/spurafrika2023/)
 
-```{=html}
-<video controls>
-  <source src="/media/20230107_danceoff.mp4" type="video/mp4">
-</video>
-```
+{{< video /media/20230107_danceoff.mp4 >}}
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script> <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script> <div class="grid" data-isotope='{ "itemSelector": ".isotope-grid-item", "masonry": "{"columnWidth": ".grid-sizer"}", "percentPosition": "true", "gutter": 0}' > <div id="grid-sizer"></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture1.jpg"> <img src="./picture1.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture2.jpg"> <img src="./picture2.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture3.jpg"> <img src="./picture3.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture4.jpg"> <img src="./picture4.jpg" style="margin:0px 0px"> </a></div> </div>
-```
+::: {layout="[[47,47],[47,47]]"}
+![](picture1.jpg){.lightbox group="kenya2023danceplayfootball"}
+
+![](picture2.jpg){.lightbox group="kenya2023danceplayfootball"}
+
+![](picture3.jpg){.lightbox group="kenya2023danceplayfootball"}
+
+![](picture4.jpg){.lightbox group="kenya2023danceplayfootball"}
+:::

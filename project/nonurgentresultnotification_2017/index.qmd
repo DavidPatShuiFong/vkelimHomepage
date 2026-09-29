@@ -8,16 +8,8 @@ categories:
 - general practice
 - quality improvement
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: project/nonurgentresultnotification_2017/
-    theme: github-dark-orange
+image-caption: <span>Photo by <a href="https://unsplash.com/@nci?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">National Cancer Institute</a> on <a href="https://unsplash.com/s/photos/doctor-results?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 ---
-
-![<span>Photo by <a href="https://unsplash.com/@nci?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">National Cancer Institute</a> on <a href="https://unsplash.com/s/photos/doctor-results?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>](featured.jpg){fig-alt=""}
-
-
 
 [Results marked 'non-urgent discussion' - rate of notification without a result notification procedure](https://rpubs.com/DavidFong/689509) on [RPubs](https://rpubs.com)
 

@@ -9,14 +9,7 @@ categories:
 - Spur Afrika 2021
 - COVID
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021testingtimes/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 The sign of the times - RAPID TESTING - NEGATIVE results! YAY~
 

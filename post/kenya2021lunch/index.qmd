@@ -8,14 +8,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2021
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021lunch/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Thanks for lunch at Laksa Garden!! Trying to eat all the yummy things in Melbourne before we leave.
 
@@ -34,21 +27,8 @@ Pray for good health and it's my last week of work. - same for David!
 
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script 
-    src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js">
- </script> <script 
-    src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js">
- </script> <div 
-   class="grid" 
-   data-isotope='{
-     "itemSelector": ".isotope-grid-item",
-     "masonry": "{"columnWidth": ".grid-sizer"}",
-     "percentPosition": "true",
-     "gutter": 0
-   }'
- >   <div id="grid-sizer"></div>   <div class="isotope-grid-item" style="float:left; width: 48%">     <a data-fancybox="gallery" href="./Lunch2.jpg">       <img src="./Lunch2.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 44%">     <a data-fancybox="gallery" href="./VisaApproval.jpg">       <img src="./VisaApproval.jpg" style="margin:0px 0px">     </a>   </div> </div> <br clear="left"><br>
-```
+::: {layout="[[48,44]]"}
+![](Lunch2.jpg){.lightbox group="kenya2021lunch"}
+
+![](VisaApproval.jpg){.lightbox group="kenya2021lunch"}
+:::

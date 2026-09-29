@@ -45,25 +45,71 @@ Standalone documents live in `static/document/<Name>/`. For example, `PatientCom
 - `content/home/*.md`: homepage widgets. Each file is one section, with its order and visibility set in front matter.
 - `themes/hugo-academic/` is **vendored** (not a submodule). Put customisations in the root `layouts/` overrides instead of editing the theme. Existing overrides include utterances comments (`layouts/partials/comments/`), the post gallery section (`layouts/section/postGallery.html`), portfolio/pages widgets, and custom RSS templates (`layouts/post/rss.xml`, `layouts/categories/rss.xml`) used for feeds.
 
-## Quarto transition (`develop` branch)
+## Quarto site (`develop` branch)
 
-`develop` is moving the site from Hugo to a Quarto website. `master` still deploys Hugo. On `develop`:
+`develop` is moving the site from Hugo to a Quarto website. `master` still deploys Hugo, and the Hugo sources (`content/`, `config/`, `layouts/`, `themes/`) stay in place until cutover.
 
-- `_quarto.yml` is the site config. `netlify.toml` runs `scripts/netlify-build.sh`, which installs pinned uv and Quarto (keep `QUARTO_VERSION` in step with the local Quarto) and runs `quarto render`, publishing `_site`. The Quarto Netlify plugin can't be used because it renders in a separate step that doesn't see uv. Netlify branch deploys give the preview. Netlify can't run R, so render locally with `execute: freeze: auto` and commit `_freeze/`. `_site/` is gitignored.
-- **Rendering needs `uv` on PATH** (installed in `~/.local/bin`): the photo-gallery extension (`_extensions/andrewheiss/photo-gallery`) runs `uv run --script` on every render of `postgallery/index.qmd`. If uv is missing, the page shows "photo-gallery: script produced no output" instead of an error.
-- Hugo sources stay in `content/` until cutover, and `project.render` lists only the Quarto files. **Quarto globs match at any depth unless they start with `/`.** Unanchored `post/*/index.qmd` also matched `content/post/*/index.qmd` and re-rendered the Hugo originals, so keep `/post/*/index.qmd` anchored and avoid broad `resources:` entries.
-- All posts are migrated: 61 from Rmd, 4 from `hugo-md` .qmd, and 1 from .md. The Rmd conversion removed the setup chunk. `htmltools::HTML(...)` gallery chunks were evaluated once and embedded as raw ```` ```{=html} ```` blocks, blogdown `video` shortcodes became `<video>` tags pointing at `/media/`, and `eval=FALSE` chunks became plain ```` ```r ```` blocks. Only the analysis posts (`mhtpdisadvantage`, `universalbulkbilling*`, `gpmanagmentplannew`) still execute R.
-- Publications and projects are migrated to `publication/<lowercase-dir>/` and `project/<lowercase-dir>/`, with listing pages at `/publication/` and `/project/`. For publications, the venue goes in `subtitle`, and the Academic link fields (`url_pdf`, `doi`, `links`, bundle PDF, `cite.bib`) are written into the body as `.btn` links. One project page embeds a document from `static/` in an iframe and defines its own `resizeIframe` script, which was in `layouts/projects/single.html` in Hugo.
-- The home page (`index.qmd`) rebuilds the active Hugo home widgets in the same order, with the old `#anchors`: featured posts (posts with `featured: true`), recent posts, projects, gallery, publications, biography, tag cloud and contact. The contact form is a Netlify Form named `contact`, the same as Hugo's. The tag cloud is a custom listing template (`_templates/tagcloud.ejs`) that merges tags differing only in case, as Hugo did. Listing template output is parsed as Markdown, so the template emits its HTML on one line.
-- The home page "Featured Posts" and "Posts" sections use a custom listing template (`_templates/cards-masonry.ejs.md`) of masonry cards. Its script sets up every `.posts-masonry` grid not yet initialised, so it can appear more than once per page. It loads Masonry 4.2.2 from jsDelivr, re-lays the cards out through a `ResizeObserver` as images and fonts load, and styles them in `theme/common.scss` (`.posts-masonry`: 3/2/1 columns at the lg/sm breakpoints). Custom templates only get `items` (no `listing`), so `fields` can't be read there.
-- The flower gallery (`content/postGallery/`) is migrated to `postgallery/<hugo-slug>/` (lowercase, spaces become `-`). The photos live once in `postgallery/img/<slug>.jpg`, which is both the photo pages' `image` and the album for the masonry gallery at `/postgallery/`. Captions (title, date, SmugMug and page links) come from `postgallery/img/album.yml`. The extension orders images by filename (oldest first, because names start with the date); an inline script in `postgallery/index.qmd` reverses them to newest first before the lightbox initialises. Thumbnails in `img/thumbs/` are generated and gitignored; the script only regenerates one when the original is newer, so delete `thumbs/` after changing thumbnail settings.
-- Home-page listings of a whole section use `"project/*/index.qmd"` rather than `project`. The directory form also picks up the section's own `index.qmd` listing page.
-- Deliberately not migrated: `content/courses/` and `content/slides/`, which are the Academic theme's demo pages (unedited since the theme was added, and not linked from anywhere), and the Talks section, which is inactive on the Hugo home page and only holds the theme's example talk. Also `content/privacy.md` and `content/terms.md`, which are the theme's unpublished drafts (body `...`, 404 on the live site). The other URLs stop existing at cutover.
-- Listings in subfolders (`spurafrika2021/`, `spurafrika2023/`) need `contents: "../post/**/index.qmd"`. `../post` and `/post` match nothing.
-- The look matches the Hugo site's Academic theme "1950s" with the "Rose" fonts. `theme/common.scss` holds the Lora/Roboto/Cutive Mono fonts and Academic's sizes: 21px root from 58em up and 16.17px below, set through `--bs-root-font-size` because Bootstrap's `:root` rule outranks `html`; 70px navbar; 4:3 grid-listing images overriding Quarto's inline fixed height. `theme/light.scss` is the 1950s palette, and `theme/dark.scss` is Academic's default day/night dark palette, since 1950s defines none. The home page sets `body-classes: home-page` for Academic's large section titles and, from `lg` up, Academic's left-gutter layout: each section's `h2` sits in a 3/12 or 4/12 column beside its content. In `#about` the gutter holds `.profile` and the heading heads `.bio`. The `#postsGallery` heading is visually hidden with CSS, because a class on a heading is moved by Pandoc onto its whole section. Default (list) listings are restyled like Academic's post stream: a CSS grid puts the date/author under the summary, with a 150px thumbnail, a 1.2rem title and 0.8rem text. Selectors start with `div.quarto-post` to outrank Quarto's own rules. Grid cards use the same compact text sizes.
-- `styles.css` restores Academic behaviour for the old fancybox/isotope galleries (Bootstrap 5's `.grid` class is a CSS grid) and caps image and video width.
-- Migrated posts go in `post/<lowercase-hugo-dir-or-slug>/index.qmd`, which keeps the old Hugo URLs (Hugo lowercases paths). Convert Hugo `categories` plus `tags` to Quarto `categories`, `lastmod` to `date-modified`, and use `image: featured.jpg`.
-- `scripts/copy-static.ts` (post-render) copies `static/` into `_site/`, the same way Hugo serves `static/` from the site root.
-- **Comments:** existing utterances threads are GitHub issues titled with the lowercase Hugo pathname (e.g. `post/kdeoverview/`). Each migrated post sets the full `comments.utterances` block (`repo`, `issue-term: "post/<slug>/"`, `theme`) in its front matter. A per-document block replaces the site-level one rather than merging, and Quarto's template ignores `label`.
-- `quarto render` deletes the tracked root `index.html` (blogdown output of `index.Rmd`) because it sits next to `index.qmd`. Run `git restore index.html` after rendering until cutover.
-- If `quarto` isn't on PATH, use RStudio's bundled copy: `/usr/lib/rstudio/resources/app/bin/quarto/bin/quarto render`.
+### Build and deploy
+
+- Render with `quarto render`. If `quarto` isn't on PATH, use RStudio's bundled copy at `/usr/lib/rstudio/resources/app/bin/quarto/bin/quarto`. Rendering also needs **`uv` on PATH** (installed in `~/.local/bin`) for the photo-gallery extension. Without it, `/postgallery/` shows "photo-gallery: script produced no output".
+- `quarto render` deletes the tracked root `index.html` (blogdown output of `index.Rmd`) because it sits next to `index.qmd`. Run `git restore index.html` afterwards until cutover.
+- Netlify runs `scripts/netlify-build.sh` (see `netlify.toml`). It installs pinned uv and Quarto, runs `quarto render` and publishes `_site/`, which is gitignored. Keep `QUARTO_VERSION` in step with the local Quarto. The Quarto Netlify plugin can't be used, because it renders in a separate step that doesn't see uv.
+- Netlify can't run R. Posts with R code (`mhtpdisadvantage`, `universalbulkbilling*`, `gpmanagmentplannew`) render locally with `execute: freeze: auto`; commit `_freeze/`.
+- `scripts/copy-static.ts` (post-render) copies `static/` into `_site/`, as Hugo served `static/` from the site root (`/CV/`, `/media/`, `/document/`…).
+
+### Where things live
+
+| Path | What |
+|---|---|
+| `_quarto.yml` | site config, navbar, render list, theme |
+| `index.qmd` | home page (sections and listings) |
+| `post/<slug>/index.qmd`, `project/…`, `publication/…` | content, at the old lowercase Hugo URLs |
+| `post/_metadata.yml` (and in `project/`, `publication/`) | defaults for every page in that folder: featured-image filter and comments |
+| `postgallery/` | flower photos: `img/` album + one page per photo |
+| `posts.qmd`, `project/index.qmd`, `publication/index.qmd`, `postgallery/index.qmd`, `spurafrika20xx/index.qmd` | listing pages |
+| `theme/common.scss`, `light.scss`, `dark.scss` | all custom styling |
+| `_templates/*.ejs*` | custom listing templates (masonry cards, tag cloud) |
+| `_filters/featured-image.lua`, `_includes/utterances.html` | shared page furniture |
+| `_extensions/andrewheiss/photo-gallery` | masonry photo gallery (installed with `quarto add`) |
+
+### Writing a post
+
+```yaml
+---
+title: "…"
+author: David Fong          # or a list
+date: 2025-06-01
+categories: [Kenya, Spur Afrika, Spur Afrika 2025]   # Hugo categories + tags merged
+image: featured.jpg         # shown at the top of the page and in listings
+image-caption: "Photo by …" # optional (Markdown/HTML)
+featured: true              # optional: appears in the home page Featured Posts
+---
+```
+
+- Put the post in `post/<slug>/index.qmd`, with images alongside. It is rendered automatically (`/post/*/index.qmd` in `project.render`).
+- The picture at the top comes from `image` (`_filters/featured-image.lua`). Don't repeat it in the body; set `image-banner: false` to hide it.
+- Comments are automatic (`_includes/utterances.html`). Each thread is a GitHub issue titled with the page path (`post/<slug>/`), matching the Hugo site's threads, including when a page is visited as `…/index.html`.
+- Photo groups use Quarto figure layout plus its built-in lightbox: `::: {layout="[[63,35],[49,49]]"}`, then one `![](photo.jpg){.lightbox group="<slug>"}` per image, **separated by blank lines**. Otherwise they become one cell. A negative width is empty space, e.g. `[45,-55]`.
+- Videos: `{{< video /media/clip.mp4 >}}` (files in `static/media/`) or `{{< video https://www.youtube.com/embed/ID >}}`.
+- Trip pages list posts by category, e.g. `spurafrika2023/index.qmd` includes `categories: "Spur Afrika 2023"`. Categories are case-sensitive in Quarto.
+
+### Look and feel
+
+- Colours and fonts reproduce the Hugo Academic site: theme "1950s", fonts "Rose", size "L". `theme/common.scss` starts with a contents list and a **design values** block (font sizes, card shadow, gutter widths); change values there rather than in the rules. `light.scss` is the 1950s palette. `dark.scss` is Academic's default day/night dark palette, since 1950s defines none.
+- Home page layout is chosen in `index.qmd` with classes on each `##` heading, which Pandoc moves onto its section: default = title in a 3/12 left gutter; `.gutter-wide` = 4/12; `.full-width`; `.title-hidden` (visually hidden, anchor kept); `.profile-section` (gutter holds `::: {.profile}`, the title heads `::: {.bio}`). Everything stacks below `lg`. Old Hugo `#anchors` are kept as heading ids.
+- Home "Featured Posts" (posts with `featured: true`) and "Posts" use `_templates/cards-masonry.ejs.md` (Masonry 4.2.2 from jsDelivr; 3/2/1 columns). The tag cloud is `_templates/tagcloud.ejs` (top 20 categories, case-insensitive like Hugo). The contact form is a Netlify Form named `contact`, the same as Hugo's.
+- `/postgallery/` uses the photo-gallery extension in masonry layout. Captions come from `postgallery/img/album.yml`. An inline script reverses the extension's filename order to newest first. Thumbnails (`img/thumbs/`, gitignored) are regenerated only when the original is newer, so delete `thumbs/` after changing thumbnail settings.
+- `/project/` has All/Kenya filter buttons (inline script in `project/index.qmd`) that drive Quarto's own category filter. Add a button there for another category.
+
+### Gotchas
+
+- **Quarto render globs match at any depth unless they start with `/`.** An unanchored `post/*/index.qmd` also matched `content/post/…` and re-rendered the Hugo originals. For the same reason, avoid broad `resources:` globs.
+- Listing `contents`: from the site root, a whole section is `"project/*/index.qmd"`; plain `project` also picks up the section's own index page. From a subfolder use `"../post/**/index.qmd"`; `../post` and `/post` match nothing.
+- Custom listing templates receive only `items` (no `listing`, so no `fields`), and their output is parsed as Markdown: keep generated HTML on one line or inside ```` ```{=html} ```` blocks.
+- A per-page `comments:` block replaces the site-level one rather than merging, and Quarto's utterances support drops `label`. That is why comments come from `_includes/utterances.html` instead.
+- Selectors restyling Quarto listings start with `div.quarto-post …` to match the specificity of Quarto's own rules.
+
+### Migration notes
+
+- Converted from Hugo: 61 Rmd posts, 4 `hugo-md` .qmd posts, 1 .md post, 5 publications, 8 projects, 11 gallery photos. Posts' Hugo-era fancybox + isotope galleries became Quarto layouts with `.lightbox`, keeping the original row widths. The exception is `post/blogdownmasonrygallery`, a tutorial about that technique, which keeps its demo HTML (styled in `common.scss` section 9).
+- Deliberately not migrated: `content/courses/` and `content/slides/`, which are the Academic theme's demo pages (not linked anywhere); the Talks section, which is inactive on the Hugo home page and only holds the theme's example talk; and `content/privacy.md` and `content/terms.md`, which are unpublished theme drafts (404 on the live site).

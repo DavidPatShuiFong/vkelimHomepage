@@ -14,12 +14,8 @@ author:
 - Ambika Kaur
 - Andre M.N. Renzaho
 subtitle: '*Australian and New Zealand Journal of Public Health* vol. 40, no. 2, pp. 144-147'
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: publication/journal-article-vitamindtestingpatterns2015/
-    theme: github-dark-orange
 ---
+
 
 [PDF](https://onlinelibrary.wiley.com/doi/pdf/10.1111/1753-6405.12409){.btn .btn-outline-primary .btn-sm} [DOI](https://doi.org/10.1111/1753-6405.12409){.btn .btn-outline-primary .btn-sm} [Cite](cite.bib){.btn .btn-outline-primary .btn-sm}
 

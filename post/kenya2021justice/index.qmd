@@ -9,14 +9,7 @@ categories:
 - Spur Afrika 2021
 - Equity
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021justice/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 "Let justice roll on like the water, and righteousness like an ever-flowing stream. 但愿公正好象潮水滚流， 公义好象河水长流。
 (Amos 5:24, Lexham and 新译本 translations)"
@@ -35,9 +28,12 @@ Pray for Spur Afrika's efforts to improve access to healthcare for families in H
 
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script> <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script> <div class="grid" data-isotope='{ "itemSelector": ".isotope-grid-item", "masonry": "{"columnWidth": ".grid-sizer"}", "percentPosition": "true", "gutter": 0}' > <div id="grid-sizer"></div> <div class="isotope-grid-item" style="float:left; width: 48%"><a data-fancybox="gallery" href="./20220114_mothersandchildren.jpg"> <img src="./20220114_mothersandchildren.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 48%"><a data-fancybox="gallery" href="./20220114_consult.jpg"> <img src="./20220114_consult.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 53%"><a data-fancybox="gallery" href="./20220114_support.jpg"> <img src="./20220114_support.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 43%"><a data-fancybox="gallery" href="./20220114_disability.jpg"> <img src="./20220114_disability.jpg" style="margin:0px 0px"> </a></div> </div>
-```
+::: {layout="[[48,48],[53,43]]"}
+![](20220114_mothersandchildren.jpg){.lightbox group="kenya2021justice"}
+
+![](20220114_consult.jpg){.lightbox group="kenya2021justice"}
+
+![](20220114_support.jpg){.lightbox group="kenya2021justice"}
+
+![](20220114_disability.jpg){.lightbox group="kenya2021justice"}
+:::

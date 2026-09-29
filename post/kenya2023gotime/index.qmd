@@ -9,14 +9,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023gotime/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 It's go time!! ✈️
 

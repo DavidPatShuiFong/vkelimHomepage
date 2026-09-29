@@ -14,14 +14,8 @@ categories:
 - tiles
 - column width
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/hugoacademicpagesascards/
-    theme: github-dark-orange
+image-caption: <span>Photo by <a href="https://unsplash.com/@anniespratt?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Annie Spratt</a> on <a href="https://unsplash.com/s/photos/cards?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 ---
-
-![<span>Photo by <a href="https://unsplash.com/@anniespratt?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Annie Spratt</a> on <a href="https://unsplash.com/s/photos/cards?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>](featured.jpg){fig-alt=""}
 
 In Hugo Academic (Wowchemy) version 4.8.0, the portfolio widget (used for 'projects')
 allows [cascading 'cards' layout with the isotope and masonry libraries](https://masonry.desandro.com/)

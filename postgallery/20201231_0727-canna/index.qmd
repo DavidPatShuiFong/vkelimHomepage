@@ -5,7 +5,6 @@ date: '2020-12-31'
 categories:
 - canna
 image: ../img/20201231_0727-canna.jpg
-comments: false
 toc: false
 ---
 

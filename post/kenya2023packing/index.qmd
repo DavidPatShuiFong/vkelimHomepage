@@ -8,14 +8,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023packing/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Thank you Grace for helping us pack over 100kg of luggage and donated goods. 😆😊 Thank you Grace for taking us to the airport tomorrow.
 

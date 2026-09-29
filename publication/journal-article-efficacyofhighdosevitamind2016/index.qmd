@@ -13,12 +13,8 @@ author:
 - Ambika Kaur
 - Andre M.N. Renzaho
 subtitle: '*BMC Health Services Research* vol. 16, 579'
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: publication/journal-article-efficacyofhighdosevitamind2016/
-    theme: github-dark-orange
 ---
+
 
 [PDF](https://link.springer.com/content/pdf/10.1186/s12913-016-1798-3.pdf){.btn .btn-outline-primary .btn-sm} [DOI](https://doi.org/10.1186/s12913-016-1798-3){.btn .btn-outline-primary .btn-sm} [Cite](cite.bib){.btn .btn-outline-primary .btn-sm}
 

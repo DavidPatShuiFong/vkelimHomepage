@@ -1,17 +1,51 @@
-// Shared typography and layout matching the Hugo Academic site
-// (theme "1950s", font set "Rose", font_size "L" in config/_default/params.toml).
+// Site-wide styles shared by the light and dark themes (see _quarto.yml).
+//
+// The look follows the old Hugo Academic site: theme "1950s", font set "Rose",
+// font_size "L". Colours live in light.scss / dark.scss; everything else here.
+//
+// Contents
+//   1. Design values (edit these first)
+//   2. Typography
+//   3. Navbar
+//   4. Home page sections (left-gutter layout)
+//   5. Cards (grid listings and masonry cards)
+//   6. List listings (posts, publications)
+//   7. Masonry cards (_templates/cards-masonry.ejs.md)
+//   8. Home page extras: tag cloud, profile
+//   9. Post content: Hugo-era gallery in the tutorial post
 
 /*-- scss:defaults --*/
 
 @import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap");
 
+// 1. Design values -----------------------------------------------------------
+
+// Academic font_size "L": 21px root on wide screens, 0.77 x 21 below 58em
+$site-font-size-large: 21px;
+$site-font-size-small: 16.17px;
+$site-font-size-breakpoint: 58em;
+
+// Text sizes used in listings and cards (relative to the root size)
+$listing-title-size: 1.2rem;   // list listings
+$card-title-size: 1rem;        // grid and masonry cards
+$summary-size: 0.8rem;
+$meta-size: 0.7rem;            // dates, authors
+
+$card-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+$card-shadow-hover: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+$list-thumbnail-width: 150px;
+
+// Home page left gutter (Academic's lcolwidth / rcolwidth, out of 12)
+$gutter-narrow: 3;             // default
+$gutter-wide: 4;               // headings with {.gutter-wide}
+$gutter-gap: 30px;
+
+// Bootstrap / Quarto variables
 $font-family-sans-serif: "Roboto", sans-serif;
 $headings-font-family: "Lora", sans-serif;
 $font-family-monospace: "Cutive Mono", monospace;
 
-// Academic font_size "L": 21px root from 58em up, 0.77 x 21 = 16.17px below
-// (see the html rule below), line-height 1.65
-$font-size-root: 16.17px;
+$font-size-root: $site-font-size-small;  // raised to large in the rules below
 $line-height-base: 1.65;
 $headings-font-weight: 400;
 $headings-line-height: 1.25;
@@ -28,10 +62,13 @@ $border-radius: 0.25rem;
 
 /*-- scss:rules --*/
 
-// Bootstrap sets `:root { font-size: var(--bs-root-font-size) }`
-@media screen and (min-width: 58em) {
+// 2. Typography --------------------------------------------------------------
+
+// Bootstrap sets `:root { font-size: var(--bs-root-font-size) }`, which
+// outranks an `html` rule, so change the variable.
+@media screen and (min-width: $site-font-size-breakpoint) {
   :root {
-    --bs-root-font-size: 21px;
+    --bs-root-font-size: #{$site-font-size-large};
   }
 }
 
@@ -48,42 +85,77 @@ h2 {
   padding-bottom: 0;
 }
 
-// Home page sections use Academic's large section titles
-.home-page section.level2 {
-  margin-top: 3rem;
+// 3. Navbar ------------------------------------------------------------------
+
+.navbar {
+  font-family: $headings-font-family;
+  box-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, 0.11);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
-.home-page section.level2 > h2 {
-  font-size: 2.25rem;
-  margin-top: 0;
+.navbar .nav-link {
+  font-size: $site-font-size-small;  // fixed size in Academic
+}
+.navbar-brand .navbar-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+// Don't let the menu squeeze the site title into an ellipsis on desktop
+@include media-breakpoint-up(lg) {
+  .navbar-brand-container {
+    flex-shrink: 0;
+  }
 }
 
-// Like Academic's home widgets, from lg up each section title sits in a left
-// gutter beside its content: 3/12 for featured, posts and projects, 4/12 for
-// publications, biography, topics and contact. In the biography the gutter
-// holds the picture and name, and the "Biography" title heads the main column.
-// The gallery strip has no visible title and runs full width.
+// 4. Home page sections -------------------------------------------------------
+//
+// index.qmd sets `body-classes: home-page`. Each `## Heading` makes a
+// section; classes written on the heading are moved by Pandoc onto that
+// section, so the layout is chosen in index.qmd:
+//
+//   ## Posts {#posts}                     title in a 3/12 gutter (default)
+//   ## Publications {#publications .gutter-wide}   4/12 gutter
+//   ## Gallery {#postsGallery .full-width .title-hidden}
+//   ## Biography {#about .gutter-wide .profile-section}
+//        gutter holds a `::: {.profile}` div; the title heads `::: {.bio}`
+//
+// Below lg everything stacks.
+
+.home-page section.level2 {
+  margin-top: 3rem;
+  > h2 {
+    font-size: 2.25rem;
+    margin-top: 0;
+  }
+}
+
+@mixin gutter-columns($left) {
+  grid-template-columns: minmax(0, $left * 1fr) minmax(0, (12 - $left) * 1fr);
+}
+
 @include media-breakpoint-up(lg) {
   .home-page section.level2 {
     display: grid;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
-    column-gap: 30px;
+    @include gutter-columns($gutter-narrow);
+    column-gap: $gutter-gap;
     align-items: start;
     > * {
       grid-column: 2;
     }
     > h2 {
       grid-column: 1;
-      grid-row: 1 / span 20;
+      grid-row: 1 / span 20;  // span every content row of the section
     }
-  }
-  .home-page {
-    #publications,
-    #about,
-    #tags,
-    #contact {
-      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    &.gutter-wide {
+      @include gutter-columns($gutter-wide);
     }
-    #about {
+    &.full-width {
+      grid-template-columns: minmax(0, 1fr);
+      > * {
+        grid-column: 1;
+      }
+    }
+    &.profile-section {
       > .profile {
         grid-column: 1;
         grid-row: 1 / span 2;
@@ -97,50 +169,43 @@ h2 {
         grid-row: 2;
       }
     }
-    #postsGallery {
-      grid-template-columns: minmax(0, 1fr);
-      > * {
-        grid-column: 1;
-      }
-    }
   }
 }
-// Academic's gallery strip has no title; keep the heading (and its
-// #postsGallery anchor) for screen readers only. A class on the heading
-// itself would be moved by Pandoc onto the whole section.
-.home-page #postsGallery > h2 {
+
+// Keep the heading (and its #anchor) for screen readers only
+.home-page section.level2.title-hidden > h2 {
   @include visually-hidden;
 }
 
-// Navbar: Lora, 0.77rem links, bold 1.2rem site title, soft shadow
-.navbar {
-  font-family: "Lora", sans-serif;
-  box-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, 0.11);
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-// Don't let the menu squeeze the site title into an ellipsis on desktop
-@include media-breakpoint-up(lg) {
-  .navbar-brand-container {
-    flex-shrink: 0;
+// 5. Cards ---------------------------------------------------------------------
+
+@mixin card-text {
+  .card-title.listing-title {
+    font-size: $card-title-size;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+  .card-text.listing-description {
+    font-size: $summary-size;
+    line-height: 1.6;
+  }
+  .card-attribution,
+  .listing-date,
+  .listing-author {
+    font-size: $meta-size;
   }
 }
-.navbar .nav-link {
-  font-size: 16.17px;
-}
-.navbar-brand .navbar-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-}
 
-// Academic cards: white, light border, drop shadow
+// Grid listings (projects, featured on other pages, gallery strip)
 .quarto-grid-item.card {
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: $card-shadow;
   border-radius: $border-radius;
   overflow: hidden;
 }
-
-// Grid listing images at 4:3 (Quarto sets an inline fixed height)
+.quarto-grid-item {
+  @include card-text;
+}
+// Grid images at 4:3 (Quarto sets an inline fixed height)
 .quarto-grid-item .card-img-top img,
 .quarto-grid-item .card-img-top .listing-item-img-placeholder {
   width: 100%;
@@ -149,14 +214,16 @@ h2 {
   object-fit: cover;
 }
 
-// Default (list) listings, sized like Academic's post stream:
-// 1.2rem bold title, 0.8rem summary, 0.7rem metadata, 150px thumbnail.
-// `div.quarto-post .body h3...` matches the specificity of Quarto's rules.
-// Like Academic, the date/author line sits under the summary rather than in
-// its own column, leaving the text the full width beside the image.
+// 6. List listings -------------------------------------------------------------
+//
+// Sized like Academic's post stream. The date/author line sits under the
+// summary rather than in its own column, leaving the text the full width
+// beside the image. `div.quarto-post .body h3...` matches the specificity of
+// Quarto's own rules.
+
 div.quarto-post {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 150px;
+  grid-template-columns: minmax(0, 1fr) $list-thumbnail-width;
   grid-template-areas:
     "body thumbnail"
     "metadata thumbnail";
@@ -169,6 +236,13 @@ div.quarto-post {
   }
   .thumbnail {
     grid-area: thumbnail;
+    max-width: $list-thumbnail-width;
+  }
+  .thumbnail img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
   }
   .metadata {
     grid-area: metadata;
@@ -179,12 +253,12 @@ div.quarto-post {
     color: $text-muted;
   }
   .body h3.listing-title {
-    font-size: 1.2rem;
+    font-size: $listing-title-size;
     line-height: 1.25;
     margin-bottom: 0.6rem;
   }
   .body .listing-subtitle {
-    font-size: 0.8rem;
+    font-size: $summary-size;
     margin-bottom: 0.4rem;
   }
   .listing-categories {
@@ -194,22 +268,13 @@ div.quarto-post {
     font-size: 0.6rem;
   }
   .listing-description {
-    font-size: 0.8rem;
+    font-size: $summary-size;
     line-height: 1.65;
   }
   .metadata,
   .listing-date,
   .listing-author {
-    font-size: 0.7rem;
-  }
-  .thumbnail {
-    max-width: 150px;
-  }
-  .thumbnail img {
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-    object-fit: cover;
+    font-size: $meta-size;
   }
 }
 // Lists without images (e.g. publications) use the full width
@@ -220,27 +285,12 @@ div.quarto-post:not(:has(.thumbnail)) {
     "metadata";
 }
 
-// Grid cards use the same compact text sizes as the lists
-.quarto-grid-item {
-  .card-title.listing-title {
-    font-size: 1rem;
-    line-height: 1.3;
-    margin-bottom: 0.5rem;
-  }
-  .card-text.listing-description {
-    font-size: 0.8rem;
-    line-height: 1.6;
-  }
-  .card-attribution,
-  .listing-date,
-  .listing-author {
-    font-size: 0.7rem;
-  }
-}
-
-// Home page "Posts": masonry cards (_templates/posts-masonry.ejs.md).
+// 7. Masonry cards ---------------------------------------------------------------
+//
+// _templates/cards-masonry.ejs.md (home page Featured Posts and Posts).
 // 3 columns from lg (992px), 2 from sm (576px), 1 below. Images keep their
 // own proportions, so card heights vary and Masonry packs them.
+
 .posts-masonry {
   --pm-gutter: 2%;
   --pm-cols: 1;
@@ -279,37 +329,62 @@ div.quarto-post:not(:has(.thumbnail)) {
   }
   .pm-card {
     background-color: $card-bg;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: $card-shadow;
     border-radius: $border-radius;
     overflow: hidden;
     transition: box-shadow 0.15s ease-in-out;
   }
   .pm-link:hover .pm-card {
-    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: $card-shadow-hover;
   }
   .pm-img {
     width: 100%;
     height: auto;
     display: block;
   }
-  .card-title.listing-title {
-    font-size: 1rem;
-    line-height: 1.3;
+  @include card-text;
+  .listing-description p:last-child {
     margin-bottom: 0.5rem;
-  }
-  .listing-description {
-    font-size: 0.8rem;
-    line-height: 1.6;
-    p:last-child {
-      margin-bottom: 0.5rem;
-    }
   }
   .card-attribution {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 0 0.5rem;
-    font-size: 0.7rem;
     color: $text-muted;
   }
+}
+
+// 8. Home page extras ------------------------------------------------------------
+
+// Tag cloud (_templates/tagcloud.ejs); font sizes are set inline per tag
+.tag-cloud {
+  text-align: center;
+  line-height: 2.2;
+  a {
+    margin: 0 0.4rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+}
+
+// Social icons under the profile picture
+.profile a[aria-label] {
+  font-size: 1.5rem;
+  margin: 0 0.3rem;
+  text-decoration: none;
+}
+
+// 9. Post content ---------------------------------------------------------------
+
+// The "Blogdown masonry gallery" tutorial post still demonstrates its
+// original fancybox + isotope gallery HTML. Bootstrap 5's `.grid` is a CSS
+// grid, which breaks that floated layout. (Other posts use Quarto's own
+// `::: {layout=...}` figures with `.lightbox` images.)
+.grid[data-isotope] {
+  display: block;
+}
+.isotope-grid-item img {
+  max-width: 100%;
+  height: auto;
 }

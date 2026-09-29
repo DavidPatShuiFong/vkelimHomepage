@@ -13,14 +13,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023workshopretreat/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 > 'For which of you, wanting to build a tower, does not first sit down and calculate the cost to see if he has enough to complete it'  
 *Luke 14:28*
@@ -37,9 +30,8 @@ Rosalie and myself are a little tired, but also very excited at what God is doin
 
 [Spur Afrika trip 2023 posts](/spurafrika2023/)
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script> <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script> <div class="grid" data-isotope='{ "itemSelector": ".isotope-grid-item", "masonry": "{"columnWidth": ".grid-sizer"}", "percentPosition": "true", "gutter": 0}' > <div id="grid-sizer"></div> <div class="isotope-grid-item" style="float:left; width: 94%"><a data-fancybox="gallery" href="./picture1.jpg"> <img src="./picture1.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 94%"><a data-fancybox="gallery" href="./picture2.jpg"> <img src="./picture2.jpg" style="margin:0px 0px"> </a></div> </div>
-```
+::: {layout="[[94],[94]]"}
+![](picture1.jpg){.lightbox group="kenya2023workshopretreat"}
+
+![](picture2.jpg){.lightbox group="kenya2023workshopretreat"}
+:::

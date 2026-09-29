@@ -8,14 +8,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2021
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021christmas2/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 It's boarding time!
 

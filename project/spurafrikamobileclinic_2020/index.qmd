@@ -10,16 +10,8 @@ categories:
 - Nairobi
 - Kibera
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: project/spurafrikamobileclinic_2020/
-    theme: github-dark-orange
+image-caption: Photo by David Fong
 ---
-
-![Photo by David Fong](featured.jpg){fig-alt=""}
-
-
 
 [Spur Afrika Mobile Clinics 2020](https://rpubs.com/DavidFong/SpurAfrikaMobileClinics2020) on [RPubs](https://rpubs.com)
 

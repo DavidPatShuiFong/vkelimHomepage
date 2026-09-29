@@ -10,14 +10,8 @@ categories:
 - Crostini
 - Samba
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/windows10chromebook/
-    theme: github-dark-orange
+image-caption: <span>Photo by <a href="https://unsplash.com/@vidarnm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vidar Nordli-Mathisen</a> on <a href="https://unsplash.com/s/photos/windows-inside-windows?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
 ---
-
-![<span>Photo by <a href="https://unsplash.com/@vidarnm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vidar Nordli-Mathisen</a> on <a href="https://unsplash.com/s/photos/windows-inside-windows?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>](featured.jpg){fig-alt=""}
 
 ## Using Windows 10 Chromebook (using the 'Crostini' Linux container)
 

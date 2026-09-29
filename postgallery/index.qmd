@@ -1,7 +1,6 @@
 ---
 title: "Gallery"
 toc: false
-comments: false
 page-layout: full
 # Masonry photo gallery (andrewheiss/quarto-static-photo-gallery). The
 # extension runs `uv run` on each render to make thumbnails in img/thumbs/

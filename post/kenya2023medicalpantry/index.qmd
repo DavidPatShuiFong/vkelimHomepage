@@ -9,14 +9,7 @@ categories:
 - Spur Afrika 2023
 - Medical Pantry
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023medicalpantry/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Thanks to the [Medical Pantry](https://medicalpantry.org/) for partnering with Spur Afrika to provide much needed basic treatment supplies for Spur Afrika's mobile clinics this coming January 2023.
 

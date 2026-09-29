@@ -8,14 +8,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2021
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021chinatown/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 While passing through Melbourne’s Chinatown on Friday, some ‘Season Greetings’ signs were visible, with the Chinese characters ‘恭喜发财’ (a congratulations, or wish, for the arrival of prosperity).
 

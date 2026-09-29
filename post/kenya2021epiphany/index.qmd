@@ -10,14 +10,7 @@ categories:
 - Epiphany
 - The Other Wise Man
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021epiphany/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Today, January 6th - Feast of the Epiphany, we departed Kenya. Now at Doha (Qatar) airport, we are waiting for a flight to Melbourne. Traditionally, the Feast of Epiphany is when the Magi (Wise Men from the East) came to visit and adore the infant Jesus. And I suppose the Magi came from a place in the Middle East not too far from Doha!
 
@@ -29,9 +22,12 @@ We have been peculiarly blessed to be in Kenya the past two weeks. Praise God th
 
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script> <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script> <div class="grid" data-isotope='{ "itemSelector": ".isotope-grid-item", "layoutMode": "masonry", "masonry": "{"columnWidth": ".grid-sizer"}", "percentPosition": "true", "gutter": 0}' > <div id="grid-sizer"></div> <div id="gutter-sizer"></div> <div class="isotope-grid-item" style="float:left; width:59%"><a data-fancybox="gallery" href="./20220106_Epiphany_Clinic.jpg"> <img src="./20220106_Epiphany_Clinic.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width:33%"><a data-fancybox="gallery" href="./20220106_Epiphany_Disability.jpg"> <img src="./20220106_Epiphany_Disability.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width:46%"><a data-fancybox="gallery" href="./20220106_Epiphany_Residence.jpg"> <img src="./20220106_Epiphany_Residence.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width:46%"><a data-fancybox="gallery" href="./20220106_Epiphany_Child.jpg"> <img src="./20220106_Epiphany_Child.jpg" style="margin:0px 0px"> </a></div> </div>
-```
+::: {layout="[[59,33],[46,46]]"}
+![](20220106_Epiphany_Clinic.jpg){.lightbox group="kenya2021epiphany"}
+
+![](20220106_Epiphany_Disability.jpg){.lightbox group="kenya2021epiphany"}
+
+![](20220106_Epiphany_Residence.jpg){.lightbox group="kenya2021epiphany"}
+
+![](20220106_Epiphany_Child.jpg){.lightbox group="kenya2021epiphany"}
+:::

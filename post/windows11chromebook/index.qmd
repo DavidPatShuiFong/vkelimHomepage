@@ -9,14 +9,8 @@ categories:
 - Chromebook
 - Crostini
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/windows11chromebook/
-    theme: github-dark-orange
+image-caption: <span>Photo by <a href="https://unsplash.com/@cloudett?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Laura Cleffmann</a> on <a href="https://unsplash.com/photos/white-framed-glass-window-during-daytime-z3drmcczVTc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></span>
 ---
-
-![<span>Photo by <a href="https://unsplash.com/@cloudett?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Laura Cleffmann</a> on <a href="https://unsplash.com/photos/white-framed-glass-window-during-daytime-z3drmcczVTc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></span>](featured.jpg){fig-alt=""}
 
 ## Using Windows 11 on Chromebook
 

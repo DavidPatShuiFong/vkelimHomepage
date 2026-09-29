@@ -1,7 +1,6 @@
 ---
 title: "Publications"
 toc: false
-comments: false
 listing:
   contents: "*/index.qmd"
   sort: "date desc"

@@ -15,12 +15,8 @@ author:
 - Usha Gowda
 - Andre M N Renzaho
 subtitle: '*BMC Cardiovascular Disorders* vol. 14, Article number: 157'
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: publication/journal-article-assessmentofvitamindcardiovascularriskfactors-2014/
-    theme: github-dark-orange
 ---
+
 
 [PDF](https://link.springer.com/content/pdf/10.1186/1471-2261-14-157.pdf){.btn .btn-outline-primary .btn-sm} [DOI](https://doi.org/10.1186/1471-2261-14-157){.btn .btn-outline-primary .btn-sm} [Cite](cite.bib){.btn .btn-outline-primary .btn-sm}
 

@@ -8,16 +8,7 @@ categories:
 - vaccination
 - effectivenss
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: project/astrazenecaeffectiveness_nationalcomparison_2021/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
-
-
 
 [AstraZeneca COVID-19 vaccination effectiveness](https://rpubs.com/DavidFong/Covid19AZefficacy) on [RPubs](https://rpubs.com)
 

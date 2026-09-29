@@ -12,15 +12,8 @@ categories:
 - air pollution
 - gender
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: project/airpollutiongenderkenya_2020/
-    theme: github-dark-orange
+image-caption: Photo by David Fong
 ---
-
-![Photo by David Fong](featured.jpg){fig-alt=""}
-
 
 [Relationship between Morbidity potentially attributable to air pollution and Gender in Kibera](https://rpubs.com/DavidFong/AirPollutionKiberaGender) on [Rpubs](https://rpubs.com)
 

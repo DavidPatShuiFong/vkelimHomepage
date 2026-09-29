@@ -11,14 +11,8 @@ categories:
 - gallery
 - tiles
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/blogdownmasonrygallery/
-    theme: github-dark-orange
+image-caption: <span>Photo by <a href="https://unsplash.com/@arlandscape?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Harald Arlander</a> on <a href="https://unsplash.com/s/photos/masonry?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
 ---
-
-![<span>Photo by <a href="https://unsplash.com/@arlandscape?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Harald Arlander</a> on <a href="https://unsplash.com/s/photos/masonry?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>](featured.jpg){fig-alt=""}
 
 The [Wowchemy theme](https://wowchemy.com/) (formerly Hugo Academic) can 'tile'
 irregularly shaped posts in a grid, using the [Isotope](https://isotope.metafizzy.co/)
@@ -90,7 +84,7 @@ htmltools::HTML(paste(
 ```{=html}
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
+  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"
 /> <script 
     src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js">
  </script> <script 

@@ -7,14 +7,7 @@ categories:
 - Christianity
 - Knuth
 image: featured.png
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/316bibletextsilluminated/
-    theme: github-dark-orange
 ---
-
-![](featured.png){fig-alt=""}
 
 [3:16 Bible Texts illuminated](http://www-cs-faculty.stanford.edu/%7Euno/316.html), a book written by well-known computer scientist [Donald E. Knuth](http://en.wikipedia.org/wiki/Donald_E_Knuth). Studies in reasonable detail the sixteenth verse of the third chapter of the books in the Bible. Beautifully illustrated ('illuminated') by calligraphers such as Hermann Zapf (who illustrated the John 3:16 verse above), Professor Knuth provides an overview of theological research, as well as his own thoughts, about each verse.
 

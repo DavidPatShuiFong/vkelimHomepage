@@ -9,14 +9,7 @@ categories:
 - Spur Afrika 2021
 - Training
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021training/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 "Whatever things are true, whatever things are honorable, whatever things are right, whatever things are pure, whatever things are pleasing, whatever things are commendable, if there is any excellence of character and if anything praiseworthy, think about these things." (Philippians 4:8 LEB)
 
@@ -38,9 +31,10 @@ So it appears that Jesus and the 'lestes'  were both working towards a new kingd
 
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script> <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script> <div class="grid" data-isotope='{ "itemSelector": ".isotope-grid-item", "masonry": "{"columnWidth": ".grid-sizer"}", "percentPosition": "true", "gutter": 0}' > <div id="grid-sizer"></div> <div class="isotope-grid-item" style="float:left; width: 35%"><a data-fancybox="gallery" href="./OchokKodongo_SchoolSign.jpg"> <img src="./OchokKodongo_SchoolSign.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 62%"><a data-fancybox="gallery" href="./SpurCentre_Training.jpg"> <img src="./SpurCentre_Training.jpg" style="margin:0px 0px"> </a></div> </div> <p>  <video controls = "">   <source src="/media/SpurCentre_TrainingVideo.mp4" type="video/mp4">  </video> </p>
-```
+::: {layout="[[35,62]]"}
+![](OchokKodongo_SchoolSign.jpg){.lightbox group="kenya2021training"}
+
+![](SpurCentre_Training.jpg){.lightbox group="kenya2021training"}
+:::
+
+{{< video /media/SpurCentre_TrainingVideo.mp4 >}}

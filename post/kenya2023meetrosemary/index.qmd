@@ -8,14 +8,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.png
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023meetrosemary/
-    theme: github-dark-orange
 ---
-
-![](featured.png){fig-alt=""}
 
 Hello Friends, It has been a while since my last post and again lots of things are happening.
 😭😂

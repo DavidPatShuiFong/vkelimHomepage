@@ -8,14 +8,8 @@ categories:
 - testthat
 - NOT_CRAN
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/covrcran/
-    theme: github-dark-orange
+image-caption: <span>Photo by <a href="https://unsplash.com/@chrisliverani?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Chris Liverani</a> on <a href="https://unsplash.com/s/photos/exam?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 ---
-
-![<span>Photo by <a href="https://unsplash.com/@chrisliverani?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Chris Liverani</a> on <a href="https://unsplash.com/s/photos/exam?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>](featured.jpg){fig-alt=""}
 
 [`testthat`](https://r-pkgs.org/tests.html) is a great tool to test that R package
 code actually does what it is supposed to do. And keep doing the right thing

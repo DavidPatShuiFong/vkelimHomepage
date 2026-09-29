@@ -10,14 +10,7 @@ categories:
 - asthma
 - air pollution
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021airpollution/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 When first visiting the Kibera (Nairobi) informal settlement in 2016 with the [Spur Afrika](https://spurafrika.org/) team,
 I noticed, together with Dr Victor Hui, that "no wonder so many kids complain about sore eyes,

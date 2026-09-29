@@ -9,14 +9,8 @@ categories:
 - dbplyr
 - github
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/contributingtotidyversedbplyr/
-    theme: github-dark-orange
+image-caption: <span>Illustrations by <a href="https://www.allisonhorst.com/">Allison Horst</a>, artist in residence at <a href="https://blog.rstudio.com/2019/11/18/artist-in-residence/">RStudio</a></span>
 ---
-
-![<span>Illustrations by <a href="https://www.allisonhorst.com/">Allison Horst</a>, artist in residence at <a href="https://blog.rstudio.com/2019/11/18/artist-in-residence/">RStudio</a></span>](featured.jpg){fig-alt=""}
 
 I was [acknowledged as a contributor to the version 2.0.0 release of `dbplyr`](https://www.tidyverse.org/blog/2020/11/dbplyr-2-0-0/)!
 

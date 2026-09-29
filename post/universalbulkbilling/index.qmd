@@ -14,14 +14,7 @@ webr:
     editor-font-scale: 0.65
 filters:
 - webr
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/universalbulkbilling/
-    theme: github-dark-orange
 ---
-
-![](featured.jpeg){fig-alt=""}
 
 *This document has now been updated,  please refer to [Calculating the practice benefit of universal bulk-billing - an updated model](../universalbulkbilling-update). Updated model includes MBS Service Level A and, optionally, care plans (721/723/732)*
 

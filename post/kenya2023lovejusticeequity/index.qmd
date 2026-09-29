@@ -11,14 +11,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023lovejusticeequity/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 All too often, the world just isn’t fair.
 
@@ -42,9 +35,8 @@ you have established equity.” *(Psalm 99:2-4, NIV)*
 
 [Spur Afrika trip 2023 posts](/spurafrika2023/)
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script> <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script> <div class="grid" data-isotope='{ "itemSelector": ".isotope-grid-item", "masonry": "{"columnWidth": ".grid-sizer"}", "percentPosition": "true", "gutter": 0}' > <div id="grid-sizer"></div> <div class="isotope-grid-item" style="float:left; width: 24%"><a data-fancybox="gallery" href="./warehouse1.jpg"> <img src="./warehouse1.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 71%"><a data-fancybox="gallery" href="./warehouse2.jpg"> <img src="./warehouse2.jpg" style="margin:0px 0px"> </a></div> </div>
-```
+::: {layout="[[24,71]]"}
+![](warehouse1.jpg){.lightbox group="kenya2023lovejusticeequity"}
+
+![](warehouse2.jpg){.lightbox group="kenya2023lovejusticeequity"}
+:::

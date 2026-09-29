@@ -10,14 +10,8 @@ categories:
 - markdown
 - PowerPoint
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/carolswithpandoc/
-    theme: github-dark-orange
+image-caption: <span>Photo by <a href="https://unsplash.com/@davidbeale?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">David Beale</a> on <a href="https://unsplash.com/s/photos/christmas-singing?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 ---
-
-![<span>Photo by <a href="https://unsplash.com/@davidbeale?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">David Beale</a> on <a href="https://unsplash.com/s/photos/christmas-singing?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>](featured.jpg){fig-alt=""}
 
 ## Converting lyrics (in text/'markdown' format) to PowerPoint
 

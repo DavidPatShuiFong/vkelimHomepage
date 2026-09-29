@@ -1,7 +1,6 @@
 ---
 title: "Posts"
 toc: false
-comments: false
 listing:
   contents: post
   sort: "date desc"

@@ -8,14 +8,8 @@ categories:
 - 4.0.2
 - openSuSE Leap 15.2
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/microsoftropen_402/
-    theme: github-dark-orange
+image-caption: <span>Photo by <a href="https://unsplash.com/@musiime?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Musiime P. Muramura</a> on <a href="https://unsplash.com/s/photos/gecko?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 ---
-
-![<span>Photo by <a href="https://unsplash.com/@musiime?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Musiime P. Muramura</a> on <a href="https://unsplash.com/s/photos/gecko?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>](featured.jpg){fig-alt=""}
 
 One reason for my sometimes growing respect for Microsoft is that they support
 (just) [Microsoft R Open](https://mran.microsoft.com/). Back in May 2019 they released

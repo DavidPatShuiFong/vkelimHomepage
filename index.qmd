@@ -3,12 +3,13 @@ pagetitle: "David Fong"
 description: "General practitioner at coHealth Kensington. Development work, teaching, monitoring and evaluation."
 image: images/avatar.jpg
 toc: false
-comments: false
 page-layout: full
 body-classes: home-page
 # Sections follow the Hugo Academic home page (content/home/*.md):
 # featured, posts, projects, postsGallery, publications, about, tags, contact.
-# Heading ids keep the old #anchors working.
+# Heading ids keep the old #anchors working; heading classes (.gutter-wide,
+# .full-width, .title-hidden, .profile-section) choose each section's layout,
+# see theme/common.scss section 4.
 listing:
   - id: listing-featured
     contents: post
@@ -69,24 +70,24 @@ listing:
 ::: {#listing-projects}
 :::
 
-## Gallery {#postsGallery}
+## Gallery {#postsGallery .full-width .title-hidden}
 
 ::: {#listing-gallery}
 :::
 
 [See all](postgallery/index.qmd){.btn .btn-outline-primary .btn-sm}
 
-## Publications {#publications}
+## Publications {#publications .gutter-wide}
 
 ::: {#listing-publications}
 :::
 
 [See all publications](publication/index.qmd){.btn .btn-outline-primary .btn-sm}
 
-## Biography {#about}
+## Biography {#about .gutter-wide .profile-section}
 
-<!-- Left gutter: picture, name, links. The "Biography" heading and text sit
-     in the main column (grid areas in theme/common.scss). -->
+<!-- Left gutter: picture, name, links (.profile). The "Biography" heading
+     and text sit in the main column (.bio). See theme/common.scss section 4. -->
 
 ::: {.profile .text-center}
 ![](images/avatar.jpg){.rounded-circle width="220" fig-alt="David Fong"}
@@ -133,12 +134,12 @@ David Fong is a general practitioner (family medicine doctor) working at coHealt
 :::
 :::
 
-## Popular Topics {#tags}
+## Popular Topics {#tags .gutter-wide}
 
 ::: {#listing-tags}
 :::
 
-## Contact {#contact}
+## Contact {#contact .gutter-wide}
 
 ::: {.grid}
 

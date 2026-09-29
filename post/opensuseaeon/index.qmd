@@ -10,14 +10,8 @@ categories:
 - Aeon
 - Remote desktop
 image: featured.png
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/opensuseaeon/
-    theme: github-dark-orange
+image-caption: <span><a href="https://en.opensuse.org/Portal:Aeon">openSuSE Aeon</a></span>
 ---
-
-![<span><a href="https://en.opensuse.org/Portal:Aeon">openSuSE Aeon</a></span>](featured.png){fig-alt=""}
 
 ## Using openSuSE Aeon on VMWare Workstation
 

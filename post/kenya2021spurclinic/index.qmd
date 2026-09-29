@@ -9,14 +9,7 @@ categories:
 - Spur Afrika 2021
 - Clinic
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021spurclinic/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Dec 29th - All the Spur sponsored children and their families were invited for a health check. 🙂 
 
@@ -28,11 +21,7 @@ We didn't have enough medications, but everything seemed to go ok (thank God).  
 
 6 doctors (mostly local), nurses and dentist participated. 152 patients, including adults and children were seen.  Height, weight, vision, blood pressure, temperature were checked and recorded.  Simple medication was given however for complex conditions referrals were completed to local hospitals.  Our local doctor will follow up most of the conditions for long term management. 
 
-```{=html}
-<video controls>
-  <source src="/media/20211229_SpurClinic.mp4" type="video/mp4">
-</video>
-```
+{{< video /media/20211229_SpurClinic.mp4 >}}
 
 Spur children also spent time writing cards for their sponsors. The cards will be personally delivered when I return to Melbourne. GREAT JOB to Maureen and Faith who made sure all the kids wrote a letter and decorated it properly.  The kids loved the stickers and new pens/pencils.   
 🤪
@@ -52,21 +41,14 @@ Please continue to pray that
 
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script 
-    src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js">
- </script> <script 
-    src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js">
- </script> <div 
-   class="grid" 
-   data-isotope='{
-     "itemSelector": ".isotope-grid-item",
-     "masonry": "{"columnWidth": ".grid-sizer"}",
-     "percentPosition": "true",
-     "gutter": 0
-   }'
- >   <div id="grid-sizer"></div>   <div class="isotope-grid-item" style="float:left; width: 63%">     <a data-fancybox="gallery" href="./bp_check.jpg">       <img src="./bp_check.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 35%">     <a data-fancybox="gallery" href="./birthday_cake.jpg">       <img src="./birthday_cake.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 49%">     <a data-fancybox="gallery" href="./medication_dispense.jpg">       <img src="./medication_dispense.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 49%">     <a data-fancybox="gallery" href="./clinic_talk.jpg">       <img src="./clinic_talk.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 45%">     <a data-fancybox="gallery" href="./medicine_check.jpg">       <img src="./medicine_check.jpg" style="margin:0px 0px">     </a>   </div> </div> <br clear="left"><br>
-```
+::: {layout="[[63,35],[49,49],[45,-55]]"}
+![](bp_check.jpg){.lightbox group="kenya2021spurclinic"}
+
+![](birthday_cake.jpg){.lightbox group="kenya2021spurclinic"}
+
+![](medication_dispense.jpg){.lightbox group="kenya2021spurclinic"}
+
+![](clinic_talk.jpg){.lightbox group="kenya2021spurclinic"}
+
+![](medicine_check.jpg){.lightbox group="kenya2021spurclinic"}
+:::

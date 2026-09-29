@@ -8,14 +8,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2021
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021lastday/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 LAST DAY OF KENYA 🥲😭
 
@@ -35,22 +28,17 @@ We will update when we get to Doha. We have 13 hours there.😁😄
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script 
-    src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js">
- </script> <script 
-    src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js">
- </script> <div 
-   class="grid" 
-   data-isotope='{
-     "itemSelector": ".isotope-grid-item",
-     "masonry": "{"columnWidth": ".grid-sizer"}",
-     "percentPosition": "true",
-     "gutter": 0
-   }'
- >   <div id="grid-sizer"></div>   <div class="isotope-grid-item" style="float:left; width: 35%">     <a data-fancybox="gallery" href="./fish_lunch.jpg">       <img src="./fish_lunch.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 63%">     <a data-fancybox="gallery" href="./team.jpg">       <img src="./team.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 63%">     <a data-fancybox="gallery" href="./training_4.jpg">       <img src="./training_4.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 36%">     <a data-fancybox="gallery" href="./team_safety.jpg">       <img src="./team_safety.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 35%">     <a data-fancybox="gallery" href="./training_2.jpg">       <img src="./training_2.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 35%">     <a data-fancybox="gallery" href="./training_3.jpg">       <img src="./training_3.jpg" style="margin:0px 0px">     </a>   </div> </div> <br clear="left"><br>
-```
+::: {layout="[[35,63],[63,36],[35,35,-30]]"}
+![](fish_lunch.jpg){.lightbox group="kenya2021lastday"}
+
+![](team.jpg){.lightbox group="kenya2021lastday"}
+
+![](training_4.jpg){.lightbox group="kenya2021lastday"}
+
+![](team_safety.jpg){.lightbox group="kenya2021lastday"}
+
+![](training_2.jpg){.lightbox group="kenya2021lastday"}
+
+![](training_3.jpg){.lightbox group="kenya2021lastday"}
+:::
 

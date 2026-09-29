@@ -14,17 +14,11 @@ categories:
 - genealogy
 - Soo Yuen
 image: featured.jpg
+image-caption: 寧溪里 Ning Kai Lei/Ningxili. My father, Dr Stephen Fong, checking the family tree.
 aliases:
 - /fong.html
 - /fong/
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/fong/
-    theme: github-dark-orange
 ---
-
-![寧溪里 Ning Kai Lei/Ningxili. My father, Dr Stephen Fong, checking the family tree.](featured.jpg){fig-alt=""}
 
 <div align="center" margin="0px 0px 0px 0px">
 <p width="50%" style="text-align: center;"> <!-- resists centreing in Chrome! --> 

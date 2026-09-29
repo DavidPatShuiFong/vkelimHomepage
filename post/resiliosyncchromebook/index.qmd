@@ -9,14 +9,8 @@ categories:
 - Crostini
 - Resilio Sync
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/resiliosyncchromebook/
-    theme: github-dark-orange
+image-caption: <span>Photo by <a href="https://unsplash.com/@vfbranciforti?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vincent Branciforti</a> on <a href="https://unsplash.com/s/photos/synchronized-swimming?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
 ---
-
-![<span>Photo by <a href="https://unsplash.com/@vfbranciforti?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Vincent Branciforti</a> on <a href="https://unsplash.com/s/photos/synchronized-swimming?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>](featured.jpg){fig-alt=""}
 
 ## Using Resilio Sync on Chromebook (using the 'Crostini' Linux container)
 

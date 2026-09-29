@@ -8,14 +8,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2021
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021packing/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 It was packing night. Praying we can take as much as we can.
 
@@ -39,21 +32,10 @@ Also update:
 
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script 
-    src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js">
- </script> <script 
-    src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js">
- </script> <div 
-   class="grid" 
-   data-isotope='{
-     "itemSelector": ".isotope-grid-item",
-     "masonry": "{"columnWidth": ".grid-sizer"}",
-     "percentPosition": "true",
-     "gutter": 0
-   }'
- >   <div id="grid-sizer"></div>   <div class="isotope-grid-item" style="float:left; width: 48%">     <a data-fancybox="gallery" href="./packing_mum.jpg">       <img src="./packing_mum.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 44%">     <a data-fancybox="gallery" href="./packing1.jpg">       <img src="./packing1.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 44%">     <a data-fancybox="gallery" href="./packing2.jpg">       <img src="./packing2.jpg" style="margin:0px 0px">     </a>   </div> </div> <br clear="left"><br>
-```
+::: {layout="[[48,44],[44,-56]]"}
+![](packing_mum.jpg){.lightbox group="kenya2021packing"}
+
+![](packing1.jpg){.lightbox group="kenya2021packing"}
+
+![](packing2.jpg){.lightbox group="kenya2021packing"}
+:::

@@ -8,14 +8,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023threedaystogo/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 🤩🥳😝😜🤩😝 PRAISE GOD for getting us through to this stage! 
 It's been lovely to have a break in South Australia, enjoy Christmas with our families and we also had a great time celebrating my birthday with a mega party!

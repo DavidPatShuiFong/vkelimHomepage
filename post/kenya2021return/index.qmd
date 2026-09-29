@@ -8,14 +8,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2021
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021return/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 Touch down!! We are back in Melbourne safely!! 😁😆
 
@@ -30,22 +23,5 @@ Please continue to pray for Spur as we have more events and sponsors to find! So
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script 
-    src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js">
- </script> <script 
-    src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js">
- </script> <div 
-   class="grid" 
-   data-isotope='{
-     "itemSelector": ".isotope-grid-item",
-     "masonry": "{"columnWidth": ".grid-sizer"}",
-     "percentPosition": "true",
-     "gutter": 0
-   }'
- >   <div id="grid-sizer"></div>   <div class="isotope-grid-item" style="float:left; width: 95%">     <a data-fancybox="gallery" href="./COVIDreturnNegative.png">       <img src="./COVIDreturnNegative.png" style="margin:0px 0px">     </a>   </div> </div> <br clear="left"><br>
-```
+![](COVIDreturnNegative.png){.lightbox}
 

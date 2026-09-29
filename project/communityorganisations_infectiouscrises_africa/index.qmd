@@ -9,14 +9,7 @@ categories:
 - Africa
 author: David Fong
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: project/communityorganisations_infectiouscrises_africa/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 ```{=html}
 <script>

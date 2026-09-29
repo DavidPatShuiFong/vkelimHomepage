@@ -11,14 +11,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023kisumu/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 KISUMU 🐓😍🥰🧒🧒🕯❤️
 
@@ -42,9 +35,28 @@ I shall post more when I can gather my thoughts. Please pray for the mentors tra
 
 [Spur Afrika trip 2023 posts](/spurafrika2023/)
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script> <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script> <div class="grid" data-isotope='{ "itemSelector": ".isotope-grid-item", "masonry": "{"columnWidth": ".grid-sizer"}", "percentPosition": "true", "gutter": 0}' > <div id="grid-sizer"></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture1.jpg"> <img src="./picture1.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture2.jpg"> <img src="./picture2.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture10.jpg"> <img src="./picture10.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture11.jpg"> <img src="./picture11.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 31%"><a data-fancybox="gallery" href="./picture3.jpg"> <img src="./picture3.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 31%"><a data-fancybox="gallery" href="./picture4.jpg"> <img src="./picture4.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 31%"><a data-fancybox="gallery" href="./picture5.jpg"> <img src="./picture5.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 32%"><a data-fancybox="gallery" href="./picture6.jpg"> <img src="./picture6.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 61%"><a data-fancybox="gallery" href="./picture8.jpg"> <img src="./picture8.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 94%"><a data-fancybox="gallery" href="./picture7.jpg"> <img src="./picture7.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture9.jpg"> <img src="./picture9.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture12.jpg"> <img src="./picture12.jpg" style="margin:0px 0px"> </a></div> </div>
-```
+::: {layout="[[47,47],[47,47],[31,31,31],[32,61],[94],[47,47]]"}
+![](picture1.jpg){.lightbox group="kenya2023kisumu"}
+
+![](picture2.jpg){.lightbox group="kenya2023kisumu"}
+
+![](picture10.jpg){.lightbox group="kenya2023kisumu"}
+
+![](picture11.jpg){.lightbox group="kenya2023kisumu"}
+
+![](picture3.jpg){.lightbox group="kenya2023kisumu"}
+
+![](picture4.jpg){.lightbox group="kenya2023kisumu"}
+
+![](picture5.jpg){.lightbox group="kenya2023kisumu"}
+
+![](picture6.jpg){.lightbox group="kenya2023kisumu"}
+
+![](picture8.jpg){.lightbox group="kenya2023kisumu"}
+
+![](picture7.jpg){.lightbox group="kenya2023kisumu"}
+
+![](picture9.jpg){.lightbox group="kenya2023kisumu"}
+
+![](picture12.jpg){.lightbox group="kenya2023kisumu"}
+:::

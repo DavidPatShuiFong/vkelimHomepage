@@ -10,14 +10,7 @@ categories:
 - Holo
 - Kisumu
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2021traveling/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 TRAVEL DAY 😆
 
@@ -42,22 +35,5 @@ Treasures in Heaven 😝
 [Spur Afrika trip 2021-2022 posts](/spurafrika2021/)
 
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script 
-    src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js">
- </script> <script 
-    src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js">
- </script> <div 
-   class="grid" 
-   data-isotope='{
-     "itemSelector": ".isotope-grid-item",
-     "masonry": "{"columnWidth": ".grid-sizer"}",
-     "percentPosition": "true",
-     "gutter": 0
-   }'
- >   <div id="grid-sizer"></div>   <div class="isotope-grid-item" style="float:left; width: 95%">     <a data-fancybox="gallery" href="./covidtest_nairobiwest.jpg">       <img src="./covidtest_nairobiwest.jpg" style="margin:0px 0px">     </a>   </div> </div> <br clear="left"><br>
-```
+![](covidtest_nairobiwest.jpg){.lightbox}
 

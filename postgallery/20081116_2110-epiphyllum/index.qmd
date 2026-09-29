@@ -5,7 +5,6 @@ date: '2008-11-16'
 categories:
 - epiphyllum
 image: ../img/20081116_2110-epiphyllum.jpg
-comments: false
 toc: false
 ---
 

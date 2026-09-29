@@ -1,0 +1,6 @@
+# Defaults for every page in this folder:
+# - show the front-matter `image` at the top of the page (image-caption optional)
+# - utterances comments, threaded by the page's path (see _includes/utterances.html)
+filters:
+  - ../_filters/featured-image.lua
+include-after-body: ../_includes/utterances.html

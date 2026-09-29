@@ -2,7 +2,6 @@
 title: "Spur Afrika Kenya 2021-2022"
 subtitle: "Visiting a child support program, 25th December 2021 to 6th January 2022"
 toc: false
-comments: false
 listing:
   contents: "../post/**/index.qmd"
   include:

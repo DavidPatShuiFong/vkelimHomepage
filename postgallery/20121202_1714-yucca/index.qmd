@@ -5,7 +5,6 @@ date: '2020-12-02'
 categories:
 - yucca
 image: ../img/20121202_1714-yucca.jpg
-comments: false
 toc: false
 ---
 

@@ -13,14 +13,7 @@ categories:
 - Spur Afrika
 - Spur Afrika 2023
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/kenya2023clinic/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 It's clinic time. 🏥
 
@@ -38,9 +31,18 @@ Also, it is nice to give the children something fun to look forward to, colourin
 
 [Spur Afrika trip 2023 posts](/spurafrika2023/)
 
-```{=html}
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/> <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script> <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script> <div class="grid" data-isotope='{ "itemSelector": ".isotope-grid-item", "masonry": "{"columnWidth": ".grid-sizer"}", "percentPosition": "true", "gutter": 0}' > <div id="grid-sizer"></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture1.jpg"> <img src="./picture1.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture2.jpg"> <img src="./picture2.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture3.jpg"> <img src="./picture3.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture4.jpg"> <img src="./picture4.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture5.jpg"> <img src="./picture5.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture6.jpg"> <img src="./picture6.jpg" style="margin:0px 0px"> </a></div> <div class="isotope-grid-item" style="float:left; width: 47%"><a data-fancybox="gallery" href="./picture7.jpg"> <img src="./picture7.jpg" style="margin:0px 0px"> </a></div> </div>
-```
+::: {layout="[[47,47],[47,47],[47,47],[47,-53]]"}
+![](picture1.jpg){.lightbox group="kenya2023clinic"}
+
+![](picture2.jpg){.lightbox group="kenya2023clinic"}
+
+![](picture3.jpg){.lightbox group="kenya2023clinic"}
+
+![](picture4.jpg){.lightbox group="kenya2023clinic"}
+
+![](picture5.jpg){.lightbox group="kenya2023clinic"}
+
+![](picture6.jpg){.lightbox group="kenya2023clinic"}
+
+![](picture7.jpg){.lightbox group="kenya2023clinic"}
+:::

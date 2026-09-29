@@ -10,15 +10,8 @@ categories:
 - refugee
 - asylum-seeker
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: project/cervicalscreeningtelephone_2019/
-    theme: github-dark-orange
+image-caption: Photo by CDC on Unsplash
 ---
-
-![Photo by CDC on Unsplash](featured.jpg){fig-alt=""}
-
 
 [Cervical Screening - telephone-based recall (2019)](https://bookdown.org/vkelim/coHealth/cervical-screening.html) on [BOOKDOWN](https://bookdown.org)
 <br> by Dr Buddini Ekanayake & Dr David Fong

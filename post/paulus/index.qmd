@@ -8,14 +8,7 @@ categories:
 - St. Paul
 - Felix Mendelssohn-Bartholdy
 image: featured.jpg
-comments:
-  utterances:
-    repo: DavidPatShuiFong/vkelimHomepage
-    issue-term: post/paulus/
-    theme: github-dark-orange
 ---
-
-![](featured.jpg){fig-alt=""}
 
 ## 'Paulus' (St. Paul) - Opus 36 by Mendelssohn
 
