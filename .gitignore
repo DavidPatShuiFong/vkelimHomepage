@@ -1,22 +1,22 @@
-.Rproj.user
+# R / RStudio
 .Rproj.user/
 .Rhistory
 .RData
 .Ruserdata
+
+# Editors and OS
 .DS_Store
-/blogdown
-/public
-Resources
-/resources
+Thumbs.db
 .~*
 *.csv#
-Thumbs.db
-
-/.quarto/
 
 # Quarto
+/.quarto/
 /_site/
-node_modules/
-
 **/*.quarto_ipynb
+# photo-gallery extension thumbnails (regenerated on render)
 /postgallery/img/thumbs/
+
+# Old Hugo build output, if still on disk (safe to delete)
+/public/
+/resources/

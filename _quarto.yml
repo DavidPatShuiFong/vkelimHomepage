@@ -1,24 +1,14 @@
-# Quarto website (transition from Hugo/blogdown, on the `develop` branch).
-#
-# During the transition the Hugo sources in content/, config/, layouts/ and
-# themes/ are left in place, so only files listed under `render` are built.
-# Migrated posts live in post/<lowercase-hugo-slug>/index.qmd.
+# David Fong's website (https://www.davidfong.org), a Quarto website.
+# See CLAUDE.md for how the site is organised.
 project:
   type: website
   output-dir: _site
   render:
-    - index.qmd
-    - posts.qmd
-    - /post/*/index.qmd
-    - spurafrika2021/index.qmd
-    - spurafrika2023/index.qmd
-    - /publication/index.qmd
-    - /publication/*/index.qmd
-    - /project/index.qmd
-    - /project/*/index.qmd
-    - /postgallery/index.qmd
-    - /postgallery/*/index.qmd
-  # static/ holds files served as-is from the site root (CV, documents, Paulus...)
+    - "*.qmd"
+    # static/ holds files served as-is (CV, documents, some with their own
+    # Quarto sources), so it is copied, not rendered
+    - "!static/"
+  # ...and copied into _site/ after rendering, so /CV/, /media/ etc. keep working
   post-render: scripts/copy-static.ts
 
 website:

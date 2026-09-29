@@ -1,0 +1,11 @@
+---
+title: "Page not found"
+toc: false
+---
+
+Sorry, there is no page at this address. It may have moved when the site
+changed from Hugo to Quarto.
+
+- [Home page](/)
+- [All posts](/posts.html)
+- [Projects](/project/) and [publications](/publication/)

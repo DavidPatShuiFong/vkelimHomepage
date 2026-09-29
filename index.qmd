@@ -5,7 +5,7 @@ image: images/avatar.jpg
 toc: false
 page-layout: full
 body-classes: home-page
-# Sections follow the Hugo Academic home page (content/home/*.md):
+# Sections follow the old Hugo Academic home page widgets:
 # featured, posts, projects, postsGallery, publications, about, tags, contact.
 # Heading ids keep the old #anchors working; heading classes (.gutter-wide,
 # .full-width, .title-hidden, .profile-section) choose each section's layout,
