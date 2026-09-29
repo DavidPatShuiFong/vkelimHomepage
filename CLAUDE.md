@@ -99,7 +99,7 @@ featured: true              # optional: appears in the home page Featured Posts
 - Home page layout is chosen in `index.qmd` with classes on each `##` heading, which Pandoc moves onto its section: default = title in a 3/12 left gutter; `.gutter-wide` = 4/12; `.full-width`; `.title-hidden` (visually hidden, anchor kept); `.profile-section` (gutter holds `::: {.profile}`, the title heads `::: {.bio}`). Everything stacks below `lg`. Old Hugo `#anchors` are kept as heading ids.
 - Home "Featured Posts" (posts with `featured: true`) and "Posts" use `_templates/cards-masonry.ejs.md` (Masonry 4.2.2 from jsDelivr; 3/2/1 columns). The tag cloud is `_templates/tagcloud.ejs` (top 20 categories, case-insensitive like Hugo). Its section links are root-relative, so they work on any page. The contact form is a Netlify Form named `contact`, the same as Hugo's.
 - `/postgallery/` uses the photo-gallery extension in masonry layout. Captions come from `postgallery/img/album.yml`. An inline script reverses the extension's filename order to newest first. Thumbnails (`img/thumbs/`, gitignored) are regenerated only when the original is newer, so delete `thumbs/` after changing thumbnail settings.
-- Footer line and back-to-top button are set in `_quarto.yml` (`website.page-footer`, `back-to-top-navigation`). The footer is styled in `common.scss` section 9.
+- Footer line and back-to-top button are set in `_quarto.yml` (`website.page-footer`, `back-to-top-navigation`). Both are styled in `common.scss` section 9 (the back-to-top button in coral).
 - `/project/` has All/Kenya filter buttons (inline script in `project/index.qmd`) that drive Quarto's own category filter. Add a button there for another category.
 
 ### Gotchas

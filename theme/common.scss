@@ -12,7 +12,7 @@
 //   6. List listings (posts, publications)
 //   7. Masonry cards (_templates/cards-masonry.ejs.md)
 //   8. Home page extras: tag cloud, profile
-//   9. Footer (text set in _quarto.yml: website.page-footer)
+//   9. Footer and back-to-top button (both switched on in _quarto.yml)
 
 /*-- scss:defaults --*/
 
@@ -375,7 +375,7 @@ div.quarto-post:not(:has(.thumbnail)) {
   text-decoration: none;
 }
 
-// 9. Footer ----------------------------------------------------------------------
+// 9. Footer and back-to-top button ----------------------------------------------------------------------
 
 // Small centred line with coral links, like Academic's "powered by" footer
 .nav-footer {
@@ -385,5 +385,16 @@ div.quarto-post:not(:has(.thumbnail)) {
   }
   a {
     color: $link-color;
+  }
+}
+
+// Quarto's floating "Back to top" button (website.back-to-top-navigation),
+// in coral instead of grey; filled coral on hover
+#quarto-back-to-top {
+  color: $primary;
+  box-shadow: 0 0.2rem 0.5rem rgba($primary, 0.4), 0 0 0.05rem $primary;
+  &:hover {
+    background-color: $primary;
+    color: #fff;
   }
 }
