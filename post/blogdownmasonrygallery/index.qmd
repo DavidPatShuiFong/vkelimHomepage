@@ -46,7 +46,8 @@ same `data-fancybox` attribute can be seen in the same lightbox by clicking on
 the right/left arrows, or using cursor keys.
 
 The example below is taken from my [post on the topic of 'equity' after visiting
-Kenya in 2021/2022](/post/kenya2021justice/). The code shown below is encased
+Kenya in 2021/2022](/post/kenya2021justice/), although that post now uses
+Quarto's built-in figure layout and lightbox instead. The code shown below is encased
 in a ```` ```{r} ... ``` ```` code chunk.
 
 
