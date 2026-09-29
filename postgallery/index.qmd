@@ -18,3 +18,15 @@ extensions:
 ---
 
 {{< photo-gallery >}}
+
+```{=html}
+<script>
+// Newest first. The extension orders photos by filename, and the filenames
+// start with the date, so reverse them. This runs while the page is parsed,
+// before photo-gallery.js sets up the lightbox on DOMContentLoaded, so the
+// lightbox order and counter follow the new order.
+for (const gallery of document.querySelectorAll(".photo-gallery .pswp-gallery")) {
+  [...gallery.children].reverse().forEach((el) => gallery.appendChild(el));
+}
+</script>
+```
