@@ -2,6 +2,7 @@
 title: Isotope and Fancybox Galleries on Blogdown
 author: David Fong
 date: '2022-01-29'
+date-modified: '2026-09-29'
 categories:
 - Computers
 - R
@@ -13,6 +14,23 @@ categories:
 image: featured.jpg
 image-caption: <span>Photo by <a href="https://unsplash.com/@arlandscape?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Harald Arlander</a> on <a href="https://unsplash.com/s/photos/masonry?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
 ---
+
+::: {.callout-note title="Updated September 2026"}
+The original version of this code had two bugs. The gallery only looked right
+because of a fallback.
+
+- The fancybox stylesheet link had no version number, so it now loads a newer
+  major version of the CSS (6.x) than the 4.0 script.
+- The `data-isotope` settings weren't valid JSON. Inside an R string in single
+  quotes, `\"` is just `"`, so the quotes around `columnWidth` ended the string
+  early. The browser reported "Error parsing data-isotope", and isotope never
+  started: the photos were only laid out by their `float: left` styles.
+
+The code below fixes both. It sets isotope up with a short script instead of the
+`data-isotope` attribute, so there is nothing to escape, and waits for the photos
+to load before laying them out. If you copied the original, compare it with the
+version below.
+:::
 
 The [Wowchemy theme](https://wowchemy.com/) (formerly Hugo Academic) can 'tile'
 irregularly shaped posts in a grid, using the [Isotope](https://isotope.metafizzy.co/)
@@ -36,48 +54,51 @@ in a ```` ```{r} ... ``` ```` code chunk.
 htmltools::HTML(paste(
 '<link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css"
-/>', # for fancybox
+  href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"
+/>', # for fancybox (same version as the script below)
 '<script 
     src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js">
  </script>', # for fancybox
 '<script 
     src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js">
  </script>', # for isotope
-'<div 
-   class="grid" 
-   data-isotope=\'{
-     "itemSelector": ".isotope-grid-item",
-     "masonry": "{\"columnWidth\": \".grid-sizer\"}",
-     "percentPosition": "true",
-     "gutter": 0
-   }\'
- >',
-'  <div id="grid-sizer"></div>',
+'<script 
+    src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js">
+ </script>', # to wait for the photos before laying them out
+'<div class="isotope-gallery" id="equity-gallery">',
+'  <div class="grid-sizer" style="width: 1%"></div>',
 '  <div class="isotope-grid-item" style="float:left; width: 48%">',
 '    <a data-fancybox="gallery" href="./20220114_mothersandchildren.jpg">',
-'      <img src="./20220114_mothersandchildren.jpg" style="margin:0px 0px">', 
+'      <img src="./20220114_mothersandchildren.jpg" style="display:block; width:100%; margin:0px">', 
        # default CSS top/bottom margin is not zero
 '    </a>',
 '  </div>',
 '  <div class="isotope-grid-item" style="float:left; width: 48%">',
 '    <a data-fancybox="gallery" href="./20220114_consult.jpg">',
-'      <img src="./20220114_consult.jpg" style="margin:0px 0px">',
+'      <img src="./20220114_consult.jpg" style="display:block; width:100%; margin:0px">',
 '    </a>',
 '  </div>',
 '  <div class="isotope-grid-item" style="float:left; width: 53%">',
 '    <a data-fancybox="gallery" href="./20220114_support.jpg">', 
-'      <img src="./20220114_support.jpg" style="margin:0px 0px">',
+'      <img src="./20220114_support.jpg" style="display:block; width:100%; margin:0px">',
 '    </a>',
 '  </div>',
 '  <div class="isotope-grid-item" style="float:left; width: 43%">',
 '    <a data-fancybox="gallery" href="./20220114_disability.jpg">',
-'      <img src="./20220114_disability.jpg" style="margin:0px 0px">',
+'      <img src="./20220114_disability.jpg" style="display:block; width:100%; margin:0px">',
 '    </a>',
 '  </div>',
 '</div>',
-#
-'<br clear="left"><br>'
+'<br clear="left"><br>',
+'<script>
+  imagesLoaded("#equity-gallery", function () {
+    new Isotope("#equity-gallery", {
+      itemSelector: ".isotope-grid-item",
+      percentPosition: true,
+      masonry: { columnWidth: ".grid-sizer" }
+    });
+  });
+</script>'
 ))
 ```
 
@@ -89,57 +110,65 @@ htmltools::HTML(paste(
     src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js">
  </script> <script 
     src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js">
- </script> <div 
-   class="grid" 
-   data-isotope='{
-     "itemSelector": ".isotope-grid-item",
-     "masonry": "{"columnWidth": ".grid-sizer"}",
-     "percentPosition": "true",
-     "gutter": 0
-   }'
- >   <div id="grid-sizer"></div>   <div class="isotope-grid-item" style="float:left; width: 48%">     <a data-fancybox="gallery" href="./20220114_mothersandchildren.jpg">       <img src="./20220114_mothersandchildren.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 48%">     <a data-fancybox="gallery" href="./20220114_consult.jpg">       <img src="./20220114_consult.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 53%">     <a data-fancybox="gallery" href="./20220114_support.jpg">       <img src="./20220114_support.jpg" style="margin:0px 0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 43%">     <a data-fancybox="gallery" href="./20220114_disability.jpg">       <img src="./20220114_disability.jpg" style="margin:0px 0px">     </a>   </div> </div> <br clear="left"><br>
+ </script> <script 
+    src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js">
+ </script> <div class="isotope-gallery" id="equity-gallery">   <div class="grid-sizer" style="width: 1%"></div>   <div class="isotope-grid-item" style="float:left; width: 48%">     <a data-fancybox="gallery" href="./20220114_mothersandchildren.jpg">       <img src="./20220114_mothersandchildren.jpg" style="display:block; width:100%; margin:0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 48%">     <a data-fancybox="gallery" href="./20220114_consult.jpg">       <img src="./20220114_consult.jpg" style="display:block; width:100%; margin:0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 53%">     <a data-fancybox="gallery" href="./20220114_support.jpg">       <img src="./20220114_support.jpg" style="display:block; width:100%; margin:0px">     </a>   </div>   <div class="isotope-grid-item" style="float:left; width: 43%">     <a data-fancybox="gallery" href="./20220114_disability.jpg">       <img src="./20220114_disability.jpg" style="display:block; width:100%; margin:0px">     </a>   </div> </div> <br clear="left"><br> <script>
+  imagesLoaded("#equity-gallery", function () {
+    new Isotope("#equity-gallery", {
+      itemSelector: ".isotope-grid-item",
+      percentPosition: true,
+      masonry: { columnWidth: ".grid-sizer" }
+    });
+  });
+</script>
 ```
 
 
-The first part defines the CSS of `fancybox`, and then includes the Javascript of
-`fancybox` and `isotope`. `isotope` has already been include by `Wowchemy`, but it
-is not clear to me how to access that included Javascript code.
+The first part loads the CSS and Javascript of `fancybox`, and the Javascript of
+`isotope` and `imagesLoaded`. `isotope` has already been included by `Wowchemy`,
+but it is not clear to me how to access that included Javascript code. Pin the
+version of each library (`@4.0`, `@3`, `@5`), and use the same version for
+fancybox's CSS and its script.
 
-In a `div` of class `grid`, the `data-isotope` attribute is defined. This attribute
-needs to be rather carefully escaped.
+The gallery is a `div` with an `id` (here `equity-gallery`), so that the script at
+the end can find it. Avoid the class name `grid` for it: Bootstrap 5, which many
+themes use (including the one on this site), styles `.grid` as a CSS grid, which
+interferes with isotope.
 
-* `itemSelector` defines how isotope grid items class will be named in divisions which
-contain gallery items. In this case, the class name will be defined as `isotope-grid-item`.
-Note the added `.` period at the beginning of the name when the class name
-is defined.
+The script at the end waits until the photos have loaded (`imagesLoaded`), so
+that their heights are known, and then starts `isotope` with these options:
 
-* the default layout is `masonry`. The `masonry` attribute is defined in the `div`
-of class `grid`. I'm not actually sure how to change to a different layout! Or
-whether changing the `masonry` attributes makes much difference!
+* `itemSelector` defines the class of the divisions which contain gallery items,
+here `isotope-grid-item`. Note the added `.` period at the beginning of the name,
+as in a CSS selector.
 
-  + `columnWidth` in this case is defined as the width of the HTML element with the
-  `id` of `grid-sizer`. A period `.` is placed before the `id` name. By default,
-  the column width is defined as the width of the first element in the `grid` div.
-  Changing this attribute doesn't seem to make any difference to me, but to keep
-  things safe, the first element in this `grid` will be a full-width element with
-  the `id` of `grid-sizer`.
-  
-  + `percentPosition` allows grid item widths to be defined as percentages of
-  available width. This attribute appears to work. In the example, this attribute
-  is set to `true`
-  
-  + `gutter`, which borders the `grid` elements, in this example is set to zero (0)
-  
-As noted previously, it is safest to define the first element of the grid to
-be the full width of the desired gallery. As the width of the first element in
-the grid is the default width of the gallery.
+* `masonry` is the default layout. It places each photo in the highest free
+space, like bricks in a wall. Its options go in their own `{ ... }`:
+
+  + `columnWidth` is the width of the element with the class `grid-sizer` (again
+  note the `.`). That element is only 1% wide, so isotope can position photos
+  in steps of 1% of the gallery width. (A full-width `grid-sizer` would give a
+  single column, with one photo per row.)
+
+  + a `gutter` (space between columns) can also be set here. In this example
+  the widths already leave a small gap.
+
+* `percentPosition: true` lets isotope position photos as percentages of the
+gallery width, so the layout adapts to the width of the screen.
+
+Setting isotope up in a script, rather than with a `data-isotope` attribute on
+the `div`, means the options don't have to be written as JSON inside an HTML
+attribute inside an R string. That is where the original version of this post
+went wrong.
 
 Each element in the grid which is part of the gallery needs to have a `class`
 definition which is the same as defined by `itemSelector` as mentioned above.
 
 In the `style` attribute, the `width` can be defined as a percentage. The percentage
 does not need to add up to 100%. Adjusting the percentages can help 'line' up the
-rows to be of equal height.
+rows to be of equal height. The `float:left` style is only a fallback: if the
+Javascript doesn't run, the photos still sit side by side. Once isotope runs, it
+positions them itself.
 
 The `data-fancybox` attribute in gallery items defines groups of photos as part
 of the same lightbox display provided by `fancybox`.
@@ -148,6 +177,7 @@ In recent versions of [hugo](https://gohugo.io/), the `href` and `img src` of
 included pictures can be in the same directory as the post itself.
 
 The images themselves do not have a default margin of zero pixels. Zero pixel
-margins can be defined with the `style` attribute of the images.
+margins can be defined with the `style` attribute of the images, along with
+`display:block; width:100%` so that each photo fills its gallery item.
 
 

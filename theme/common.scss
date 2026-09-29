@@ -12,7 +12,6 @@
 //   6. List listings (posts, publications)
 //   7. Masonry cards (_templates/cards-masonry.ejs.md)
 //   8. Home page extras: tag cloud, profile
-//   9. Post content: Hugo-era gallery in the tutorial post
 
 /*-- scss:defaults --*/
 
@@ -373,18 +372,4 @@ div.quarto-post:not(:has(.thumbnail)) {
   font-size: 1.5rem;
   margin: 0 0.3rem;
   text-decoration: none;
-}
-
-// 9. Post content ---------------------------------------------------------------
-
-// The "Blogdown masonry gallery" tutorial post still demonstrates its
-// original fancybox + isotope gallery HTML. Bootstrap 5's `.grid` is a CSS
-// grid, which breaks that floated layout. (Other posts use Quarto's own
-// `::: {layout=...}` figures with `.lightbox` images.)
-.grid[data-isotope] {
-  display: block;
-}
-.isotope-grid-item img {
-  max-width: 100%;
-  height: auto;
 }
