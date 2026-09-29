@@ -1,30 +1,36 @@
 // Light palette: Hugo Academic theme "1950s"
-// (themes/hugo-academic/data/themes/1950s.toml)
+// (themes/hugo-academic/data/themes/1950s.toml).
+// Fonts, sizes and layout are in common.scss.
 
 /*-- scss:defaults --*/
 
-$primary: #EF525B;
-$link-color: #EF525B;
-$body-bg: #EAE7D6;
+// Named colours
+$primary: #EF525B;           // coral: links, buttons, focus rings (same in dark.scss)
+$academic-beige: #EAE7D6;    // page background
+$academic-teal: #24C2CB;     // navbar
+$academic-teal-dark: #00828B;  // current page in the navbar
+
+// Page (links use $primary)
+$body-bg: $academic-beige;
 $body-color: rgba(0, 0, 0, 0.8);
 $headings-color: #313131;
+$footer-bg: $body-bg;
 
-$navbar-bg: #24C2CB;
+$navbar-bg: $academic-teal;
 $navbar-fg: #fff;
-$navbar-hl: #00828B;
+$navbar-hl: $academic-teal-dark;
 
 $card-bg: #fff;
 $code-color: #333;
 $code-bg: #f8f8f8;
-$code-block-bg: #f8f8f8;
-$footer-bg: #EAE7D6;
+$code-block-bg: $code-bg;
 
 // Form fields (contact form, listing filters): white on the beige page with a
 // clearly visible border, and a coral ring when a field is selected
 $input-bg: #fff;
-$input-color: rgba(0, 0, 0, 0.8);
+$input-color: $body-color;
 $input-border-color: rgba(0, 0, 0, 0.35);
 $input-placeholder-color: #6c757d;
-$input-focus-bg: #fff;
+$input-focus-bg: $input-bg;
 $input-focus-border-color: $primary;
-$input-focus-box-shadow: 0 0 0 0.2rem rgba(239, 82, 91, 0.25);
+$input-focus-box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);

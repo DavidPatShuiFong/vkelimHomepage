@@ -3,12 +3,13 @@
 // the 20 most-used categories across the listed pages, sorted alphabetically,
 // with font size on a log scale between 0.7rem and 2rem.
 const maxTags = 20, fontMin = 0.7, fontMax = 2.0;
-// Link each tag to the first section listing that contains it.
+// Link each tag to the first section listing that contains it. Links start
+// with "/" so the template works on a page at any depth.
 const sections = [
-  { re: /(^|\/)post\//, href: "posts.html" },
-  { re: /(^|\/)project\//, href: "project/index.html" },
-  { re: /(^|\/)publication\//, href: "publication/index.html" },
-  { re: /(^|\/)postgallery\//, href: "postgallery/index.html" },
+  { re: /(^|\/)post\//, href: "/posts.html" },
+  { re: /(^|\/)project\//, href: "/project/" },
+  { re: /(^|\/)publication\//, href: "/publication/" },
+  { re: /(^|\/)postgallery\//, href: "/postgallery/" },
 ];
 // Like Hugo, tags differing only in case count as one tag, shown in their
 // most common spelling.
@@ -45,4 +46,4 @@ const size = (n) => max === min ? (fontMin + fontMax) / 2 :
 const links = top.map(([key, tag, n]) =>
   `<a href="${sections[where.get(key) ?? 0].href}#category=${encodeURIComponent(tag)}" style="font-size: ${size(n).toFixed(2)}rem" title="${n} pages">${tag}</a>`);
 %>
-<div class="tag-cloud"><%= links.join(" ") %></div>
+<% if (links.length) { %><div class="tag-cloud"><%= links.join(" ") %></div><% } %>

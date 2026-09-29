@@ -1,31 +1,38 @@
 // Dark palette: Hugo Academic's day/night mode defaults, used because the
 // "1950s" theme defines no dark colours
 // (themes/hugo-academic/layouts/partials/functions/parse_theme.html,
-//  themes/hugo-academic/assets/scss/academic/_dark.scss)
+//  themes/hugo-academic/assets/scss/academic/_dark.scss).
+// Fonts, sizes and layout are in common.scss.
 
 /*-- scss:defaults --*/
 
-$primary: #EF525B;
-$link-color: #EF525B;
-$body-bg: hsl(231, 15%, 16%);
-$body-color: rgb(248, 248, 242);
-$headings-color: rgb(152, 166, 173);
+// Named colours
+$primary: #EF525B;                      // coral (same in light.scss)
+$academic-dark-bg: hsl(231, 15%, 16%);  // page background
+$academic-dark-surface: rgb(68, 71, 90);  // code and form fields
+$academic-dark-navbar: rgb(40, 42, 54);
+$academic-dark-text: rgb(248, 248, 242);
 
-$navbar-bg: rgb(40, 42, 54);
+// Page (links use $primary)
+$body-bg: $academic-dark-bg;
+$body-color: $academic-dark-text;
+$headings-color: rgb(152, 166, 173);
+$footer-bg: $body-bg;
+
+$navbar-bg: $academic-dark-navbar;
 $navbar-fg: #fff;
 $navbar-hl: rgba(255, 255, 255, 0.8);
 
 $card-bg: #343a40;
 $code-color: rgb(139, 233, 253);
-$code-bg: rgb(68, 71, 90);
-$code-block-bg: rgb(68, 71, 90);
-$footer-bg: hsl(231, 15%, 16%);
+$code-bg: $academic-dark-surface;
+$code-block-bg: $code-bg;
 
 // Form fields: Academic's dark input colour with a visible border
-$input-bg: rgb(68, 71, 90);
-$input-color: rgb(248, 248, 242);
+$input-bg: $academic-dark-surface;
+$input-color: $body-color;
 $input-border-color: rgba(255, 255, 255, 0.35);
-$input-placeholder-color: rgba(248, 248, 242, 0.6);
-$input-focus-bg: rgb(68, 71, 90);
+$input-placeholder-color: rgba($body-color, 0.6);
+$input-focus-bg: $input-bg;
 $input-focus-border-color: $primary;
-$input-focus-box-shadow: 0 0 0 0.2rem rgba(239, 82, 91, 0.35);
+$input-focus-box-shadow: 0 0 0 0.2rem rgba($primary, 0.35);
