@@ -24,9 +24,9 @@ listing:
     contents: post
     sort: "date desc"
     max-items: 5
-    type: default
+    template: _templates/posts-masonry.ejs.md
     fields: [image, date, title, description]
-    categories: false
+    max-description-length: 175
   - id: listing-projects
     contents: "project/*/index.qmd"
     sort: "date desc"
