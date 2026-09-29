@@ -61,7 +61,7 @@ Standalone documents live in `static/document/<Name>/`. For example, `PatientCom
 
 | Path | What |
 |---|---|
-| `_quarto.yml` | site config, navbar, render list, theme |
+| `_quarto.yml` | site config, navbar, footer line, render list, theme |
 | `index.qmd` | home page (sections and listings) |
 | `post/<slug>/index.qmd`, `project/…`, `publication/…` | content, at the old lowercase Hugo URLs |
 | `post/_metadata.yml` (and in `project/`, `publication/`) | defaults for every page in that folder: featured-image filter and comments |

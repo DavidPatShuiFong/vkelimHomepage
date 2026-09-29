@@ -59,6 +59,12 @@ website:
         href: https://au.linkedin.com/in/david-p-fong-0b266970
       - icon: rss
         href: posts.xml
+  # Small footer line, as on the Hugo site ("Code with Blogdown, page source on GitHub")
+  page-footer:
+    center: >-
+      Built with [Quarto](https://quarto.org/), page source on
+      <i class="bi bi-github" aria-hidden="true"></i>
+      [GitHub](https://github.com/DavidPatShuiFong/vkelimHomepage/)
 
 format:
   html:

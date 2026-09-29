@@ -12,6 +12,7 @@
 //   6. List listings (posts, publications)
 //   7. Masonry cards (_templates/cards-masonry.ejs.md)
 //   8. Home page extras: tag cloud, profile
+//   9. Footer (text set in _quarto.yml: website.page-footer)
 
 /*-- scss:defaults --*/
 
@@ -372,4 +373,17 @@ div.quarto-post:not(:has(.thumbnail)) {
   font-size: 1.5rem;
   margin: 0 0.3rem;
   text-decoration: none;
+}
+
+// 9. Footer ----------------------------------------------------------------------
+
+// Small centred line with coral links, like Academic's "powered by" footer
+.nav-footer {
+  color: $body-color;
+  p {
+    font-size: 0.75rem;  // on the <p>: Quarto shrinks it again relative to .nav-footer
+  }
+  a {
+    color: $link-color;
+  }
 }
