@@ -1,14 +1,84 @@
+# Netlify build: scripts/netlify-build.sh installs uv and Quarto, then runs
+# `quarto render`. Netlify cannot run R, so computations come from the
+# committed _freeze/.
 [build]
-  publish = "public"
-  command = "hugo"
+  publish = "_site"
+  command = "bash scripts/netlify-build.sh"
 
-[context.production.environment]
-  HUGO_VERSION = "0.76.4" # if older than 0.54.0, use format: 0.53 (no trailing zero)
-  HUGO_ENV = "production"
-  HUGO_ENABLEGITINFO = "true"
+# Redirects for addresses from the old Hugo Academic site that have no page
+# here. Netlify uses the first rule that matches, and only when no file
+# exists at the address. Missing pages otherwise get 404.html (404.qmd).
 
-[context.branch-deploy.environment]
-  HUGO_VERSION = "0.76.4" # if older, use format: 0.53 (no trailing zero)
+# RSS feeds (Hugo made one per section and taxonomy term)
+[[redirects]]
+  from = "/index.xml"
+  to = "/posts.xml"
+  status = 301
+[[redirects]]
+  from = "/post/index.xml"
+  to = "/posts.xml"
+  status = 301
+[[redirects]]
+  from = "/tag/:term/index.xml"
+  to = "/posts.xml"
+  status = 301
+[[redirects]]
+  from = "/category/:term/index.xml"
+  to = "/posts.xml"
+  status = 301
 
-[context.deploy-preview.environment]
-  HUGO_VERSION = "0.76.4"
+# List pages
+[[redirects]]
+  from = "/post/"
+  to = "/posts.html"
+  status = 301
+
+# Tag and category pages -> the post list (it has category filters)
+[[redirects]]
+  from = "/tag/*"
+  to = "/posts.html"
+  status = 301
+[[redirects]]
+  from = "/tags/"
+  to = "/posts.html"
+  status = 301
+[[redirects]]
+  from = "/category/*"
+  to = "/posts.html"
+  status = 301
+[[redirects]]
+  from = "/categories/"
+  to = "/posts.html"
+  status = 301
+
+# Author and publication-type pages
+[[redirects]]
+  from = "/author/*"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/authors/"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/publication-type/*"
+  to = "/publication/"
+  status = 301
+[[redirects]]
+  from = "/publication_types/"
+  to = "/publication/"
+  status = 301
+
+# Academic theme demo pages that were never the site's own content
+[[redirects]]
+  from = "/courses/*"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/slides/*"
+  to = "/"
+  status = 301
+[[redirects]]
+  from = "/talk/*"
+  to = "/"
+  status = 301

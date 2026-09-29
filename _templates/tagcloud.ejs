@@ -1,0 +1,49 @@
+<%
+// Tag cloud for the home page, replacing Hugo Academic's tag_cloud widget:
+// the 20 most-used categories across the listed pages, sorted alphabetically,
+// with font size on a log scale between 0.7rem and 2rem.
+const maxTags = 20, fontMin = 0.7, fontMax = 2.0;
+// Link each tag to the first section listing that contains it. Links start
+// with "/" so the template works on a page at any depth.
+const sections = [
+  { re: /(^|\/)post\//, href: "/posts.html" },
+  { re: /(^|\/)project\//, href: "/project/" },
+  { re: /(^|\/)publication\//, href: "/publication/" },
+  { re: /(^|\/)postgallery\//, href: "/postgallery/" },
+];
+// Like Hugo, tags differing only in case count as one tag, shown in their
+// most common spelling.
+const counts = new Map();
+const forms = new Map();
+const where = new Map();
+for (const item of items) {
+  const section = sections.findIndex((s) => s.re.test(item.path || ""));
+  for (const cat of item.categories || []) {
+    const key = cat.toLowerCase();
+    counts.set(key, (counts.get(key) || 0) + 1);
+    const f = forms.get(key) || new Map();
+    f.set(cat, (f.get(cat) || 0) + 1);
+    forms.set(key, f);
+    if (section >= 0 && (!where.has(key) || section < where.get(key))) {
+      where.set(key, section);
+    }
+  }
+}
+const display = (key) => [...forms.get(key).entries()].sort((a, b) => b[1] - a[1])[0][0];
+const top = [...counts.entries()]
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, maxTags)
+  .map(([key, n]) => [key, display(key), n])
+  .sort((a, b) => a[0].localeCompare(b[0]));
+const values = top.map((t) => t[2]);
+const min = Math.min(...values), max = Math.max(...values);
+const size = (n) => max === min ? (fontMin + fontMax) / 2 :
+  fontMin + (fontMax - fontMin) * (Math.log(n) - Math.log(min)) / (Math.log(max) - Math.log(min));
+%>
+<%
+// Emit the cloud as one line: Quarto treats listing template output as
+// Markdown, so separate lines would each become a paragraph.
+const links = top.map(([key, tag, n]) =>
+  `<a href="${sections[where.get(key) ?? 0].href}#category=${encodeURIComponent(tag)}" style="font-size: ${size(n).toFixed(2)}rem" title="${n} pages">${tag}</a>`);
+%>
+<% if (links.length) { %><div class="tag-cloud"><%= links.join(" ") %></div><% } %>

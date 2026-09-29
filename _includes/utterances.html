@@ -1,0 +1,38 @@
+<!--
+  Utterances comments (https://utteranc.es), added to every page in post/,
+  project/ and publication/ by their _metadata.yml.
+
+  Each comment thread is a GitHub issue in the repo below, titled with the
+  page's path as on the old Hugo site, e.g. "post/kdeoverview/". The path is
+  worked out from the URL, so a page reached as ".../index.html" still finds
+  its thread. Section index pages (e.g. /project/) get no comments.
+-->
+<script>
+(() => {
+  const repo = "DavidPatShuiFong/vkelimHomepage";
+  const label = "comments 💬";
+  const theme = "github-dark-orange";
+
+  const term = location.pathname
+    .replace(/^\/+/, "")          // "post/kdeoverview/index.html"
+    .replace(/index\.html$/, "")  // "post/kdeoverview/"
+    .replace(/([^/])$/, "$1/");   // always end with "/"
+  if (term.split("/").filter(Boolean).length < 2) return;  // section index page
+
+  const script = document.createElement("script");
+  script.src = "https://utteranc.es/client.js";
+  script.async = true;
+  script.crossOrigin = "anonymous";
+  script.setAttribute("repo", repo);
+  script.setAttribute("issue-term", term);
+  script.setAttribute("label", label);
+  script.setAttribute("theme", theme);
+
+  const container = document.createElement("div");
+  container.className = "utterances-comments";
+  container.appendChild(script);
+  document.addEventListener("DOMContentLoaded", () => {
+    (document.querySelector("main") || document.body).appendChild(container);
+  });
+})();
+</script>

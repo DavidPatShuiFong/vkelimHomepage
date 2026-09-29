@@ -1,0 +1,45 @@
+---
+title: "Projects"
+toc: false
+listing:
+  contents: "*/index.qmd"
+  sort: "date desc"
+  type: grid
+  grid-columns: 3
+  fields: [image, date, title, description]
+  categories: false
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+---
+
+```{=html}
+<!-- Filter buttons, as on the Hugo Academic Projects widget (content/home/projects.md).
+     They drive Quarto's own listing filter; "" shows all items. -->
+<div class="btn-group project-filters mb-4" role="group" aria-label="Filter projects">
+  <button type="button" class="btn btn-primary" data-category="">All</button>
+  <button type="button" class="btn btn-outline-primary" data-category="Kenya">Kenya</button>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".project-filters button");
+  const select = (category) => {
+    for (const b of buttons) {
+      const on = b.dataset.category === category;
+      b.classList.toggle("btn-primary", on);
+      b.classList.toggle("btn-outline-primary", !on);
+      b.setAttribute("aria-pressed", on);
+    }
+  };
+  for (const b of buttons) {
+    b.addEventListener("click", () => {
+      window.quartoListingCategory(btoa(encodeURIComponent(b.dataset.category)));
+      select(b.dataset.category);
+    });
+  }
+  // Reflect a #category=... link (e.g. from the tag cloud)
+  const m = window.location.hash.match(/category=([^&]*)/);
+  select(m ? decodeURIComponent(m[1]) : "");
+});
+</script>
+```

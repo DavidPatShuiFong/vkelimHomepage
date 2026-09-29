@@ -1,0 +1,72 @@
+# David Fong's website (https://www.davidfong.org), a Quarto website.
+# See CLAUDE.md for how the site is organised.
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    # static/ holds files served as-is (CV, documents, some with their own
+    # Quarto sources), so it is copied, not rendered
+    - "!static/"
+  # ...and copied into _site/ after rendering, so /CV/, /media/ etc. keep working
+  post-render: scripts/copy-static.ts
+
+website:
+  title: "David Fong  |  方拔萃"
+  site-url: https://www.davidfong.org
+  description: "General practitioner at coHealth Kensington. Development work, teaching, monitoring and evaluation."
+  navbar:
+    left:
+      - text: Posts
+        href: posts.qmd
+      - text: Projects
+        href: project/index.qmd
+      - text: Publications
+        href: publication/index.qmd
+      - text: Gallery
+        href: postgallery/index.qmd
+      - text: CV
+        href: /CV/
+      - text: Topics
+        menu:
+          - text: Fong family name
+            href: post/fong/index.qmd
+          - text: Christianity
+            href: posts.qmd#category=Christianity
+          - text: Spur Afrika Kenya 2021-2022
+            href: spurafrika2021/index.qmd
+          - text: Spur Afrika Kenya 2023
+            href: spurafrika2023/index.qmd
+      # Quick links to home page sections, as in the Hugo menu
+      - text: About
+        href: index.qmd#about
+      - text: Contact
+        href: index.qmd#contact
+    right:
+      - icon: github
+        href: https://github.com/DavidPatShuiFong
+      - icon: linkedin
+        href: https://au.linkedin.com/in/david-p-fong-0b266970
+      - icon: rss
+        href: posts.xml
+  # Floating "Back to top" button, shown after scrolling down (the Hugo site
+  # had a back-to-top arrow in its footer)
+  back-to-top-navigation: true
+  # Small footer line, as on the Hugo site ("Code with Blogdown, page source on GitHub")
+  page-footer:
+    center: >-
+      Built with [Quarto](https://quarto.org/), page source on
+      <i class="bi bi-github" aria-hidden="true"></i>
+      [GitHub](https://github.com/DavidPatShuiFong/vkelimHomepage/)
+
+format:
+  html:
+    # Colours and fonts match the Hugo Academic site: see theme/*.scss
+    theme:
+      light: [default, theme/common.scss, theme/light.scss]
+      dark: [default, theme/common.scss, theme/dark.scss]
+    toc: true
+
+execute:
+  # Netlify cannot run R: render locally and commit _freeze/.
+  freeze: auto

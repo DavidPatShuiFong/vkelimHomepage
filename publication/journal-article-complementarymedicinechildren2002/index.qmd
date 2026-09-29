@@ -1,0 +1,19 @@
+---
+title: Usage of complementary medicine among children
+date: '2002-04-01'
+description: Determining the prevalence of and parental attitudes toward the usage of complementary medicine among the paediatric population of a large regional public hospital in Victoria. Relationships between complementary medicine usage and sociological or medical data of the surveyed families are explored.
+categories:
+- complementary medicine
+- paediatrics
+author:
+- LK Fong
+- David Fong
+subtitle: '*Australian Family Physician* vol. 31, issue 4, pp. 388-391'
+---
+
+
+[PDF](journal-article-ComplementaryMedicineChildren2002.pdf){.btn .btn-outline-primary .btn-sm} [PubMed](https://pubmed.ncbi.nlm.nih.gov/12043138/){.btn .btn-outline-primary .btn-sm} [PDF (colour)](/document/UsageComplementaryMedicineChildren.pdf){.btn .btn-outline-primary .btn-sm} [Cite](cite.bib){.btn .btn-outline-primary .btn-sm}
+
+## Abstract
+
+<em>Objective:</em> To determine the prevalence of and parental attitudes toward the usage of complementary medicine among the paediatric population of a large regional public hospital in Victoria. Relationships between complementary medicine usage and sociological or medical data of the surveyed families are explored. </br></br> <em>Design:</em> One hundred and twenty surveys were handed out and returned from parents of nonsurgical inpatients of the children's ward of the Bendigo Base Hospital. Survey data was supplemented by information available from the hospital medical record. </br></br> <em>Results:</em> Thirty-three percent of respondents indicated they used complementary medicine for their inpatient child, and 41% for at least one of their children. Vitamins were more popular and acupuncture less popular than complementary medicine modalities used by their parents. Complementary medicine use was not correlated with the patient's age; presenting complaint; duration of inpatient stay; or number of previous admissions. Families with children using complementary medicine were more likely to have skilled or professional parents who also used complementary medicine. There was a correlation between children using complementary medicine and inadequate vaccination. </br></br> <em>Conclusion:</em> A significant proportion of children are exposed to complementary medicine. Parent, rather than child, characteristics were most strongly correlated with complementary usage.

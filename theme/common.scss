@@ -1,0 +1,400 @@
+// Site-wide styles shared by the light and dark themes (see _quarto.yml).
+//
+// The look follows the old Hugo Academic site: theme "1950s", font set "Rose",
+// font_size "L". Colours live in light.scss / dark.scss; everything else here.
+//
+// Contents
+//   1. Design values (edit these first)
+//   2. Typography
+//   3. Navbar
+//   4. Home page sections (left-gutter layout)
+//   5. Cards (grid listings and masonry cards)
+//   6. List listings (posts, publications)
+//   7. Masonry cards (_templates/cards-masonry.ejs.md)
+//   8. Home page extras: tag cloud, profile
+//   9. Footer and back-to-top button (both switched on in _quarto.yml)
+
+/*-- scss:defaults --*/
+
+@import url("https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Lora:wght@400;700&family=Roboto:wght@400;700&display=swap");
+
+// 1. Design values -----------------------------------------------------------
+
+// Academic font_size "L": 21px root on wide screens, 0.77 x 21 below 58em
+$site-font-size-large: 21px;
+$site-font-size-small: 16.17px;
+$site-font-size-breakpoint: 58em;
+
+// Text sizes used in listings and cards (relative to the root size)
+$listing-title-size: 1.2rem;   // list listings
+$card-title-size: 1rem;        // grid and masonry cards
+$summary-size: 0.8rem;
+$meta-size: 0.7rem;            // dates, authors
+
+$card-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+$card-shadow-hover: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+$list-thumbnail-width: 150px;
+
+// Home page left gutter (Academic's lcolwidth / rcolwidth, out of 12)
+$gutter-narrow: 3;             // default
+$gutter-wide: 4;               // headings with {.gutter-wide}
+$gutter-gap: 30px;
+
+// Bootstrap / Quarto variables
+$font-family-sans-serif: "Roboto", sans-serif;
+$headings-font-family: "Lora", sans-serif;
+$font-family-monospace: "Cutive Mono", monospace;
+
+$font-size-root: $site-font-size-small;  // raised to large in the rules below
+$line-height-base: 1.65;
+$headings-font-weight: 400;
+$headings-line-height: 1.25;
+$h1-font-size: 2.25rem;
+$h2-font-size: 1.5rem;
+$h3-font-size: 1.25rem;
+$h4-font-size: 1rem;
+$h5-font-size: 1rem;
+$h6-font-size: 1rem;
+$code-font-size: 0.7em;
+
+$link-decoration: none;
+$border-radius: 0.25rem;
+
+/*-- scss:rules --*/
+
+// 2. Typography --------------------------------------------------------------
+
+// Bootstrap sets `:root { font-size: var(--bs-root-font-size) }`, which
+// outranks an `html` rule, so change the variable.
+@media screen and (min-width: $site-font-size-breakpoint) {
+  :root {
+    --bs-root-font-size: #{$site-font-size-large};
+  }
+}
+
+h1, h2, .h1, .h2 {
+  font-weight: 400;
+}
+h3, h4, h5, h6 {
+  font-weight: 700;
+}
+
+// Academic headings have no rule underneath
+h2 {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+// 3. Navbar ------------------------------------------------------------------
+
+.navbar {
+  font-family: $headings-font-family;
+  box-shadow: 0 0.125rem 0.25rem 0 rgba(0, 0, 0, 0.11);
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.navbar .nav-link {
+  font-size: $site-font-size-small;  // fixed size in Academic
+}
+.navbar-brand .navbar-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+// Don't let the menu squeeze the site title into an ellipsis on desktop
+@include media-breakpoint-up(lg) {
+  .navbar-brand-container {
+    flex-shrink: 0;
+  }
+}
+
+// 4. Home page sections -------------------------------------------------------
+//
+// index.qmd sets `body-classes: home-page`. Each `## Heading` makes a
+// section; classes written on the heading are moved by Pandoc onto that
+// section, so the layout is chosen in index.qmd:
+//
+//   ## Posts {#posts}                     title in a 3/12 gutter (default)
+//   ## Publications {#publications .gutter-wide}   4/12 gutter
+//   ## Gallery {#postsGallery .full-width .title-hidden}
+//   ## Biography {#about .gutter-wide .profile-section}
+//        gutter holds a `::: {.profile}` div; the title heads `::: {.bio}`
+//
+// Below lg everything stacks.
+
+.home-page section.level2 {
+  margin-top: 3rem;
+  > h2 {
+    font-size: 2.25rem;
+    margin-top: 0;
+  }
+}
+
+@mixin gutter-columns($left) {
+  grid-template-columns: minmax(0, $left * 1fr) minmax(0, (12 - $left) * 1fr);
+}
+
+@include media-breakpoint-up(lg) {
+  .home-page section.level2 {
+    display: grid;
+    @include gutter-columns($gutter-narrow);
+    column-gap: $gutter-gap;
+    align-items: start;
+    > * {
+      grid-column: 2;
+    }
+    > h2 {
+      grid-column: 1;
+      grid-row: 1 / span 20;  // span every content row of the section
+    }
+    &.gutter-wide {
+      @include gutter-columns($gutter-wide);
+    }
+    &.full-width {
+      grid-template-columns: minmax(0, 1fr);
+      > * {
+        grid-column: 1;
+      }
+    }
+    &.profile-section {
+      > .profile {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+      }
+      > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+      > .bio {
+        grid-column: 2;
+        grid-row: 2;
+      }
+    }
+  }
+}
+
+// Keep the heading (and its #anchor) for screen readers only
+.home-page section.level2.title-hidden > h2 {
+  @include visually-hidden;
+}
+
+// 5. Cards ---------------------------------------------------------------------
+
+@mixin card-text {
+  .card-title.listing-title {
+    font-size: $card-title-size;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+  }
+  .card-text.listing-description {
+    font-size: $summary-size;
+    line-height: 1.6;
+  }
+  .card-attribution,
+  .listing-date,
+  .listing-author {
+    font-size: $meta-size;
+  }
+}
+
+// Grid listings (projects, featured on other pages, gallery strip)
+.quarto-grid-item.card {
+  box-shadow: $card-shadow;
+  border-radius: $border-radius;
+  overflow: hidden;
+}
+.quarto-grid-item {
+  @include card-text;
+}
+// Grid images at 4:3 (Quarto sets an inline fixed height)
+.quarto-grid-item .card-img-top img,
+.quarto-grid-item .card-img-top .listing-item-img-placeholder {
+  width: 100%;
+  height: auto !important;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+// 6. List listings -------------------------------------------------------------
+//
+// Sized like Academic's post stream. The date/author line sits under the
+// summary rather than in its own column, leaving the text the full width
+// beside the image. `div.quarto-post .body h3...` matches the specificity of
+// Quarto's own rules.
+
+div.quarto-post {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) $list-thumbnail-width;
+  grid-template-areas:
+    "body thumbnail"
+    "metadata thumbnail";
+  column-gap: 1.5rem;
+  row-gap: 0;
+  align-items: start;
+  padding-bottom: 1rem;
+  .body {
+    grid-area: body;
+  }
+  .thumbnail {
+    grid-area: thumbnail;
+    max-width: $list-thumbnail-width;
+  }
+  .thumbnail img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+  }
+  .metadata {
+    grid-area: metadata;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1rem;
+    margin-top: 0;
+    color: $text-muted;
+  }
+  .body h3.listing-title {
+    font-size: $listing-title-size;
+    line-height: 1.25;
+    margin-bottom: 0.6rem;
+  }
+  .body .listing-subtitle {
+    font-size: $summary-size;
+    margin-bottom: 0.4rem;
+  }
+  .listing-categories {
+    margin-bottom: 0.4rem;
+  }
+  .listing-categories .listing-category {
+    font-size: 0.6rem;
+  }
+  .listing-description {
+    font-size: $summary-size;
+    line-height: 1.65;
+  }
+  .metadata,
+  .listing-date,
+  .listing-author {
+    font-size: $meta-size;
+  }
+}
+// Lists without images (e.g. publications) use the full width
+div.quarto-post:not(:has(.thumbnail)) {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "body"
+    "metadata";
+}
+
+// 7. Masonry cards ---------------------------------------------------------------
+//
+// _templates/cards-masonry.ejs.md (home page Featured Posts and Posts).
+// 3 columns from lg (992px), 2 from sm (576px), 1 below. Images keep their
+// own proportions, so card heights vary and Masonry packs them.
+
+.posts-masonry {
+  --pm-gutter: 2%;
+  --pm-cols: 1;
+  position: relative;
+  margin-bottom: 1rem;
+  @include media-breakpoint-up(sm) {
+    --pm-cols: 2;
+  }
+  @include media-breakpoint-up(lg) {
+    --pm-cols: 3;
+  }
+  .pm-sizer,
+  .pm-item {
+    width: calc((100% - (var(--pm-cols) - 1) * var(--pm-gutter)) / var(--pm-cols));
+  }
+  .pm-gutter {
+    width: var(--pm-gutter);
+  }
+  .pm-item {
+    margin-bottom: 1.25rem;
+  }
+  // Without JavaScript, fall back to a plain wrapped layout
+  &:not(.pm-js) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--pm-gutter);
+    .pm-sizer,
+    .pm-gutter {
+      display: none;
+    }
+  }
+  .pm-link,
+  .pm-link:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+  .pm-card {
+    background-color: $card-bg;
+    box-shadow: $card-shadow;
+    border-radius: $border-radius;
+    overflow: hidden;
+    transition: box-shadow 0.15s ease-in-out;
+  }
+  .pm-link:hover .pm-card {
+    box-shadow: $card-shadow-hover;
+  }
+  .pm-img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  @include card-text;
+  .listing-description p:last-child {
+    margin-bottom: 0.5rem;
+  }
+  .card-attribution {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0 0.5rem;
+    color: $text-muted;
+  }
+}
+
+// 8. Home page extras ------------------------------------------------------------
+
+// Tag cloud (_templates/tagcloud.ejs); font sizes are set inline per tag
+.tag-cloud {
+  text-align: center;
+  line-height: 2.2;
+  a {
+    margin: 0 0.4rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+}
+
+// Social icons under the profile picture
+.profile a[aria-label] {
+  font-size: 1.5rem;
+  margin: 0 0.3rem;
+  text-decoration: none;
+}
+
+// 9. Footer and back-to-top button ----------------------------------------------------------------------
+
+// Small centred line with coral links, like Academic's "powered by" footer
+.nav-footer {
+  color: $body-color;
+  p {
+    font-size: 0.75rem;  // on the <p>: Quarto shrinks it again relative to .nav-footer
+  }
+  a {
+    color: $link-color;
+  }
+}
+
+// Quarto's floating "Back to top" button (website.back-to-top-navigation),
+// in coral instead of grey; filled coral on hover
+#quarto-back-to-top {
+  color: $primary;
+  box-shadow: 0 0.2rem 0.5rem rgba($primary, 0.4), 0 0 0.05rem $primary;
+  &:hover {
+    background-color: $primary;
+    color: #fff;
+  }
+}
