@@ -9,12 +9,15 @@ categories:
 - Spur Afrika 2021
 - Holo
 - Kisumu
+image: featured.jpg
 comments:
   utterances:
     repo: DavidPatShuiFong/vkelimHomepage
     issue-term: post/kenya2021holonewyearsday/
     theme: github-dark-orange
 ---
+
+![](featured.jpg){fig-alt=""}
 
 Holo Day 2 - Happy New Year 2022! 
 

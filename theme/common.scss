@@ -49,9 +49,67 @@ h2 {
 }
 
 // Home page sections use Academic's large section titles
+.home-page section.level2 {
+  margin-top: 3rem;
+}
 .home-page section.level2 > h2 {
   font-size: 2.25rem;
-  margin-top: 3rem;
+  margin-top: 0;
+}
+
+// Like Academic's home widgets, from lg up each section title sits in a left
+// gutter beside its content: 3/12 for featured, posts and projects, 4/12 for
+// publications, biography, topics and contact. In the biography the gutter
+// holds the picture and name, and the "Biography" title heads the main column.
+// The gallery strip has no visible title and runs full width.
+@include media-breakpoint-up(lg) {
+  .home-page section.level2 {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+    column-gap: 30px;
+    align-items: start;
+    > * {
+      grid-column: 2;
+    }
+    > h2 {
+      grid-column: 1;
+      grid-row: 1 / span 20;
+    }
+  }
+  .home-page {
+    #publications,
+    #about,
+    #tags,
+    #contact {
+      grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    }
+    #about {
+      > .profile {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+      }
+      > h2 {
+        grid-column: 2;
+        grid-row: 1;
+      }
+      > .bio {
+        grid-column: 2;
+        grid-row: 2;
+      }
+    }
+    #postsGallery {
+      grid-template-columns: minmax(0, 1fr);
+      > * {
+        grid-column: 1;
+      }
+    }
+  }
+}
+// Academic's gallery strip has no title; keep the heading (and its
+// #postsGallery anchor) for screen readers only. A class on the heading
+// itself would be moved by Pandoc onto the whole section.
+.home-page #postsGallery > h2 {
+  @include visually-hidden;
 }
 
 // Navbar: Lora, 0.77rem links, bold 1.2rem site title, soft shadow

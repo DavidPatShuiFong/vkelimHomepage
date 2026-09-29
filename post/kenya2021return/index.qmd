@@ -7,12 +7,15 @@ categories:
 - Kenya
 - Spur Afrika
 - Spur Afrika 2021
+image: featured.jpg
 comments:
   utterances:
     repo: DavidPatShuiFong/vkelimHomepage
     issue-term: post/kenya2021return/
     theme: github-dark-orange
 ---
+
+![](featured.jpg){fig-alt=""}
 
 Touch down!! We are back in Melbourne safely!! 😁😆
 

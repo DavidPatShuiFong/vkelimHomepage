@@ -15,17 +15,13 @@ listing:
     include:
       featured: true
     sort: "date desc"
-    type: grid
-    grid-columns: 3
-    fields: [image, title, date, description]
-    max-description-length: 150
-    categories: false
+    template: _templates/cards-masonry.ejs.md
+    max-description-length: 175
   - id: listing-posts
     contents: post
     sort: "date desc"
-    max-items: 5
-    template: _templates/posts-masonry.ejs.md
-    fields: [image, date, title, description]
+    max-items: 6
+    template: _templates/cards-masonry.ejs.md
     max-description-length: 175
   - id: listing-projects
     contents: "project/*/index.qmd"
@@ -89,9 +85,10 @@ listing:
 
 ## Biography {#about}
 
-::: {.grid}
+<!-- Left gutter: picture, name, links. The "Biography" heading and text sit
+     in the main column (grid areas in theme/common.scss). -->
 
-::: {.g-col-12 .g-col-md-4 .text-center .profile}
+::: {.profile .text-center}
 ![](images/avatar.jpg){.rounded-circle width="220" fig-alt="David Fong"}
 
 ### David Fong {.unnumbered .unlisted}
@@ -107,7 +104,7 @@ Lead doctor, Kensington site, coHealth
 [<i class="bi bi-twitter"></i>](https://twitter.com/DavidBaCuiFong){aria-label="Twitter"}
 :::
 
-::: {.g-col-12 .g-col-md-8}
+::: {.bio}
 David Fong is a general practitioner (family medicine doctor) working at coHealth, Kensington site. He volunteers with Spur Afrika (child development program) in Kibera, Kenya, and Elim and Agape childrens' home (HIV and disability) in Xi'an, China.
 
 ::: {.grid}
@@ -134,9 +131,6 @@ David Fong is a general practitioner (family medicine doctor) working at coHealt
 :::
 
 :::
-
-:::
-
 :::
 
 ## Popular Topics {#tags}

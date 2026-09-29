@@ -47,6 +47,11 @@ website:
             href: spurafrika2021/index.qmd
           - text: Spur Afrika Kenya 2023
             href: spurafrika2023/index.qmd
+      # Quick links to home page sections, as in the Hugo menu
+      - text: About
+        href: index.qmd#about
+      - text: Contact
+        href: index.qmd#contact
     right:
       - icon: github
         href: https://github.com/DavidPatShuiFong
