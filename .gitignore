@@ -20,3 +20,4 @@ Thumbs.db
 # Old Hugo build output, if still on disk (safe to delete)
 /public/
 /resources/
+.positai

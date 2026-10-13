@@ -121,6 +121,8 @@ David Fong is a general practitioner (family medicine doctor) working at coHealt
 ::: {.g-col-12 .g-col-md-7}
 #### Education {.unnumbered .unlisted}
 
+- **Masters of Liberal Arts (Global Development Practice)**, 2023\
+  Harvard University
 - **Data, Economics and Development Policy**, 2019\
   Massachusetts Institute of Technology (MITx)
 - **Fellowship of the Royal Australian College of General Practice**, 2001\
