@@ -5,7 +5,6 @@ date: '2022-01-29'
 date-modified: '2026-09-29'
 categories:
 - Computers
-- R
 - blogdown
 - isotope
 - fancybox
