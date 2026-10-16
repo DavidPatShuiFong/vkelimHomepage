@@ -17,7 +17,6 @@ categories:
 - mental health treatment plans
 - MHTP
 - disadvantage
-- R
 image: featured.jpg
 format:
   html:

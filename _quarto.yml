@@ -58,6 +58,9 @@ website:
       Built with [Quarto](https://quarto.org/), page source on
       <i class="bi bi-github" aria-hidden="true"></i>
       [GitHub](https://github.com/DavidPatShuiFong/vkelimHomepage/)
+    right:
+      - text: "R-bloggers"
+        href: https://www.r-bloggers.com
 
 format:
   html:
